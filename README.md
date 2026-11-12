@@ -96,3 +96,23 @@ PRs, reproducible bug reports, documentation improvements, and **synthetic** tes
 ## License and provenance
 
 [MIT](LICENSE). Initially developed with AI assistance under human project direction; tests and claims must be reviewed before publishing. This project is independent and unaffiliated with any specific PMS, channel manager, hotel brand, OTA, government service or AI platform. It was inspired by real-world hospitality operation challenges, not by exporting proprietary systems or customer records.
+
+## Front Desk Operations Prototype (v0.2.0rc1)
+
+This development branch adds a privacy-first **check-in readiness reviewer**, not a live check-in service. It combines pseudonymous reservation references, housekeeping and technical holds, arrival-time rules and authorized review signals. A second AI can receive an expiring **read-only** task handoff; it cannot change reservations, send messages, collect payment or submit KBS notifications.
+
+- [Offline operations cockpit](demo/operations.html) — fictional, browser-local viewer (will be published at `/operations.html` on Pages after review and merge).
+- [Operations product blueprint](docs/PRODUCT_BLUEPRINT_TR.md)
+- [Second-AI handoff protocol](docs/AI_AGENT_PROTOCOL_TR.md)
+- [Market and competitor research](docs/COMPETITIVE_RESEARCH_TR.md)
+- [Go-to-market strategy](docs/MARKETING_GO_TO_MARKET_TR.md)
+- [Release quality gates](docs/RELEASE_QUALITY_CHECKLIST_TR.md)
+
+Run locally:
+
+```bash
+python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12 --at-time 14:01 --output ops-report.json
+python -m unittest discover -s tests -v
+```
+
+**Limitations:** no real PMS integration, no customer identity data, no official registration, no automatic hotel check-in. AI can make mistakes; every critical decision requires fresh authoritative verification and a human operator.
