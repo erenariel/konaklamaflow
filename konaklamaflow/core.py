@@ -242,7 +242,7 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
     planned: dict[str, list[Window]] = {r.id: [] for r in rooms}
     todo = sorted(
         (r for r in reservations if r.status == "confirmed" and r.room_id is None and r.stay.start >= today),
-        key=lambda r: (r.stay.start, r.source, r.ref),
+        key=lambda r: (r.stay.start, 0 if r.twin_requested else 1, r.source, r.ref),
     )
     for res in todo:
         if (res.source, res.ref) in duplicated or res.category not in categories:
@@ -261,8 +261,9 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
         if not candidates:
             warn("NO_SAFE_ROOM_PROPOSAL", "critical", res, "No free compatible room; do not confirm or promise a room")
             continue
-        # For twin requests prioritize actual twin, then flexible; otherwise deterministic room ID.
-        candidates.sort(key=lambda r: (0 if r.beds == "twin" and res.twin_requested else 1, r.id))
+        # Preserve scarce twin-capable rooms for constrained guests; heuristic, not global optimization.
+        bed_order = ("twin", "flex", "double") if res.twin_requested else ("double", "flex", "twin")
+        candidates.sort(key=lambda r: (bed_order.index(r.beds), r.id))
         chosen = candidates[0]
         planned[chosen.id].append(res.stay)
         proposals.append({"reservation_ref": res.ref, "source": res.source, "room_id": chosen.id, "kind": "MANUAL_APPROVAL_REQUIRED"})
