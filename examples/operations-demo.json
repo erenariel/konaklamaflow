@@ -1,0 +1,28 @@
+{
+  "property_id": "SAMPLE_INN_01",
+  "settings": {"checkin_time": "14:00", "checkout_time": "12:00"},
+  "rooms": [
+    {"id": "101", "category": "standard", "beds": "double", "active": true},
+    {"id": "102", "category": "standard", "beds": "twin", "active": true},
+    {"id": "201", "category": "superior", "beds": "double", "active": true},
+    {"id": "202", "category": "superior", "beds": "twin", "active": true, "maintenance": [{"start":"2026-11-12", "end":"2026-11-14"}]}
+  ],
+  "reservations": [
+    {"ref":"DEMO_A01", "source":"CHANNEL_A", "status":"confirmed", "checkin":"2026-11-12", "checkout":"2026-11-14", "category":"standard", "room_id":"101"},
+    {"ref":"DEMO_A02", "source":"CHANNEL_B", "status":"confirmed", "checkin":"2026-11-12", "checkout":"2026-11-13", "category":"standard", "room_id":"102", "twin_requested":true},
+    {"ref":"DEMO_A03", "source":"CHANNEL_A", "status":"confirmed", "checkin":"2026-11-12", "checkout":"2026-11-15", "category":"superior", "room_id":"201"},
+    {"ref":"DEMO_A04", "source":"CHANNEL_C", "status":"confirmed", "checkin":"2026-11-13", "checkout":"2026-11-15", "category":"superior"},
+    {"ref":"DEMO_A05", "source":"CHANNEL_C", "status":"cancelled", "checkin":"2026-11-12", "checkout":"2026-11-13", "category":"standard", "room_id":"102"}
+  ],
+  "room_operations": [
+    {"room_id":"101", "housekeeping":"clean", "inspection":"approved", "maintenance_hold":false},
+    {"room_id":"102", "housekeeping":"clean", "inspection":"approved", "maintenance_hold":false},
+    {"room_id":"201", "housekeeping":"dirty", "inspection":"pending", "maintenance_hold":false},
+    {"room_id":"202", "housekeeping":"out_of_service", "inspection":"pending", "maintenance_hold":true}
+  ],
+  "arrival_checks": [
+    {"source":"CHANNEL_A", "ref":"DEMO_A01", "arrival_state":"arrived", "identity_status":"verified_by_authorized_staff", "registration_status":"pending", "payment_review":"cleared", "early_checkin_authorized":false},
+    {"source":"CHANNEL_B", "ref":"DEMO_A02", "arrival_state":"expected", "identity_status":"not_checked", "registration_status":"not_checked", "payment_review":"review", "early_checkin_authorized":false},
+    {"source":"CHANNEL_A", "ref":"DEMO_A03", "arrival_state":"arrived", "identity_status":"verified_by_authorized_staff", "registration_status":"not_checked", "payment_review":"cleared", "early_checkin_authorized":false}
+  ]
+}
