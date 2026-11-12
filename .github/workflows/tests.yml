@@ -12,18 +12,32 @@ jobs:
         python-version: ['3.11', '3.12', '3.13']
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run tests
         run: python -m unittest discover -s tests -v
+      - name: Check commit privacy and Python syntax
+        run: |
+          python scripts/verify_commit_privacy.py
+          python -m compileall -q konaklamaflow scripts
       - name: Run fictional demo
         run: python -m konaklamaflow examples/demo.json --as-of 2026-11-12 --output /tmp/report.json
+      - name: Check operations and suite fixtures
+        run: |
+          python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12 --at-time 14:01 --output /tmp/ops-report.json
+          python -m konaklamaflow.experience_cli examples/fictional-hotel.json /tmp/suite-report.json
+          python scripts/generate_suite_demo.py --check
 
   browser:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

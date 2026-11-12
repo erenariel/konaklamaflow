@@ -1,0 +1,915 @@
+{
+  "schema_version": "0.3",
+  "mode": "DRY_RUN_ONLY",
+  "property_id": "SAMPLE_HOTEL_01",
+  "as_of": "2026-11-12",
+  "at_time": "14:01",
+  "snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10",
+  "summary": {
+    "reservations": 12,
+    "rooms": 18,
+    "blocked": 10,
+    "review_ready": 2,
+    "pending_channel_events": 2
+  },
+  "arrivals": [
+    {
+      "id": "KF1001",
+      "channel": "booking",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-15",
+      "room_id": "101",
+      "status": "blocked",
+      "blockers": [
+        "SPECIAL_REQUEST_REVIEW"
+      ],
+      "core_reasons": [],
+      "notes": [
+        "Özel talepler yetkili personel tarafından doğrulanmalıdır."
+      ],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "bcb08f52f20adba66af39300",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": true,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1002",
+      "channel": "expedia",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "room_id": null,
+      "status": "blocked",
+      "blockers": [
+        "CORE_REVIEW_REQUIRED",
+        "IDENTITY_STAFF_REVIEW",
+        "NO_ASSIGNED_ROOM"
+      ],
+      "core_reasons": [
+        "room_unassigned",
+        "NO_SAFE_ROOM_PROPOSAL",
+        "identity_needs_authorized_verification"
+      ],
+      "notes": [],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "b8532e08272a3eba431e421d",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": false,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": false,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1003",
+      "channel": "trip",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "room_id": "303",
+      "status": "blocked",
+      "blockers": [
+        "HOUSEKEEPING_NOT_INSPECTED",
+        "HOUSEKEEPING_TASK_OPEN",
+        "SPECIAL_REQUEST_REVIEW"
+      ],
+      "core_reasons": [
+        "room_not_clean",
+        "room_not_inspected"
+      ],
+      "notes": [
+        "Özel talepler yetkili personel tarafından doğrulanmalıdır."
+      ],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "5f751a28966b64c7eaf58bda",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": true,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1004",
+      "channel": "direct",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-13",
+      "room_id": "104",
+      "status": "blocked",
+      "blockers": [
+        "PAYMENT_REVIEW"
+      ],
+      "core_reasons": [
+        "payment_review_needed"
+      ],
+      "notes": [],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "a90d687ad551f78c30f3f855",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": true,
+        "payment_reviewed": false
+      }
+    },
+    {
+      "id": "KF1005",
+      "channel": "booking",
+      "arrival": "2026-11-13",
+      "departure": "2026-11-15",
+      "room_id": "404",
+      "status": "blocked",
+      "blockers": [
+        "ARRIVAL_NOT_TODAY",
+        "GUEST_NOT_ARRIVED",
+        "IDENTITY_STAFF_REVIEW",
+        "SPECIAL_REQUEST_REVIEW"
+      ],
+      "core_reasons": [
+        "identity_needs_authorized_verification",
+        "arrival_date_not_today",
+        "guest_not_arrived"
+      ],
+      "notes": [
+        "İleri tarihli giriş; bugün için hazır sayılmaz.",
+        "Özel talepler yetkili personel tarafından doğrulanmalıdır."
+      ],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "543ce19d61c2f287af3ee75c",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": false,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1006",
+      "channel": "expedia",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "room_id": "102",
+      "status": "blocked",
+      "blockers": [
+        "CANCELLED_ASSIGNED",
+        "NOT_CONFIRMED",
+        "UNMAPPED_PMS"
+      ],
+      "core_reasons": [],
+      "notes": [],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "60c3bd75ca148fd9c4bf88c9",
+      "checklist": {
+        "pms_match": false,
+        "reservation_confirmed": false,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": false,
+        "payment_reviewed": false
+      }
+    },
+    {
+      "id": "KF1007",
+      "channel": "hotelbeds",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-16",
+      "room_id": "304",
+      "status": "blocked",
+      "blockers": [
+        "SPECIAL_REQUEST_REVIEW"
+      ],
+      "core_reasons": [],
+      "notes": [
+        "Özel talepler yetkili personel tarafından doğrulanmalıdır."
+      ],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "bc88392164bfce3c3a622880",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": true,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1008",
+      "channel": "booking",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "room_id": "301",
+      "status": "blocked",
+      "blockers": [
+        "CHANNEL_EVENT_REVIEW",
+        "IDENTITY_STAFF_REVIEW",
+        "SPECIAL_REQUEST_REVIEW",
+        "UNMAPPED_PMS"
+      ],
+      "core_reasons": [
+        "identity_needs_authorized_verification"
+      ],
+      "notes": [
+        "Özel talepler yetkili personel tarafından doğrulanmalıdır."
+      ],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "ce4b0d99f4bbcf06b8226bbf",
+      "checklist": {
+        "pms_match": false,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": false,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1009",
+      "channel": "agency",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "room_id": "B01",
+      "status": "review_ready",
+      "blockers": [],
+      "core_reasons": [],
+      "notes": [],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "3996ca26e7377d2e0efa4302",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": true,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1010",
+      "channel": "direct",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-13",
+      "room_id": "201",
+      "status": "review_ready",
+      "blockers": [],
+      "core_reasons": [],
+      "notes": [],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "b89fa900533a47911beca6e6",
+      "checklist": {
+        "pms_match": true,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": true,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1011",
+      "channel": "booking",
+      "arrival": "2026-11-13",
+      "departure": "2026-11-15",
+      "room_id": "302",
+      "status": "blocked",
+      "blockers": [
+        "ARRIVAL_NOT_TODAY",
+        "GUEST_NOT_ARRIVED",
+        "IDENTITY_STAFF_REVIEW",
+        "UNMAPPED_PMS"
+      ],
+      "core_reasons": [
+        "identity_needs_authorized_verification",
+        "arrival_date_not_today",
+        "guest_not_arrived"
+      ],
+      "notes": [
+        "İleri tarihli giriş; bugün için hazır sayılmaz."
+      ],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "c32bc72b419a12d3ede8aacf",
+      "checklist": {
+        "pms_match": false,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": false,
+        "payment_reviewed": true
+      }
+    },
+    {
+      "id": "KF1012",
+      "channel": "trip",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-15",
+      "room_id": "403",
+      "status": "blocked",
+      "blockers": [
+        "SPECIAL_REQUEST_REVIEW",
+        "UNMAPPED_PMS"
+      ],
+      "core_reasons": [],
+      "notes": [
+        "Özel talepler yetkili personel tarafından doğrulanmalıdır."
+      ],
+      "suggested_room": null,
+      "human_approval_required": true,
+      "task_id": "4eed6587da114b416972f9d0",
+      "checklist": {
+        "pms_match": false,
+        "reservation_confirmed": true,
+        "room_compatible": true,
+        "housekeeping_inspected": false,
+        "identity_staff_reviewed": true,
+        "payment_reviewed": true
+      }
+    }
+  ],
+  "unmatched_channel_events": [
+    "E1005"
+  ],
+  "event_reviews": [
+    {
+      "id": "E1001",
+      "status": "matched",
+      "reservation_id": "KF1001",
+      "reason_codes": []
+    },
+    {
+      "id": "E1002",
+      "status": "matched",
+      "reservation_id": "KF1002",
+      "reason_codes": []
+    },
+    {
+      "id": "E1003",
+      "status": "matched",
+      "reservation_id": "KF1003",
+      "reason_codes": []
+    },
+    {
+      "id": "E1004",
+      "status": "needs_review",
+      "reservation_id": "KF1008",
+      "reason_codes": [
+        "CHANNEL_EVENT_REVIEW"
+      ]
+    },
+    {
+      "id": "E1005",
+      "status": "needs_review",
+      "reservation_id": null,
+      "reason_codes": [
+        "CHANNEL_REFERENCE_MISMATCH",
+        "CHANNEL_EVENT_REVIEW"
+      ]
+    },
+    {
+      "id": "E1006",
+      "status": "matched",
+      "reservation_id": "KF1007",
+      "reason_codes": []
+    },
+    {
+      "id": "E1007",
+      "status": "matched",
+      "reservation_id": "KF1005",
+      "reason_codes": []
+    }
+  ],
+  "room_plan": [
+    {
+      "id": "B01",
+      "held_reservation_ids": [
+        "KF1009"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1009"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+      ]
+    },
+    {
+      "id": "B02",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "HOUSEKEEPING_NOT_INSPECTED"
+      ]
+    },
+    {
+      "id": "101",
+      "held_reservation_ids": [
+        "KF1001"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1001"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+      ]
+    },
+    {
+      "id": "102",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "REQUIRES_LIVE_REVALIDATION",
+      "reason_codes": []
+    },
+    {
+      "id": "103",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "REQUIRES_LIVE_REVALIDATION",
+      "reason_codes": []
+    },
+    {
+      "id": "104",
+      "held_reservation_ids": [
+        "KF1004"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1004"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+      ]
+    },
+    {
+      "id": "201",
+      "held_reservation_ids": [
+        "KF1010"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1010"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+      ]
+    },
+    {
+      "id": "202",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "HOUSEKEEPING_NOT_INSPECTED",
+        "HOUSEKEEPING_TASK_OPEN"
+      ]
+    },
+    {
+      "id": "203",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "REQUIRES_LIVE_REVALIDATION",
+      "reason_codes": []
+    },
+    {
+      "id": "301",
+      "held_reservation_ids": [
+        "KF1008"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1008"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+      ]
+    },
+    {
+      "id": "302",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [
+        "KF1011"
+      ],
+      "availability": "REQUIRES_LIVE_REVALIDATION",
+      "reason_codes": []
+    },
+    {
+      "id": "303",
+      "held_reservation_ids": [
+        "KF1003"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1003"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW",
+        "HOUSEKEEPING_NOT_INSPECTED",
+        "HOUSEKEEPING_TASK_OPEN"
+      ]
+    },
+    {
+      "id": "304",
+      "held_reservation_ids": [
+        "KF1007"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1007"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+      ]
+    },
+    {
+      "id": "401",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "OUT_OF_SERVICE_OR_MAINTENANCE",
+        "HOUSEKEEPING_NOT_INSPECTED",
+        "MAINTENANCE_TASK_OPEN"
+      ]
+    },
+    {
+      "id": "402",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "REQUIRES_LIVE_REVALIDATION",
+      "reason_codes": []
+    },
+    {
+      "id": "403",
+      "held_reservation_ids": [
+        "KF1012"
+      ],
+      "reservation_ids_all_holds": [
+        "KF1012"
+      ],
+      "availability": "BLOCKED_FOR_REVIEW",
+      "reason_codes": [
+        "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+      ]
+    },
+    {
+      "id": "404",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [
+        "KF1005"
+      ],
+      "availability": "REQUIRES_LIVE_REVALIDATION",
+      "reason_codes": []
+    },
+    {
+      "id": "405",
+      "held_reservation_ids": [],
+      "reservation_ids_all_holds": [],
+      "availability": "REQUIRES_LIVE_REVALIDATION",
+      "reason_codes": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1001",
+      "kind": "housekeeping",
+      "room_id": "303",
+      "reservation_id": "KF1003",
+      "status": "open",
+      "priority": "high"
+    },
+    {
+      "id": "T1002",
+      "kind": "maintenance",
+      "room_id": "401",
+      "reservation_id": null,
+      "status": "in_progress",
+      "priority": "high"
+    },
+    {
+      "id": "T1004",
+      "kind": "frontdesk",
+      "room_id": null,
+      "reservation_id": "KF1008",
+      "status": "open",
+      "priority": "high"
+    },
+    {
+      "id": "T1003",
+      "kind": "guest_request",
+      "room_id": "404",
+      "reservation_id": "KF1005",
+      "status": "open",
+      "priority": "normal"
+    },
+    {
+      "id": "T1005",
+      "kind": "housekeeping",
+      "room_id": "202",
+      "reservation_id": null,
+      "status": "open",
+      "priority": "normal"
+    }
+  ],
+  "financial_review": {
+    "basis": "FICTIONAL_RESERVATION_TOTALS_NOT_DAILY_REVENUE",
+    "reservation_totals_by_currency": {
+      "EUR": "3148.00"
+    },
+    "folio_reconciliation": "NOT_IMPLEMENTED_NO_LEDGER_INPUT",
+    "payment_review_ids": [
+      "KF1004"
+    ],
+    "departures_today_ids": [],
+    "no_financial_postings": true
+  },
+  "engine_report": {
+    "schema_version": "0.2-prototype",
+    "mode": "DRY_RUN_ONLY",
+    "property_id": "SAMPLE_HOTEL_01",
+    "as_of": "2026-11-12",
+    "at_time": "14:01",
+    "snapshot_sha256": "17ddfb5427b248b3471a9ae9ce7a88cbced599f5d81d9346643d37e830fd35c3",
+    "checkin_policy": {
+      "checkin_time": "14:00",
+      "checkout_time": "12:00"
+    },
+    "summary": {
+      "arrivals_total": 11,
+      "ready_for_review": 5,
+      "blocked": 6,
+      "already_checked_in_requires_review": 0
+    },
+    "tasks": [
+      {
+        "task_id": "210aaa5b4fbd414e9ca164ec",
+        "reservation_ref": "KF1009",
+        "source": "agency",
+        "room_id": "B01",
+        "category": "economy",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14"
+        },
+        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": true,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "4b75b253029e361724bf5ebf",
+        "reservation_ref": "KF1001",
+        "source": "booking",
+        "room_id": "101",
+        "category": "standard",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-15"
+        },
+        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": true,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "d677e665ec7a7a3e3ed0b18c",
+        "reservation_ref": "KF1008",
+        "source": "booking",
+        "room_id": "301",
+        "category": "superior",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14"
+        },
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": false,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [
+          "identity_needs_authorized_verification"
+        ],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "ed6f1f693080a14d981801b3",
+        "reservation_ref": "KF1004",
+        "source": "direct",
+        "room_id": "104",
+        "category": "standard",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-13"
+        },
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": true,
+          "payment_review_complete": false,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [
+          "payment_review_needed"
+        ],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "ac4d28ac1ae1dbb52e080724",
+        "reservation_ref": "KF1010",
+        "source": "direct",
+        "room_id": "201",
+        "category": "standard",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-13"
+        },
+        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": true,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "b17f172bd03a5fc34d8d61f6",
+        "reservation_ref": "KF1002",
+        "source": "expedia",
+        "room_id": null,
+        "category": "superior",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14"
+        },
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": false,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": false,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [
+          "room_unassigned",
+          "NO_SAFE_ROOM_PROPOSAL",
+          "identity_needs_authorized_verification"
+        ],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "61455c2a1dc16bb05b5be24d",
+        "reservation_ref": "KF1007",
+        "source": "hotelbeds",
+        "room_id": "304",
+        "category": "triple",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-16"
+        },
+        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": true,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "2c92fe76a0e0f30ca0d06589",
+        "reservation_ref": "KF1003",
+        "source": "trip",
+        "room_id": "303",
+        "category": "deluxe",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14"
+        },
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": true,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": false,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [
+          "room_not_clean",
+          "room_not_inspected"
+        ],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "6a33930a44ac1db165f7602f",
+        "reservation_ref": "KF1012",
+        "source": "trip",
+        "room_id": "403",
+        "category": "deluxe",
+        "stay": {
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-15"
+        },
+        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": true,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "1e974b8009ad5e286146b641",
+        "reservation_ref": "KF1005",
+        "source": "booking",
+        "room_id": "404",
+        "category": "family",
+        "stay": {
+          "checkin": "2026-11-13",
+          "checkout": "2026-11-15"
+        },
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": false,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [
+          "identity_needs_authorized_verification",
+          "arrival_date_not_today",
+          "guest_not_arrived"
+        ],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      },
+      {
+        "task_id": "cf4e6d9a87a42c63f440bd83",
+        "reservation_ref": "KF1011",
+        "source": "booking",
+        "room_id": "302",
+        "category": "superior",
+        "stay": {
+          "checkin": "2026-11-13",
+          "checkout": "2026-11-15"
+        },
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
+        "checklist": {
+          "identity_reviewed_by_authorized_staff": false,
+          "payment_review_complete": true,
+          "room_clean_and_inspected": true,
+          "registration_confirmed_by_authorized_system": false
+        },
+        "reasons": [
+          "identity_needs_authorized_verification",
+          "arrival_date_not_today",
+          "guest_not_arrived"
+        ],
+        "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+      }
+    ],
+    "disclaimer": "No check-in, payment, room assignment, guest notification or government registration has been executed. Identity and registration signals are unverified demo inputs unless provided by an authorized trusted system."
+  },
+  "approval_policy": {
+    "pms_writes": false,
+    "payments": false,
+    "kbs": false,
+    "guest_messages": false,
+    "human_approval_required": true
+  }
+}

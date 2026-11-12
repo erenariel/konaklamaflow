@@ -23,3 +23,6 @@ real_exports/
 
 # Generated local report (may contain private operational data)
 /report.json
+/ops-report.json
+/suite-report.json
+/handoff.json

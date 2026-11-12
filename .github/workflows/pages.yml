@@ -34,6 +34,7 @@ jobs:
           mkdir -p _site
           cp demo/viewer.html _site/index.html
           cp demo/operations.html _site/operations.html
+          cp demo/hotel-suite.html _site/hotel-suite.html
           cp docs/images/demo-report.png _site/demo-report.png
           cp docs/images/social-card.png _site/social-card.png
           touch _site/.nojekyll

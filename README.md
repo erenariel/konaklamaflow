@@ -82,7 +82,7 @@ See [Security](SECURITY.md), [Input Specification](docs/INPUT_SPEC.md), [Archite
 
 ## Roadmap — practical, measurable milestones
 
-1. **Current prototype:** validated pseudonymized JSON, deterministic rules, 23 engine tests, nine browser checks, CLI, and a fictional demonstration.
+1. **Current prototype:** validated pseudonymized JSON, deterministic rules, engine/browser regression tests, CLI, and fictional demonstrations. Candidate branch capabilities are described below.
 2. **v0.2:** opt-in local dashboard, import adapter specification, immutable audit format, more test scenarios for split stays and mixed capacity.
 3. **v0.3:** community-driven integrations *only* for vendor-supported APIs, with sandbox test suites and explicit approval; multi-property namespace isolation.
 4. **v1.0 goal:** stable schema, upgrade policies, security review, opt-in pilot documentation, observability and maintainer governance. We do **not** claim these features exist today.
@@ -116,3 +116,23 @@ python -m unittest discover -s tests -v
 ```
 
 **Limitations:** no real PMS integration, no customer identity data, no official registration, no automatic hotel check-in. AI can make mistakes; every critical decision requires fresh authoritative verification and a human operator.
+
+## Hotel operations suite — v0.3 development preview
+
+The `feat/hotel-operations-suite-v03` branch extends the unmerged v0.2 work in PR #2. Its review PR targets that development branch; neither PR has been merged into `main`. **v0.3 is a schema/UI development preview, not a published package release.** Existing reservation, operations and AI-review APIs remain available; the distribution remains a release candidate.
+
+Open [demo/hotel-suite.html](demo/hotel-suite.html) locally for ten fictional views: front desk, arrivals, OTA reconciliation, room plan, housekeeping/engineering, guest-request drafts, department tasks, reservation totals, AI review and the planned integration map. This preview has no external requests, telemetry or browser storage. No live provider, PMS, payment, identity or KBS connection is enabled. It has not been deployed by this branch.
+
+```bash
+python -m konaklamaflow.experience_cli examples/fictional-hotel.json
+python scripts/generate_suite_demo.py --check
+python -m unittest discover -s tests -v
+# With the optional browser extra and Playwright Chromium installed:
+python -m unittest discover -s tests/browser -v
+```
+
+The suite adapts its schema to the existing v0.2 rule engine. Capacity, bed/amenity requests, channel references, task holds and currency-separated reservation totals extend those common checks. The browser renders the Python-generated report; any local housekeeping/task/event simulation invalidates readiness and export until reset. It does not recalculate an independent check-in decision in JavaScript.
+
+Booking.com, Expedia, Trip.com/Ctrip and channel-manager labels describe **synthetic source reconciliation**, not connected accounts. Amounts use decimal strings; reservation totals are not daily revenue, cash receipts or a reconciled folio. The two-assistant contract exposes only opaque, expiring review references and rechecks the current trusted snapshot. Hashes and TTL do not authenticate an operator or authorize an action. Durable audit, RBAC/MFA, operation idempotency and human approval in a real PMS remain future architecture.
+
+Read the [schema and trust contract](docs/V03_SCHEMA_TR.md), [integration record](docs/V03_INTEGRATION_REPORT_TR.md), [official-source research](docs/RESEARCH_MATRIX_TR.md), [threat model](docs/GUVENLIK_TEHDIT_MODELI_TR.md) and [phased roadmap](docs/GELISTIRME_YOL_HARITASI_TR.md). The supplied [integration instructions](docs/CODEX_INTEGRATION_TR.md) are preserved. No adoption, time-saving, vendor partnership or production-performance result is claimed.
