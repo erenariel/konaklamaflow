@@ -127,12 +127,14 @@ def parse_input(data: Any) -> tuple[str, list[Room], list[Reservation]]:
         x = require_keys(item, ROOM_KEYS, f"rooms[{i}]")
         rid = identifier(x.get("id"), f"rooms[{i}].id")
         if rid in room_ids:
-            raise InputError(f"duplicate room id: {rid}")
+            raise InputError("duplicate room id")
         room_ids.add(rid)
         category = identifier(x.get("category"), f"rooms[{i}].category")
         beds = x.get("beds", "double")
         if not isinstance(beds, str) or beds not in BED_TYPES:
             raise InputError(f"rooms[{i}].beds: supported: double, twin, flex")
+        if "active" in x and x["active"] is None:
+            raise InputError("active: expected true or false")
         active = optional_bool(x.get("active"), True, f"rooms[{i}].active")
         raw_maintenance = x.get("maintenance", [])
         if not isinstance(raw_maintenance, list):
@@ -160,6 +162,8 @@ def parse_input(data: Any) -> tuple[str, list[Room], list[Reservation]]:
         room_id = x.get("room_id")
         if room_id is not None:
             room_id = identifier(room_id, f"reservations[{i}].room_id")
+        if "twin_requested" in x and x["twin_requested"] is None:
+            raise InputError("twin_requested: expected true or false")
         twin_requested = optional_bool(x.get("twin_requested"), False, "twin_requested")
         nightly_base, total_base = x.get("nightly_base"), x.get("total_base")
         if (nightly_base is None) != (total_base is None):
@@ -192,7 +196,9 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
     assigned = {r.id: [] for r in rooms}
 
     def warn(code: str, severity: str, reservation: Reservation, detail: str) -> None:
-        alerts.append(issue(code, severity, reservation.ref, detail))
+        alert = issue(code, severity, reservation.ref, detail)
+        alert["source"] = reservation.source
+        alerts.append(alert)
 
     for res in reservations:
         key = (res.source, res.ref)
@@ -229,12 +235,19 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
 
     for room_id, held in assigned.items():
         held.sort(key=lambda r: (r.stay.start, r.source, r.ref))
-        for i, a in enumerate(held):
-            for b in held[i + 1:]:
-                if a.stay.overlaps(b.stay):
-                    warn("ROOM_OVERLAP", "critical", b, f"Assigned room {room_id} overlaps another active booking or hold; manual resolution required")
-                elif b.stay.start >= a.stay.end:
-                    break
+        # A sweep flags every participant once, including nested/connected stays.
+        # Pairwise warnings both missed the first guest and grew quadratically.
+        conflicts: set[int] = set()
+        longest = None
+        for index, current in enumerate(held):
+            if longest is not None and current.stay.start < held[longest].stay.end:
+                conflicts.update((longest, index))
+                if current.stay.end > held[longest].stay.end:
+                    longest = index
+            else:
+                longest = index
+        for index in sorted(conflicts):
+            warn("ROOM_OVERLAP", "critical", held[index], "Assigned room overlaps another active booking or hold; manual resolution required")
 
     # Never propose a room for a duplicate source reference. Proposal is advisory only.
     ref_counts = Counter((r.source, r.ref) for r in reservations)
@@ -242,7 +255,7 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
     planned: dict[str, list[Window]] = {r.id: [] for r in rooms}
     todo = sorted(
         (r for r in reservations if r.status == "confirmed" and r.room_id is None and r.stay.start >= today),
-        key=lambda r: (r.stay.start, r.source, r.ref),
+        key=lambda r: (r.stay.start, 0 if r.twin_requested else 1, r.source, r.ref),
     )
     for res in todo:
         if (res.source, res.ref) in duplicated or res.category not in categories:
@@ -261,8 +274,9 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
         if not candidates:
             warn("NO_SAFE_ROOM_PROPOSAL", "critical", res, "No free compatible room; do not confirm or promise a room")
             continue
-        # For twin requests prioritize actual twin, then flexible; otherwise deterministic room ID.
-        candidates.sort(key=lambda r: (0 if r.beds == "twin" and res.twin_requested else 1, r.id))
+        # Preserve scarce twin-capable rooms for constrained guests; heuristic, not global optimization.
+        bed_order = ("twin", "flex", "double") if res.twin_requested else ("double", "flex", "twin")
+        candidates.sort(key=lambda r: (bed_order.index(r.beds), r.id))
         chosen = candidates[0]
         planned[chosen.id].append(res.stay)
         proposals.append({"reservation_ref": res.ref, "source": res.source, "room_id": chosen.id, "kind": "MANUAL_APPROVAL_REQUIRED"})

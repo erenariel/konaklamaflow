@@ -53,3 +53,9 @@ python scripts/capture_previews.py
 ```
 
 This captures the report panel and a 1200×630 share card into `docs/images/`. It does not read an operator report or contact the network. You can use `KONAKLAMAFLOW_CHROMIUM` as described above when using a preinstalled browser.
+
+## v0.3 suite candidate
+
+The suite uses the same unit and `tests/browser` discovery commands above. Browser dependencies remain optional for the Python unit suite. `scripts/generate_suite_demo.py --check` compares the fictional snapshot, generated Python evaluation and embedded HTML; run the generator without `--check` after intentionally changing the fixture or evaluator. Browser tests check report parity, stale-state rejection, downloads, offline behavior, escaping, dialog keyboard focus and responsive layouts. These checks are not a WCAG certification or a hotel-scale benchmark.
+
+`python scripts/verify_commit_privacy.py` checks this repository owner's author/committer aliases without printing email values. It does not remove GitHub caches, inspect third-party clones or replace secret/PII review. CI runs the unit suite on Python 3.11, 3.12 and 3.13, and Chromium separately.

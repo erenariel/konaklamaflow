@@ -14,4 +14,4 @@
 
 ## Supported versions
 
-Only the newest tagged release, once published, will be maintained. At present, the project has **no published release or security SLA**.
+Only the newest tagged release, once published, will be maintained. The latest published release is **v0.1.1**; there is **no formal security SLA**. Production suitability has not been established.

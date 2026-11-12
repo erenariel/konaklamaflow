@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased — v0.2.0rc1]
+
+- Added a dry-run front-desk readiness queue with pseudonymous reservation and housekeeping signals.
+- Added a read-only expiring second-AI task handoff protocol; no execution tools.
+- Added a local offline operations cockpit, synthetic fixtures, new Python/browser tests, and operator/marketing documentation.
+- Improved the room proposal heuristic to preserve scarce twin-capable rooms where possible; not a global optimizer.
+- Corrected release status in security documentation.
+
+
 ## Unreleased
 
 - Present the demo with a warm boutique-hotel visual identity, architectural SVG illustration, clearer report cards, and responsive layouts.

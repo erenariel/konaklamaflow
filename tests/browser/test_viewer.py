@@ -41,7 +41,8 @@ class ViewerTests(unittest.IsolatedAsyncioTestCase):
         await self.page.locator('#chooseReport').focus()
         await expect(self.page.locator('#chooseReport')).to_be_focused()
         async with self.page.expect_file_chooser() as chooser:
-            await self.page.keyboard.press('Enter')
+            # Dispatch the keyboard event on the button itself to avoid focus races in CI.
+            await self.page.locator('#chooseReport').press('Enter')
         await (await chooser.value).set_files(ROOT / 'examples/demo-report.json')
         await expect(self.page.locator('#importStatus')).to_have_text('Rapor yüklendi. Öneriler insan onayı gerektirir.')
         self.assertEqual(await self.page.locator('#proposals .item').count(), 1)
@@ -144,6 +145,15 @@ class ViewerTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn('Gerçek işletme verisi içermez', await self.page.locator('#reportMode').inner_text())
         await self.page.locator('#resetReport').click()
         self.assertIn('Kurgusal örnek', await self.page.locator('#reportMode').inner_text())
+
+
+    async def test_new_source_scoped_issues_are_accepted_and_identifiable(self):
+        from konaklamaflow.core import review
+        source=json.loads((ROOT/'examples/demo.json').read_text())
+        report=review(source,'2026-11-12')
+        await self.upload(report)
+        for item in report['issues']:
+            self.assertIn(item['source']+' · '+item['reservation_ref'],await self.page.locator('#issues').inner_text())
 
 
 if __name__ == '__main__':
