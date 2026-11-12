@@ -46,3 +46,13 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - name: Check offline viewer and report imports
         run: python -m unittest discover -s tests/browser -v
+      - name: Verify themes, modes and offline screenshots
+        run: python scripts/verify_demo_experience.py --output /tmp/demo-experience
+      - name: Preserve visual verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-experience-${{ github.sha }}
+          path: /tmp/demo-experience
+          if-no-files-found: error
+          retention-days: 14

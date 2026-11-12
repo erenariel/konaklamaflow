@@ -37,45 +37,78 @@ html,body{font-size:13px}.app{grid-template-columns:216px minmax(0,1fr)}.sidebar
 
 .rack-row.has-maintenance,.rack-row.has-maintenance .rack-track{min-height:65px}.scheduled-maintenance{position:absolute;top:41px;height:17px;display:flex;align-items:center;justify-content:center;background:#f8ede5;border:1px dashed #d8bda1;border-radius:4px;color:#a98356;font-size:7px;letter-spacing:.5px;overflow:hidden;white-space:nowrap}.rack-row.has-maintenance .technical-bar{bottom:auto;height:27px;top:7px}
 
-/* v0.4 visual experience starter: optional, offline and decision-neutral. */
-.kf-prefs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;border-left:1px solid var(--line);padding-left:10px}
+/* v0.4 visual preferences: in-memory, offline and decision-neutral. */
+html[data-kf-theme="light"]{color-scheme:light;--ink:#1d343d;--muted:#52666e;--bg:#eef3f5;--white:#fff;--line:#d3dfe3;--surface:#edf3f4;--surface-hover:#deeaec;--control-border:#7d929b;--blue:#1e6669;--primary-bg:#1e6669;--primary-fg:#fff;--primary-hover:#174e50;--greenbg:#e1f2e8;--success:#1d6749;--redbg:#fbe9e8;--danger:#9b342f;--amberbg:#fff0d5;--warning:#80520d;--infobg:#e7eef8;--info:#345976;--focus:#175dc7;--shadow:0 5px 16px #21343e08}
+html[data-kf-theme="dark"]{color-scheme:dark;--ink:#e9f2f2;--muted:#b3c7cd;--bg:#122630;--white:#1d333c;--line:#3c5965;--surface:#253e48;--surface-hover:#2d4b56;--control-border:#86a2ae;--blue:#91dfd1;--primary-bg:#91dfd1;--primary-fg:#133236;--primary-hover:#b4eee3;--greenbg:#164c42;--success:#b9efda;--redbg:#50353d;--danger:#ffd0cf;--amberbg:#56442c;--warning:#ffe3ad;--infobg:#2a435e;--info:#c8e4ff;--focus:#f2d982;--shadow:0 5px 14px #06121930}
+html[data-kf-theme="night"]{color-scheme:dark;--ink:#f1f5f5;--muted:#c0d1df;--bg:#090f17;--white:#18202b;--line:#405569;--surface:#222f3c;--surface-hover:#304253;--control-border:#97abbc;--blue:#9ce3d3;--primary-bg:#9ce3d3;--primary-fg:#102c31;--primary-hover:#c0f2e6;--greenbg:#155343;--success:#c4ffe6;--redbg:#563040;--danger:#ffdade;--amberbg:#604a28;--warning:#fff0c4;--infobg:#293f5d;--info:#d6eaff;--focus:#ffe7a3;--shadow:0 5px 14px #00000035}
+.kf-prefs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;border-left:1px solid var(--line);padding-left:10px;min-width:0}
 .kf-prefs label{font-size:11px;font-weight:700;color:var(--muted)}
-.kf-prefs select{font-size:11px;max-width:118px;padding:9px 8px;border-radius:7px;border:1px solid var(--line);background:var(--white);color:var(--ink)}
+.kf-prefs select{font:inherit;font-size:11px;max-width:128px;padding:9px 8px;border-radius:7px;border:1px solid var(--control-border);background:var(--white);color:var(--ink);min-height:35px}
 .kf-prefs button{font-size:11px;padding:9px 10px;min-height:35px}
-.kf-prefs select:focus-visible,.kf-prefs button:focus-visible{outline:3px solid #27b6a6;outline-offset:2px}
-html[data-kf-theme="dark"]{--ink:#e9f2f2;--muted:#a4bdc5;--bg:#122630;--line:#39535c;--white:#1d333c;--blue:#7bcfc2;--shadow:0 5px 14px #06121930;--greenbg:#164c42;--redbg:#50353d;--amberbg:#56442c}
-html[data-kf-theme="night"]{--ink:#f1f5f5;--muted:#bfd0d4;--bg:#090f17;--line:#46515c;--white:#18202b;--blue:#9ce3d3;--shadow:0 5px 14px #00000035;--greenbg:#155343;--redbg:#563040;--amberbg:#604a28}
-html[data-kf-theme="dark"] body,html[data-kf-theme="night"] body{background:var(--bg)}
-html[data-kf-theme="dark"] .main,html[data-kf-theme="night"] .main{background:var(--bg);color:var(--ink)}
-html[data-kf-theme="dark"] .panel,html[data-kf-theme="dark"] .metric,html[data-kf-theme="dark"] .selected-reservation,html[data-kf-theme="dark"] .drawer,
-html[data-kf-theme="night"] .panel,html[data-kf-theme="night"] .metric,html[data-kf-theme="night"] .selected-reservation,html[data-kf-theme="night"] .drawer{background:var(--white);color:var(--ink);border-color:var(--line)}
-html[data-kf-theme="dark"] .table thead,html[data-kf-theme="night"] .table thead,
-html[data-kf-theme="dark"] .rack-header,html[data-kf-theme="night"] .rack-header,
-html[data-kf-theme="dark"] .rack-row>.rack-name,html[data-kf-theme="night"] .rack-row>.rack-name,
-html[data-kf-theme="dark"] .rack-day.today,html[data-kf-theme="night"] .rack-day.today,
-html[data-kf-theme="dark"] .rack-cells .today,html[data-kf-theme="night"] .rack-cells .today{background:#253b46;color:var(--ink)}
-html[data-kf-theme="night"] .rack-header,html[data-kf-theme="night"] .rack-row>.rack-name{background:#202936}
-html[data-kf-theme="dark"] .room,html[data-kf-theme="night"] .room{background:#25414b;border-color:#44616a;color:var(--ink)}
-html[data-kf-theme="night"] .room{background:#222e3a}
-html[data-kf-theme="dark"] .secondary,html[data-kf-theme="night"] .secondary{background:var(--white);color:var(--ink);border-color:var(--line)}
-html[data-kf-theme="dark"] .primary,html[data-kf-theme="night"] .primary{color:#102d33}
-html[data-kf-theme="dark"] .tdstrong,html[data-kf-theme="night"] .tdstrong{color:var(--ink)}
-html[data-kf-theme="dark"] .topbar,html[data-kf-theme="night"] .topbar{border-color:var(--line)}
+.kf-module-choice{display:none}
+html[data-kf-mode="presentation"] .kf-module-choice{display:inline-block}
+html[data-kf-theme] body,html[data-kf-theme] .main{background:var(--bg);color:var(--ink)}
+html[data-kf-theme] .panel,html[data-kf-theme] .metric,html[data-kf-theme] .selected-reservation,html[data-kf-theme] .drawer{background:var(--white);color:var(--ink);border-color:var(--line)}
+html[data-kf-theme] .copilot-panel{background:var(--white)}
+html[data-kf-theme] .topbar,html[data-kf-theme] .table td,html[data-kf-theme] .rack-row,html[data-kf-theme] .rack-day,html[data-kf-theme] .rack-cells span,html[data-kf-theme] .rack-footer,html[data-kf-theme] .listrow,html[data-kf-theme] .statrow,html[data-kf-theme] .activity li,html[data-kf-theme] .check{border-color:var(--line)}
+html[data-kf-theme] .metric strong,html[data-kf-theme] .tdstrong,html[data-kf-theme] .selected-reservation b,html[data-kf-theme] .copilot-heading h2,html[data-kf-theme] .rack-row>.rack-name b,html[data-kf-theme] .story-evidence h3,html[data-kf-theme] .ai-intro h2{color:var(--ink)}
+html[data-kf-theme] .sub,html[data-kf-theme] .metric-top,html[data-kf-theme] .metric small,html[data-kf-theme] .panel-head p,html[data-kf-theme] .tdmeta,html[data-kf-theme] .section-note,html[data-kf-theme] .tiny,html[data-kf-theme] .empty,html[data-kf-theme] .floor,html[data-kf-theme] .roomslegend,html[data-kf-theme] .room small,html[data-kf-theme] .activity p,html[data-kf-theme] .drawer .meta,html[data-kf-theme] .footer,html[data-kf-theme] .top-actions .date,html[data-kf-theme] .eyebrow,html[data-kf-theme] .selected-reservation small,html[data-kf-theme] .selected-reservation b span,html[data-kf-theme] .reservation-fact b,html[data-kf-theme] .panel-kicker,html[data-kf-theme] .subtle-count,html[data-kf-theme] .rack-day,html[data-kf-theme] .rack-day b,html[data-kf-theme] .rack-row>.rack-name small,html[data-kf-theme] .rack-footer,html[data-kf-theme] .rack-footer small,html[data-kf-theme] .copilot-heading p,html[data-kf-theme] .copilot-disclaimer,html[data-kf-theme] .story-label,html[data-kf-theme] .story-booking b,html[data-kf-theme] .story-steps li small,html[data-kf-theme] .story-steps li b,html[data-kf-theme] .story-evidence>small,html[data-kf-theme] .story-evidence p,html[data-kf-theme] .story-evidence dt,html[data-kf-theme] .tour-status,html[data-kf-theme] .copilot-footer,html[data-kf-theme] .ai-intro p{color:var(--muted)}
+html[data-kf-theme] .primary{background:var(--primary-bg);color:var(--primary-fg);border-color:var(--primary-bg)}
+html[data-kf-theme] .primary:hover{background:var(--primary-hover);color:var(--primary-fg)}
+html[data-kf-theme] .secondary,html[data-kf-theme] .mini,html[data-kf-theme] .ghost,html[data-kf-theme] .switch button,html[data-kf-theme] .input,html[data-kf-theme] .story-select{background:var(--white);color:var(--ink);border-color:var(--control-border)}
+html[data-kf-theme] .secondary:hover,html[data-kf-theme] .mini:hover,html[data-kf-theme] .ghost:hover,html[data-kf-theme] .switch button:hover,html[data-kf-theme] .table tbody tr:hover{background:var(--surface-hover)}
+html[data-kf-theme] .input::placeholder{color:var(--muted);opacity:1}
+html[data-kf-theme] .switch button.selected{background:var(--infobg);color:var(--info);border-color:var(--info)}
+html[data-kf-theme] .table thead,html[data-kf-theme] .table th,html[data-kf-theme] .rack-header,html[data-kf-theme] .rack-row>.rack-name{background:var(--surface);color:var(--muted)}
+html[data-kf-theme] .rack-header .rack-name{color:var(--muted)}
+html[data-kf-theme] .room,html[data-kf-theme] .module,html[data-kf-theme] .taskcard,html[data-kf-theme] .draft,html[data-kf-theme] .story-evidence,html[data-kf-theme] .ai-intro{background:var(--surface);color:var(--ink);border-color:var(--line)}
+html[data-kf-theme] .room.occupied{background:var(--infobg);border-color:var(--info)}
+html[data-kf-theme] .room.dirty{background:var(--amberbg);border-color:var(--warning)}
+html[data-kf-theme] .room.ooo{background:var(--redbg);border-color:var(--danger)}
+html[data-kf-theme] .ready,html[data-kf-theme] .check em.ok,html[data-kf-theme] .chip,html[data-kf-theme] .shift-banner,html[data-kf-theme] .safety{background:var(--greenbg);color:var(--success);border-color:var(--success)}
+html[data-kf-theme] .shift-banner b,html[data-kf-theme] .safety p{color:var(--success)}
+html[data-kf-theme] .blocked,html[data-kf-theme] .check em.no{background:var(--redbg);color:var(--danger)}
+html[data-kf-theme] .review,html[data-kf-theme] .note{background:var(--amberbg);color:var(--warning);border-color:var(--warning)}
+html[data-kf-theme] .module .status{color:var(--warning)}
+html[data-kf-theme] .info{background:var(--infobg);color:var(--info)}
+html[data-kf-theme] .neutral{background:var(--surface);color:var(--muted)}
+html[data-kf-theme] .avatar,html[data-kf-theme] .metric-top .mico,html[data-kf-theme] .activity .dot,html[data-kf-theme] .reservation-avatar,html[data-kf-theme] .copilot-mark,html[data-kf-theme] .safety .glyph{background:var(--surface);color:var(--blue)}
+html[data-kf-theme] .bar{background:var(--surface)}
+html[data-kf-theme] .stay-bar{background:var(--infobg);color:var(--info);border-color:var(--info)}
+html[data-kf-theme] .stay-bar span{opacity:1}
+html[data-kf-theme] .channel-expedia{background:var(--infobg);color:var(--info)}
+html[data-kf-theme] .channel-trip{background:var(--amberbg);color:var(--warning)}
+html[data-kf-theme] .channel-direct,html[data-kf-theme] .channel-agency{background:var(--greenbg);color:var(--success)}
+html[data-kf-theme] .channel-hotelbeds{background:var(--surface);color:var(--ink)}
+html[data-kf-theme] .stay-bar.cancelled{background:var(--surface);color:var(--muted);border-color:var(--muted)}
+html[data-kf-theme] .technical-bar{background:var(--redbg);color:var(--danger);border-color:var(--danger)}
+html[data-kf-theme] .scheduled-maintenance,html[data-kf-theme] .unreleased-bar,html[data-kf-theme] .hk-flag{background:var(--amberbg);color:var(--warning);border-color:var(--warning)}
+html[data-kf-theme] .rack-day.today,html[data-kf-theme] .rack-cells .today,html[data-kf-theme] .rack-row.evidence-highlight,html[data-kf-theme] .rack-row.evidence-highlight>.rack-name{background:var(--greenbg);color:var(--success)}
+html[data-kf-theme] .rack-day.today b{color:var(--success)}
+html[data-kf-theme] .story-booking span,html[data-kf-theme] .actor-chain span,html[data-kf-theme] .story-steps li>span{background:var(--surface);color:var(--muted);border-color:var(--control-border)}
+html[data-kf-theme] .actor-chain span.live,html[data-kf-theme] .story-steps li.current>span,html[data-kf-theme] .story-steps li.done>span{background:var(--greenbg);color:var(--success);border-color:var(--success)}
+html[data-kf-theme] .story-steps li.current b,html[data-kf-theme] .story-steps li.done b,html[data-kf-theme] .story-evidence dd{color:var(--ink)}
+html[data-kf-theme] .story-steps li.current>span{box-shadow:none}
+html[data-kf-theme] .copilot-disclaimer,html[data-kf-theme] .copilot-footer,html[data-kf-theme] .story-evidence,html[data-kf-theme] .story-evidence dl{border-color:var(--line)}
+html[data-kf-theme] .story-steps li:not(:last-child):before,html[data-kf-theme] .actor-chain i{background:var(--line)}
+html[data-kf-theme] .story-selected{outline-color:var(--focus)}
+html[data-kf-theme] :is(button,a,input,select,[tabindex]):focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+html[data-kf-theme] .sidebar :focus-visible{outline-color:#f2d982}
 html[data-kf-mode="presentation"] .app{display:block;max-width:1800px;margin:0 auto}
 html[data-kf-mode="presentation"] .sidebar{display:none}
 html[data-kf-mode="presentation"] .main{max-width:1800px;margin:0 auto;padding:8px clamp(15px,3vw,56px) 48px}
-html[data-kf-mode="presentation"] .intro h1{font-size:clamp(30px,3vw,48px)}
+html[data-kf-mode="presentation"] .intro h1{font-size:clamp(28px,3vw,42px)}
 html[data-kf-mode="presentation"] .metric strong{font-size:clamp(29px,3vw,44px)}
-html[data-kf-mode="presentation"] .welcome{min-height:185px}
 html[data-kf-mode="presentation"] .topbar{height:65px}
+@media(min-width:1100px){html[data-kf-mode="presentation"] #content{aspect-ratio:16/9;overflow:auto;padding:16px;border:1px solid var(--control-border);border-radius:14px;background:var(--surface)}html[data-kf-mode="presentation"] .workbench-bottom{display:none}}
 @keyframes kfGentleRise{from{opacity:.85;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes kfOrbit{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-13px,7px,0)}}
 html[data-kf-motion="on"] .metric{animation:kfGentleRise .35s ease-out both}
 html[data-kf-motion="on"] .welcome:after{animation:kfOrbit 15s ease-in-out infinite}
 html[data-kf-motion="on"] .drawer{transition:transform .2s ease,opacity .2s ease}
-html[data-kf-motion="off"] .metric,html[data-kf-motion="off"] .welcome:after,html[data-kf-motion="off"] .drawer{animation:none!important;transition:none!important}
-@media(prefers-reduced-motion:reduce){html[data-kf-motion] .metric,html[data-kf-motion] .welcome:after,html[data-kf-motion] .drawer{animation:none!important;transition:none!important}}
-@media(max-width:768px){.kf-prefs{width:100%;border-left:0;padding-left:0}.kf-prefs select{max-width:105px}.kf-prefs button{font-size:10px}.intro{gap:12px}html[data-kf-mode="presentation"] .main{padding:0 13px 28px}}
+html[data-kf-motion="off"] *,html[data-kf-motion="off"] *:before,html[data-kf-motion="off"] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(prefers-reduced-motion:reduce){html[data-kf-motion] *,html[data-kf-motion] *:before,html[data-kf-motion] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:768px){.kf-prefs{width:100%;border-left:0;padding-left:0}.kf-prefs select{max-width:114px}.kf-prefs button{font-size:10px}.intro{gap:12px}html[data-kf-mode="presentation"] .main{padding:0 13px 28px}}
 
 </style>
 </head>
@@ -89,9 +122,9 @@ html[data-kf-motion="off"] .metric,html[data-kf-motion="off"] .welcome:after,htm
   <div class="sidebar-bottom"><div class="pilot"><b>🔒 Güvenli demo modu</b><p>Gerçek misafir bilgisi yok. PMS, OTA, ödeme ve resmî bildirim bağlantısı yok.</p></div><div class="online"><i></i> Tarayıcı içi simülasyon · çevrimdışı</div></div>
 </aside>
 <main class="main">
- <header class="topbar"><div class="crumb">Sample Boutique Hotel <span style="padding:0 7px;color:#c2cad8">/</span> <b id="crumb">Genel Bakış</b></div><div class="top-actions"><span class="date">Perşembe, 12 Kasım 2026</span><span class="chip">● KURGUSAL DEMO</span><div class="avatar">K</div></div></header>
- <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button><div class="kf-prefs" role="group" aria-label="Görünüm tercihleri"><label for="kfTheme">Tema</label><select id="kfTheme" aria-label="Tema seçimi"><option value="light">Açık</option><option value="dark">Koyu</option><option value="night">Gece audit</option></select><button type="button" class="secondary" id="kfMode" aria-pressed="false">Sunum modu</button><button type="button" class="secondary" id="kfMotion" aria-pressed="false">Hareket: Açık</button></div></div></section>
- <div id="content"></div>
+ <header class="topbar"><div class="crumb">Sample Boutique Hotel <span aria-hidden="true" style="padding:0 7px;color:var(--muted)">/</span> <b id="crumb">Genel Bakış</b></div><div class="top-actions"><span class="date">Perşembe, 12 Kasım 2026</span><span class="chip">● KURGUSAL DEMO</span><div class="avatar">K</div></div></header>
+ <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button><div class="kf-prefs" role="group" aria-label="Görünüm tercihleri"><label for="kfTheme">Tema</label><select id="kfTheme" aria-label="Tema seçimi"><option value="light">Açık</option><option value="dark">Koyu</option><option value="night">Gece audit</option></select><button type="button" class="secondary" id="kfMode" aria-pressed="false">Sunum modu</button><button type="button" class="secondary" id="kfMotion" aria-pressed="false">Hareket: Açık</button><label class="kf-module-choice" for="kfModule">Modül</label><select class="kf-module-choice" id="kfModule" aria-label="Sunum modülü"></select></div></div></section>
+ <div id="content" role="region" aria-label="Operasyon çalışma alanı" tabindex="0"></div>
  <footer class="footer">KonaklamaFlow v0.3 konsept • Tüm rezervasyonlar kurgusaldır. Bu arayüz ticari PMS değildir. Gerçek AI veya canlı bağlantı etkin değildir.</footer>
 </main></div>
 <div class="drawer-backdrop" id="backdrop" role="presentation"><aside class="drawer" tabindex="-1" aria-modal="true" role="dialog" aria-label="Detay paneli" id="drawer"></aside></div>
@@ -136,8 +169,8 @@ const readyCount=()=>arrivals().filter(b=>reviewOf(b).status==='review_ready').l
 const activeTasks=()=>state.tasks.filter(x=>x.status!=='done');
 function logAction(label,info){log.unshift({time:new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}),label,info});log=log.slice(0,28)}
 function notify(t){const box=document.getElementById('toast');box.textContent=t;box.style.display='block';clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>box.style.display='none',3700)}
-function navTo(dest){if(!PAGE_LIST.find(x=>x[0]===dest))return;stopStory('Modül değişti; senaryo duraklatıldı.');page=dest;search='';statusFilter='all';closeDetail();render();document.querySelector('nav [data-nav="'+dest+'"]').focus();window.scrollTo({top:0,behavior:'instant'})}
-function navRender(){const nav=document.getElementById('nav');nav.textContent='';for(const [id,symbol,name] of PAGE_LIST){const el=document.createElement('button');el.className='nav'+(id===page?' active':'');el.type='button';el.dataset.nav=id;el.setAttribute('aria-current',id===page?'page':'false');el.innerHTML=`<span class="symbol" aria-hidden="true">${icon(({dashboard:"grid",arrivals:"enter",ota:"sync",rooms:"calendar",housekeeping:"spark",guest:"heart",tasks:"check",revenue:"chart",ai:"spark",integrations:"network"})[id])}</span><span>${esc(name)}</span>`;nav.append(el)}}
+function navTo(dest){if(!PAGE_LIST.find(x=>x[0]===dest))return;stopStory('Modül değişti; senaryo duraklatıldı.');page=dest;search='';statusFilter='all';closeDetail();render();focusNavigation(dest);window.scrollTo({top:0,behavior:'instant'})}
+function navRender(){const selector=document.getElementById('kfModule');if(selector)selector.value=page;const nav=document.getElementById('nav');nav.textContent='';for(const [id,symbol,name] of PAGE_LIST){const el=document.createElement('button');el.className='nav'+(id===page?' active':'');el.type='button';el.dataset.nav=id;el.setAttribute('aria-current',id===page?'page':'false');el.innerHTML=`<span class="symbol" aria-hidden="true">${icon(({dashboard:"grid",arrivals:"enter",ota:"sync",rooms:"calendar",housekeeping:"spark",guest:"heart",tasks:"check",revenue:"chart",ai:"spark",integrations:"network"})[id])}</span><span>${esc(name)}</span>`;nav.append(el)}}
 function getTitle(){return PAGE_LIST.find(x=>x[0]===page)}
 function pill(label,type='neutral'){return `<span class="pill ${type}"><i></i>${esc(label)}</span>`}
 function badge(b){const e=reviewOf(b);return e.status==='review_ready'?pill('Kontrole hazır','ready'):e.status==='blocked'?pill('Engel · '+e.issues.length,'blocked'):pill('Diğer','neutral')}
@@ -152,13 +185,15 @@ function render(){
  if(active&&!active.isConnected){
   const target=focusAttribute?document.querySelector('['+focusAttribute+'="'+CSS.escape(focusValue)+'"]'):focusId?document.getElementById(focusId):null;
   if(target&&!target.disabled)target.focus({preventScroll:true});
-  else document.querySelector('nav [data-nav="'+page+'"]')?.focus({preventScroll:true});
+  else focusNavigation();
  }}
 const UI_ICONS={grid:'M3 3h6v6H3zM13 3h6v6h-6zM3 13h6v6H3zM13 13h6v6h-6z',calendar:'M4 5h16v15H4zM4 10h16M8 3v4M16 3v4',enter:'M13 4h7v16h-7M3 12h12M10 7l5 5-5 5',sync:'M4 7h13l-3-3M20 17H7l3 3M20 7v5M4 17v-5',spark:'m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6Z',heart:'M20 5a5 5 0 0 0-8 2 5 5 0 0 0-8-2c-4 5 3 10 8 14 5-4 12-9 8-14Z',check:'M4 4h16v16H4zM8 12l3 3 6-7',chart:'M4 20V4M4 20h16M8 16v-5M13 16V7M18 16V3',network:'M9 3h6v5H9zM3 16h6v5H3zM15 16h6v5h-6zM12 8v4M6 16v-4h12v4',play:'m8 4 12 8-12 8Z',pause:'M7 4h3v16H7zM15 4h3v16h-3z',next:'m5 4 10 8L5 20ZM19 4v16',reset:'M4 4v6h6M4 10a8 8 0 1 1 0 6',shield:'m12 3 8 3v6c0 4-4 7-8 9-4-2-8-5-8-9V6Z',arrow:'M4 12h16M14 6l6 6-6 6'};
 function icon(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${UI_ICONS[name]||UI_ICONS.grid}"/></svg>`;}
 let selectedStoryId=null,storyStep=0,storyStarted=false,storyPlaying=false,storyTimer=null,storyMessage='Senaryoyu seçin; iki asistanın görev devrini adım adım izleyin.';
 let timelineOffset=0;
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+function motionAllowed(){return !reducedMotion.matches&&document.documentElement.dataset.kfMotion!=='off';}
+function focusNavigation(destination=page){const target=document.documentElement.dataset.kfMode==='presentation'?document.getElementById('kfModule'):document.querySelector('nav [data-nav="'+destination+'"]');target?.focus({preventScroll:true});}
 function stories(){return typeof DEMO_STORIES==='object'&&Array.isArray(DEMO_STORIES.stories)?DEMO_STORIES.stories:[];}
 function currentStory(){return stories().find(s=>s.id===selectedStoryId)||stories()[0]||null;}
 function syncTourPlayback(){const panel=document.getElementById('tourPanel');if(!panel)return;panel.dataset.playing=String(storyPlaying);const play=document.getElementById('tourPlay'),pause=document.getElementById('tourPause');if(play){play.disabled=reportStale||storyPlaying;play.innerHTML=icon('play')+' '+(storyPlaying?'Oynatılıyor':'Senaryoyu oynat');}if(pause)pause.disabled=!storyPlaying;const status=panel.querySelector('.tour-status');if(status)status.textContent=storyMessage;document.querySelectorAll('.story-pulse').forEach(el=>{if(!storyPlaying)el.classList.remove('story-pulse');});}
@@ -172,13 +207,13 @@ function nextStory(){
  render();
 }
 function scheduleStory(){
- clearTimeout(storyTimer);if(!storyPlaying||reportStale||reducedMotion.matches)return;
+ clearTimeout(storyTimer);if(!storyPlaying||reportStale||!motionAllowed())return;
  const story=currentStory();if(!story||storyStep>=story.steps.length-1){stopStory('İnceleme insana devredildi. Gerçek işlem yapılmadı.');render();return;}
- storyTimer=setTimeout(()=>{if(!storyPlaying||reportStale)return;storyStep++;storyMessage='Kontrol raporundaki kanıt gösteriliyor; kaynak veri değiştirilmiyor.';render();scheduleStory();},2100);
+ storyTimer=setTimeout(()=>{if(!storyPlaying||reportStale||!motionAllowed())return;storyStep++;storyMessage='Kontrol raporundaki kanıt gösteriliyor; kaynak veri değiştirilmiyor.';render();scheduleStory();},2100);
 }
 function playStory(){
  const story=currentStory();if(!story||reportStale){notify('Rapor eskidi. Senaryo için örnek veriye dönün.');return;}
- if(reducedMotion.matches){nextStory();storyMessage='Azaltılmış hareket açık: Sonraki adım düğmesiyle ilerleyin.';render();return;}
+ if(!motionAllowed()){nextStory();storyMessage='Azaltılmış hareket açık: Sonraki adım düğmesiyle ilerleyin.';render();return;}
  if(!storyStarted||storyStep>=story.steps.length-1){storyStarted=true;storyStep=0;}
  storyPlaying=true;storyMessage='Senaryo oynatılıyor · kurgusal AI akışı';render();scheduleStory();
 }
@@ -278,7 +313,7 @@ window.addEventListener('keydown',event=>{
   else if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
  }
-});document.getElementById('backdrop').addEventListener('click',event=>{if(event.target.id==='backdrop')closeDetail()});document.getElementById('resetButton').addEventListener('click',reset);document.getElementById('exportButton').addEventListener('click',exportReport);document.getElementById('startShowcase').addEventListener('click',()=>{if(page!=='dashboard'&&page!=='ai'){page='dashboard';search='';statusFilter='all';closeDetail();}playStory();document.getElementById('tourPanel')?.scrollIntoView({block:'start',behavior:reducedMotion.matches?'auto':'smooth'});});render();
+});document.getElementById('backdrop').addEventListener('click',event=>{if(event.target.id==='backdrop')closeDetail()});document.getElementById('resetButton').addEventListener('click',reset);document.getElementById('exportButton').addEventListener('click',exportReport);document.getElementById('startShowcase').addEventListener('click',()=>{if(page!=='dashboard'&&page!=='ai'){page='dashboard';search='';statusFilter='all';closeDetail();}playStory();document.getElementById('tourPanel')?.scrollIntoView({block:'start',behavior:motionAllowed()?'smooth':'auto'});});render();
 
 /* Visual preferences are strictly in-memory presentation controls. */
 (function setupKfVisualOptions(){
@@ -286,14 +321,21 @@ window.addEventListener('keydown',event=>{
  const theme=document.getElementById('kfTheme');
  const mode=document.getElementById('kfMode');
  const motion=document.getElementById('kfMotion');
+ const moduleChoice=document.getElementById('kfModule');
  const systemReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
  if(!theme||!mode||!motion)return;
  let motionDisabled=false;
  root.dataset.kfTheme='light';
  root.dataset.kfMode='operator';
+ if(moduleChoice){
+  for(const [id,,name] of PAGE_LIST){const option=document.createElement('option');option.value=id;option.textContent=name;moduleChoice.append(option);}
+  moduleChoice.value=page;
+  moduleChoice.addEventListener('change',()=>navTo(moduleChoice.value));
+ }
  const syncMotion=()=>{
   const enabled=!motionDisabled&&!systemReduced.matches;
   root.dataset.kfMotion=enabled?'on':'off';
+  if(!enabled)stopStory('Hareket kapalı: Sonraki adım düğmesiyle ilerleyin.');
   motion.disabled=systemReduced.matches;
   motion.textContent=systemReduced.matches?'Hareket: Sistemce azaltıldı':enabled?'Hareket: Açık':'Hareket: Kapalı';
   motion.setAttribute('aria-pressed',String(motionDisabled));
@@ -304,6 +346,7 @@ window.addEventListener('keydown',event=>{
   root.dataset.kfMode=presenting?'presentation':'operator';
   mode.setAttribute('aria-pressed',String(presenting));
   mode.textContent=presenting?'Operatör modu':'Sunum modu';
+  if(moduleChoice)moduleChoice.value=page;
  });
  motion.addEventListener('click',()=>{motionDisabled=!motionDisabled;syncMotion();});
  systemReduced.addEventListener?.('change',syncMotion);
