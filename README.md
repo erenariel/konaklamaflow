@@ -4,9 +4,9 @@
 
 [![KonaklamaFlow interactive hotel workbench: room timeline and two-assistant review simulation](docs/images/operations-tour.gif)](demo/hotel-suite.html)
 
-**[Interactive hotel suite / Etkileşimli otel demosu](demo/hotel-suite.html)** · [Watch the actual demo tour (GIF)](docs/images/operations-tour.gif) · [Published site](https://erenariel.github.io/konaklamaflow/) · [Latest release](https://github.com/erenariel/konaklamaflow/releases/latest)
+**[Open the interactive hotel demo / Otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Watch the actual demo tour (GIF)](docs/images/operations-tour.gif) · [Offline HTML](demo/hotel-suite.html) · [Latest package release](https://github.com/erenariel/konaklamaflow/releases/latest)
 
-Download and open `demo/hotel-suite.html` for a self-contained fictional PMS-style workbench: room timeline, reservation details and a click-to-play two-assistant review tour. The GIF above records this working interface. This candidate remains under review in [PR #3](https://github.com/erenariel/konaklamaflow/pull/3); the published site still opens the earlier report viewer until the reviewed changes are merged. Earlier report viewers remain available locally as `demo/viewer.html` and `demo/operations.html`.
+Download and open `demo/hotel-suite.html` for a self-contained fictional PMS-style workbench: room timeline, reservation details and a click-to-play two-assistant review tour. The GIF above records this working interface. The reviewed Pages configuration uses this workbench as its entry page. Earlier report viewers remain available at `reviewer.html` / `operations.html` on the site and locally as `demo/viewer.html` / `demo/operations.html`.
 
 [![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
 
@@ -117,11 +117,11 @@ python -m unittest discover -s tests -v
 
 **Limitations:** no real PMS integration, no customer identity data, no official registration, no automatic hotel check-in. AI can make mistakes; every critical decision requires fresh authoritative verification and a human operator.
 
-## Hotel operations suite — v0.3 development preview
+## Hotel operations suite — v0.3 prototype
 
-The `feat/hotel-operations-suite-v03` branch extends the unmerged v0.2 work in PR #2. Its review PR targets that development branch; neither PR has been merged into `main`. **v0.3 is a schema/UI development preview, not a published package release.** Existing reservation, operations and AI-review APIs remain available; the distribution remains a release candidate.
+The suite extends the shared v0.2 reservation and readiness engine, reviewed in [PR #2](https://github.com/erenariel/konaklamaflow/pull/2) and [PR #3](https://github.com/erenariel/konaklamaflow/pull/3). **v0.3 describes the prototype schema/UI; it is not a published stable package release.** Existing reservation, operations and AI-review APIs remain available; the distribution remains a release candidate.
 
-Open [demo/hotel-suite.html](demo/hotel-suite.html) locally for ten fictional views: front desk, arrivals, OTA reconciliation, room plan, housekeeping/engineering, guest-request drafts, department tasks, reservation totals, AI review and the planned integration map. This preview has no external requests, telemetry or browser storage. No live provider, PMS, payment, identity or KBS connection is enabled. It has not been deployed by this branch.
+Open [demo/hotel-suite.html](demo/hotel-suite.html) locally for ten fictional views: front desk, arrivals, OTA reconciliation, room plan, housekeeping/engineering, guest-request drafts, department tasks, reservation totals, AI review and the planned integration map. This preview has no external requests, telemetry or browser storage. No live provider, PMS, payment, identity or KBS connection is enabled. The Pages entry and this offline file use the same reviewed suite HTML.
 
 ```bash
 python -m konaklamaflow.experience_cli examples/fictional-hotel.json
@@ -133,7 +133,7 @@ python -m unittest discover -s tests/browser -v
 
 The workbench starts with a seven-day reservation timeline and an interactive AI review rail. Choose a scenario, then play, pause, step or replay: twin-room scarcity, housekeeping blockers, unmatched OTA data, or a successful **human pre-review**. Every explanation is generated from the same evaluated fictional snapshot. The tour is a scripted visualization of the intended AI integration; it does not call a model, change room assignments or approve check-in. Reduced-motion users can step manually.
 
-The [tour guide](docs/DEMO_SHOWCASE_TR.md) explains the controls and [recording script](scripts/record_demo_tour.py) reproduces the actual GIF without using vendor screenshots or private data. When the candidate is approved for Pages, the suite becomes the default entry and the older viewers keep separate URLs.
+The [tour guide](docs/DEMO_SHOWCASE_TR.md) explains the controls and [recording script](scripts/record_demo_tour.py) reproduces the actual GIF without using vendor screenshots or private data. The suite is configured as the Pages entry; the older viewers keep separate URLs.
 
 The suite adapts its schema to the existing v0.2 rule engine. Capacity, bed/amenity requests, channel references, task holds and currency-separated reservation totals extend those common checks. The browser renders the Python-generated report; any local housekeeping/task/event simulation invalidates readiness and export until reset. It does not recalculate an independent check-in decision in JavaScript.
 
