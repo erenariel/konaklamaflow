@@ -1,6 +1,6 @@
 # Yayın öncesi kalite kapıları — v0.2.0rc1
 
-Bu geliştirme **henüz GitHub'a yüklenmiş değildir**. Kaynak paketi, canlı `erenariel/konaklamaflow` v0.1.1 üzerinde incelenerek bir feature branch / PR aracılığıyla birleştirilmelidir.
+Bu geliştirme **GitHub'da geliştirme dalına yüklenmiştir, ancak `main` dalına birleştirilmemiş ve canlı sürüm olarak yayımlanmamıştır**. Kaynak paketi, canlı `erenariel/konaklamaflow` v0.1.1 üzerinde incelenerek bir feature branch / PR aracılığıyla birleştirilmelidir.
 
 ## Kapsam ve test
 
