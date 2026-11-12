@@ -115,7 +115,7 @@ class TestBrowserSuite(unittest.TestCase):
         self.page.locator('nav [data-nav="arrivals"]').click()
         self.page.locator('[data-filter="review_ready"]').click()
         self.assertIn('Kayıt bulunamadı',self.page.locator('#content').inner_text())
-        self.assertIn('Python raporu eskidi',self.page.locator('#content').inner_text())
+        self.assertIn('Rapor güncel değil',self.page.locator('#content').inner_text())
         self.page.locator('#resetButton').click()
         self.assertFalse(self.page.evaluate('() => reportStale'))
         self.assertFalse(self.page.locator('#exportButton').is_disabled())
@@ -263,10 +263,124 @@ class TestBrowserSuite(unittest.TestCase):
         self.assertEqual(set(self.page.evaluate('() => [...occupiedIds()]')),expected)
         self.page.locator('nav [data-nav="rooms"]').click()
         for room in ('102','103','403'):
-            self.assertIn('occupied',self.page.locator('[data-room="'+room+'"]').get_attribute('class'))
-        self.page.locator('[data-room="102"]').click()
+            self.assertIn('occupied',self.page.locator('.room[data-room="'+room+'"]').get_attribute('class'))
+        self.page.locator('.room[data-room="102"]').click()
         self.assertIn('KF1006',self.page.locator('#drawer').inner_text())
         self.assertNotIn('aktif tahsis yok',self.page.locator('#drawer').inner_text())
+
+
+    def test_guided_stories_are_bound_to_the_authoritative_report_and_idle_initially(self):
+        data=self.page.evaluate('() => DEMO_STORIES')
+        self.assertEqual(data['snapshot_sha256'],REPORT['snapshot_sha256'])
+        self.assertEqual(data['mode'],'SCRIPTED_FICTIONAL_REVIEW')
+        self.assertEqual({s['id'] for s in data['stories']},{'twin-review','housekeeping-review','channel-review','arrival-review'})
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-current-step'),'-1')
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-playing'),'false')
+        self.assertIn('gerçek AI/API çağrısı yok',self.page.locator('#tourPanel').inner_text())
+
+    def test_manual_tour_reveals_engine_evidence_without_mutating_source_or_authorizing(self):
+        before=self.page.evaluate('() => JSON.stringify(state)')
+        story=self.page.evaluate('() => currentStory()')
+        for index,step in enumerate(story['steps']):
+            self.page.locator('#tourNext').click()
+            self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-current-step'),str(index))
+            self.assertIn(step['title'],self.page.locator('.story-evidence').inner_text())
+            for evidence in step['evidence']:
+                self.assertIn(evidence['value'],self.page.locator('.story-evidence').inner_text())
+        self.assertTrue(self.page.locator('#tourNext').is_disabled())
+        self.assertEqual(self.page.evaluate('() => JSON.stringify(state)'),before)
+        self.assertFalse(self.page.evaluate('() => reportStale'))
+        self.assertFalse(self.page.locator('#exportButton').is_disabled())
+        self.assertIn('Gerçek check-in veya mesaj gönderimi yapılmadı',self.page.locator('.tour-status').inner_text())
+
+    def test_autoplay_pause_and_reset_cancel_pending_timers(self):
+        self.page.clock.install()
+        self.page.locator('#tourPlay').click()
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-playing'),'true')
+        self.page.clock.fast_forward(2101)
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-current-step'),'1')
+        self.page.locator('#tourPause').click()
+        self.page.clock.fast_forward(10000)
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-current-step'),'1')
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-playing'),'false')
+        self.page.locator('#tourReset').click()
+        self.page.clock.fast_forward(10000)
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-current-step'),'-1')
+
+    def test_navigation_and_dialog_stop_story_without_losing_modal_focus(self):
+        self.page.clock.install()
+        self.page.locator('#tourPlay').click()
+        opener=self.page.locator('.rack-row [data-room="303"]')
+        opener.click()
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-playing'),'false')
+        self.page.clock.fast_forward(10000)
+        self.assertEqual(self.page.evaluate('() => storyStep'),0)
+        self.page.keyboard.press('Escape')
+        self.assertTrue(opener.evaluate('el=>el===document.activeElement'))
+        self.page.locator('#tourPlay').click()
+        self.page.locator('nav [data-nav="ota"]').click()
+        self.page.clock.fast_forward(10000)
+        self.assertFalse(self.page.evaluate('() => storyPlaying'))
+        self.page.locator('nav [data-nav="dashboard"]').click()
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-playing'),'false')
+
+    def test_scenario_change_cancels_playback_and_positive_case_is_only_human_review(self):
+        self.page.clock.install()
+        self.page.locator('#tourPlay').click()
+        self.page.locator('#tourScenario').select_option('arrival-review')
+        self.page.clock.fast_forward(10000)
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-current-step'),'-1')
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-story-id'),'arrival-review')
+        for _ in range(5):self.page.locator('#tourNext').click()
+        self.assertIn('yetkili personel ön incelemesi',self.page.locator('.story-evidence').inner_text())
+        self.assertFalse(REPORT['approval_policy']['pms_writes'])
+        self.assertFalse(REPORT['approval_policy']['payments'])
+        self.assertFalse(REPORT['approval_policy']['kbs'])
+
+    def test_reduced_motion_requires_explicit_step_and_stale_report_disables_tour(self):
+        self.page.clock.install()
+        self.page.emulate_media(reduced_motion='reduce')
+        self.page.locator('#tourPlay').click()
+        self.page.clock.fast_forward(10000)
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-current-step'),'0')
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-playing'),'false')
+        self.page.locator('nav [data-nav="housekeeping"]').click()
+        self.page.locator('[data-hk="303"]').click()
+        self.page.locator('nav [data-nav="dashboard"]').click()
+        self.assertTrue(self.page.locator('#tourPlay').is_disabled())
+        self.assertTrue(self.page.locator('#tourNext').is_disabled())
+        self.assertTrue(self.page.locator('#tourScenario').is_disabled())
+        self.assertEqual(self.page.locator('#tourPanel').get_attribute('data-playing'),'false')
+
+    def test_room_timeline_renders_literal_dates_and_report_holds_without_new_decisions(self):
+        self.assertEqual(self.page.locator('.rack-header .rack-day').count(),7)
+        self.assertEqual(self.page.locator('.rack-header .rack-day.today').count(),1)
+        self.assertIn('KF1003',self.page.locator('[data-rack-room="303"]').inner_text())
+        self.assertIn('TEKNİK BLOKAJ',self.page.locator('[data-rack-room="401"]').inner_text())
+        before=self.page.evaluate('() => JSON.stringify(state)')
+        self.page.locator('[data-timeline-shift="7"]').click()
+        self.assertEqual(self.page.evaluate('() => timelineOffset'),7)
+        self.assertEqual(self.page.evaluate('() => JSON.stringify(state)'),before)
+        self.page.locator('[data-timeline-shift="0"]').click()
+        self.assertEqual(self.page.evaluate('() => timelineOffset'),0)
+
+    def test_scheduled_maintenance_is_visible_and_uses_engine_current_day_warning(self):
+        snapshot=json.loads(json.dumps(SNAPSHOT))
+        snapshot['rooms'][0]['maintenance']=[{'start':'2026-11-12','end':'2026-11-14'}]
+        report=self.load_generated_snapshot(snapshot)
+        self.page.locator('nav [data-nav="rooms"]').click()
+        self.assertIn('PLANLI BAKIM',self.page.locator('[data-rack-room="B01"]').inner_text())
+        self.assertIn('ooo',self.page.locator('.room[data-room="B01"]').get_attribute('class'))
+        self.page.locator('.room[data-room="B01"]').click()
+        self.assertIn('2026-11-12',self.page.locator('#drawer').inner_text())
+        self.assertIn('personel incelemesi gerekli',self.page.locator('#drawer').inner_text())
+
+    def test_tour_keyboard_focus_and_mobile_priority(self):
+        self.page.locator('#tourNext').press('Enter')
+        self.assertTrue(self.page.locator('#tourNext').evaluate('el=>el===document.activeElement'))
+        self.page.set_viewport_size({'width':390,'height':844})
+        self.assertLess(self.page.locator('#tourPanel').bounding_box()['y'],self.page.locator('.rack-panel').first.bounding_box()['y'])
+        self.assertTrue(self.page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'))
 
 
 if __name__=='__main__':

@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from konaklamaflow.experience_engine import evaluate  # noqa: E402
+from konaklamaflow.demo_stories import build_demo_stories, report_fingerprint  # noqa: E402
 
 START = '// BEGIN GENERATED_SUITE_DATA'
 END = '// END GENERATED_SUITE_DATA'
@@ -34,8 +35,12 @@ def embed(document, snapshot, report):
         raise ValueError('Missing or duplicate generated data markers')
     start = document.index(START)
     end = document.index(END, start) + len(END)
+    stories = build_demo_stories(snapshot)
+    if stories['report_sha256'] != report_fingerprint(report):
+        raise ValueError('Demo story data does not match the authoritative report')
     block = (START + '\nconst INITIAL_DATA=' + safe_json(snapshot) + ';\n'
-             + 'const INITIAL_EVALUATION=' + safe_json(report) + ';\n' + END)
+             + 'const INITIAL_EVALUATION=' + safe_json(report) + ';\n'
+             + 'const DEMO_STORIES=' + safe_json(stories) + ';\n' + END)
     return document[:start] + block + document[end:]
 
 

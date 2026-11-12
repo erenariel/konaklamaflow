@@ -30,14 +30,7 @@ jobs:
           ref: ${{ github.event.workflow_run.head_sha }}
           persist-credentials: false
       - name: Stage fictional demo only
-        run: |
-          mkdir -p _site
-          cp demo/viewer.html _site/index.html
-          cp demo/operations.html _site/operations.html
-          cp demo/hotel-suite.html _site/hotel-suite.html
-          cp docs/images/demo-report.png _site/demo-report.png
-          cp docs/images/social-card.png _site/social-card.png
-          touch _site/.nojekyll
+        run: python scripts/stage_demo_site.py --output _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

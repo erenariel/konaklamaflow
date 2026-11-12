@@ -2,11 +2,11 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
-[![KonaklamaFlow: a calmer front desk, clearer decisions](docs/images/social-card.png)](https://erenariel.github.io/konaklamaflow/)
+[![KonaklamaFlow interactive hotel workbench: room timeline and two-assistant review simulation](docs/images/operations-tour.gif)](demo/hotel-suite.html)
 
-**[Try the fictional demo / Kurgusal demoyu aç](https://erenariel.github.io/konaklamaflow/)** · [Latest release](https://github.com/erenariel/konaklamaflow/releases/latest)
+**[Interactive hotel suite / Etkileşimli otel demosu](demo/hotel-suite.html)** · [Watch the actual demo tour (GIF)](docs/images/operations-tour.gif) · [Published site](https://erenariel.github.io/konaklamaflow/) · [Latest release](https://github.com/erenariel/konaklamaflow/releases/latest)
 
-The demo starts with fictional data. Selected report files are processed in your browser; download `demo/viewer.html` for fully offline use.
+Download and open `demo/hotel-suite.html` for a self-contained fictional PMS-style workbench: room timeline, reservation details and a click-to-play two-assistant review tour. The GIF above records this working interface. This candidate remains under review in [PR #3](https://github.com/erenariel/konaklamaflow/pull/3); the published site still opens the earlier report viewer until the reviewed changes are merged. Earlier report viewers remain available locally as `demo/viewer.html` and `demo/operations.html`.
 
 [![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
 
@@ -130,6 +130,10 @@ python -m unittest discover -s tests -v
 # With the optional browser extra and Playwright Chromium installed:
 python -m unittest discover -s tests/browser -v
 ```
+
+The workbench starts with a seven-day reservation timeline and an interactive AI review rail. Choose a scenario, then play, pause, step or replay: twin-room scarcity, housekeeping blockers, unmatched OTA data, or a successful **human pre-review**. Every explanation is generated from the same evaluated fictional snapshot. The tour is a scripted visualization of the intended AI integration; it does not call a model, change room assignments or approve check-in. Reduced-motion users can step manually.
+
+The [tour guide](docs/DEMO_SHOWCASE_TR.md) explains the controls and [recording script](scripts/record_demo_tour.py) reproduces the actual GIF without using vendor screenshots or private data. When the candidate is approved for Pages, the suite becomes the default entry and the older viewers keep separate URLs.
 
 The suite adapts its schema to the existing v0.2 rule engine. Capacity, bed/amenity requests, channel references, task holds and currency-separated reservation totals extend those common checks. The browser renders the Python-generated report; any local housekeeping/task/event simulation invalidates readiness and export until reset. It does not recalculate an independent check-in decision in JavaScript.
 
