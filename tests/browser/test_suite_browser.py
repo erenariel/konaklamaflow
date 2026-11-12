@@ -56,6 +56,7 @@ class TestBrowserSuite(unittest.TestCase):
         toggle.click()
         self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'on')
         self.page.emulate_media(reduced_motion='reduce')
+        self.page.wait_for_function("document.documentElement.dataset.kfMotion === 'off'")
         self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'off')
         self.assertTrue(toggle.is_disabled())
 
