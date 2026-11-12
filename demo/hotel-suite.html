@@ -36,6 +36,47 @@ html,body{font-size:13px}.app{grid-template-columns:216px minmax(0,1fr)}.sidebar
 @media(max-width:760px){.tour-controls{margin:0 0 13px}}
 
 .rack-row.has-maintenance,.rack-row.has-maintenance .rack-track{min-height:65px}.scheduled-maintenance{position:absolute;top:41px;height:17px;display:flex;align-items:center;justify-content:center;background:#f8ede5;border:1px dashed #d8bda1;border-radius:4px;color:#a98356;font-size:7px;letter-spacing:.5px;overflow:hidden;white-space:nowrap}.rack-row.has-maintenance .technical-bar{bottom:auto;height:27px;top:7px}
+
+/* v0.4 visual experience starter: optional, offline and decision-neutral. */
+.kf-prefs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;border-left:1px solid var(--line);padding-left:10px}
+.kf-prefs label{font-size:11px;font-weight:700;color:var(--muted)}
+.kf-prefs select{font-size:11px;max-width:118px;padding:9px 8px;border-radius:7px;border:1px solid var(--line);background:var(--white);color:var(--ink)}
+.kf-prefs button{font-size:11px;padding:9px 10px;min-height:35px}
+.kf-prefs select:focus-visible,.kf-prefs button:focus-visible{outline:3px solid #27b6a6;outline-offset:2px}
+html[data-kf-theme="dark"]{--ink:#e9f2f2;--muted:#a4bdc5;--bg:#122630;--line:#39535c;--white:#1d333c;--blue:#7bcfc2;--shadow:0 5px 14px #06121930;--greenbg:#164c42;--redbg:#50353d;--amberbg:#56442c}
+html[data-kf-theme="night"]{--ink:#f1f5f5;--muted:#bfd0d4;--bg:#090f17;--line:#46515c;--white:#18202b;--blue:#9ce3d3;--shadow:0 5px 14px #00000035;--greenbg:#155343;--redbg:#563040;--amberbg:#604a28}
+html[data-kf-theme="dark"] body,html[data-kf-theme="night"] body{background:var(--bg)}
+html[data-kf-theme="dark"] .main,html[data-kf-theme="night"] .main{background:var(--bg);color:var(--ink)}
+html[data-kf-theme="dark"] .panel,html[data-kf-theme="dark"] .metric,html[data-kf-theme="dark"] .selected-reservation,html[data-kf-theme="dark"] .drawer,
+html[data-kf-theme="night"] .panel,html[data-kf-theme="night"] .metric,html[data-kf-theme="night"] .selected-reservation,html[data-kf-theme="night"] .drawer{background:var(--white);color:var(--ink);border-color:var(--line)}
+html[data-kf-theme="dark"] .table thead,html[data-kf-theme="night"] .table thead,
+html[data-kf-theme="dark"] .rack-header,html[data-kf-theme="night"] .rack-header,
+html[data-kf-theme="dark"] .rack-row>.rack-name,html[data-kf-theme="night"] .rack-row>.rack-name,
+html[data-kf-theme="dark"] .rack-day.today,html[data-kf-theme="night"] .rack-day.today,
+html[data-kf-theme="dark"] .rack-cells .today,html[data-kf-theme="night"] .rack-cells .today{background:#253b46;color:var(--ink)}
+html[data-kf-theme="night"] .rack-header,html[data-kf-theme="night"] .rack-row>.rack-name{background:#202936}
+html[data-kf-theme="dark"] .room,html[data-kf-theme="night"] .room{background:#25414b;border-color:#44616a;color:var(--ink)}
+html[data-kf-theme="night"] .room{background:#222e3a}
+html[data-kf-theme="dark"] .secondary,html[data-kf-theme="night"] .secondary{background:var(--white);color:var(--ink);border-color:var(--line)}
+html[data-kf-theme="dark"] .primary,html[data-kf-theme="night"] .primary{color:#102d33}
+html[data-kf-theme="dark"] .tdstrong,html[data-kf-theme="night"] .tdstrong{color:var(--ink)}
+html[data-kf-theme="dark"] .topbar,html[data-kf-theme="night"] .topbar{border-color:var(--line)}
+html[data-kf-mode="presentation"] .app{display:block;max-width:1800px;margin:0 auto}
+html[data-kf-mode="presentation"] .sidebar{display:none}
+html[data-kf-mode="presentation"] .main{max-width:1800px;margin:0 auto;padding:8px clamp(15px,3vw,56px) 48px}
+html[data-kf-mode="presentation"] .intro h1{font-size:clamp(30px,3vw,48px)}
+html[data-kf-mode="presentation"] .metric strong{font-size:clamp(29px,3vw,44px)}
+html[data-kf-mode="presentation"] .welcome{min-height:185px}
+html[data-kf-mode="presentation"] .topbar{height:65px}
+@keyframes kfGentleRise{from{opacity:.85;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes kfOrbit{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-13px,7px,0)}}
+html[data-kf-motion="on"] .metric{animation:kfGentleRise .35s ease-out both}
+html[data-kf-motion="on"] .welcome:after{animation:kfOrbit 15s ease-in-out infinite}
+html[data-kf-motion="on"] .drawer{transition:transform .2s ease,opacity .2s ease}
+html[data-kf-motion="off"] .metric,html[data-kf-motion="off"] .welcome:after,html[data-kf-motion="off"] .drawer{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){html[data-kf-motion] .metric,html[data-kf-motion] .welcome:after,html[data-kf-motion] .drawer{animation:none!important;transition:none!important}}
+@media(max-width:768px){.kf-prefs{width:100%;border-left:0;padding-left:0}.kf-prefs select{max-width:105px}.kf-prefs button{font-size:10px}.intro{gap:12px}html[data-kf-mode="presentation"] .main{padding:0 13px 28px}}
+
 </style>
 </head>
 <body>
@@ -49,7 +90,7 @@ html,body{font-size:13px}.app{grid-template-columns:216px minmax(0,1fr)}.sidebar
 </aside>
 <main class="main">
  <header class="topbar"><div class="crumb">Sample Boutique Hotel <span style="padding:0 7px;color:#c2cad8">/</span> <b id="crumb">Genel Bakış</b></div><div class="top-actions"><span class="date">Perşembe, 12 Kasım 2026</span><span class="chip">● KURGUSAL DEMO</span><div class="avatar">K</div></div></header>
- <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button></div></section>
+ <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button><div class="kf-prefs" role="group" aria-label="Görünüm tercihleri"><label for="kfTheme">Tema</label><select id="kfTheme" aria-label="Tema seçimi"><option value="light">Açık</option><option value="dark">Koyu</option><option value="night">Gece audit</option></select><button type="button" class="secondary" id="kfMode" aria-pressed="false">Sunum modu</button><button type="button" class="secondary" id="kfMotion" aria-pressed="false">Hareket: Açık</button></div></div></section>
  <div id="content"></div>
  <footer class="footer">KonaklamaFlow v0.3 konsept • Tüm rezervasyonlar kurgusaldır. Bu arayüz ticari PMS değildir. Gerçek AI veya canlı bağlantı etkin değildir.</footer>
 </main></div>
@@ -238,5 +279,36 @@ window.addEventListener('keydown',event=>{
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
  }
 });document.getElementById('backdrop').addEventListener('click',event=>{if(event.target.id==='backdrop')closeDetail()});document.getElementById('resetButton').addEventListener('click',reset);document.getElementById('exportButton').addEventListener('click',exportReport);document.getElementById('startShowcase').addEventListener('click',()=>{if(page!=='dashboard'&&page!=='ai'){page='dashboard';search='';statusFilter='all';closeDetail();}playStory();document.getElementById('tourPanel')?.scrollIntoView({block:'start',behavior:reducedMotion.matches?'auto':'smooth'});});render();
+
+/* Visual preferences are strictly in-memory presentation controls. */
+(function setupKfVisualOptions(){
+ const root=document.documentElement;
+ const theme=document.getElementById('kfTheme');
+ const mode=document.getElementById('kfMode');
+ const motion=document.getElementById('kfMotion');
+ const systemReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+ if(!theme||!mode||!motion)return;
+ let motionDisabled=false;
+ root.dataset.kfTheme='light';
+ root.dataset.kfMode='operator';
+ const syncMotion=()=>{
+  const enabled=!motionDisabled&&!systemReduced.matches;
+  root.dataset.kfMotion=enabled?'on':'off';
+  motion.disabled=systemReduced.matches;
+  motion.textContent=systemReduced.matches?'Hareket: Sistemce azaltıldı':enabled?'Hareket: Açık':'Hareket: Kapalı';
+  motion.setAttribute('aria-pressed',String(motionDisabled));
+ };
+ theme.addEventListener('change',()=>{root.dataset.kfTheme=theme.value;});
+ mode.addEventListener('click',()=>{
+  const presenting=root.dataset.kfMode!=='presentation';
+  root.dataset.kfMode=presenting?'presentation':'operator';
+  mode.setAttribute('aria-pressed',String(presenting));
+  mode.textContent=presenting?'Operatör modu':'Sunum modu';
+ });
+ motion.addEventListener('click',()=>{motionDisabled=!motionDisabled;syncMotion();});
+ systemReduced.addEventListener?.('change',syncMotion);
+ syncMotion();
+})();
+
 </script>
 </body></html>
