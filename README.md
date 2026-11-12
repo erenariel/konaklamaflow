@@ -2,6 +2,10 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
+**[Try the fictional demo / Kurgusal demoyu aç](https://erenariel.github.io/konaklamaflow/)** · [Latest release](https://github.com/erenariel/konaklamaflow/releases/latest)
+
+The demo starts with fictional data. Selected report files are processed in your browser; download `demo/viewer.html` for fully offline use.
+
 [![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
 
 > **Project status (2026-11-12):** Runnable developer prototype, not a certified PMS, hotel management suite, production booking engine, or KBS integration. No real customer deployments or third-party integrations are claimed.
