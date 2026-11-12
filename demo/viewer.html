@@ -3,52 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<meta name="description" content="KonaklamaFlow: küçük oteller için çevrimdışı rezervasyon kontrol paneli. Kurgusal raporu inceleyin; öneriler insan onayı gerektirir.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#163e37">
+<meta name="description" content="Küçük ve butik oteller için daha sakin bir resepsiyon, daha net kararlar. KonaklamaFlow’un kurgusal rezervasyon raporunu keşfedin.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
-<meta property="og:title" content="KonaklamaFlow - Offline hotel reservation review">
-<meta property="og:description" content="Explore a fictional report: reservation conflicts, room proposals, and next-day arrivals. Open source, MIT, human review required.">
-<meta property="og:image" content="https://erenariel.github.io/konaklamaflow/demo-report.png">
-<title>KonaklamaFlow · Offline Demo Viewer</title>
+<meta property="og:title" content="KonaklamaFlow · A calmer front desk. Clearer decisions.">
+<meta property="og:description" content="Privacy-first, open-source reservation review for small and boutique hotels. Explore the fictional demo; every recommendation needs a human decision.">
+<meta property="og:image" content="https://erenariel.github.io/konaklamaflow/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="KonaklamaFlow: a calmer front desk, clearer decisions. An illustrated arched doorway in natural green and ivory tones.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://erenariel.github.io/konaklamaflow/">
+<meta name="twitter:card" content="summary_large_image">
+<title>KonaklamaFlow · Daha sakin bir resepsiyon.</title>
 <style>
-  :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0c1420;color:#e8f1f4}
-  *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 85% 0%,#173a41 0%,#0c1420 48%)}
-  .wrap{max-width:1100px;margin:auto;padding:26px 20px 65px}header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:30px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.4px;font-size:20px}.logo{display:grid;place-items:center;width:40px;height:40px;background:#13b598;color:#09202a;border-radius:13px;font-size:24px}
-  .eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#5dd5bc;font-weight:800}
-  h1{font-size:clamp(27px,4.2vw,45px);margin:.2em 0 .2em;letter-spacing:-1.2px;line-height:1.1}h2{font-size:18px;margin:0 0 14px;letter-spacing:-.3px}
-  p{color:#a8b9c6;line-height:1.6;margin:7px 0}.sub{max-width:730px}.badge{border:1px solid #2d6f65;color:#72e1c9;background:#0e2a2e;padding:6px 10px;border-radius:16px;font-size:11px;font-weight:800;letter-spacing:.04em}
-  .intro{display:flex;align-items:start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:26px}
-  button{font:inherit;cursor:pointer}button.upload{display:inline-flex;align-items:center;gap:10px;background:#16ae95;color:#061821;font-weight:800;padding:11px 16px;border:0;border-radius:10px;box-shadow:0 6px 25px #0002;white-space:nowrap}
-  button:focus-visible{outline:3px solid #fff;outline-offset:4px}.reset{margin-top:10px;background:transparent;border:1px solid #628b9a;border-radius:7px;color:#d2e9ee;padding:7px 10px}
-  .hint{font-size:12px;color:#92a9b5;max-width:245px;margin-top:7px}.error{color:#ffb0a7}
-  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:22px 0 32px}.metric,.panel{background:#142331;border:1px solid #294053;border-radius:15px;box-shadow:0 18px 42px #0002}
-  .metric{padding:19px 19px 16px}.metric .num{font-size:31px;font-weight:800;letter-spacing:-1px;margin-top:8px}.metric .label{font-size:12px;color:#9bb1bf}
-  .metric .num.critical{color:#ffb0a7}.metric .num.teal{color:#66e0c6}
-  .cols{display:grid;grid-template-columns:1.08fr .92fr;gap:16px}.panel{padding:21px;margin-bottom:16px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-  .small{font-size:12px;color:#91aaba}.item{display:flex;gap:13px;padding:13px 0;border-top:1px solid #23394a}.marker{display:inline-flex;align-items:center;justify-content:center;width:31px;height:31px;min-width:31px;border-radius:9px;background:#3c2b33;color:#ffa69c;font-weight:800;font-size:13px}
-  .marker.review{background:#393426;color:#f2d185}.marker.ok{background:#113c3d;color:#6be4c7}.item strong{font-size:13px}.desc{color:#9fb4c1;font-size:12px;line-height:1.55;margin-top:4px}
-  .pill{border:1px solid #355165;border-radius:9px;padding:4px 9px;font-size:11px;color:#c7d8e2}.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
-  .empty{font-size:13px;color:#91abba;border-top:1px solid #23394a;padding-top:16px}
-  footer{font-size:12px;color:#819cab;margin-top:20px}a{color:#72e1c9}code{background:#0a1b26;border-radius:4px;padding:2px 5px}
-  @media(max-width:740px){.cols{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.wrap{padding:16px 14px 35px}.panel{padding:17px}}
+ :root{--paper:#f5f2eb;--white:#fffefb;--ink:#203d35;--green:#163e37;--muted:#66746b;--line:#dcded3;--mint:#e6eee4;--clay:#a64b35;--clay-light:#fcf0e8;--gold:#b68b49;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}
+ *{box-sizing:border-box}html{scroll-padding-top:22px}body{margin:0}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #b26a36;outline-offset:5px}button:disabled{cursor:default}svg{display:block;flex-shrink:0}h1,h2,h3,p{margin:0}button{color:inherit}p{line-height:1.7}.container{width:min(1220px,calc(100% - 88px));margin:auto}.skip{position:absolute;left:16px;top:-100px;background:var(--white);padding:12px 18px;z-index:5}.skip:focus{top:12px}
+ .nav{height:98px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px}.brand{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.7px;white-space:nowrap}.brand-mark{width:37px;height:41px;color:var(--green)}.brand em{font-style:normal;font-weight:400}.nav-links{display:flex;align-items:center;gap:34px;font-size:13px;font-weight:600;color:#52625a}.nav-links a{transition:color .2s}.nav-links a:hover{color:var(--clay)}.source-link{display:inline-flex;gap:9px;align-items:center}.source-link svg{width:17px;height:17px}.nav-note{display:flex;align-items:center;gap:8px;font-size:11px;color:#52625a}.dot{width:6px;height:6px;border-radius:50%;background:#66856a;display:inline-block;flex-shrink:0}
+ .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding:69px 0 63px}.eyebrow{display:flex;align-items:center;gap:10px;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:2px;color:#596c5e}.eyebrow:before{content:"";width:25px;height:1px;background:var(--gold)}h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(44px,5.15vw,72px);line-height:1.08;font-weight:400;letter-spacing:-2.8px;margin:23px 0 22px}h1 em{color:#728369;font-weight:400}.hero-copy>p{font-size:15px;color:#647269;max-width:465px}.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:23px;margin-top:30px}.primary{display:inline-flex;align-items:center;justify-content:center;gap:26px;background:var(--green);color:#fffdf4;border:1px solid var(--green);border-radius:6px;padding:15px 20px;font-size:12px;font-weight:600;transition:background .2s,transform .2s}.primary:hover{background:#28584a;transform:translateY(-2px)}.primary svg{width:17px;height:17px}.text-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;border-bottom:1px solid #abb5a5;padding:5px 0}.hero-note{display:flex;align-items:center;gap:7px;margin-top:20px;font-size:11px;color:#74816f}.hero-note svg{width:13px;height:13px}
+ .hero-art{position:relative;min-width:0;max-width:430px;width:100%;justify-self:end}.art-frame{position:relative;aspect-ratio:1.07;border-radius:180px 180px 10px 10px;overflow:hidden;background:#e7e8dd}.art-frame:after{content:"";position:absolute;inset:16px;border:1px solid #bcc8b980;border-radius:inherit;pointer-events:none}.hotel-art{width:100%;height:100%}.art-caption{position:absolute;bottom:23px;left:50%;transform:translateX(-50%);white-space:nowrap;display:flex;align-items:center;gap:9px;background:#fffdf3;border:1px solid #e2e4d7;border-radius:5px;padding:10px 13px;font-size:10px;letter-spacing:.15px;box-shadow:0 6px 22px #30482e0a}.art-caption svg{width:16px;height:16px;color:#638062}.art-label{display:flex;align-items:center;justify-content:space-between;font-size:9px;letter-spacing:1.8px;color:#758069;margin-top:14px}.art-label span:last-child{font-family:Georgia,serif;font-size:13px;letter-spacing:0;font-style:italic}
+ .principles{display:flex;justify-content:space-between;gap:20px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:54px}.principle{display:flex;align-items:center;gap:11px;font-size:11px;color:#627162}.principle svg{width:17px;height:17px;color:#70866b}.principle strong{font-weight:600;color:var(--ink)}
+ .section-intro{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:23px}.overline{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#7a8673;font-weight:700;margin-bottom:10px}.section-intro h2{font-family:Georgia,serif;font-weight:400;font-size:32px;letter-spacing:-.9px}.section-intro>p{font-size:11px;color:#71806c;max-width:260px;text-align:right}.demo-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;border:1px solid #d8dfcd;background:#edf1e6;border-radius:30px;color:#53644c;padding:6px 10px;white-space:nowrap}.demo-tag .dot{width:5px;height:5px;background:#859873}
+ .report-shell{background:var(--white);border:1px solid #dadfd4;border-radius:12px;overflow:hidden;box-shadow:0 18px 65px #233e3010}.report-top{padding:22px 27px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #e7e9e1;background:#fdfdf8}.report-identity{display:flex;align-items:center;gap:11px;min-width:0}.report-logo{width:31px;height:31px;border-radius:7px;background:var(--mint);display:grid;place-items:center}.report-logo svg{width:17px;height:17px}.report-name{font-size:12px;font-weight:650}.file-info{font-size:10px;color:#627158;margin-top:4px;overflow-wrap:anywhere}.report-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;flex-shrink:0}.upload{display:flex;align-items:center;gap:8px;background:var(--green);color:#fffef7;border:0;border-radius:5px;padding:10px 13px;font-size:10px;font-weight:600}.upload:hover{background:#2c594a}.upload svg{width:14px;height:14px}.reset{font-size:10px;background:transparent;border:1px solid #d9dfd2;border-radius:5px;padding:9px 11px;color:#617257}.reset:hover{background:#eff2e9}.upload-help{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 27px;font-size:10px;color:#627158;background:#f6f8f0}.upload-help p{font-size:10px}.import-status:empty{display:none}.import-status{font-size:10px;color:#426244}.import-status.error{color:#9c3c28;font-weight:600}.report-content{padding:25px 27px 27px}
+ .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:25px}.metric{position:relative;border:1px solid #e1e5d9;border-radius:8px;padding:17px 18px;background:#fffefb;min-width:0}.metric.alert{background:#fcf5ee;border-color:#eddfd1}.metric.proposal{background:#edf2e9;border-color:#dce5d4}.metric-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.metric-label{font-size:12px;color:#697560}.metric-icon{color:#8a987e;width:16px;height:16px}.metric.alert .metric-icon{color:var(--clay)}.num{font-family:Georgia,serif;font-size:37px;line-height:1;margin-top:16px;letter-spacing:-1.5px}.num.critical{color:var(--clay)}.metric-note{font-size:10px;color:#637158;margin-top:9px;line-height:1.5}.metric.alert .metric-note{color:#a46b52}
+ .cols{display:grid;grid-template-columns:1.16fr .84fr;gap:20px;align-items:start}.column{min-width:0}.panel{border:1px solid #e1e5d9;border-radius:8px;overflow:hidden;margin-bottom:18px}.panel:last-child{margin-bottom:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 18px 15px}.section-title{display:flex;align-items:center;gap:9px}.section-title svg{width:15px;height:15px;color:#728269}.section-head h3{font-size:14px;font-weight:650;letter-spacing:-.1px}.count{font-size:9px;color:#5e6d54;background:#f0f3eb;border-radius:4px;padding:4px 7px;white-space:nowrap}.issue-filters{display:flex;gap:5px;padding:0 18px 13px;border-bottom:1px solid #e8eae2}.filter{font-size:11px;border:1px solid transparent;border-radius:4px;background:transparent;padding:5px 8px;color:#5e6d54}.filter[aria-pressed=true]{background:#edf1e7;border-color:#e1e7d8;color:#3e583c}.filter:hover{background:#f3f5ee}
+ .item{padding:16px 18px;display:flex;gap:11px;border-bottom:1px solid #edf0e6;min-width:0}.item:last-child{border-bottom:0}.item.critical-row{background:#fdf8f2}.marker{width:27px;height:27px;min-width:27px;border-radius:7px;background:#f1e2d7;color:#9c5136;display:grid;place-items:center;font-size:12px;font-weight:700}.marker.review{background:#f3edda;color:#967e3b}.marker.ok{background:#eaf0e3;color:#6a855c}.item-content{flex:1;min-width:0}.item-heading{display:flex;align-items:start;justify-content:space-between;gap:8px}.item strong{font-size:12px;font-weight:650;line-height:1.5;overflow-wrap:anywhere}.reference{font-size:8px;color:#58684f;background:#f0f1e9;border-radius:3px;padding:3px 5px;white-space:nowrap;max-width:120px;overflow-wrap:anywhere}.desc{font-size:12px;line-height:1.7;color:#626f5d;margin-top:5px;overflow-wrap:anywhere}.severity{display:inline-flex;gap:4px;align-items:center;font-size:8px;margin-top:8px;color:#9d603f}.severity.review{color:#776324}.severity:before{content:"";width:4px;height:4px;border-radius:50%;background:currentColor}.details{margin-top:8px;font-size:9px;color:#637158;overflow-wrap:anywhere}.details summary{cursor:pointer;display:list-item;font-size:9px}.details p{font-size:9px;line-height:1.6;margin-top:6px}.details code{font-size:8px;display:block;margin-bottom:4px;color:#738064;overflow-wrap:anywhere}.empty{font-size:11px;color:#5e6d54;padding:18px;line-height:1.7}
+ .proposal-callout{font-size:8px;letter-spacing:.3px;color:#5b714d;white-space:nowrap}.proposal-row{background:#f6f8f1}.proposal-row .marker{height:35px;width:35px;min-width:35px;font-family:Georgia,serif;font-size:15px}.room-number small{font-family:"Segoe UI",Arial,sans-serif;font-size:8px;letter-spacing:1px}.room-number{font-family:Georgia,serif;color:#405e38;font-size:21px;margin-left:auto;line-height:1}.arrival-row{align-items:center}.arrival-row .marker{background:#f0f3eb;color:#829277;width:27px;height:29px;min-width:27px}.room-state{font-size:8px;border:1px solid #dde6d4;border-radius:4px;color:#647c54;padding:4px 6px;white-space:nowrap;align-self:center}.room-state.unassigned{color:#806032;border-color:#eee2c9;background:#fcf8ed}.next-day{font-size:9px;color:#748368;white-space:nowrap}.privacy{border:0;background:var(--green);color:#fbfcf4;padding:23px 22px;position:relative;overflow:hidden}.privacy:after{content:"";position:absolute;right:-50px;top:28px;width:150px;height:150px;border:1px solid #87a38c26;border-radius:50%;pointer-events:none}.privacy svg{width:23px;height:23px;color:#bfd0a7;margin-bottom:16px}.privacy h3{font-family:Georgia,serif;font-size:23px;line-height:1.25;font-weight:400;margin-bottom:11px;position:relative;z-index:1}.privacy p{font-size:12px;color:#c3cfb7;max-width:275px;position:relative;z-index:1}.privacy-note{margin-top:16px;padding-top:13px;border-top:1px solid #66816c66;display:flex;align-items:center;gap:7px;font-size:8px;color:#b6c9a9}.privacy-note .dot{background:#bacd9e;width:4px;height:4px}
+ .report-bottom{display:flex;justify-content:space-between;gap:15px;padding:13px 27px;border-top:1px solid #e3e7db;background:#fafbf5;font-size:8px;color:#657558}.report-bottom span{display:flex;gap:6px;align-items:center}.report-bottom svg{width:11px;height:11px}.how{padding:64px 0 57px}.how-title{font-family:Georgia,serif;font-size:29px;font-weight:400;letter-spacing:-.5px;margin-bottom:28px}.how-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}.step{border-top:1px solid #cfd6c5;padding-top:17px}.step-number{font-family:Georgia,serif;font-style:italic;font-size:20px;color:#6c7f61;margin-bottom:16px}.step h3{font-size:12px;font-weight:600;margin-bottom:8px}.step p{font-size:11px;color:#77816f;max-width:280px}.bottom-cta{display:flex;justify-content:space-between;align-items:center;gap:25px;border-top:1px solid var(--line);padding:30px 0 39px}.bottom-cta p{font-family:Georgia,serif;font-style:italic;font-size:21px;color:#7a8871}.bottom-cta a{display:flex;gap:12px;align-items:center;font-size:11px;font-weight:600}.bottom-cta a svg{width:15px;height:15px}footer{border-top:1px solid var(--line);padding:23px 0 29px}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-brand{font-size:12px;font-weight:650;letter-spacing:-.4px}.footer-brand span{font-weight:400}.footer-note{font-size:9px;color:#637158;line-height:1.7;margin-top:6px}.footer-links{display:flex;gap:22px;font-size:10px;color:#6b7a60}.footer-links a:hover{text-decoration:underline}
+ @media(min-width:1500px){h1{font-size:76px}.hero{padding:78px 0}}
+ @media(max-width:1000px){.container{width:calc(100% - 52px)}.nav-links{gap:22px}.nav-note{display:none}.hero{gap:25px;padding:48px 0}.hero h1{font-size:56px;letter-spacing:-2.3px}.hero-copy>p{font-size:13px}.hero-art{max-width:350px}.hero-actions{gap:16px}.primary{padding:13px 16px;gap:16px}.principles{gap:12px}.principle{font-size:10px;gap:7px}.report-tools{gap:7px}.report-top{padding:19px 21px}.report-content{padding:22px 21px}.cols{gap:14px}.section-head{padding:16px 14px}.item{padding:15px 14px}.issue-filters{padding-left:14px}.privacy{padding:21px 19px}}
+ @media(max-width:740px){.container{width:calc(100% - 36px)}.nav{height:77px;gap:12px}.brand{font-size:18px}.brand-mark{width:30px;height:34px}.nav-links{gap:16px;font-size:11px}.nav-links .how-nav{display:none}.source-link svg{width:15px;height:15px}.hero{grid-template-columns:1fr;padding:40px 0 30px;gap:33px}.hero h1{font-size:clamp(40px,9vw,61px);letter-spacing:-1.8px;margin-top:20px}.eyebrow{font-size:8px;letter-spacing:1.5px}.hero-copy>p{font-size:13px;max-width:430px}.hero-actions{margin-top:24px}.primary{font-size:11px;padding:13px 16px}.text-link{font-size:11px}.hero-note{font-size:10px;margin-top:17px}.hero-art{width:80%;max-width:330px;justify-self:center}.art-frame{aspect-ratio:1.27}.art-caption{max-width:calc(100% - 28px);white-space:normal;line-height:1.5;bottom:18px;padding:8px 11px;font-size:9px}.art-label{font-size:8px;margin-top:10px}.principles{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;padding:19px 0;margin-bottom:36px}.principle:last-child{grid-column:1/-1}.principle svg{width:15px;height:15px}.section-intro h2{font-size:27px}.section-intro>p{display:none}.section-intro{margin-bottom:18px}.overline{font-size:8px;letter-spacing:1.6px}.report-top{align-items:start;flex-direction:column;padding:18px 15px;gap:15px}.report-identity{width:100%}.report-tools{width:100%;justify-content:space-between}.upload{font-size:10px;padding:11px 12px}.reset{font-size:9px;padding:10px}.upload-help{padding:10px 15px;align-items:start;flex-direction:column;gap:7px}.report-content{padding:17px 12px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:19px}.metric{padding:14px}.num{font-size:35px;margin-top:12px}.metric-label{font-size:11px}.metric-note{font-size:10px}.cols{grid-template-columns:1fr;gap:18px}.section-head{padding:16px 14px}.section-head h3{font-size:12px}.item strong{font-size:11px}.desc{font-size:10px}.report-bottom{padding:12px 15px;font-size:8px;flex-wrap:wrap;gap:6px}.privacy h3{font-size:25px}.privacy p{max-width:none}.privacy{padding:23px}.privacy-note{font-size:9px}.how{padding:38px 0}.how-title{font-size:25px;margin-bottom:24px}.how-grid{grid-template-columns:1fr;gap:22px}.step{display:grid;grid-template-columns:30px 1fr;column-gap:14px;padding-top:16px}.step-number{grid-row:span 2;margin:0}.step h3{margin-bottom:5px}.step p{max-width:none}.bottom-cta{align-items:start;flex-direction:column;padding:25px 0 30px;gap:17px}.bottom-cta p{font-size:20px}.footer-inner{align-items:start;flex-direction:column;gap:17px}.footer-links{gap:22px}.reference{max-width:88px;white-space:normal}.item-heading{align-items:start}}
+ @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header><div class="brand"><span class="logo" aria-hidden="true">⌂</span><span>Konaklama<span style="color:#66dbc1">Flow</span></span></div><span class="badge">OFFLINE · DEMO ONLY</span></header>
-  <div class="intro">
-    <div><div class="eyebrow">Hospitality operations / Ön kontrol</div><h1>Günlük operasyon paneli</h1><p class="sub">Rezervasyon çakışmaları, oda önerileri ve yarınki girişler. Veriler yalnızca bu tarayıcıda işlenir; sistem herhangi bir otel yazılımında değişiklik yapmaz.</p><p class="small" id="fileInfo">Kurgusal örnek rapor yükleniyor…</p></div>
-    <div><button class="upload" id="chooseReport" type="button" aria-describedby="uploadHint">↥ Rapor JSON yükle</button><input id="reportFile" type="file" accept="application/json,.json" hidden><div class="hint" id="uploadHint">Raporunu <code>python -m konaklamaflow</code> komutuyla oluştur. Bu sayfa hiçbir dosyayı sunucuya göndermez.</div><button class="reset" id="resetReport" type="button">Kurgusal örneğe dön</button><p class="hint" id="importStatus" role="status" aria-live="polite" aria-atomic="true"></p></div>
+<a class="skip" href="#rapor">Rapora geç</a>
+<div class="container">
+ <header class="nav">
+  <a class="brand" href="#" aria-label="KonaklamaFlow ana sayfa"><svg class="brand-mark" viewBox="0 0 38 44" fill="none" aria-hidden="true"><path d="M5 41V19C5 10 11 4 19 4s14 6 14 15v22H5Z" stroke="currentColor" stroke-width="1.6"/><path d="M12 41V22a7 7 0 0 1 14 0v19M18.8 4v8M5 23h7m14 0h7M19 29v6" stroke="currentColor" stroke-width="1.4"/><path d="M1 41h36" stroke="currentColor" stroke-width="1.6"/></svg><span>Konaklama<em>Flow</em></span></a>
+  <nav class="nav-links" aria-label="Ana gezinme"><a href="#rapor">Örnek rapor</a><a class="how-nav" href="#nasil-calisir">Nasıl çalışır?</a><a class="source-link" href="https://github.com/erenariel/konaklamaflow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18"/></svg>GitHub</a></nav>
+  <span class="nav-note"><span class="dot"></span>Açık kaynak · MIT</span>
+ </header>
+ <main>
+  <section class="hero" aria-labelledby="heroTitle">
+   <div class="hero-copy"><div class="eyebrow">Küçük oteller için, büyük bir özenle.</div><h1 id="heroTitle">Daha sakin bir<br>resepsiyon.<br><em>Daha net kararlar.</em></h1><p>Rezervasyon çakışmalarını, oda önerilerini ve yarınki girişleri tek bir yerde görün. KonaklamaFlow kontrol eder; son kararı siz verirsiniz.</p><div class="hero-actions"><a class="primary" href="#rapor">Kurgusal raporu keşfet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="text-link" href="https://github.com/erenariel/konaklamaflow#readme">Projeyi tanıyın <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" width="12" height="12" aria-hidden="true"><path d="M5 15 15 5M6 5h9v9"/></svg></a></div><div class="hero-note"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="m10 2 6 3v5c0 4-6 7-6 7s-6-3-6-7V5l6-3Z"/><path d="m7 9 2 2 4-4"/></svg>Hesap gerekmez. Rapor dosyanız tarayıcıda kalır.</div></div>
+   <div class="hero-art" aria-hidden="true"><div class="art-frame"><svg class="hotel-art" viewBox="0 0 430 400" fill="none"><path fill="#e8e9df" d="M0 0h430v400H0z"/><circle cx="312" cy="102" r="40" fill="#c1a572"/><path d="M0 329c122-43 260-22 430-55v126H0V329Z" fill="#d6ddcd"/><path d="m74 304 143 44 145-52-142-39-146 47Z" fill="#c4cdbb"/><path d="M98 290V131c0-65 44-96 95-96 56 0 94 39 94 94v203l-94 30-95-72Z" fill="#214b3f"/><path d="m193 362 94-30V129c0-31-9-55-26-71 26 29 47 49 47 92v187l-115 34v-9Z" fill="#173c33"/><path d="M127 299V138c0-46 27-73 65-73 41 0 65 31 65 73v194l-64 21-66-54Z" stroke="#7e9a7e" stroke-width="1.2"/><path d="M151 311V152c0-32 17-51 41-51 26 0 41 22 41 51v187l-40 13-42-41Z" fill="#d4d7bb"/><path d="M174 331V163c0-18 8-31 18-31 12 0 19 14 19 31v183l-18 6-19-21Z" fill="#a8b89a"/><path d="M193 132v220m-42-119 82 15m-82-62 82 15m-82 78 82 15" stroke="#65846b" stroke-width="1.2"/><path d="M98 215 40 242v67l58-19v-75Z" fill="#c6c5a8"/><path d="M40 242 99 224v14l-59 19v-15Z" fill="#b3b59b"/><path d="M64 253v40m18-46v40" stroke="#8d9d7f" stroke-width="1.2"/><path d="M294 331c7-25 10-51 3-79m3 50c-20-6-30-20-27-39 15 7 25 21 27 39Zm0-9c19-8 27-22 23-40-13 10-21 22-23 40Z" fill="#73916e"/><path d="m64 322 132 40m17-2 105-31M132 314l61 38" stroke="#f5f2e4" stroke-opacity=".6"/><path d="M355 194v72m-11-57 22-6m-22 22 22-6m-22 22 22-6" stroke="#bac4af" stroke-width="1.1"/><circle cx="70" cy="126" r="3" fill="#c3cbb7"/><circle cx="344" cy="155" r="2" fill="#a9b99b"/></svg><div class="art-caption"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m10 2 6 3v5c0 4-6 7-6 7s-6-3-6-7V5l6-3Z"/><path d="m7 9 2 2 4-4"/></svg>Özenle tasarlandı. Mahremiyetle çalışır.</div></div><div class="art-label"><span>BAĞIMSIZ OTELLER İÇİN</span><span>Biraz daha huzurlu bir gün.</span></div></div>
+  </section>
+  <div class="principles" aria-label="Proje ilkeleri">
+   <div class="principle"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="14" height="11" rx="2"/><path d="M6 17h8m-4-3v3M7 8l2 2 4-4"/></svg><span><strong>Yerel işleme.</strong> Rapor yüklemesi sunucuya gitmez.</span></div>
+   <div class="principle"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="m6 5-4 5 4 5m8-10 4 5-4 5m-3-12-2 14"/></svg><span><strong>Açık kaynak.</strong> İncelenebilir, geliştirilebilir.</span></div>
+   <div class="principle"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="10" cy="6" r="3"/><path d="M4 18v-2a6 6 0 0 1 12 0v2"/></svg><span><strong>İnsan onayı.</strong> Kontrol sizde kalır.</span></div>
   </div>
-  <div class="metrics" id="metrics" aria-live="polite"></div>
-  <div class="cols">
-    <div><section class="panel"><div class="section-head"><h2>Kontrol uyarıları</h2><span class="small" id="issueTotal"></span></div><div id="issues"></div></section>
-    <section class="panel"><div class="section-head"><h2>Oda blokaj önerileri</h2><span class="pill">İNSAN ONAYI GEREKİR</span></div><div id="proposals"></div></section></div>
-    <div><section class="panel"><div class="section-head"><h2>Yarınki girişler</h2><span class="small" id="nextDay"></span></div><div id="arrivals"></div></section>
-    <section class="panel"><h2>Gizlilik ve sınırlar</h2><p>Bu araç yalnızca kurgusal veya önceden pseudonimleştirilmiş veriyle örnek kullanım içindir. Gerçek rezervasyon numarası, isim, pasaport, telefon, otel şifresi veya özel PMS dökümleri yükleme.</p><p>Rapor önerileri otomatik rezervasyon, iptal, misafir mesajı veya KBS bildirimi oluşturmaz.</p></section></div>
-  </div>
-  <footer><strong>KonaklamaFlow v0.1.1</strong> · MIT · Statik çevrimdışı görüntüleyici · Gerçek işletmede kullanmadan önce bağımsız doğrulama gerekir.<p><a href="https://github.com/erenariel/konaklamaflow">Kaynak kod, kullanım ve katkı / Source &amp; contributing</a></p></footer>
+  <section id="rapor" aria-labelledby="reportTitle">
+   <div class="section-intro"><div><div class="overline">GÜNLÜK OPERASYON, DAHA ANLAŞILIR.</div><h2 id="reportTitle">Bir bakışta, neye bakmalı?</h2></div><p>Önce kurgusal raporu keşfedin.<br>Nasıl çalıştığını, veriye dokunmadan görün.</p></div>
+   <div class="report-shell">
+    <div class="report-top"><div class="report-identity"><div class="report-logo" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 17V8a6 6 0 0 1 12 0v9H4Zm4 0v-7a2 2 0 0 1 4 0v7"/></svg></div><div><div class="report-name">Operasyon özeti</div><p class="file-info" id="fileInfo">Kurgusal örnek rapor yükleniyor…</p></div></div><div class="report-tools"><button class="reset" id="resetReport" type="button">Kurgusal örneğe dön</button><button class="upload" id="chooseReport" type="button" aria-describedby="uploadHint"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M10 13V3m-4 4 4-4 4 4M3 12v5h14v-5"/></svg>Rapor JSON yükle</button><input id="reportFile" type="file" accept="application/json,.json" hidden></div></div>
+    <div class="upload-help"><p id="uploadHint">Kurgusal veya önceden pseudonimleştirilmiş raporlar · En fazla 3 MB</p><p class="import-status" id="importStatus" role="status" aria-live="polite" aria-atomic="true"></p></div>
+    <div class="report-content">
+     <div class="metrics" id="metrics" aria-live="polite"></div>
+     <div class="cols">
+      <div class="column"><section class="panel" aria-labelledby="issuesTitle"><div class="section-head"><div class="section-title"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="m10 3 8 14H2L10 3Z"/><path d="M10 8v4m0 2v1"/></svg><h3 id="issuesTitle">Kontrol uyarıları</h3></div><span class="count" id="issueTotal"></span></div><div class="issue-filters" role="group" aria-label="Uyarıları filtrele"><button class="filter" type="button" data-filter="all" aria-pressed="true">Tümü</button><button class="filter" type="button" data-filter="critical" aria-pressed="false">Kritik</button><button class="filter" type="button" data-filter="review" aria-pressed="false">İncelenecek</button></div><div id="issues" aria-live="polite"></div></section>
+      <section class="panel" aria-labelledby="proposalsTitle"><div class="section-head"><div class="section-title"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 17V6l7-3 7 3v11H3Zm4 0v-6h6v6M7 7h1m4 0h1"/></svg><h3 id="proposalsTitle">Oda önerileri</h3></div><span class="proposal-callout">İNSAN ONAYI GEREKİR</span></div><div id="proposals"></div></section></div>
+      <div class="column"><section class="panel" aria-labelledby="arrivalsTitle"><div class="section-head"><div class="section-title"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M6 2v4m8-4v4M3 9h14m-9 4 2 2 3-3"/></svg><h3 id="arrivalsTitle">Yarınki girişler</h3></div><span class="next-day" id="nextDay"></span></div><div id="arrivals"></div></section>
+      <section class="panel privacy" aria-labelledby="privacyTitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 11 3 3 5-6"/></svg><h3 id="privacyTitle">Misafirperverlik insanla.<br>Mahremiyet tasarımla.</h3><p>Yüklediğiniz rapor bu tarayıcıda işlenir. İsim, telefon, pasaport veya gerçek rezervasyon bilgileri içeren dosyalar yüklemeyin.</p><div class="privacy-note"><span class="dot"></span>Otel sistemlerine bağlantı veya otomatik işlem yok.</div></section></div>
+     </div>
+    </div>
+    <div class="report-bottom"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 7v4m0-7v1"/></svg>Karar destek raporu · Her öneri manuel kontrol gerektirir.</span><span id="reportMode">Kurgusal örnek · Gerçek işletme verisi içermez.</span></div>
+   </div>
+  </section>
+  <section class="how" id="nasil-calisir" aria-labelledby="howTitle"><div class="overline">BASİT BİR AKIŞ. ÖNEMLİ BİR KONTROL.</div><h2 class="how-title" id="howTitle">Üç adımda, daha net bir tablo.</h2><div class="how-grid"><article class="step"><div class="step-number">01</div><h3>Doğru raporla başlayın.</h3><p>Kurgusal veya önceden pseudonimleştirilmiş bir rapor kullanın. Kişisel verileri en başta dışarıda bırakın.</p></article><article class="step"><div class="step-number">02</div><h3>Öncelikleri birlikte görün.</h3><p>Oda çakışmalarını, kontrol gerektiren tutarları ve yarınki girişleri aynı ekranda inceleyin.</p></article><article class="step"><div class="step-number">03</div><h3>Son kararı siz verin.</h3><p>Önerileri işletmenizin kurallarıyla doğrulayın. Bu demo rezervasyon değiştirmez, mesaj veya KBS bildirimi göndermez.</p></article></div></section>
+  <div class="bottom-cta"><p>Küçük otellerin iyi fikirlere ihtiyacı var.</p><a href="https://github.com/erenariel/konaklamaflow/blob/main/CONTRIBUTING.md">Birlikte geliştirelim<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a></div>
+ </main>
+ <footer><div class="footer-inner"><div><div class="footer-brand">Konaklama<span>Flow</span></div><p class="footer-note">Türkiye’deki küçük ve butik oteller için açık kaynak ön kontrol prototipi.</p></div><nav class="footer-links" aria-label="Proje bağlantıları"><a href="https://github.com/erenariel/konaklamaflow#readme">Dokümantasyon</a><a href="https://github.com/erenariel/konaklamaflow/issues">Geri bildirim</a><a href="https://github.com/erenariel/konaklamaflow/blob/main/LICENSE">MIT lisansı</a></nav></div></footer>
 </div>
 <script type="application/json" id="sample">{
   "schema_version": "1.0",
@@ -123,6 +150,27 @@ const el=id=>document.getElementById(id);
 const ID=/^[A-Za-z0-9_-]{1,40}$/;
 const MAX_FILE_BYTES=3_000_000;
 let importVersion=0;
+let currentReport=null;
+let activeIssueFilter='all';
+const issueCopy={
+ DUPLICATE_SOURCE_REF:['Aynı kayıt birden fazla kez görünüyor','Kaynak ve rezervasyon referansı tekrarlanıyor. İşlem yapmadan önce kayıtları karşılaştırın.'],
+ UNKNOWN_CATEGORY:['Oda kategorisi tanınmıyor','Rezervasyonda istenen kategori bu envanterde yer almıyor. Kaynak kaydı kontrol edin.'],
+ BASE_PRICE_MISMATCH:['Fiyat tutarı eşleşmiyor','Gecelik baz fiyat ile toplam tutar tutarlı değil. Vergi, indirim ve ek ücretleri ayrıca doğrulayın.'],
+ CANCELLED_HOLD_REVIEW:['İptal edilen kaydın odasını kontrol edin','İptal edilmiş rezervasyonda oda ataması bulunuyor. Kaynak sistemdeki blokajı manuel olarak doğrulayın.'],
+ UNKNOWN_ROOM:['Atanan oda tanınmıyor','Bu oda raporun envanterinde yer almıyor. Oda bilgisini kaynak sistemle karşılaştırın.'],
+ CATEGORY_MISMATCH:['Oda ve kategori farklı','Atanmış oda, satılan kategoriden farklı. İşletmenizin yetkili yükseltme politikasını kontrol edin.'],
+ ROOM_OUT_OF_SERVICE:['Oda kullanıma uygun görünmüyor','Oda pasif veya konaklama tarihleri bakımla çakışıyor. Başka bir oda için manuel kontrol gerekiyor.'],
+ TWIN_NOT_GUARANTEED:['Twin yatak talebi doğrulanmalı','Atanan oda twin yatak talebini garanti etmiyor. Misafire söz vermeden önce yatak düzenini doğrulayın.'],
+ ROOM_OVERLAP:['Oda atamaları çakışıyor','Aynı odada örtüşen aktif kayıt veya bekleyen blokaj var. Kaynak sistemde manuel çözüm gerekiyor.'],
+ NO_SAFE_ROOM_PROPOSAL:['Uygun oda bulunamadı','Uyumlu ve boş bir oda önerilemiyor. Oda sözü vermeden önce envanteri ve işletme kurallarını kontrol edin.']
+};
+function icon(kind,className=''){
+ const paths={rooms:'M3 17V6l7-3 7 3v11H3Zm4 0v-6h6v6M7 7h1m4 0h1',booking:'M4 3h12v14H4V3Zm3 4h6m-6 3h6m-6 3h4',critical:'m10 3 8 14H2L10 3Zm0 5v4m0 2v1',proposal:'m5 10 3 3 7-7M3 17h14',arrival:'M4 17V3h10v14M1 17h16M10 10h7m-3-3 3 3-3 3'};
+ const n=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ n.setAttribute('viewBox','0 0 20 20');n.setAttribute('fill','none');n.setAttribute('stroke','currentColor');n.setAttribute('stroke-width','1.2');n.setAttribute('aria-hidden','true');
+ if(className)n.setAttribute('class',className);
+ const path=document.createElementNS(n.namespaceURI,'path');path.setAttribute('d',paths[kind]||paths.booking);n.appendChild(path);return n;
+}
 function invalid(){throw Error('Rapor geçersiz veya desteklenmeyen bir şemada. Son geçerli rapor korundu.');}
 function object(value,keys){
  if(!value || typeof value!=='object' || Array.isArray(value))invalid();
@@ -167,23 +215,71 @@ function validate(data){
 }
 function status(message,isError=false){el('importStatus').textContent=message;el('importStatus').classList.toggle('error',isError);}
 const add=(parent, tag, className, value)=>{let n=document.createElement(tag); if(className)n.className=className;if(value!==undefined)n.textContent=String(value);parent.appendChild(n);return n;};
-function item(target,mark,title,details,kind){const outer=add(target,'div','item');add(outer,'span','marker '+(kind||'review'),mark);const content=add(outer,'div','');add(content,'strong','',title);add(content,'div','desc',details);}
-function render(data,filename){
- validate(data);
- const s=data.summary;
- const stats=[['İncelenen oda',s.rooms,''],['Rezervasyon',s.reservations,''],['Kritik uyarı',s.critical_alerts,'critical'],['Oda önerisi',s.room_proposals,'teal']];
- el('metrics').replaceChildren(); for(const [name,value,kind] of stats){const box=add(el('metrics'),'div','metric');add(box,'div','label',name);add(box,'div','num '+kind,value);}
- for(const id of ['issues','proposals','arrivals'])el(id).replaceChildren();
- el('issueTotal').textContent=data.issues.length+' uyarı';
- for(const x of data.issues){item(el('issues'),x.severity==='critical'?'!':'?',String(x.code||'UNKNOWN')+' · '+String(x.reservation_ref||'?'),x.detail||'',x.severity==='critical'?'':'review');}
- if(!data.issues.length)add(el('issues'),'p','empty','Uyarı bulunamadı.');
- for(const x of data.room_proposals){item(el('proposals'),'✓',String(x.reservation_ref||'?')+' → Oda '+String(x.room_id||'?'),'Kaynak: '+String(x.source||'?')+' · Yalnızca öneridir, PMS’de değişiklik yapılmadı.','ok');}
- if(!data.room_proposals.length)add(el('proposals'),'p','empty','Uygun oda önerisi yok.');
- const current=new Date(data.as_of+'T12:00:00Z');current.setUTCDate(current.getUTCDate()+1);el('nextDay').textContent=current.toLocaleDateString('tr-TR',{timeZone:'UTC'});
- for(const x of data.tomorrow_arrivals){item(el('arrivals'),'⌂',String(x.reservation_ref||'?')+' · '+String(x.category||'?'),'Kaynak: '+String(x.source||'?')+' · '+(x.assigned_room?'Oda '+String(x.assigned_room):'Oda henüz atanmadı')+' · '+String(x.status||''),'ok');}
- if(!data.tomorrow_arrivals.length)add(el('arrivals'),'p','empty','Yarın için giriş görünmüyor.');
- el('fileInfo').textContent=(filename||'Örnek rapor')+' · '+String(data.as_of||'')+' · '+String(data.mode||'');
+function renderIssues(){
+ const all=currentReport.issues;
+ const shown=all.filter(x=>activeIssueFilter==='all'||x.severity===activeIssueFilter)
+  .map((x,index)=>({x,index})).sort((a,b)=>(a.x.severity==='critical'?0:1)-(b.x.severity==='critical'?0:1)||a.index-b.index).map(entry=>entry.x);
+ el('issues').replaceChildren();
+ el('issueTotal').textContent=activeIssueFilter==='all'?all.length+' uyarı':shown.length+' / '+all.length+' uyarı';
+ document.querySelectorAll('[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===activeIssueFilter)));
+ for(const x of shown){
+  const row=add(el('issues'),'div','item'+(x.severity==='critical'?' critical-row':''));
+  add(row,'span','marker '+(x.severity==='critical'?'':'review'),x.severity==='critical'?'!':'?');
+  const content=add(row,'div','item-content');const heading=add(content,'div','item-heading');
+  const copy=issueCopy[x.code]||['Kontrol gerektiren kayıt',x.detail];
+  add(heading,'strong','',copy[0]);add(heading,'span','reference',x.reservation_ref);
+  let description=copy[1];
+  if(x.code==='BASE_PRICE_MISMATCH'){
+   const expected=/^Expected base-only total ([0-9]+\.[0-9]{2}) (TRY|EUR|USD|GBP);/.exec(x.detail);
+   if(expected)description='Beklenen baz toplam '+expected[1]+' '+expected[2]+'. Vergi, indirim ve gecelik tutarları ayrıca doğrulayın.';
+  }
+  add(content,'p','desc',description);
+  add(content,'span','severity '+(x.severity==='critical'?'':'review'),x.severity==='critical'?'Öncelikli kontrol':'Manuel inceleme');
+  const details=add(content,'details','details');add(details,'summary','','Rapor ayrıntısı');
+  add(details,'code','',x.code);add(details,'p','',x.detail);
+ }
+ if(!shown.length)add(el('issues'),'p','empty',all.length?'Bu kategoride uyarı bulunmuyor.':'Bu raporda uyarı bulunmuyor. Sonuçları yine de manuel olarak doğrulayın.');
 }
+function render(data,filename,isDemo=false){
+ validate(data);
+ currentReport=data;activeIssueFilter='all';
+ const s=data.summary;
+ const stats=[
+  ['İncelenen oda',s.rooms,'rooms','','Envanterdeki oda sayısı'],
+  ['Rezervasyon',s.reservations,'booking','','Rapordaki toplam kayıt'],
+  ['Kritik uyarı',s.critical_alerts,'critical','alert',s.critical_alerts?'Öncelikle gözden geçirin':'Kritik uyarı bulunmuyor'],
+  ['Oda önerisi',s.room_proposals,'proposal','proposal','Son karar her zaman sizde']
+ ];
+ el('metrics').replaceChildren();
+ for(const [name,value,kind,tone,note] of stats){
+  const box=add(el('metrics'),'div','metric '+tone);const head=add(box,'div','metric-head');
+  add(head,'div','metric-label',name);head.appendChild(icon(kind,'metric-icon'));
+  add(box,'div','num '+(kind==='critical'?'critical':''),value);add(box,'div','metric-note',note);
+ }
+ renderIssues();
+ for(const id of ['proposals','arrivals'])el(id).replaceChildren();
+ for(const x of data.room_proposals){
+  const row=add(el('proposals'),'div','item proposal-row');const mark=add(row,'span','marker ok');mark.appendChild(icon('proposal'));mark.firstChild.setAttribute('width','19');
+  const content=add(row,'div','item-content');add(content,'strong','',x.reservation_ref+' için oda önerisi');
+  add(content,'p','desc','Kaynak: '+x.source+' · PMS’ye uygulanmadı.');
+  const number=add(row,'span','room-number');add(number,'small','','ODA ');add(number,'span','',x.room_id);
+ }
+ if(!data.room_proposals.length)add(el('proposals'),'p','empty','Bu raporda uygun oda önerisi bulunmuyor.');
+ const current=new Date(data.as_of+'T12:00:00Z');const reportDate=current.toLocaleDateString('tr-TR',{timeZone:'UTC',day:'numeric',month:'long',year:'numeric'});
+ current.setUTCDate(current.getUTCDate()+1);el('nextDay').textContent=current.toLocaleDateString('tr-TR',{timeZone:'UTC',day:'numeric',month:'short'});
+ for(const x of data.tomorrow_arrivals){
+  const row=add(el('arrivals'),'div','item arrival-row');const mark=add(row,'span','marker ok');mark.appendChild(icon('arrival'));mark.firstChild.setAttribute('width','17');
+  const content=add(row,'div','item-content');add(content,'strong','',x.reservation_ref+' · '+x.category);
+  add(content,'p','desc',x.source+' · '+(x.status==='confirmed'?'Onaylı':'Bekleyen kayıt'));
+  add(row,'span','room-state'+(x.assigned_room?'':' unassigned'),x.assigned_room?'Oda '+x.assigned_room:'Atama bekliyor');
+ }
+ if(!data.tomorrow_arrivals.length)add(el('arrivals'),'p','empty','Yarın için giriş görünmüyor.');
+ el('fileInfo').textContent=(filename||'Seçilen rapor')+' · '+reportDate;
+ el('reportMode').textContent=isDemo?'Kurgusal örnek · Gerçek işletme verisi içermez.':'Seçtiğiniz rapor · İçeriğini yalnızca siz doğrulayabilirsiniz.';
+}
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
+ activeIssueFilter=button.dataset.filter;renderIssues();
+}));
 el('chooseReport').addEventListener('click',()=>el('reportFile').click());
 el('reportFile').addEventListener('change',async event=>{
  const file=event.target.files?.[0];if(!file)return;
@@ -204,11 +300,11 @@ el('reportFile').addEventListener('change',async event=>{
 });
 el('resetReport').addEventListener('click',()=>{
  ++importVersion;el('reportFile').value='';
- render(JSON.parse(el('sample').textContent),'Kurgusal örnek rapor');
+ render(JSON.parse(el('sample').textContent),'Kurgusal örnek rapor',true);
  status('Kurgusal örnek gösteriliyor.');
 });
 // Demo output embedded during packaging; no fetch/network access.
-render(JSON.parse(document.getElementById('sample').textContent),'Kurgusal örnek rapor');
+render(JSON.parse(document.getElementById('sample').textContent),'Kurgusal örnek rapor',true);
 </script>
 </body>
 </html>

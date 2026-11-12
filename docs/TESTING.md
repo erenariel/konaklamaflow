@@ -25,7 +25,7 @@ python -m playwright install chromium
 python -m unittest discover -s tests/browser -v
 ```
 
-The seven Chromium checks cover valid import, keyboard access to the file picker, malformed and unsupported reports, summary consistency, the 3 MB limit, retrying the same file, HTML-as-text rendering, reset, concurrent imports, mobile overflow, and absence of network requests. They load the self-contained HTML into a browser page; they do not test the hosting service.
+The nine Chromium checks cover valid import, keyboard access to the file picker, malformed and unsupported reports, summary consistency, the 3 MB limit, retrying the same file, HTML-as-text rendering, reset, concurrent imports, mobile overflow, keyboard-operated issue filters, accurate demo/import labels, and absence of network requests. They load the self-contained HTML into a browser page; they do not test the hosting service.
 
 In environments with a preinstalled Chromium, set `KONAKLAMAFLOW_CHROMIUM` to its executable path. CI installs the Playwright-managed browser.
 
@@ -33,7 +33,7 @@ In environments with a preinstalled Chromium, set `KONAKLAMAFLOW_CHROMIUM` to it
 
 The [tests workflow](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) runs the unit suite and fictional demo on Python 3.11, 3.12, and 3.13 for pushes and pull requests. Inspect the run for the commit you are reviewing; a previous successful run does not validate later changes.
 
-A separate Chromium job runs the browser regression suite. The Pages workflow publishes only the fictional viewer and screenshot after a successful push CI run on this repository's main branch; private reports and repository administration notes are not included.
+A separate Chromium job runs the browser regression suite. The Pages workflow publishes only the fictional viewer and its preview images after a successful push CI run on this repository's main branch; private reports and repository administration notes are not included.
 
 ## Add a regression test
 
@@ -43,3 +43,13 @@ A separate Chromium job runs the browser regression suite. The Pages workflow pu
 4. Run the complete suite and demo before submitting a pull request.
 
 Tests and CI are evidence of the checked behavior. They are not production certification, proof of anonymization, or an independent security audit.
+
+## Refresh the presentation assets
+
+The preview images use only the embedded fictional report and repository-owned SVG artwork. After installing the browser extra, run:
+
+```bash
+python scripts/capture_previews.py
+```
+
+This captures the report panel and a 1200×630 share card into `docs/images/`. It does not read an operator report or contact the network. You can use `KONAKLAMAFLOW_CHROMIUM` as described above when using a preinstalled browser.

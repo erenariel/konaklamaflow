@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Present the demo with a warm boutique-hotel visual identity, architectural SVG illustration, clearer report cards, and responsive layouts.
+- Show critical alerts first, add keyboard-operated severity filters, and explain known issue types in Turkish while retaining original report details.
+- Distinguish the fictional sample from a selected report without making assumptions about uploaded content.
+- Add reproducible report screenshots and a 1200×630 social preview; no external fonts, trackers, or image requests are introduced.
+- Extend browser coverage to nine checks, including issue filters, report labels, and 320/390/768/1280-pixel layouts.
+
 ## [0.1.1] — 2026-11-12
 
 - Validate schema 1.0 dry-run reports before rendering, including rows, dates, summary totals and advisory-only proposals.

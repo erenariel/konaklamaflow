@@ -37,7 +37,9 @@ class ViewerTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_valid_report_and_keyboard_file_picker(self):
         self.assertEqual(await self.page.locator('#issues .item').count(), 3)
+        await self.page.locator('#chooseReport').scroll_into_view_if_needed()
         await self.page.locator('#chooseReport').focus()
+        await expect(self.page.locator('#chooseReport')).to_be_focused()
         async with self.page.expect_file_chooser() as chooser:
             await self.page.keyboard.press('Enter')
         await (await chooser.value).set_files(ROOT / 'examples/demo-report.json')
@@ -93,6 +95,7 @@ class ViewerTests(unittest.IsolatedAsyncioTestCase):
         await self.upload(report)
         self.assertEqual(await self.page.locator('#issues img').count(), 0)
         self.assertIsNone(await self.page.evaluate('window.injected'))
+        await self.page.locator('#issues details').evaluate_all('(nodes) => nodes.forEach(node => node.open = true)')
         self.assertIn('<img', await self.page.locator('#issues').inner_text())
         await self.page.locator('#resetReport').click()
         self.assertNotIn('<img', await self.page.locator('#issues').inner_text())
@@ -118,8 +121,29 @@ class ViewerTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn('Kurgusal örnek rapor', await self.page.locator('#fileInfo').inner_text())
 
     async def test_mobile_has_no_horizontal_overflow(self):
-        await self.page.set_viewport_size({'width': 390, 'height': 844})
-        self.assertTrue(await self.page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'))
+        for width in (320, 390, 768, 1280):
+            with self.subTest(width=width):
+                await self.page.set_viewport_size({'width': width, 'height': 844})
+                self.assertTrue(await self.page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'))
+
+    async def test_issue_filters_prioritize_critical_and_support_keyboard(self):
+        self.assertIn('Uygun oda bulunamadı', await self.page.locator('#issues .item').first.inner_text())
+        critical = self.page.get_by_role('button', name='Kritik', exact=True)
+        await critical.focus()
+        await self.page.keyboard.press('Enter')
+        await expect(critical).to_have_attribute('aria-pressed', 'true')
+        self.assertEqual(await self.page.locator('#issues .item').count(), 1)
+        await self.page.get_by_role('button', name='İncelenecek', exact=True).click()
+        self.assertEqual(await self.page.locator('#issues .item').count(), 2)
+        await self.page.get_by_role('button', name='Tümü', exact=True).click()
+        self.assertEqual(await self.page.locator('#issues .item').count(), 3)
+
+    async def test_selected_report_is_not_labeled_as_fictional_demo(self):
+        await self.upload(DEMO)
+        self.assertIn('Seçtiğiniz rapor', await self.page.locator('#reportMode').inner_text())
+        self.assertNotIn('Gerçek işletme verisi içermez', await self.page.locator('#reportMode').inner_text())
+        await self.page.locator('#resetReport').click()
+        self.assertIn('Kurgusal örnek', await self.page.locator('#reportMode').inner_text())
 
 
 if __name__ == '__main__':

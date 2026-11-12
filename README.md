@@ -1,6 +1,8 @@
-# KonaklamaFlow 🏨
+# KonaklamaFlow
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
+
+[![KonaklamaFlow: a calmer front desk, clearer decisions](docs/images/social-card.png)](https://erenariel.github.io/konaklamaflow/)
 
 **[Try the fictional demo / Kurgusal demoyu aç](https://erenariel.github.io/konaklamaflow/)** · [Latest release](https://github.com/erenariel/konaklamaflow/releases/latest)
 
@@ -66,7 +68,7 @@ This abbreviated example only displays a subset of the complete report fields. T
 
 *Fictional demonstration data only. Room proposals require human review.*
 
-Open `demo/viewer.html` directly in your browser to explore the **fictional** report. The viewer supports schema 1.0 dry-run reports up to 3 MB; malformed files leave the last valid report on screen. Errors are shown inline, the file picker supports keyboard input, and **Kurgusal örneğe dön** resets the demo. For your own pseudonymized results, select the generated `report.json` file with **Rapor JSON yükle**. The viewer contains no CDNs, telemetry, report uploads, storage or external JavaScript; it only renders the local file you select. **This is a report viewer, not a browser-based PMS.**
+Open `demo/viewer.html` directly in your browser to explore the **fictional** report. The viewer offers a mobile-friendly presentation, Turkish issue explanations, critical-first ordering, and filters for critical and review alerts. Original report details remain available under **Rapor ayrıntısı**. It supports schema 1.0 dry-run reports up to 3 MB; malformed files leave the last valid report on screen. Errors are shown inline, the file picker supports keyboard input, and **Kurgusal örneğe dön** resets the demo. For your own pseudonymized results, select the generated `report.json` file with **Rapor JSON yükle**. The viewer contains no CDNs, telemetry, report uploads, storage or external JavaScript; it only renders the local file you select. **This is a report viewer, not a browser-based PMS.**
 
 ## Security, real-world use, limitations
 
@@ -80,7 +82,7 @@ See [Security](SECURITY.md), [Input Specification](docs/INPUT_SPEC.md), [Archite
 
 ## Roadmap — practical, measurable milestones
 
-1. **v0.1.1 (current prototype):** validated pseudonymized JSON, deterministic rules, 23 engine tests, seven browser checks, CLI, and a fictional demonstration.
+1. **Current prototype:** validated pseudonymized JSON, deterministic rules, 23 engine tests, nine browser checks, CLI, and a fictional demonstration.
 2. **v0.2:** opt-in local dashboard, import adapter specification, immutable audit format, more test scenarios for split stays and mixed capacity.
 3. **v0.3:** community-driven integrations *only* for vendor-supported APIs, with sandbox test suites and explicit approval; multi-property namespace isolation.
 4. **v1.0 goal:** stable schema, upgrade policies, security review, opt-in pilot documentation, observability and maintainer governance. We do **not** claim these features exist today.

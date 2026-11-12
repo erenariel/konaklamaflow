@@ -34,6 +34,7 @@ jobs:
           mkdir -p _site
           cp demo/viewer.html _site/index.html
           cp docs/images/demo-report.png _site/demo-report.png
+          cp docs/images/social-card.png _site/social-card.png
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
