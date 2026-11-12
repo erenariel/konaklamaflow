@@ -1,42 +1,25 @@
 # İki AI asistanı için güvenli görev devri
 
-**Güven sınırı:** Bu sürüm yalnızca rapor oluşturur. `agent_protocol.py` gerçek yetkilendirme, imzalı onay veya işlem yürütme sistemi değildir.
+Bu paket yalnızca salt okunur inceleme referansı üretir. Gerçek AI sağlayıcısı, yetkilendirme sunucusu, imzalı onay veya işlem yürütücüsü yoktur. İkinci AI'nın verdiği metin, kimlik/check-in/ödeme/KBS yetkisi sayılmaz.
 
-## Roller
-
-- **Operasyon Hazırlama Asistanı (AI-1):** İzinli veri kaynağından kimliksiz operasyon özetini çıkarmak üzere ileride geliştirilecek adaptörü yönlendirir. Gerçek belgeleri diğer modellere iletmez.
-- **İkinci İnceleme Asistanı (AI-2):** Kural motoru çıktısındaki engelleri açıklar, yapılacakları önceliklendirir, insan için Türkçe/İngilizce taslak oluşturur. *Check-in, ödeme, kayıt veya mesaj göndermez.*
-- **Deterministik Kural Motoru:** Tarih, statü, rezervasyon çakışması, oda tipi, temizlik ve benzeri kontrol kararlarını tekrar üretilebilir biçimde hesaplar. AI'nın yalnızca serbest metin yanıtına güvenilmez.
-- **Yetkili Personel / PMS:** Son onay, misafir kimliği, folyo/ödeme ve resmî bildirimlerin tek gerçek kaynağı.
-
-## Protokol akışı
-
-1. `plan_operations(...)` raporunu oluştur. `snapshot_sha256` mevcut girdi anlık görüntüsünü tanımlar.
-2. `make_handoff(report, issued_at, 300)` yalnızca pseudonim rezervasyon kodu ve sebepleri içeren manifest üretir.
-3. AI-2, `SUGGEST_RECEPTION_REVIEW` amacı dışında bir işlem önerirse `verify_suggestion` reddeder.
-4. Kaynak değiştiğinde veya beş dakika geçtiğinde görev devri geçersizdir. Yeni anlık görüntü alınmalıdır.
-5. Üretim ortamında ayrıca RBAC, MFA, sunucu imzaları, idempotency storage, denetlenebilir audit ve PMS tarafında işlem öncesi yeniden doğrulama şarttır; bu pakette bunlar **henüz yoktur**.
-
-## İdempotency ve denetim tasarımı (gelecek sürüm)
-
-`(property_id, source, reservation_ref, operation_kind, canonical_snapshot_hash)` tuple'ından kararlı talep kimliği üret. Üretim veri tabanında benzersiz constraint uygula. Aynı işlem tekrar gelirse önceki sonucu dön; sonradan tekrar ödeme/check-in yapma. Dış sisteme yazılamayan başarısız işlemler için güvenli durum, yeniden deneme ve olay günlüğü kullan. Olası race condition için güncel PMS revizyonu ile compare-and-swap gerektir.
-
-## Önemli: Bu kodun *yapmadıkları*
-
-- Şifre, erişim anahtarı, TCKN/pasaport, guest profile veya ödeme bilgisi almaz.
-- Web sayfasına giriş yapmaz, rezervasyonu yeşile almaz, folyo veya KBS kaydı oluşturmaz.
-- İkinci asistanı gerçekte çağırmaz; yalnızca görev sözleşmesi verir. Uygun AI sağlayıcısının bağlantısı ileride isteğe bağlı yapılabilir.
-- Yetkili personelin varlığını veya KBS sonucunu kriptografik biçimde doğrulamaz.
-
-Örnek Python:
+1. Güvenilir çağıran, kaynaktan tutarlı ve önceden pseudonimleştirilmiş anlık görüntü alır; `plan_operations` ile rapor üretir.
+2. `make_handoff(report, issued_at, 300)` doğrulanmış rapordan 30–600 saniyelik manifest oluşturur. Manifestte yalnızca opak görev ID'si, durum ve izinli neden kodları bulunur; tesis, rezervasyon/kanal/oda referansları ve serbest metin diğer AI'ya gönderilmez.
+3. AI yanıtı yalnızca `task_id`, `intent`, `snapshot_sha256`, `report_sha256` içerebilir. Tek amaç `SUGGEST_RECEPTION_REVIEW` olur; bilinmeyen alan, araç çağrısı veya yazma amacı reddedilir.
+4. Güvenilir çağıran kaynak durumunu tekrar okuyup güncel raporu hesaplar. `verify_suggestion(manifest, suggestion, checked_at, current_review=fresh_report)` hem manifesti hem yanıtı bu raporla karşılaştırır. Kaynak, tesis, değerlendirme saati veya görev kapsamı değişirse eski referans reddedilir.
+5. Saat, güncel rapor ve saklanan manifest AI'dan veya istemcinin serbest alanlarından alınamaz. Hash ve TTL kimlik doğrulama değildir; gerçek kaynak erişimi ve operatör yetkisi bu pakette doğrulanmaz.
 
 ```python
 from konaklamaflow.operations import plan_operations
-from konaklamaflow.agent_protocol import make_handoff
-import json
+from konaklamaflow.agent_protocol import make_handoff, verify_suggestion
 
-source = json.load(open("examples/operations-demo.json", encoding="utf-8"))
-report = plan_operations(source, "2026-11-12", "14:01")
+report = plan_operations(trusted_snapshot, "2026-11-12", "14:01")
 manifest = make_handoff(report, "2026-11-12T11:01:00Z")
-print(manifest["mode"])  # NO_EXECUTION_READ_ONLY
+# trusted_snapshot/fresh_snapshot örnekte yer tutucudur; gerçek veri/kimlik içermez.
+fresh_report = plan_operations(fresh_snapshot, "2026-11-12", "14:01")
+valid_reference = verify_suggestion(
+    manifest, ai_suggestion, "2026-11-12T11:02:00Z", current_review=fresh_report
+)
+# True yalnızca açıklama referansının geçerli olduğunu belirtir; işlem onayı değildir.
 ```
+
+Aynı geçerli açıklama tekrar doğrulanabilir. İşlem yürütülmediğinden kalıcı idempotency kaydı, imzalı işlem günlüğü veya ödeme tekrar koruması uygulandığı iddia edilmez. Gelecekteki izinli entegrasyon ayrıca sunucu tarafı RBAC/MFA, property/tenant izolasyonu, kaynak revizyonu ile compare-and-swap, benzersiz idempotency kaydı, yetkili insan onayı, korumalı audit ve belirsiz sonuç prosedürü gerektirir. Misafir notu, sağlayıcı alanı ve model yanıtları güvenilmeyen veridir; talimat veya yetki kaynağı değildir.

@@ -6,13 +6,15 @@ The result is a decision-support checklist, never a completed check-in.
 from __future__ import annotations
 
 from collections import Counter
-from datetime import date, datetime, time, timedelta
+from copy import deepcopy
+from datetime import date, time
 from hashlib import sha256
 import json
 import re
 from typing import Any
 
 from .core import InputError, parse_input, review
+from .report_contract import DISCLAIMER, validate_report
 
 ID = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
 ALLOWED_ROOT = {"property_id", "rooms", "reservations", "room_operations", "arrival_checks", "settings"}
@@ -21,7 +23,7 @@ ARRIVAL_KEYS = {"source", "ref", "arrival_state", "identity_status", "registrati
 SETTINGS_KEYS = {"checkin_time", "checkout_time"}
 HOUSEKEEPING = {"clean", "dirty", "inspecting", "out_of_service"}
 INSPECTION = {"approved", "pending"}
-ARRIVAL = {"expected", "arrived", "checked_in"}
+ARRIVAL = {"expected", "arrived", "checked_in", "checked_out"}
 IDENTITY = {"not_checked", "pending", "verified_by_authorized_staff"}
 REGISTRATION = {"not_checked", "pending", "confirmed_by_authorized_system"}
 PAYMENT = {"not_applicable", "cleared", "review"}
@@ -74,11 +76,20 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
         raise InputError("input: object required")
     _object(data, ALLOWED_ROOT, "input")
     now_time = _clock(at_time, "at_time")
+    # Bound the offline prototype before invoking the reservation engine.
+    for field, limit in (("rooms", 500), ("reservations", 5000), ("room_operations", 500), ("arrival_checks", 5000)):
+        if not isinstance(data.get(field, []), list) or len(data.get(field, [])) > limit:
+            raise InputError("Operational snapshot exceeds supported list limits")
+    for room in data.get("rooms", []):
+        if isinstance(room, dict) and isinstance(room.get("maintenance"), list) and len(room["maintenance"]) > 100:
+            raise InputError("Too many maintenance windows")
+    # Use one owned snapshot for validation, hashing and planning. The caller must
+    # still capture a consistent source revision before calling this function.
+    data = deepcopy(data)
     # Reuse the existing reservation engine for category, date and overlap validation.
     reservation_data = {k: v for k, v in data.items() if k in {"property_id", "rooms", "reservations"}}
     base_report = review(reservation_data, as_of)
     property_id, rooms, reservations = parse_input(reservation_data)
-    snapshot = _snapshot_hash(data)
     by_room = {r.id: r for r in rooms}
 
     settings = _object(data.get("settings", {}), SETTINGS_KEYS, "settings")
@@ -90,6 +101,8 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
     room_operations: dict[str, dict[str, Any]] = {}
     for number, item in enumerate(data.get("room_operations", []), 1):
         obj = _object(item, ROOM_OP_KEYS, f"room_operations[{number}]")
+        if set(obj) != ROOM_OP_KEYS:
+            raise InputError("room_operations: all room status signals are required")
         room_id = _id(obj.get("room_id"), "room_id")
         if room_id not in by_room or room_id in room_operations:
             raise InputError("room_operations: unknown or duplicated room ID")
@@ -116,18 +129,28 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
     keys = {(r.source, r.ref) for r in reservations}
     if set(arrival_checks) - keys:
         raise InputError("arrival_checks: unknown reservation reference")
+    snapshot = _snapshot_hash(data)
     report_flags: dict[tuple[str, str], list[str]] = {}
     for issue in base_report["issues"]:
-        # Existing issue schema does not always include source. Resolve conservatively
-        # by ref: ambiguous refs across channels receive the same warning.
-        ref = issue["reservation_ref"]
-        for k in keys:
-            if k[1] == ref and issue["severity"] == "critical":
-                report_flags.setdefault(k, []).append(issue["code"])
+        # Review-level bed and price warnings also require reception attention.
+        key = (issue["source"], issue["reservation_ref"])
+        report_flags.setdefault(key, []).append(issue["code"])
     duplicated = Counter((r.source, r.ref) for r in reservations)
-    active = [r for r in reservations if r.status in {"pending", "confirmed"}]
+    # Cancellation is not evidence of physical departure when the same source
+    # explicitly still reports a checked-in occupant. Keep that contradiction
+    # visible for staff and prevent another arrival from appearing ready.
+    active = [r for r in reservations if r.status in {"pending", "confirmed"}
+              or arrival_checks.get((r.source, r.ref), {}).get("arrival_state") == "checked_in"]
     result: list[dict[str, Any]] = []
     asof_day = date.fromisoformat(as_of)
+    unreleased_rooms = set()
+    for previous in active:
+        previous_state = arrival_checks.get((previous.source, previous.ref), {}).get("arrival_state", "expected")
+        if previous.room_id and previous.status == "cancelled" and previous_state == "checked_in":
+            unreleased_rooms.add(previous.room_id)
+        if previous.room_id and previous.stay.start < asof_day and previous.stay.end <= asof_day and previous_state != "checked_out":
+            if previous.stay.end == asof_day or previous_state == "checked_in":
+                unreleased_rooms.add(previous.room_id)
     for occurrence, r in enumerate(sorted(active, key=lambda v: (v.stay.start, v.source, v.ref)), 1):
         key = (r.source, r.ref)
         status = arrival_checks.get(key, {
@@ -135,6 +158,10 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
             "registration_status": "not_checked", "payment_review": "review",
             "early_checkin_authorized": False,
         })
+        if status["arrival_state"] == "checked_out":
+            continue
+        if r.stay.end <= asof_day and status["arrival_state"] != "checked_in":
+            continue  # Completed historical stays do not clutter the arrival queue.
         reasons = []
         room_state = room_operations.get(r.room_id) if r.room_id else None
         if r.room_id is None:
@@ -148,6 +175,10 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
                 reasons.append("room_not_inspected")
             if room_state["maintenance_hold"]:
                 reasons.append("maintenance_hold")
+        # Calendar adjacency is not proof that the previous occupant has left.
+        # Even early arrival authorization cannot override an unverified departure.
+        if r.room_id in unreleased_rooms:
+            reasons.append("departure_not_verified")
         if duplicated[key] > 1:
             reasons.append("duplicate_reservation")
         reasons.extend(report_flags.get(key, []))
@@ -174,7 +205,7 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
             state = "BLOCKED_FOR_HUMAN_REVIEW"
         else:
             state = "READY_FOR_HUMAN_CHECKIN_REVIEW"
-        task_id = sha256(f"{property_id}|{r.source}|{r.ref}|{occurrence}|{as_of}|{snapshot}|checkin-review".encode()).hexdigest()[:24]
+        task_id = sha256(f"{property_id}|{r.source}|{r.ref}|{occurrence}|{as_of}|{at_time}|{snapshot}|checkin-review".encode()).hexdigest()[:24]
         result.append({
             "task_id": task_id,
             "reservation_ref": r.ref, "source": r.source,
@@ -191,7 +222,7 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
             "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY",
         })
     counts = Counter(item["state"] for item in result)
-    return {
+    report = {
         "schema_version": "0.2-prototype",
         "mode": "DRY_RUN_ONLY", "property_id": property_id,
         "as_of": as_of, "at_time": at_time,
@@ -199,5 +230,7 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
         "checkin_policy": {"checkin_time": checkin_time.strftime("%H:%M"), "checkout_time": checkout_time.strftime("%H:%M")},
         "summary": {"arrivals_total": len(result), "ready_for_review": counts["READY_FOR_HUMAN_CHECKIN_REVIEW"], "blocked": counts["BLOCKED_FOR_HUMAN_REVIEW"], "already_checked_in_requires_review": counts["REVIEW_EXISTING_CHECKIN"]},
         "tasks": result,
-        "disclaimer": "No check-in, payment, room assignment, guest notification or government registration has been executed. Identity and registration signals are unverified demo inputs unless provided by an authorized trusted system.",
+        "disclaimer": DISCLAIMER,
     }
+    validate_report(report)
+    return report

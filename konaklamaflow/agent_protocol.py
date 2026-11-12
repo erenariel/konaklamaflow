@@ -1,7 +1,8 @@
-"""Second-AI handoff contract: suggestions, not self-executing commands.
+"""Read-only second-AI references, never authorization or executable commands.
 
-This module deliberately implements *no* authenticated approvals, PMS writes, KBS,
-identity verification, payments, or credential management.
+The caller must retain the trusted manifest and regenerate current_review from
+its trusted source; neither input may come from the AI being checked. There is
+no provider call, tool dispatcher, approval, network access or PMS write here.
 """
 from __future__ import annotations
 
@@ -10,76 +11,71 @@ from hashlib import sha256
 import json
 from typing import Any
 
+from .core import InputError
+from .report_contract import validate_report
+
 
 class ProtocolError(ValueError):
     pass
 
 
-def _utc(value: str) -> datetime:
+def _utc(value: Any) -> datetime:
+    if not isinstance(value, str):
+        raise ProtocolError("UTC timestamp with timezone is required")
     try:
         stamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    except (ValueError, AttributeError):
+        if stamp.tzinfo is None or stamp.utcoffset() != timedelta(0):
+            raise ValueError
+        return stamp.astimezone(timezone.utc)
+    except (ValueError, OverflowError):
         raise ProtocolError("Invalid UTC timestamp") from None
-    if stamp.tzinfo is None or stamp.utcoffset() != timedelta(0):
-        raise ProtocolError("UTC timestamp with timezone is required")
-    return stamp.astimezone(timezone.utc)
 
 
-def make_handoff(review: dict[str, Any], issued_at: str, validity_seconds: int = 300) -> dict[str, Any]:
-    """Build machine-readable review tasks with stable no-write, expiring references.
-
-    A manifest is not an authorization token. A production integration must
-    independently authenticate the operator and verify a fresh PMS snapshot.
-    """
+def make_handoff(review: Any, issued_at: str, validity_seconds: int = 300) -> dict[str, Any]:
+    """Build a minimal, expiring review manifest from a validated local report."""
     issued = _utc(issued_at)
-    if not (30 <= validity_seconds <= 600):
-        raise ProtocolError("Validity must be 30..600 seconds")
-    if review.get("mode") != "DRY_RUN_ONLY" or not isinstance(review.get("tasks"), list):
-        raise ProtocolError("Expected a dry-run operations report")
-    snapshot_hash = review.get("snapshot_sha256")
-    if not isinstance(snapshot_hash, str) or len(snapshot_hash) != 64 or any(c not in '0123456789abcdef' for c in snapshot_hash):
-        raise ProtocolError("Invalid snapshot checksum")
-    tasks = []
-    seen = set()
-    for item in review["tasks"]:
-        task_id = item.get("task_id")
-        if not isinstance(task_id, str) or len(task_id) != 24 or task_id in seen:
-            raise ProtocolError("Invalid or duplicate task id")
-        seen.add(task_id)
-        # Never pass a credential, guest name, passport number or email to another AI.
-        tasks.append({
-            "task_id": task_id,
-            "reservation_ref": item["reservation_ref"],
-            "source": item["source"],
-            "state": item["state"],
-            "reason_codes": list(item["reasons"]),
-            "intent": "SUGGEST_RECEPTION_REVIEW",
-            "allowed_tools": ["explain_status", "prepare_checklist"],
-            "forbidden_tools": ["write_pms", "send_guest_message", "submit_kbs", "capture_payment", "read_identity_document"],
-        })
-    expires = issued + timedelta(seconds=validity_seconds)
+    if type(validity_seconds) is not int or not 30 <= validity_seconds <= 600:
+        raise ProtocolError("Validity must be an integer from 30..600 seconds")
+    try:
+        validate_report(review)
+        expires = issued + timedelta(seconds=validity_seconds)
+    except (InputError, OverflowError):
+        raise ProtocolError("Invalid operations report or expiry") from None
+    digest = sha256(json.dumps(review, ensure_ascii=True, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     return {
         "protocol": "konaklamaflow.agent-handoff.v1",
         "mode": "NO_EXECUTION_READ_ONLY",
-        "snapshot_sha256": snapshot_hash,
+        "snapshot_sha256": review["snapshot_sha256"],
+        "report_sha256": digest,
         "issued_at": issued.isoformat(), "expires_at": expires.isoformat(),
-        "tasks": tasks,
-        "disclaimer": "Never interpret this as permission for autonomous check-in. A trusted runtime must re-fetch current PMS data and require authorized human approval for writes.",
+        # No property, room, reservation/channel reference, or free text goes to AI.
+        "tasks": [{"task_id": t["task_id"], "state": t["state"], "reason_codes": list(t["reasons"]),
+                   "intent": "SUGGEST_RECEPTION_REVIEW",
+                   "allowed_tools": ["explain_status", "prepare_checklist"]} for t in review["tasks"]],
     }
 
 
-def verify_suggestion(handoff: dict[str, Any], suggestion: dict[str, Any], checked_at: str) -> bool:
-    """Validate an AI explanation reference; does not approve/execute an action."""
+def verify_suggestion(handoff: Any, suggestion: Any, checked_at: str, *, current_review: Any) -> bool:
+    """Check a read-only reference against a fresh trusted report. Never execute.
+
+    This deliberately requires current_review: comparing an AI-provided checksum
+    only to an old manifest cannot detect a newer source/property/evaluation.
+    Repeated valid explanations are allowed; there is no write idempotency store.
+    """
     now = _utc(checked_at)
-    if not handoff or handoff.get("protocol") != "konaklamaflow.agent-handoff.v1":
-        raise ProtocolError("Unknown handoff protocol")
-    if not (_utc(handoff["issued_at"]) <= now < _utc(handoff["expires_at"])):
-        raise ProtocolError("Handoff expired or not yet valid")
-    if not isinstance(suggestion, dict) or set(suggestion) != {"task_id", "intent", "snapshot_sha256"}:
+    if not isinstance(handoff, dict) or not {"issued_at", "expires_at"} <= set(handoff):
+        raise ProtocolError("Invalid handoff")
+    issued, expires = _utc(handoff["issued_at"]), _utc(handoff["expires_at"])
+    lifetime = (expires - issued).total_seconds()
+    if not 30 <= lifetime <= 600 or not lifetime.is_integer() or not issued <= now < expires:
+        raise ProtocolError("Handoff expired, future dated or invalid lifetime")
+    expected = make_handoff(current_review, handoff["issued_at"], int(lifetime))
+    if handoff != expected:
+        raise ProtocolError("Changed report or invalid manifest")
+    if not isinstance(suggestion, dict) or set(suggestion) != {"task_id", "intent", "snapshot_sha256", "report_sha256"}:
         raise ProtocolError("Invalid suggestion shape")
-    if suggestion["snapshot_sha256"] != handoff["snapshot_sha256"]:
-        raise ProtocolError("Stale or mismatched source snapshot")
-    allowed = any(t["task_id"] == suggestion["task_id"] for t in handoff["tasks"])
-    if not allowed or suggestion["intent"] != "SUGGEST_RECEPTION_REVIEW":
+    if suggestion["snapshot_sha256"] != expected["snapshot_sha256"] or suggestion["report_sha256"] != expected["report_sha256"]:
+        raise ProtocolError("Stale or mismatched report")
+    if not isinstance(suggestion["task_id"], str) or suggestion["task_id"] not in {t["task_id"] for t in expected["tasks"]} or suggestion["intent"] != "SUGGEST_RECEPTION_REVIEW":
         raise ProtocolError("Unsupported action")
     return True

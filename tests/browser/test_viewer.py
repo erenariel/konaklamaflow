@@ -147,5 +147,14 @@ class ViewerTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn('Kurgusal örnek', await self.page.locator('#reportMode').inner_text())
 
 
+    async def test_new_source_scoped_issues_are_accepted_and_identifiable(self):
+        from konaklamaflow.core import review
+        source=json.loads((ROOT/'examples/demo.json').read_text())
+        report=review(source,'2026-11-12')
+        await self.upload(report)
+        for item in report['issues']:
+            self.assertIn(item['source']+' · '+item['reservation_ref'],await self.page.locator('#issues').inner_text())
+
+
 if __name__ == '__main__':
     unittest.main()

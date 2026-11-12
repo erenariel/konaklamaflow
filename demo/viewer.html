@@ -194,7 +194,8 @@ function validate(data){
   if(!Array.isArray(data[field]) || data[field].length>100000)invalid();
  }
  for(const x of data.issues){
-  object(x,['code','severity','reservation_ref','detail']);
+  object(x,['code','severity','reservation_ref','detail','source']);
+  if(x.source!==undefined)identifier(x.source);
   if(typeof x.code!=='string' || !/^[A-Z][A-Z0-9_]{0,79}$/.test(x.code) || !['critical','review'].includes(x.severity))invalid();
   identifier(x.reservation_ref);text(x.detail,2000);
  }
@@ -227,7 +228,7 @@ function renderIssues(){
   add(row,'span','marker '+(x.severity==='critical'?'':'review'),x.severity==='critical'?'!':'?');
   const content=add(row,'div','item-content');const heading=add(content,'div','item-heading');
   const copy=issueCopy[x.code]||['Kontrol gerektiren kayıt',x.detail];
-  add(heading,'strong','',copy[0]);add(heading,'span','reference',x.reservation_ref);
+  add(heading,'strong','',copy[0]);add(heading,'span','reference',(x.source?x.source+' · ':'')+x.reservation_ref);
   let description=copy[1];
   if(x.code==='BASE_PRICE_MISMATCH'){
    const expected=/^Expected base-only total ([0-9]+\.[0-9]{2}) (TRY|EUR|USD|GBP);/.exec(x.detail);

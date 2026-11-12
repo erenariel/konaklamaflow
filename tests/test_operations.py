@@ -76,16 +76,16 @@ class OperationsTests(unittest.TestCase):
     def test_hand_off_expires_and_blocks_write(self):
         rep=run();h=make_handoff(rep,'2026-11-12T11:00:00Z')
         self.assertEqual(h['mode'],'NO_EXECUTION_READ_ONLY')
-        task=h['tasks'][0]; p={'task_id':task['task_id'],'intent':'SUGGEST_RECEPTION_REVIEW','snapshot_sha256':h['snapshot_sha256']}
-        self.assertTrue(verify_suggestion(h,p,'2026-11-12T11:03:00Z'))
-        with self.assertRaises(ProtocolError): verify_suggestion(h,p,'2026-11-12T11:05:00Z')
+        task=h['tasks'][0]; p={'task_id':task['task_id'],'intent':'SUGGEST_RECEPTION_REVIEW','snapshot_sha256':h['snapshot_sha256'],'report_sha256':h['report_sha256']}
+        self.assertTrue(verify_suggestion(h,p,'2026-11-12T11:03:00Z',current_review=rep))
+        with self.assertRaises(ProtocolError): verify_suggestion(h,p,'2026-11-12T11:05:00Z',current_review=rep)
         p['intent']='write_pms'
-        with self.assertRaises(ProtocolError):verify_suggestion(h,p,'2026-11-12T11:03:00Z')
+        with self.assertRaises(ProtocolError):verify_suggestion(h,p,'2026-11-12T11:03:00Z',current_review=rep)
 
     def test_stale_source_checksum_blocked(self):
         h=make_handoff(run(),'2026-11-12T11:00:00+00:00')
-        p={'task_id':h['tasks'][0]['task_id'],'intent':'SUGGEST_RECEPTION_REVIEW','snapshot_sha256':'0'*64}
-        with self.assertRaises(ProtocolError):verify_suggestion(h,p,'2026-11-12T11:02:00Z')
+        p={'task_id':h['tasks'][0]['task_id'],'intent':'SUGGEST_RECEPTION_REVIEW','snapshot_sha256':'0'*64,'report_sha256':h['report_sha256']}
+        with self.assertRaises(ProtocolError):verify_suggestion(h,p,'2026-11-12T11:02:00Z',current_review=run())
 
     def test_duplicated_reservation_blocks_all_instances(self):
         d=copy.deepcopy(DEMO);d['reservations'].append(copy.deepcopy(d['reservations'][0]))
