@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "konaklamaflow"
+version = "0.1.0"
+description = "Privacy-first dry-run hospitality operations reviewer for boutique hotels"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [{name = "erenariel"}]
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Topic :: Office/Business"]
+
+[project.scripts]
+konaklamaflow = "konaklamaflow.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["konaklamaflow*"]

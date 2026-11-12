@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "project": "KonaklamaFlow",
+  "mode": "DRY_RUN_ONLY",
+  "property_id": "DEMO_INN_01",
+  "as_of": "2026-11-12",
+  "summary": {
+    "rooms": 5,
+    "reservations": 5,
+    "critical_alerts": 1,
+    "review_alerts": 2,
+    "room_proposals": 1,
+    "tomorrow_arrivals": 3
+  },
+  "issues": [
+    {
+      "code": "CANCELLED_HOLD_REVIEW",
+      "severity": "review",
+      "reservation_ref": "D004",
+      "detail": "Cancelled booking has a room assignment; verify manually in the source PMS"
+    },
+    {
+      "code": "BASE_PRICE_MISMATCH",
+      "severity": "review",
+      "reservation_ref": "D005",
+      "detail": "Expected base-only total 85.00 EUR; verify taxes, discounts and nightly rates manually"
+    },
+    {
+      "code": "NO_SAFE_ROOM_PROPOSAL",
+      "severity": "critical",
+      "reservation_ref": "D005",
+      "detail": "No free compatible room; do not confirm or promise a room"
+    }
+  ],
+  "room_proposals": [
+    {
+      "reservation_ref": "D002",
+      "source": "CHANNEL_B",
+      "room_id": "102",
+      "kind": "MANUAL_APPROVAL_REQUIRED"
+    }
+  ],
+  "tomorrow_arrivals": [
+    {
+      "reservation_ref": "D003",
+      "source": "CHANNEL_A",
+      "category": "superior",
+      "assigned_room": "201",
+      "status": "confirmed"
+    },
+    {
+      "reservation_ref": "D002",
+      "source": "CHANNEL_B",
+      "category": "standard",
+      "assigned_room": null,
+      "status": "confirmed"
+    },
+    {
+      "reservation_ref": "D005",
+      "source": "CHANNEL_C",
+      "category": "standard",
+      "assigned_room": null,
+      "status": "confirmed"
+    }
+  ],
+  "disclaimer": "Advisory only. Human approval and checks in the actual PMS are required. No KBS or OTA updates are made."
+}

@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+!.env.example
+*.sqlite3
+*.db
+reports-private/
+real_exports/
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+
+# Generated local report (may contain private operational data)
+/report.json
