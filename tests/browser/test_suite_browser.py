@@ -56,7 +56,8 @@ class TestBrowserSuite(unittest.TestCase):
         toggle.click()
         self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'on')
         self.page.emulate_media(reduced_motion='reduce')
-        self.page.wait_for_function("document.documentElement.dataset.kfMotion === 'off'")
+        # CSP forbids string-eval; Playwright locator polling needs no unsafe-eval.
+        self.page.locator('html[data-kf-motion="off"]').wait_for(state='attached',timeout=5000)
         self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'off')
         self.assertTrue(toggle.is_disabled())
 
