@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "konaklamaflow"
-version = "0.1.0"
+version = "0.1.1"
 description = "Privacy-first dry-run hospitality operations reviewer for boutique hotels"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -14,6 +14,9 @@ classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :
 
 [project.scripts]
 konaklamaflow = "konaklamaflow.cli:main"
+
+[project.optional-dependencies]
+browser = ["playwright==1.62.0"]
 
 [tool.setuptools.packages.find]
 include = ["konaklamaflow*"]

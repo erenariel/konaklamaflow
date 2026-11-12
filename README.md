@@ -2,11 +2,11 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
-[![Local tests](https://img.shields.io/badge/tests-23%20unit%20tests-informational)](#quick-start-python-311) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.0%20prototype-yellow)](CHANGELOG.md)
+[![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
 
 > **Project status (2026-11-12):** Runnable developer prototype, not a certified PMS, hotel management suite, production booking engine, or KBS integration. No real customer deployments or third-party integrations are claimed.
 
-**TR:** KonaklamaFlow, küçük ve butik otellerin rezervasyon ve oda blokajı kontrollerini kişisel veri kullanmadan deneyebilmesi için oluşturulmuş, açık kaynaklı bir *ön kontrol / karar destek motorudur*. Herhangi bir otel sistemine kendiliğinden giriş yapmaz. **Gerçek PMS üzerinde işlem yapmaz, misafire söz vermez ve KBS bildirimi göndermez.**
+**TR:** KonaklamaFlow, küçük ve butik otellerin rezervasyon ve oda blokajı kontrollerini kurgusal veya önceden pseudonimleştirilmiş verilerle deneyebilmesi için oluşturulmuş, açık kaynaklı bir *ön kontrol / karar destek motorudur*. Herhangi bir otel sistemine kendiliğinden giriş yapmaz. **Gerçek PMS üzerinde işlem yapmaz, misafire söz vermez ve KBS bildirimi göndermez.**
 
 **EN:** A deterministic, provider-neutral dry-run reviewer: ingest pseudonymized reservations and room availability, inspect possible conflicts, suggest safe room choices, and print a next-day arrival checklist. Every proposed action needs a human decision in the authorized property-management system.
 
@@ -58,7 +58,11 @@ This abbreviated example only displays a subset of the complete report fields. T
 
 ## Offline visual viewer / Görsel panel
 
-Open `demo/viewer.html` directly in your browser to explore the **fictional** report. For your own pseudonymized results, select the generated `report.json` file with **Rapor JSON yükle**. The viewer contains no CDNs, telemetry, network requests, storage or external JavaScript; it only renders the local file you select. **This is a report viewer, not a browser-based PMS.**
+![KonaklamaFlow offline report viewer showing five fictional reservations, three alerts, and one advisory room proposal](docs/images/demo-report.png)
+
+*Fictional demonstration data only. Room proposals require human review.*
+
+Open `demo/viewer.html` directly in your browser to explore the **fictional** report. The viewer supports schema 1.0 dry-run reports up to 3 MB; malformed files leave the last valid report on screen. Errors are shown inline, the file picker supports keyboard input, and **Kurgusal örneğe dön** resets the demo. For your own pseudonymized results, select the generated `report.json` file with **Rapor JSON yükle**. The viewer contains no CDNs, telemetry, report uploads, storage or external JavaScript; it only renders the local file you select. **This is a report viewer, not a browser-based PMS.**
 
 ## Security, real-world use, limitations
 
@@ -66,18 +70,18 @@ Open `demo/viewer.html` directly in your browser to explore the **fictional** re
 - Real integration requires vendor authorization, written property authorization, an API agreement where appropriate, security review, documented consent/legal basis, and a protected runtime. Import normalization and PII minimization must happen *before* this engine.
 - KBS (police accommodation notifications), official registries, tax/financial records, accounting and regulatory obligations are **out of scope**. No field substitution, KBS workarounds, credential harvesting, login automation or guest identity handling is implemented.
 - Property-specific rules (room upgrades, twin requests, cancellation holds, local taxes) must be reviewed by the operator. No output should be treated as a final booking decision.
-- There is no telemetry, AI provider API call, internet connection, database or scheduler in v0.1.0.
+- There is no telemetry, AI provider API call, database or scheduler in the review engine. The optional hosted demo loads its static page from GitHub Pages; selected report files are processed locally in the browser. Download the viewer for fully offline use.
 
 See [Security](SECURITY.md), [Input Specification](docs/INPUT_SPEC.md), [Architecture](docs/ARCHITECTURE.md), and [Known Limitations](docs/LIMITATIONS.md).
 
 ## Roadmap — practical, measurable milestones
 
-1. **v0.1 (this release):** validated pseudonymized JSON, deterministic rules, 23 tests, CLI, fictional demonstration.
+1. **v0.1.1 (current prototype):** validated pseudonymized JSON, deterministic rules, 23 engine tests, seven browser checks, CLI, and a fictional demonstration.
 2. **v0.2:** opt-in local dashboard, import adapter specification, immutable audit format, more test scenarios for split stays and mixed capacity.
 3. **v0.3:** community-driven integrations *only* for vendor-supported APIs, with sandbox test suites and explicit approval; multi-property namespace isolation.
 4. **v1.0 goal:** stable schema, upgrade policies, security review, opt-in pilot documentation, observability and maintainer governance. We do **not** claim these features exist today.
 
-Read [the maintainer plan](docs/MAINTAINER_PLAN.md), [Turkish Codex for OSS strategy](docs/OSS_APPLICATION_STRATEGY_TR.md) and [project issue templates](.github/ISSUE_TEMPLATE).
+Read the [maintenance roadmap](docs/MAINTAINER_PLAN.md), [testing guide](docs/TESTING.md) and [issue templates](.github/ISSUE_TEMPLATE).
 
 ## Contributing / Katkı
 

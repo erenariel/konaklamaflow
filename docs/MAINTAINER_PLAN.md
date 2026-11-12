@@ -1,31 +1,35 @@
-# Maintainer plan & evidence log (for actual open-source adoption)
+# Maintenance roadmap
 
-The objective is useful public infrastructure, **not artificial star counts, staged PRs, or invented traction**. As of 2026-11-12, this repository is a new prototype prepared for publication; no adoption is claimed.
+KonaklamaFlow is an early offline reservation review prototype. This roadmap tracks useful work for hotel operators and contributors. Planned items are not current features.
 
-## What would count as genuine progress?
+## Current baseline
 
-| Evidence | How to produce and verify |
-|---|---|
-| Real user value | Opt-in feedback from small hospitality businesses; redact all guest/property data |
-| Active maintenance | Issues labelled, real bugs fixed with regression tests, public releases with changelogs |
-| Community engagement | External contributors with meaningful PRs, questions, translations and documentation fixes |
-| Adoption | Independently verifiable downloads/clones, third-party integrations or public mentions (with permission) |
-| Safety | Reviewed code changes, secret scanning, safe issue templates, security response policy |
-| Platform independence | Vendor-neutral schema and documented adapters, no terms-of-service circumvention |
+- Python CLI, pseudonymized JSON input, deterministic rules, and an offline report viewer.
+- MIT license and fictional fixtures.
+- Unit tests and GitHub Actions on Python 3.11, 3.12, and 3.13.
 
-## First 12 weeks (suggested, **not a program requirement**)
+## Next priorities
 
-- Weeks 1–2: publish v0.1, build install/demo instructions, run CI on supported Python versions, add test cases from synthetic scenarios.
-- Weeks 3–4: collect anonymized feedback from 2–3 willing hotel operators; publish known issues and operator priorities.
-- Weeks 5–8: implement local-only read-only dashboard, add property policy configuration, label and triage issues; release v0.2 only when features work.
-- Weeks 9–12: write transparent pilot report, improve translations/accessibility, document supported vendor APIs, accept and review outside contributions where available.
+| Work | Completion criteria |
+| --- | --- |
+| Invalid report handling | The viewer rejects malformed reports clearly and keeps a usable screen. |
+| Accessibility | Keyboard navigation, file-picker focus, readable alerts, and mobile layout are checked. |
+| Operational test coverage | Synthetic scenarios cover split stays and constrained bed availability; unsupported cases are documented. |
+| Import contract | A documented CSV-to-JSON mapping removes identity data before input; no live PMS access is needed. |
+| Clearer local guidance | Turkish and English CLI instructions explain errors and required manual review. |
 
-Do not set arbitrary GitHub stars or issue volume targets. Record *actual* feedback and releases only.
+Discuss a feature in an issue before making a large change. Scope it to an observable outcome and include fictional acceptance examples.
 
-## Codex for Open Source application (when truthful evidence exists)
+## Feedback and triage
 
-The official form asks for a public repository, maintainer role, why the repo qualifies (max 500 chars), OpenAI organization ID, and how API credits would support core maintenance (max 500 chars). See https://openai.com/tr-TR/form/codex-for-oss/ . Acceptance and Pro access are not guaranteed. Apply with the links and actual metrics available at the time.
+Ask willing operators which daily check is unclear or time-consuming. Request a description, not a PMS export. Turn a reproducible problem into a synthetic fixture and record the expected result. Track actual feedback and accepted changes; do not treat untested suggestions as measured impact.
 
-## Responsible AI workflow
+Contributors can help by reproducing reported issues, improving documentation, testing the viewer with a keyboard, and reviewing synthetic hotel scenarios.
 
-Codex or another code assistant may suggest test cases, review diffs, document issues and prepare releases. The human maintainer remains responsible for ensuring correctness, legality and non-disclosure before any merge or release.
+## Releases
+
+Keep the changelog aligned with implemented behavior. Check CI for the release commit, verify the demo, and document compatibility changes before tagging a release. Do not label the prototype production-ready without the necessary review and evidence.
+
+## Longer-term work
+
+Property policies, a stable input schema, an audit format, and vendor-supported read-only adapters require separate designs and review. Any adapter must have property and vendor authorization. Guest messaging, official KBS reporting, and writes to live hotel systems remain outside this prototype.

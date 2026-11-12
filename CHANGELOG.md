@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.1] — 2026-11-12
+
+- Validate schema 1.0 dry-run reports before rendering, including rows, dates, summary totals and advisory-only proposals.
+- Keep the last valid report after a failed import; show private-data-safe inline errors.
+- Add keyboard access, demo reset, same-file retry and protection against stale asynchronous file reads.
+- Add seven Chromium regression checks and a browser CI job; keep the Python engine free of runtime dependencies.
+- Add a tested-commit-only static demo deployment workflow, real CI badge, fictional screenshot and contribution templates.
+- Focus public documentation on the product, testing and maintenance; remove application-planning and obsolete setup notes from the current tree.
+
 ## [0.1.0] — 2026-11-12 (prepared locally; not a published GitHub release)
 
 - First deterministic hotel reservation dry-run reviewer.

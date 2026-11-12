@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
+<meta name="description" content="KonaklamaFlow: küçük oteller için çevrimdışı rezervasyon kontrol paneli. Kurgusal raporu inceleyin; öneriler insan onayı gerektirir.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta property="og:title" content="KonaklamaFlow - Offline hotel reservation review">
+<meta property="og:description" content="Explore a fictional report: reservation conflicts, room proposals, and next-day arrivals. Open source, MIT, human review required.">
+<meta property="og:image" content="https://erenariel.github.io/konaklamaflow/demo-report.png">
 <title>KonaklamaFlow · Offline Demo Viewer</title>
 <style>
   :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0c1420;color:#e8f1f4}
@@ -14,8 +19,9 @@
   h1{font-size:clamp(27px,4.2vw,45px);margin:.2em 0 .2em;letter-spacing:-1.2px;line-height:1.1}h2{font-size:18px;margin:0 0 14px;letter-spacing:-.3px}
   p{color:#a8b9c6;line-height:1.6;margin:7px 0}.sub{max-width:730px}.badge{border:1px solid #2d6f65;color:#72e1c9;background:#0e2a2e;padding:6px 10px;border-radius:16px;font-size:11px;font-weight:800;letter-spacing:.04em}
   .intro{display:flex;align-items:start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:26px}
-  label.upload{cursor:pointer;display:inline-flex;align-items:center;gap:10px;background:#16ae95;color:#061821;font-weight:800;padding:11px 16px;border-radius:10px;box-shadow:0 6px 25px #0002;white-space:nowrap}
-  input[type=file]{position:absolute;left:-9999px} .hint{font-size:12px;color:#92a9b5;max-width:245px;margin-top:7px}
+  button{font:inherit;cursor:pointer}button.upload{display:inline-flex;align-items:center;gap:10px;background:#16ae95;color:#061821;font-weight:800;padding:11px 16px;border:0;border-radius:10px;box-shadow:0 6px 25px #0002;white-space:nowrap}
+  button:focus-visible{outline:3px solid #fff;outline-offset:4px}.reset{margin-top:10px;background:transparent;border:1px solid #628b9a;border-radius:7px;color:#d2e9ee;padding:7px 10px}
+  .hint{font-size:12px;color:#92a9b5;max-width:245px;margin-top:7px}.error{color:#ffb0a7}
   .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:22px 0 32px}.metric,.panel{background:#142331;border:1px solid #294053;border-radius:15px;box-shadow:0 18px 42px #0002}
   .metric{padding:19px 19px 16px}.metric .num{font-size:31px;font-weight:800;letter-spacing:-1px;margin-top:8px}.metric .label{font-size:12px;color:#9bb1bf}
   .metric .num.critical{color:#ffb0a7}.metric .num.teal{color:#66e0c6}
@@ -24,7 +30,7 @@
   .marker.review{background:#393426;color:#f2d185}.marker.ok{background:#113c3d;color:#6be4c7}.item strong{font-size:13px}.desc{color:#9fb4c1;font-size:12px;line-height:1.55;margin-top:4px}
   .pill{border:1px solid #355165;border-radius:9px;padding:4px 9px;font-size:11px;color:#c7d8e2}.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
   .empty{font-size:13px;color:#91abba;border-top:1px solid #23394a;padding-top:16px}
-  footer{font-size:12px;color:#819cab;margin-top:20px}code{background:#0a1b26;border-radius:4px;padding:2px 5px}
+  footer{font-size:12px;color:#819cab;margin-top:20px}a{color:#72e1c9}code{background:#0a1b26;border-radius:4px;padding:2px 5px}
   @media(max-width:740px){.cols{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.wrap{padding:16px 14px 35px}.panel{padding:17px}}
 </style>
 </head>
@@ -33,16 +39,16 @@
   <header><div class="brand"><span class="logo" aria-hidden="true">⌂</span><span>Konaklama<span style="color:#66dbc1">Flow</span></span></div><span class="badge">OFFLINE · DEMO ONLY</span></header>
   <div class="intro">
     <div><div class="eyebrow">Hospitality operations / Ön kontrol</div><h1>Günlük operasyon paneli</h1><p class="sub">Rezervasyon çakışmaları, oda önerileri ve yarınki girişler. Veriler yalnızca bu tarayıcıda işlenir; sistem herhangi bir otel yazılımında değişiklik yapmaz.</p><p class="small" id="fileInfo">Kurgusal örnek rapor yükleniyor…</p></div>
-    <div><label class="upload" for="reportFile">↥ Rapor JSON yükle</label><input id="reportFile" type="file" accept="application/json,.json"><div class="hint">Raporunu <code>python -m konaklamaflow</code> komutuyla oluştur. Bu sayfa hiçbir dosyayı sunucuya göndermez.</div></div>
+    <div><button class="upload" id="chooseReport" type="button" aria-describedby="uploadHint">↥ Rapor JSON yükle</button><input id="reportFile" type="file" accept="application/json,.json" hidden><div class="hint" id="uploadHint">Raporunu <code>python -m konaklamaflow</code> komutuyla oluştur. Bu sayfa hiçbir dosyayı sunucuya göndermez.</div><button class="reset" id="resetReport" type="button">Kurgusal örneğe dön</button><p class="hint" id="importStatus" role="status" aria-live="polite" aria-atomic="true"></p></div>
   </div>
   <div class="metrics" id="metrics" aria-live="polite"></div>
   <div class="cols">
     <div><section class="panel"><div class="section-head"><h2>Kontrol uyarıları</h2><span class="small" id="issueTotal"></span></div><div id="issues"></div></section>
     <section class="panel"><div class="section-head"><h2>Oda blokaj önerileri</h2><span class="pill">İNSAN ONAYI GEREKİR</span></div><div id="proposals"></div></section></div>
     <div><section class="panel"><div class="section-head"><h2>Yarınki girişler</h2><span class="small" id="nextDay"></span></div><div id="arrivals"></div></section>
-    <section class="panel"><h2>Gizlilik ve sınırlar</h2><p>Bu araç yalnızca anonimleştirilmiş/kurgusal veriyle örnek kullanım içindir. Gerçek rezervasyon numarası, isim, pasaport, telefon, otel şifresi veya özel PMS dökümleri yükleme.</p><p>Rapor önerileri otomatik rezervasyon, iptal, misafir mesajı veya KBS bildirimi oluşturmaz.</p></section></div>
+    <section class="panel"><h2>Gizlilik ve sınırlar</h2><p>Bu araç yalnızca kurgusal veya önceden pseudonimleştirilmiş veriyle örnek kullanım içindir. Gerçek rezervasyon numarası, isim, pasaport, telefon, otel şifresi veya özel PMS dökümleri yükleme.</p><p>Rapor önerileri otomatik rezervasyon, iptal, misafir mesajı veya KBS bildirimi oluşturmaz.</p></section></div>
   </div>
-  <footer><strong>KonaklamaFlow v0.1</strong> · MIT · Statik çevrimdışı görüntüleyici · Gerçek işletmede kullanmadan önce bağımsız doğrulama gerekir.</footer>
+  <footer><strong>KonaklamaFlow v0.1.1</strong> · MIT · Statik çevrimdışı görüntüleyici · Gerçek işletmede kullanmadan önce bağımsız doğrulama gerekir.<p><a href="https://github.com/erenariel/konaklamaflow">Kaynak kod, kullanım ve katkı / Source &amp; contributing</a></p></footer>
 </div>
 <script type="application/json" id="sample">{
   "schema_version": "1.0",
@@ -114,10 +120,56 @@
 <script>
 'use strict';
 const el=id=>document.getElementById(id);
+const ID=/^[A-Za-z0-9_-]{1,40}$/;
+const MAX_FILE_BYTES=3_000_000;
+let importVersion=0;
+function invalid(){throw Error('Rapor geçersiz veya desteklenmeyen bir şemada. Son geçerli rapor korundu.');}
+function object(value,keys){
+ if(!value || typeof value!=='object' || Array.isArray(value))invalid();
+ if(Object.keys(value).some(key=>!keys.includes(key)))invalid();
+}
+function identifier(value){if(typeof value!=='string' || !ID.test(value))invalid();}
+function text(value,max){if(typeof value!=='string' || value.length>max)invalid();}
+function validDate(value){
+ if(typeof value!=='string' || !/^\d{4}-\d{2}-\d{2}$/.test(value))invalid();
+ const d=new Date(value+'T12:00:00Z');
+ if(Number.isNaN(d.getTime()) || d.toISOString().slice(0,10)!==value || value<'0001-01-01' || value>='9999-12-31')invalid();
+}
+function validate(data){
+ object(data,['schema_version','project','mode','property_id','as_of','summary','issues','room_proposals','tomorrow_arrivals','disclaimer']);
+ if(data.schema_version!=='1.0' || data.project!=='KonaklamaFlow' || data.mode!=='DRY_RUN_ONLY')invalid();
+ identifier(data.property_id);validDate(data.as_of);text(data.disclaimer,1000);
+ const fields=['rooms','reservations','critical_alerts','review_alerts','room_proposals','tomorrow_arrivals'];
+ object(data.summary,fields);
+ for(const field of fields){if(!Number.isSafeInteger(data.summary[field]) || data.summary[field]<0)invalid();}
+ for(const field of ['issues','room_proposals','tomorrow_arrivals']){
+  if(!Array.isArray(data[field]) || data[field].length>100000)invalid();
+ }
+ for(const x of data.issues){
+  object(x,['code','severity','reservation_ref','detail']);
+  if(typeof x.code!=='string' || !/^[A-Z][A-Z0-9_]{0,79}$/.test(x.code) || !['critical','review'].includes(x.severity))invalid();
+  identifier(x.reservation_ref);text(x.detail,2000);
+ }
+ for(const x of data.room_proposals){
+  object(x,['reservation_ref','source','room_id','kind']);
+  for(const key of ['reservation_ref','source','room_id'])identifier(x[key]);
+  if(x.kind!=='MANUAL_APPROVAL_REQUIRED')invalid();
+ }
+ for(const x of data.tomorrow_arrivals){
+  object(x,['reservation_ref','source','category','assigned_room','status']);
+  for(const key of ['reservation_ref','source','category'])identifier(x[key]);
+  if(x.assigned_room!==null)identifier(x.assigned_room);
+  if(!['confirmed','pending'].includes(x.status))invalid();
+ }
+ const critical=data.issues.filter(x=>x.severity==='critical').length;
+ if(data.summary.critical_alerts!==critical || data.summary.review_alerts!==data.issues.length-critical ||
+    data.summary.room_proposals!==data.room_proposals.length || data.summary.tomorrow_arrivals!==data.tomorrow_arrivals.length)invalid();
+}
+function status(message,isError=false){el('importStatus').textContent=message;el('importStatus').classList.toggle('error',isError);}
 const add=(parent, tag, className, value)=>{let n=document.createElement(tag); if(className)n.className=className;if(value!==undefined)n.textContent=String(value);parent.appendChild(n);return n;};
 function item(target,mark,title,details,kind){const outer=add(target,'div','item');add(outer,'span','marker '+(kind||'review'),mark);const content=add(outer,'div','');add(content,'strong','',title);add(content,'div','desc',details);}
 function render(data,filename){
- if(!data || typeof data !== 'object' || !data.summary || !Array.isArray(data.issues) || !Array.isArray(data.room_proposals) || !Array.isArray(data.tomorrow_arrivals))throw Error('KonaklamaFlow rapor şeması bulunamadı.');
+ validate(data);
  const s=data.summary;
  const stats=[['İncelenen oda',s.rooms,''],['Rezervasyon',s.reservations,''],['Kritik uyarı',s.critical_alerts,'critical'],['Oda önerisi',s.room_proposals,'teal']];
  el('metrics').replaceChildren(); for(const [name,value,kind] of stats){const box=add(el('metrics'),'div','metric');add(box,'div','label',name);add(box,'div','num '+kind,value);}
@@ -127,15 +179,33 @@ function render(data,filename){
  if(!data.issues.length)add(el('issues'),'p','empty','Uyarı bulunamadı.');
  for(const x of data.room_proposals){item(el('proposals'),'✓',String(x.reservation_ref||'?')+' → Oda '+String(x.room_id||'?'),'Kaynak: '+String(x.source||'?')+' · Yalnızca öneridir, PMS’de değişiklik yapılmadı.','ok');}
  if(!data.room_proposals.length)add(el('proposals'),'p','empty','Uygun oda önerisi yok.');
- const current=new Date(String(data.as_of||'')+'T12:00:00');if(!Number.isNaN(current.getTime())){current.setDate(current.getDate()+1);el('nextDay').textContent=current.toLocaleDateString('tr-TR');}
+ const current=new Date(data.as_of+'T12:00:00Z');current.setUTCDate(current.getUTCDate()+1);el('nextDay').textContent=current.toLocaleDateString('tr-TR',{timeZone:'UTC'});
  for(const x of data.tomorrow_arrivals){item(el('arrivals'),'⌂',String(x.reservation_ref||'?')+' · '+String(x.category||'?'),'Kaynak: '+String(x.source||'?')+' · '+(x.assigned_room?'Oda '+String(x.assigned_room):'Oda henüz atanmadı')+' · '+String(x.status||''),'ok');}
  if(!data.tomorrow_arrivals.length)add(el('arrivals'),'p','empty','Yarın için giriş görünmüyor.');
  el('fileInfo').textContent=(filename||'Örnek rapor')+' · '+String(data.as_of||'')+' · '+String(data.mode||'');
 }
+el('chooseReport').addEventListener('click',()=>el('reportFile').click());
 el('reportFile').addEventListener('change',async event=>{
  const file=event.target.files?.[0];if(!file)return;
- if(file.size>3_000_000){alert('Rapor 3 MB sınırını aşıyor.');return;}
- try{render(JSON.parse(await file.text()),file.name);}catch(err){alert('Dosya okunamadı: '+err.message);}
+ const version=++importVersion;
+ // Clear the picker so choosing the same file again also triggers change.
+ event.target.value='';
+ if(file.size>MAX_FILE_BYTES){status('Rapor 3 MB sınırını aşıyor. Son geçerli rapor korundu.',true);return;}
+ status('Rapor okunuyor…');
+ try{
+  const raw=await file.text();
+  if(version!==importVersion)return;
+  let data;
+  try{data=JSON.parse(raw);}catch{status('Dosya geçerli JSON değil. Son geçerli rapor korundu.',true);return;}
+  render(data,file.name);status('Rapor yüklendi. Öneriler insan onayı gerektirir.');
+ }catch{
+  if(version===importVersion)status('Rapor okunamadı veya şeması geçersiz. Son geçerli rapor korundu.',true);
+ }
+});
+el('resetReport').addEventListener('click',()=>{
+ ++importVersion;el('reportFile').value='';
+ render(JSON.parse(el('sample').textContent),'Kurgusal örnek rapor');
+ status('Kurgusal örnek gösteriliyor.');
 });
 // Demo output embedded during packaging; no fetch/network access.
 render(JSON.parse(document.getElementById('sample').textContent),'Kurgusal örnek rapor');
