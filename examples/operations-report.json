@@ -1,0 +1,115 @@
+{
+  "schema_version": "0.2-prototype",
+  "mode": "DRY_RUN_ONLY",
+  "property_id": "SAMPLE_INN_01",
+  "as_of": "2026-11-12",
+  "at_time": "14:01",
+  "snapshot_sha256": "1b8c61fdb104708a38056e63008f370f07c3c97246e7f52d677977e649117e97",
+  "checkin_policy": {
+    "checkin_time": "14:00",
+    "checkout_time": "12:00"
+  },
+  "summary": {
+    "arrivals_total": 4,
+    "ready_for_review": 1,
+    "blocked": 3,
+    "already_checked_in_requires_review": 0
+  },
+  "tasks": [
+    {
+      "task_id": "5767d839ba14e37d26452d3e",
+      "reservation_ref": "DEMO_A01",
+      "source": "CHANNEL_A",
+      "room_id": "101",
+      "category": "standard",
+      "stay": {
+        "checkin": "2026-11-12",
+        "checkout": "2026-11-14"
+      },
+      "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+      "checklist": {
+        "identity_reviewed_by_authorized_staff": true,
+        "payment_review_complete": true,
+        "room_clean_and_inspected": true,
+        "registration_confirmed_by_authorized_system": false
+      },
+      "reasons": [],
+      "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+    },
+    {
+      "task_id": "10e314530ea13df9ef0ec884",
+      "reservation_ref": "DEMO_A03",
+      "source": "CHANNEL_A",
+      "room_id": "201",
+      "category": "superior",
+      "stay": {
+        "checkin": "2026-11-12",
+        "checkout": "2026-11-15"
+      },
+      "state": "BLOCKED_FOR_HUMAN_REVIEW",
+      "checklist": {
+        "identity_reviewed_by_authorized_staff": true,
+        "payment_review_complete": true,
+        "room_clean_and_inspected": false,
+        "registration_confirmed_by_authorized_system": false
+      },
+      "reasons": [
+        "room_not_clean",
+        "room_not_inspected"
+      ],
+      "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+    },
+    {
+      "task_id": "7f4c63272372f991b5a4c9f0",
+      "reservation_ref": "DEMO_A02",
+      "source": "CHANNEL_B",
+      "room_id": "102",
+      "category": "standard",
+      "stay": {
+        "checkin": "2026-11-12",
+        "checkout": "2026-11-13"
+      },
+      "state": "BLOCKED_FOR_HUMAN_REVIEW",
+      "checklist": {
+        "identity_reviewed_by_authorized_staff": false,
+        "payment_review_complete": false,
+        "room_clean_and_inspected": true,
+        "registration_confirmed_by_authorized_system": false
+      },
+      "reasons": [
+        "identity_needs_authorized_verification",
+        "payment_review_needed",
+        "guest_not_arrived"
+      ],
+      "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+    },
+    {
+      "task_id": "4c75cc1bc72a7ee5dcd89ab0",
+      "reservation_ref": "DEMO_A04",
+      "source": "CHANNEL_C",
+      "room_id": null,
+      "category": "superior",
+      "stay": {
+        "checkin": "2026-11-13",
+        "checkout": "2026-11-15"
+      },
+      "state": "BLOCKED_FOR_HUMAN_REVIEW",
+      "checklist": {
+        "identity_reviewed_by_authorized_staff": false,
+        "payment_review_complete": false,
+        "room_clean_and_inspected": false,
+        "registration_confirmed_by_authorized_system": false
+      },
+      "reasons": [
+        "room_unassigned",
+        "NO_SAFE_ROOM_PROPOSAL",
+        "identity_needs_authorized_verification",
+        "payment_review_needed",
+        "arrival_date_not_today",
+        "guest_not_arrived"
+      ],
+      "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
+    }
+  ],
+  "disclaimer": "No check-in, payment, room assignment, guest notification or government registration has been executed. Identity and registration signals are unverified demo inputs unless provided by an authorized trusted system."
+}
