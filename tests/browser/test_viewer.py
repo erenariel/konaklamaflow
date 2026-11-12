@@ -41,7 +41,8 @@ class ViewerTests(unittest.IsolatedAsyncioTestCase):
         await self.page.locator('#chooseReport').focus()
         await expect(self.page.locator('#chooseReport')).to_be_focused()
         async with self.page.expect_file_chooser() as chooser:
-            await self.page.keyboard.press('Enter')
+            # Dispatch the keyboard event on the button itself to avoid focus races in CI.
+            await self.page.locator('#chooseReport').press('Enter')
         await (await chooser.value).set_files(ROOT / 'examples/demo-report.json')
         await expect(self.page.locator('#importStatus')).to_have_text('Rapor yüklendi. Öneriler insan onayı gerektirir.')
         self.assertEqual(await self.page.locator('#proposals .item').count(), 1)
