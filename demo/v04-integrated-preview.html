@@ -638,6 +638,7 @@ function fullUiEnglishRows(rows){
  }
 }
 const fullUiSourceText=new WeakMap();
+const fullUiAttrSource=new WeakMap();
 function fullUiTranslation(source,lang){
  const exact=fullUiPhrases[lang].get(source);
  if(exact)return exact;
@@ -670,11 +671,12 @@ function fullUiTranslateTree(){
    if(el.closest('.v04-panel'))continue;
    for(const attr of ['placeholder','title','aria-label']){
      if(!el.hasAttribute(attr))continue;
-     const name='fullUiOriginal'+attr.charAt(0).toUpperCase()+attr.slice(1);
-     if(!el.dataset[name])el.dataset[name]=el.getAttribute(attr);
-     const original=el.dataset[name];
+     let originals=fullUiAttrSource.get(el);
+     if(!originals){originals=Object.create(null);fullUiAttrSource.set(el,originals);}
+     if(!Object.hasOwn(originals,attr))originals[attr]=el.getAttribute(attr);
+     const original=originals[attr];
      const translated=fullUiTranslation(original,lang);
-     if(translated!==original||lang==='tr')el.setAttribute(attr,translated);
+     el.setAttribute(attr,translated);
    }
  }
  const marker=document.getElementById('fullUiTranslationMarker');
