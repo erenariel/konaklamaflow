@@ -125,7 +125,10 @@ def validate_fictional_hotel(data):
     guest_ids=_unique(guests,"id")
     booking_ids=_unique(reservations,"id")
     _unique(folios,"id")
-    _unique(reports,"id")
+    if (len({r.get("id") for r in reports}) != len(reports)
+        or any(not isinstance(r.get("id"),str) or
+               re.fullmatch(r"[a-z][a-z_]{1,47}",r["id"]) is None for r in reports)):
+        _bad()
     room_map={r["id"]:r for r in rooms}
     for r in rooms:
         if (r["category"] not in CATEGORIES or type(r["capacity"]) is not int
