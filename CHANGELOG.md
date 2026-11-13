@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased — shared fictional reservation model, Issue #35]
+
+- Generate the integrated dashboard, room plan, PMS views, AI stories, folios and report registry from one Python-validated fictional snapshot with explicit foreign keys.
+- Preserve the 12 KF review cases; author three new, explicitly linked fictional folios instead of relabeling unrelated historical KFD financial records.
+- Add cross-module reservation navigation, absent-finance and missing-source states, multiroom parent/stay links, and stale-source notices after local simulations.
+- Keep the legacy API fixtures, PR #34 mobile/language controls, PR #36 precomputed evidence panel, and PR #38 Aurora visuals.
+- Add identity, reporting, navigation, workflow-routing, multilingual and source-provenance regressions; regenerate real-browser media with matching manifests.
+- No merge, release, live connection, guest identity handling, payment, KBS or real message execution is enabled by this candidate.
+
 ## [Unreleased — OSS maintenance and CLI safety]
 
 - Bound command-line JSON input to 32 MiB before parsing; reject oversized files without printing private file paths or contents.
