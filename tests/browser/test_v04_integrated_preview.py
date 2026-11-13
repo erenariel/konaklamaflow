@@ -118,7 +118,7 @@ class V04WorkbenchPreviewTests(unittest.TestCase):
         self.assertIn("connect-src 'none'", text)
         self.assertNotIn("api.openai.com", text)
         self.assertIsNone(re.search(
-            r'function\\s+(?:evaluate|eligible|proposal|overlaps)\\s*\\(', text))
+            r'function\s+(?:evaluate|eligible|proposal|overlaps)\s*\(', text))
         self.assertEqual(self.page.evaluate("() => INITIAL_EVALUATION.mode"), "DRY_RUN_ONLY")
 
 
