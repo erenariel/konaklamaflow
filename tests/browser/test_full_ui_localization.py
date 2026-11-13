@@ -125,7 +125,7 @@ class FullApplicationLanguageTests(unittest.TestCase):
         self.assertEqual(self.page.locator("#aiCommandCenter").count(),1)
         first=self.page.evaluate("() => selectedStoryId")
         self.page.evaluate("() => {storyStep=currentStory().steps.length-1;}")
-        self.page.wait_for_function("selectedStoryId !== '"+first+"'",timeout=5000)
+        self.page.wait_for_timeout(2400)\n        self.assertNotEqual(self.page.evaluate("() => selectedStoryId"),first)
         self.assertEqual(self.page.evaluate("() => storyStep"),0)
         self.page.locator("#commandPause").click()
         self.assertFalse(self.page.evaluate("() => commandTourAll || storyPlaying"))
