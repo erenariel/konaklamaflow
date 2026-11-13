@@ -46,6 +46,43 @@ class GlobalPresentationConceptBrowserTests(unittest.TestCase):
                 self.assertTrue(self.page.locator("#heading").inner_text().strip())
                 self.assertTrue(self.page.locator("#heroTitle").inner_text().strip())
 
+    def test_all_ten_locales_have_complete_scripted_story_contract(self):
+        catalog = self.page.evaluate("""() => Object.fromEntries(Object.entries(locales).map(
+            ([id, value]) => [id, {
+                keys: Object.keys(value).sort(),
+                stories: Object.keys(value.stories).sort(),
+                steps: value.steps.length,
+                message_steps: value.stepMessages.length,
+                complete: Object.values(value).every(v => v !== null && v !== '')
+            }]
+        ))""")
+        self.assertEqual(set(catalog), set(LANGUAGES))
+        reference = catalog["en"]["keys"]
+        for language, data in catalog.items():
+            with self.subTest(language=language):
+                self.assertEqual(data["keys"], reference)
+                self.assertEqual(data["stories"], ["hk", "ota", "ready", "twin"])
+                self.assertEqual(data["steps"], 5)
+                self.assertEqual(data["message_steps"], 5)
+                self.assertTrue(data["complete"])
+
+    def test_accessible_controls_and_room_dates_localize(self):
+        for language in LANGUAGES:
+            self.page.locator("#locale").select_option(language)
+            labels = self.page.evaluate("""() => ({
+                scenario: document.querySelector('#scenario').getAttribute('aria-label'),
+                next: document.querySelector('#next').getAttribute('aria-label'),
+                actual: accessibleLabels[state.lang].next,
+                room: document.querySelector('#rack .cell').getAttribute('aria-label')
+            })""")
+            with self.subTest(language=language):
+                self.assertEqual(labels["next"], labels["actual"])
+                self.assertTrue(labels["scenario"])
+                self.assertTrue(labels["room"])
+                self.assertNotIn("Room 101, 13 November", labels["room"])
+        self.page.locator("#next").click()
+        self.assertEqual(self.page.locator("#progress").get_attribute("aria-valuenow"), "2")
+
     def test_themes_and_presentation_mode(self):
         for theme in ("light", "dark", "night"):
             self.page.locator("#theme").select_option(theme)
