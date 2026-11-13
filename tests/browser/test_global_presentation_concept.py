@@ -129,6 +129,52 @@ class GlobalPresentationConceptBrowserTests(unittest.TestCase):
         self.page.locator("#play").click()
         self.assertFalse(self.page.evaluate("() => state.playing"))
 
+    def test_guided_tour_durations_and_all_story_steps(self):
+        # Deterministic clock interception tests the sequence without waiting 7 min.
+        self.page.evaluate("""() => {
+            window.__tourInterval = null;
+            window.setInterval = (callback, duration) => {
+                window.__tourInterval = {callback, duration};
+                return 777;
+            };
+            window.clearInterval = () => {};
+        }""")
+        for selection, millis in (("short", 4500), ("medium", 9000), ("long", 21000)):
+            self.page.locator("#tourLength").select_option(selection)
+            self.page.locator("#guidedStart").click()
+            self.assertTrue(self.page.evaluate("() => state.guided"))
+            self.assertEqual(self.page.evaluate("() => window.__tourInterval.duration"), millis)
+            self.assertEqual(self.page.evaluate("() => [state.story,state.step]"), ["twin", 0])
+            sequence = [self.page.evaluate("() => state.story + ':' + state.step")]
+            for _ in range(19):
+                self.page.evaluate("() => window.__tourInterval.callback()")
+                sequence.append(self.page.evaluate("() => state.story + ':' + state.step"))
+            expected = [story + ':' + str(step) for story in ("twin", "hk", "ota", "ready")
+                        for step in range(5)]
+            self.assertEqual(sequence, expected)
+            self.page.evaluate("() => window.__tourInterval.callback()")
+            self.assertFalse(self.page.evaluate("() => state.guided"))
+            self.assertFalse(self.page.evaluate("() => state.playing"))
+
+    def test_guided_controls_translate_and_respect_reduced_motion(self):
+        for language in LANGUAGES:
+            self.page.locator("#locale").select_option(language)
+            labels = self.page.evaluate("""() => ({
+                duration: document.getElementById('tourLength').getAttribute('aria-label'),
+                expected: playbackLabels[state.lang].tourDuration,
+                start: document.getElementById('guidedStart').getAttribute('aria-label'),
+                startExpected: playbackLabels[state.lang].tourStart
+            })""")
+            with self.subTest(language=language):
+                self.assertEqual(labels["duration"], labels["expected"])
+                self.assertEqual(labels["start"], labels["startExpected"])
+        self.page.emulate_media(reduced_motion="reduce")
+        self.page.locator('html[data-motion="off"]').wait_for(state="attached", timeout=5000)
+        self.page.locator("#guidedStart").click()
+        self.assertFalse(self.page.evaluate("() => state.playing"))
+        self.assertFalse(self.page.evaluate("() => state.guided"))
+        self.assertEqual(self.page.evaluate("() => [state.story,state.step]"), ["twin", 0])
+
     def test_four_scripted_stories(self):
         for story in ("twin", "hk", "ota", "ready"):
             with self.subTest(story=story):
