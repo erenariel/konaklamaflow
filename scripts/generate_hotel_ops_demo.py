@@ -41,6 +41,10 @@ def embed(text,data,report):
          "// END GENERATED_FULL_UI_DICTIONARY","demo/full-ui-i18n-catalog.js"),
         ("// BEGIN GENERATED_HOTEL_OPS_UI",
          "// END GENERATED_HOTEL_OPS_UI","demo/hotel-ops-module.js"),
+        ("/* BEGIN AI_COMMAND_CSS */",
+         "/* END AI_COMMAND_CSS */","demo/ai-command-center.css"),
+        ("/* BEGIN AI_COMMAND_JS */",
+         "/* END AI_COMMAND_JS */","demo/ai-command-center.js"),
     ):
         if updated.count(left)!=1 or updated.count(right)!=1:
             raise ValueError("Missing or ambiguous hotel operations source markers")
