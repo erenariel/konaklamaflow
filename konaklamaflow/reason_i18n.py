@@ -6,8 +6,6 @@ Translations are editorial drafts pending native-speaker and a11y review.
 """
 from __future__ import annotations
 
-from collections import Counter
-from copy import deepcopy
 import re
 
 from .experience_engine import BLOCKER_CODES, SnapshotError, evaluate
