@@ -35,10 +35,10 @@ def embed(text,data,report):
     for left,right,filename in (
         ("/* BEGIN GENERATED_HOTEL_OPS_STYLES */",
          "/* END GENERATED_HOTEL_OPS_STYLES */","demo/hotel-ops-styles.css"),
-        ("// BEGIN GENERATED_FULL_UI_I18N",
-         "// END GENERATED_FULL_UI_I18N","demo/full-ui-i18n.js"),
-        ("// BEGIN GENERATED_FULL_UI_I18N_CATALOG",
-         "// END GENERATED_FULL_UI_I18N_CATALOG","demo/full-ui-i18n-catalog.js"),
+        ("// BEGIN GENERATED_FULL_UI_RUNTIME",
+         "// END GENERATED_FULL_UI_RUNTIME","demo/full-ui-i18n.js"),
+        ("// BEGIN GENERATED_FULL_UI_DICTIONARY",
+         "// END GENERATED_FULL_UI_DICTIONARY","demo/full-ui-i18n-catalog.js"),
         ("// BEGIN GENERATED_HOTEL_OPS_UI",
          "// END GENERATED_HOTEL_OPS_UI","demo/hotel-ops-module.js"),
     ):
