@@ -37,7 +37,7 @@ class V04WorkbenchPreviewTests(unittest.TestCase):
         self.page.close()
 
     def test_actual_ten_module_workbench_remains_accessible(self):
-        self.assertEqual(self.page.locator("nav [data-nav]").count(), 18)
+        self.assertEqual(self.page.locator("nav [data-nav]").count(), 20)
         self.assertEqual(self.page.evaluate("() => INITIAL_EVALUATION"), REPORT)
         self.assertEqual(self.page.locator("#v04Booking option").count(),
                          len(REPORT["arrivals"]))
