@@ -6,7 +6,6 @@
 fullUiRows([
  [
   "AI senaryosunu keşfet",
-  "AI senaryosunu keşfet",
   "Explore AI scenarios",
   "Explorer les scénarios IA",
   "Εξερεύνηση σεναρίων AI",
@@ -18,7 +17,6 @@ fullUiRows([
   "Переглянути сценарії ШІ"
  ],
  [
-  "Demoyu sıfırla",
   "Demoyu sıfırla",
   "Reset demo",
   "Réinitialiser la démo",
@@ -32,7 +30,6 @@ fullUiRows([
  ],
  [
   "Rapor indir",
-  "Rapor indir",
   "Download report",
   "Télécharger le rapport",
   "Λήψη αναφοράς",
@@ -44,7 +41,6 @@ fullUiRows([
   "Завантажити звіт"
  ],
  [
-  "Tema",
   "Tema",
   "Theme",
   "Thème",
@@ -58,7 +54,6 @@ fullUiRows([
  ],
  [
   "Açık",
-  "Açık",
   "Light",
   "Clair",
   "Φωτεινό",
@@ -70,7 +65,6 @@ fullUiRows([
   "Світла"
  ],
  [
-  "Koyu",
   "Koyu",
   "Dark",
   "Sombre",
@@ -84,7 +78,6 @@ fullUiRows([
  ],
  [
   "Gece audit",
-  "Gece audit",
   "Night audit",
   "Audit de nuit",
   "Νυχτερινός έλεγχος",
@@ -96,7 +89,6 @@ fullUiRows([
   "Нічний аудит"
  ],
  [
-  "Sunum modu",
   "Sunum modu",
   "Presentation mode",
   "Mode présentation",
@@ -110,7 +102,6 @@ fullUiRows([
  ],
  [
   "Modül",
-  "Modül",
   "Module",
   "Module",
   "Ενότητα",
@@ -122,7 +113,6 @@ fullUiRows([
   "Модуль"
  ],
  [
-  "ÇALIŞMA ALANI",
   "ÇALIŞMA ALANI",
   "WORKSPACE",
   "ESPACE DE TRAVAIL",
@@ -136,7 +126,6 @@ fullUiRows([
  ],
  [
   "Güvenli demo modu",
-  "Güvenli demo modu",
   "Safe demo mode",
   "Mode démo sécurisé",
   "Ασφαλής λειτουργία demo",
@@ -148,7 +137,6 @@ fullUiRows([
   "Безпечний деморежим"
  ],
  [
-  "Tarayıcı içi simülasyon · çevrimdışı",
   "Tarayıcı içi simülasyon · çevrimdışı",
   "In-browser simulation · offline",
   "Simulation dans le navigateur · hors ligne",
@@ -162,7 +150,6 @@ fullUiRows([
  ],
  [
   "Kurgusal kaynak anlık görüntüsü · Tüm nihai işlemler yetkili personelde",
-  "Kurgusal kaynak anlık görüntüsü · Tüm nihai işlemler yetkili personelde",
   "Fictional source snapshot · Final actions require authorized staff",
   "Données fictives · Actions finales réservées au personnel habilité",
   "Εικονικά δεδομένα · Τελικές ενέργειες μόνο από εξουσιοδοτημένο προσωπικό",
@@ -174,7 +161,6 @@ fullUiRows([
   "Тестові дані · Остаточні дії лише уповноваженими працівниками"
  ],
  [
-  "Bugün",
   "Bugün",
   "Today",
   "Aujourd’hui",
@@ -188,7 +174,6 @@ fullUiRows([
  ],
  [
   "Öncelikli girişler",
-  "Öncelikli girişler",
   "Priority arrivals",
   "Arrivées prioritaires",
   "Αφίξεις προτεραιότητας",
@@ -200,7 +185,6 @@ fullUiRows([
   "Пріоритетні прибуття"
  ],
  [
-  "Operasyon durumu",
   "Operasyon durumu",
   "Operations status",
   "État des opérations",
@@ -214,7 +198,6 @@ fullUiRows([
  ],
  [
   "Bugün beklenen girişler",
-  "Bugün beklenen girişler",
   "Expected arrivals today",
   "Arrivées prévues aujourd’hui",
   "Αναμενόμενες αφίξεις σήμερα",
@@ -226,7 +209,6 @@ fullUiRows([
   "Очікувані прибуття сьогодні"
  ],
  [
-  "Gelen OTA olayları",
   "Gelen OTA olayları",
   "Incoming OTA events",
   "Événements OTA entrants",
@@ -240,7 +222,6 @@ fullUiRows([
  ],
  [
   "Grafik oda planı",
-  "Grafik oda planı",
   "Graphical room plan",
   "Plan graphique des chambres",
   "Γραφικό πλάνο δωματίων",
@@ -252,7 +233,6 @@ fullUiRows([
   "Графічний план номерів"
  ],
  [
-  "Kat hizmetleri kontrol kuyruğu",
   "Kat hizmetleri kontrol kuyruğu",
   "Housekeeping inspection queue",
   "File d’inspection du ménage",
@@ -266,7 +246,6 @@ fullUiRows([
  ],
  [
   "Konaklama öncesi özel talepler",
-  "Konaklama öncesi özel talepler",
   "Pre-arrival special requests",
   "Demandes spéciales avant arrivée",
   "Ειδικά αιτήματα πριν την άφιξη",
@@ -278,7 +257,6 @@ fullUiRows([
   "Особливі запити до прибуття"
  ],
  [
-  "Departman iş listesi",
   "Departman iş listesi",
   "Department task list",
   "Liste des tâches",
@@ -292,7 +270,6 @@ fullUiRows([
  ],
  [
   "Folyo ve gece audit hazırlığı",
-  "Folyo ve gece audit hazırlığı",
   "Folio and night audit preparation",
   "Préparation des folios et audit de nuit",
   "Προετοιμασία λογαριασμών και νυχτερινού ελέγχου",
@@ -304,7 +281,6 @@ fullUiRows([
   "Підготовка фоліо й нічного аудиту"
  ],
  [
-  "Entegrasyon katmanları",
   "Entegrasyon katmanları",
   "Integration layers",
   "Couches d’intégration",
@@ -318,7 +294,6 @@ fullUiRows([
  ],
  [
   "Ön inceleme durumu",
-  "Ön inceleme durumu",
   "Pre-review status",
   "Statut du pré-examen",
   "Κατάσταση προελέγχου",
@@ -330,7 +305,6 @@ fullUiRows([
   "Статус попередньої перевірки"
  ],
  [
-  "Personel incelemesi gerekli",
   "Personel incelemesi gerekli",
   "Staff review required",
   "Examen du personnel requis",
@@ -344,7 +318,6 @@ fullUiRows([
  ],
  [
   "Personel kontrolüne hazır",
-  "Personel kontrolüne hazır",
   "Ready for staff pre-review",
   "Prêt pour pré-examen",
   "Έτοιμο για προέλεγχο",
@@ -356,7 +329,6 @@ fullUiRows([
   "Готово до перевірки"
  ],
  [
-  "Sıradaki güvenli adım",
   "Sıradaki güvenli adım",
   "Next safe step",
   "Prochaine étape sûre",
@@ -370,7 +342,6 @@ fullUiRows([
  ],
  [
   "Kaynak doğrulanmadı",
-  "Kaynak doğrulanmadı",
   "Source not verified",
   "Source non vérifiée",
   "Μη επαληθευμένη πηγή",
@@ -382,7 +353,6 @@ fullUiRows([
   "Джерело не перевірено"
  ],
  [
-  "Oda planı",
   "Oda planı",
   "Room plan",
   "Plan des chambres",
@@ -396,7 +366,6 @@ fullUiRows([
  ],
  [
   "Rezervasyon",
-  "Rezervasyon",
   "Reservation",
   "Réservation",
   "Κράτηση",
@@ -408,7 +377,6 @@ fullUiRows([
   "Бронювання"
  ],
  [
-  "Misafirler",
   "Misafirler",
   "Guests",
   "Clients",
@@ -422,7 +390,6 @@ fullUiRows([
  ],
  [
   "Aktif Folyolar",
-  "Aktif Folyolar",
   "Open folios",
   "Folios ouverts",
   "Ανοιχτοί λογαριασμοί",
@@ -434,7 +401,6 @@ fullUiRows([
   "Відкриті фоліо"
  ],
  [
-  "Acente Alacakları",
   "Acente Alacakları",
   "Agency receivables",
   "Créances des agences",
@@ -448,7 +414,6 @@ fullUiRows([
  ],
  [
   "Rapor Merkezi",
-  "Rapor Merkezi",
   "Report center",
   "Centre des rapports",
   "Κέντρο αναφορών",
@@ -460,7 +425,6 @@ fullUiRows([
   "Центр звітів"
  ],
  [
-  "Blokajlar",
   "Blokajlar",
   "Room blocks",
   "Blocages",
@@ -474,7 +438,6 @@ fullUiRows([
  ],
  [
   "Demirbaşlar",
-  "Demirbaşlar",
   "Room assets",
   "Équipements des chambres",
   "Εξοπλισμός δωματίων",
@@ -486,7 +449,6 @@ fullUiRows([
   "Оснащення номерів"
  ],
  [
-  "Tümü",
   "Tümü",
   "All",
   "Tous",
@@ -500,7 +462,6 @@ fullUiRows([
  ],
  [
   "Engelli",
-  "Engelli",
   "Blocked",
   "Bloqué",
   "Αποκλεισμένο",
@@ -512,7 +473,6 @@ fullUiRows([
   "Заблоковано"
  ],
  [
-  "Hazır",
   "Hazır",
   "Ready",
   "Prêt",
@@ -526,7 +486,6 @@ fullUiRows([
  ],
  [
   "Kaynak",
-  "Kaynak",
   "Source",
   "Source",
   "Πηγή",
@@ -538,7 +497,6 @@ fullUiRows([
   "Джерело"
  ],
  [
-  "Durum",
   "Durum",
   "Status",
   "Statut",
@@ -552,7 +510,6 @@ fullUiRows([
  ],
  [
   "Önerilen işlem",
-  "Önerilen işlem",
   "Suggested action",
   "Action proposée",
   "Προτεινόμενη ενέργεια",
@@ -564,7 +521,6 @@ fullUiRows([
   "Пропонована дія"
  ],
  [
-  "Oda",
   "Oda",
   "Room",
   "Chambre",
@@ -578,7 +534,6 @@ fullUiRows([
  ],
  [
   "Oda tipi",
-  "Oda tipi",
   "Room category",
   "Catégorie",
   "Κατηγορία",
@@ -590,7 +545,6 @@ fullUiRows([
   "Категорія"
  ],
  [
-  "Kat",
   "Kat",
   "Floor",
   "Étage",
@@ -604,7 +558,6 @@ fullUiRows([
  ],
  [
   "Kapasite",
-  "Kapasite",
   "Capacity",
   "Capacité",
   "Χωρητικότητα",
@@ -616,7 +569,6 @@ fullUiRows([
   "Місткість"
  ],
  [
-  "Toplam oda",
   "Toplam oda",
   "Total rooms",
   "Total des chambres",
@@ -630,7 +582,6 @@ fullUiRows([
  ],
  [
   "Kirli oda",
-  "Kirli oda",
   "Dirty rooms",
   "Chambres sales",
   "Βρώμικα δωμάτια",
@@ -642,7 +593,6 @@ fullUiRows([
   "Брудні номери"
  ],
  [
-  "Teknik kapalı",
   "Teknik kapalı",
   "Out of order",
   "Hors service",
@@ -656,7 +606,6 @@ fullUiRows([
  ],
  [
   "Kat hizmetleri ↗",
-  "Kat hizmetleri ↗",
   "Housekeeping ↗",
   "Ménage ↗",
   "Καθαριότητα ↗",
@@ -668,7 +617,6 @@ fullUiRows([
   "Прибирання ↗"
  ],
  [
-  "Kontrole hazır",
   "Kontrole hazır",
   "Ready for review",
   "Prêt à examiner",
@@ -682,7 +630,6 @@ fullUiRows([
  ],
  [
   "Bağlı değil",
-  "Bağlı değil",
   "Not connected",
   "Non connecté",
   "Χωρίς σύνδεση",
@@ -694,7 +641,6 @@ fullUiRows([
   "Не підключено"
  ],
  [
-  "Sisteme bağlantı yok",
   "Sisteme bağlantı yok",
   "No connection to source",
   "Aucune connexion source",
@@ -708,7 +654,6 @@ fullUiRows([
  ],
  [
   "Personel onayı gerekli",
-  "Personel onayı gerekli",
   "Staff approval required",
   "Approbation nécessaire",
   "Απαιτείται έγκριση",
@@ -720,7 +665,6 @@ fullUiRows([
   "Потрібне схвалення"
  ],
  [
-  "Kurgusal işlem · salt okunur",
   "Kurgusal işlem · salt okunur",
   "Fictional operation · read only",
   "Opération fictive · lecture seule",
@@ -734,7 +678,6 @@ fullUiRows([
  ],
  [
   "Bu demo işlem gerçekleştiremez; entegrasyon ayrı izin gerektirir",
-  "Bu demo işlem gerçekleştiremez; entegrasyon ayrı izin gerektirir",
   "This demo cannot perform real actions; integration requires separate permission",
   "Aucune action réelle possible ; autorisation distincte requise",
   "Το demo δεν εκτελεί πραγματικές ενέργειες",
@@ -746,7 +689,6 @@ fullUiRows([
   "Демо не виконує реальні дії"
  ],
  [
-  "Daha fazla bilgi",
   "Daha fazla bilgi",
   "More information",
   "Plus d’informations",
