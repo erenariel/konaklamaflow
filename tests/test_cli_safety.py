@@ -77,6 +77,18 @@ class CliFileSafetyTests(unittest.TestCase):
             self.assertNotIn(str(source), error)
             self.assertEqual(stdout, "")
 
+    def test_json_parser_depth_error_is_private_and_handled(self):
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / "private-synthetic-source.json"
+            source.write_text("{}", encoding="utf-8")
+            with patch("konaklamaflow.cli.json.loads", side_effect=RecursionError("nested JSON")):
+                status, error, stdout = self.run_cli(str(source), "--as-of", "2026-11-12")
+            self.assertEqual(status, 2)
+            self.assertIn("unable to read JSON", error)
+            self.assertNotIn("nested JSON", error)
+            self.assertNotIn(str(source), error)
+            self.assertEqual(stdout, "")
+
     def test_small_invalid_payload_keeps_generic_error(self):
         with tempfile.TemporaryDirectory() as folder:
             source = Path(folder) / "private-synthetic-source.json"

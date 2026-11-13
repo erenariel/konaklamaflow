@@ -44,7 +44,7 @@ def main(argv=None) -> int:
     except InputError as e:
         print(f"Input rejected: {e}", file=sys.stderr)
         return 2
-    except (OSError, UnicodeError, json.JSONDecodeError):
+    except (OSError, UnicodeError, json.JSONDecodeError, RecursionError):
         print("Input rejected: unable to read JSON input or write report", file=sys.stderr)
         return 2
 
