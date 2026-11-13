@@ -170,7 +170,7 @@ function opsBlocks(){
  opsT('room'),'Kategori','Kapasite','Yatak','Kat','Hazırlık','Teknik blokaj'],
  rooms.map(r=>opsTr([opsHtml(r.id),opsHtml(r.category),opsHtml(r.capacity),
  opsHtml(r.bed),opsHtml(r.floor),opsStatusBadge(r.housekeeping),
- r.blocked?opsStatusBadge('BLOCKED'):'—'])))+
+ r.blocked?opsStatusBadge('BLOCKED'):'—']))))+
  '<p class="ops-note">Mevcut 10 modüllü oda planı ayrıca kalır. Yeni rezervasyon taslakları oda müsaitliğini resmî olarak değiştirmez.</p></div>';
 }
 function opsAssets(){
