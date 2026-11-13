@@ -92,6 +92,42 @@ class GlobalPresentationConceptBrowserTests(unittest.TestCase):
         self.page.locator("#mode").click()
         self.assertEqual(self.page.locator("html").get_attribute("data-mode"), "operator")
 
+    def test_speed_and_manual_motion_are_decision_neutral(self):
+        before = self.page.locator("#factRule").inner_text()
+        self.page.locator("#speed").select_option("2")
+        self.assertEqual(self.page.evaluate("() => state.speed"), 2)
+        self.page.locator("#play").click()
+        self.assertTrue(self.page.evaluate("() => state.playing"))
+        self.page.locator("#speed").select_option("1.5")
+        self.assertEqual(self.page.evaluate("() => state.speed"), 1.5)
+        self.assertTrue(self.page.evaluate("() => state.playing"))
+        self.page.locator("#motion").click()
+        self.assertFalse(self.page.evaluate("() => state.playing"))
+        self.assertEqual(self.page.locator("html").get_attribute("data-motion"), "off")
+        self.assertEqual(self.page.locator("#motion").get_attribute("aria-pressed"), "true")
+        old_step = self.page.evaluate("() => state.step")
+        self.page.locator("#play").click()
+        self.assertEqual(self.page.evaluate("() => state.step"), old_step + 1)
+        self.assertFalse(self.page.evaluate("() => state.playing"))
+        self.assertEqual(self.page.locator("#factRule").inner_text(), before)
+        self.page.locator("#motion").click()
+        self.assertEqual(self.page.locator("html").get_attribute("data-motion"), "on")
+
+    def test_playback_accessibility_labels_for_all_ten_languages(self):
+        for language in LANGUAGES:
+            self.page.locator("#locale").select_option(language)
+            with self.subTest(language=language):
+                actual = self.page.locator("#speed").get_attribute("aria-label")
+                self.assertEqual(actual, self.page.evaluate(
+                    "() => playbackLabels[state.lang].speed"))
+                self.assertEqual(self.page.locator("#motion").get_attribute("aria-label"),
+                                 self.page.evaluate("() => playbackLabels[state.lang].on"))
+        self.page.emulate_media(reduced_motion="reduce")
+        self.assertEqual(self.page.locator("html").get_attribute("data-motion"), "off")
+        self.assertTrue(self.page.locator("#motion").is_disabled())
+        self.page.locator("#play").click()
+        self.assertFalse(self.page.evaluate("() => state.playing"))
+
     def test_four_scripted_stories(self):
         for story in ("twin", "hk", "ota", "ready"):
             with self.subTest(story=story):
