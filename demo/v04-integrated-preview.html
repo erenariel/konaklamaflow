@@ -282,6 +282,27 @@ html[data-kf-motion="off"] .ai-ticker-track{animation:none!important;transform:n
 .stay-bar.stay-short{display:block;padding-inline:8px 4px;height:32px;line-height:1.1}.stay-bar.stay-short strong{display:block;font-size:9px;white-space:normal;line-height:1.15;overflow-wrap:normal}.stay-bar.stay-short span{display:none}.stay-bar.stay-short i{position:absolute;inset-inline-start:4px;top:7px;bottom:7px;width:2px}
 
 /* END AI_COMMAND_CSS */
+
+/* BEGIN MOBILE_LOCALE_SAFETY_V053: do not overlap the sidebar at narrow widths */
+@media (max-width:760px) {
+  .main>.topbar {
+    height:auto; min-height:54px; display:grid; grid-template-columns:minmax(0,1fr);
+    justify-items:stretch; align-items:stretch; row-gap:8px; padding:10px 0 12px;
+  }
+  .main>.topbar>.crumb {min-width:0; line-height:1.35; overflow-wrap:anywhere}
+  .main>.topbar>.top-actions {
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start;
+    min-width:0; width:100%; gap:8px;
+  }
+  .main>.topbar .ops-global-language {
+    flex:1 1 100%; width:100%; min-width:0; max-width:100%;
+    justify-content:space-between; box-sizing:border-box;
+  }
+  .main>.topbar .ops-global-language select {min-width:110px;max-width:min(55%,220px)}
+  .main>.topbar .top-actions .chip,.main>.topbar .full-ui-translation-note {min-width:0;max-width:100%}
+}
+/* END MOBILE_LOCALE_SAFETY_V053 */
+
 </style>
 </head>
 <body>
@@ -2543,4 +2564,69 @@ fullUiEnglishRows([["Rezervasyon ve oda tarihleri kontrol edilir","Reservation a
 })();
 
 </script>
+
+<script>
+/* BEGIN V053_LOCALE_REPAIR: presentation-only text; no data/PMS writes. */
+(function(){
+  'use strict';
+  const langs=['tr','en','fr','el','he','ar','de','ru','es','uk'];
+  const labels={
+    tr:['Hareket: Açık','Hareket: Kapalı','Hareket: Sistemce azaltıldı','Sunum modu','Operatör modu'],
+    en:['Motion: On','Motion: Off','Motion: Reduced by system','Presentation mode','Operator mode'],
+    fr:['Animations : activées','Animations : désactivées','Animations : réduites par le système','Mode présentation','Mode opérateur'],
+    el:['Κίνηση: ενεργή','Κίνηση: ανενεργή','Κίνηση: μειωμένη από το σύστημα','Λειτουργία παρουσίασης','Λειτουργία χειριστή'],
+    he:['תנועה: פעילה','תנועה: כבויה','תנועה: מופחתת על ידי המערכת','מצב מצגת','מצב מפעיל'],
+    ar:['الحركة: مفعّلة','الحركة: متوقفة','الحركة: مخفّضة حسب النظام','وضع العرض','وضع التشغيل'],
+    de:['Animation: Ein','Animation: Aus','Animation: Systemreduziert','Präsentationsmodus','Betriebsmodus'],
+    ru:['Анимация: вкл.','Анимация: выкл.','Анимация: системное ограничение','Режим презентации','Режим оператора'],
+    es:['Movimiento: activado','Movimiento: desactivado','Movimiento: reducido por el sistema','Modo presentación','Modo operador'],
+    uk:['Анімація: увімкнено','Анімація: вимкнено','Анімацію обмежено системою','Режим презентації','Режим оператора']
+  };
+  const originalDate='12 Kasım 2026 · 14:01';
+  const date=new Date('2026-11-12T12:00:00Z');
+  const dateTranslations=langs.slice(1).map(lang=>new Intl.DateTimeFormat(lang,{
+    day:'numeric',month:'long',year:'numeric',timeZone:'UTC'
+  }).format(date)+' · 14:01');
+  if(typeof fullUiRows==='function')fullUiRows([
+    ['ÖN BÜRO VARDİYASI','FRONT DESK SHIFT','SERVICE DE RÉCEPTION','ΒΑΡΔΙΑ ΥΠΟΔΟΧΗΣ','משמרת קבלה','وردية الاستقبال','REZEPTIONSSCHICHT','СМЕНА РЕСЕПШЕН','TURNO DE RECEPCIÓN','ЗМІНА РЕСЕПЦІЇ'],
+    ['Kurgusal kaynak anlık görüntüsü · Tüm nihai işlemler yetkili personelde',
+     'Fictional source snapshot · Staff approves all final actions',
+     'Aperçu fictif · Toutes les décisions finales reviennent au personnel',
+     'Εικονικά δεδομένα · Οι τελικές ενέργειες εγκρίνονται από το προσωπικό',
+     'נתונים מדומים · כל הפעולות הסופיות באישור הצוות',
+     'بيانات تجريبية · جميع الإجراءات النهائية بموافقة الموظفين',
+     'Fiktive Daten · Alle abschließenden Schritte liegen beim Personal',
+     'Тестовые данные · Окончательные действия подтверждает персонал',
+     'Datos ficticios · El personal aprueba todas las acciones finales',
+     'Тестові дані · Остаточні дії затверджує персонал'],
+    [originalDate,...dateTranslations]
+  ]);
+  const getLang=()=>{
+    const lang=document.getElementById('globalLanguage')?.value||document.documentElement.lang||'tr';
+    return langs.includes(lang)?lang:'en';
+  };
+  function syncVisualControls(){
+    const translations=labels[getLang()];
+    const motion=document.getElementById('kfMotion');
+    const mode=document.getElementById('kfMode');
+    const root=document.documentElement;
+    if(motion){
+      const idx=window.matchMedia('(prefers-reduced-motion: reduce)').matches?2:root.dataset.kfMotion==='off'?1:0;
+      motion.textContent=translations[idx];
+    }
+    if(mode)mode.textContent=translations[root.dataset.kfMode==='presentation'?4:3];
+  }
+  // Existing preference buttons and locale selectors update state synchronously.
+  // Repaint only labels after their original handlers; never alter state or inputs.
+  ['globalLanguage','v04Locale','kfMotion','kfMode'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.addEventListener(id==='globalLanguage'||id==='v04Locale'?'change':'click',()=>queueMicrotask(syncVisualControls));
+  });
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change',syncVisualControls);
+  syncVisualControls();
+})();
+/* END V053_LOCALE_REPAIR */
+</script>
+
 </body></html>
