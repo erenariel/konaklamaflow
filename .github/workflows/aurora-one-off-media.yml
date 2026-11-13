@@ -1,0 +1,50 @@
+name: Aurora one-off offline showcase refresh
+on:
+  push:
+    branches: [feat/aurora-operator-workspace-20261114]
+    paths:
+      - 'demo/**'
+      - '.github/workflows/aurora-one-off-media.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aurora-one-off-media
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install only browser-test dependencies
+        run: |
+          python -m pip install -e '.[browser]'
+          python -m playwright install --with-deps chromium
+      - name: Ensure source and synthetic data match
+        run: |
+          python scripts/generate_suite_demo.py --check
+          python scripts/generate_hotel_ops_demo.py --check
+      - name: Capture actual fictional offline UI
+        run: |
+          python scripts/capture_previews.py
+          python scripts/build_promo_gifs.py
+      - name: Verify all media and browser-bound sources
+        run: |
+          python -m unittest tests.test_showcase_media tests.test_aurora_ui_contract -v
+      - name: Commit generated images and source provenance
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/images/
+          if ! git diff --cached --quiet; then
+            git commit -m "docs(media): refresh Aurora offline demo previews and source-bound GIFs"
+            git push origin HEAD:feat/aurora-operator-workspace-20261114
+          fi
