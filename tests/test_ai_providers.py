@@ -60,6 +60,8 @@ class AIProviderPolicyTests(unittest.TestCase):
             {"trusted_report_sha256": "bad"},
             {"trusted_task_id": "my_guest_email"},
             {"trusted_state": "approved"},
+            {"trusted_state": ["blocked"]},
+            {"trusted_state": {"state": "blocked"}},
             {"trusted_state": "review_ready"},
             {"trusted_state": "blocked", "reason_codes": []},
             {"reason_codes": ["ROOM_CONFLICT", "PAYMENT_REVIEW"] * 30},
