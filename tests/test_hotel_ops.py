@@ -25,7 +25,7 @@ class HotelOperationsTests(unittest.TestCase):
         self.assertFalse(report["safety"]["fiscal_invoices"])
         self.assertTrue(report["safety"]["human_approval_required"])
         self.assertEqual(len(report["reports"]["active_folios"]["rows"]),3)
-        self.assertEqual(len(report["reports"]["room_list"]["rows"]),10)
+        self.assertEqual(len(report["reports"]["room_list"]["rows"]),18)
         self.assertEqual(len(report["reports"]["guest_list"]["rows"]),9)
         for key in ("trial_balance","fiscal_list","budget_analysis","invoice_register",
                     "safe_deposit","revenue_management","email_report"):
@@ -60,7 +60,7 @@ class HotelOperationsTests(unittest.TestCase):
         before=deepcopy(self.src)
         req={"checkin":"2026-11-18","checkout":"2026-11-21","agency_id":"HOTELBEDS",
              "board":"BB","payment_type":"city_ledger","status":"confirmed",
-             "rooms":[{"category":"superior","adults":2,"children":1},
+             "rooms":[{"category":"family","adults":2,"children":1},
                       {"category":"standard","adults":2,"children":0}]}
         draft=draft_new_reservation(self.src,req)
         self.assertEqual(draft["room_count"],2)
