@@ -66,3 +66,11 @@ Arapça (`ar`) ve İbranice (`he`) için `dir=rtl`, logical CSS özellikleri, `b
 - Gerçek zamanlı AI provider API köprüsü ve yetkilendirmesi (ayrı özel backend, açık onay, maliyet limiti).
 - Gerçek PMS adaptörü ve güvenlik/uyumluluk denetimi (ayrı pilot).
 - Çok dilli kayıt dosyalarının izlenen commit ile tekrarlanabilir build süreci.
+
+## Güncel sunum kontrol geliştirmeleri
+
+- Kullanıcı sunum adımlarını **1× / 1,5× / 2×** hızlarda oynatabilir. Hız değiştiğinde mevcut zamanlayıcı kapatılıp yalnız kullanıcı daha önce oynatmayı başlattıysa güvenli şekilde yeniden başlatılır.
+- On dilde hareketi kapat/aç kontrolü ve ekrandaki kontrol düğmelerinin erişilebilir etiketleri bulunur.
+- İşletim sisteminin `prefers-reduced-motion: reduce` ayarı önceliklidir. Bu durumda animasyon ve otomatik zamanlayıcı çalışmaz; kullanıcı isteğiyle yalnız tek adım ilerlenir.
+- Animasyon ve hız ayarları **yalnızca anlatımı** etkiler; hikâyenin kurgu nedenlerini, rezervasyon karar kodlarını veya gerçek sistem durumunu değiştirmez.
+- Mevcut konsept, gerçek Python otel karar motoru ve on modüllü üretim demosu ile henüz birleştirilmemiştir. Yayınlanan tamamlanmış özellik gibi gösterilmemelidir.
