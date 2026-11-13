@@ -1,6 +1,6 @@
 """Stage only the reviewed fictional demo assets; never an entire checkout.
 
-The operations suite is the entry page. Earlier report viewers keep dedicated
+The integrated multilingual hotel workbench is the entry page. Earlier viewers keep dedicated
 URLs. A nonempty/preexisting output is refused to prevent accidental publication
 of leftover files, private reports or Git metadata. This does not deploy a site.
 """
@@ -12,7 +12,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_ASSETS = {
-    'index.html': 'demo/hotel-suite.html',
+    'index.html': 'demo/v04-integrated-preview.html',
+    'hotel-operations.html': 'demo/v04-integrated-preview.html',
     'hotel-suite.html': 'demo/hotel-suite.html',
     'reviewer.html': 'demo/viewer.html',
     'operations.html': 'demo/operations.html',
