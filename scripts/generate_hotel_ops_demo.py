@@ -43,7 +43,7 @@ def embed(text,data,report):
         start_at=updated.index(left)
         end_at=updated.index(right,start_at)+len(right)
         raw=(ROOT/filename).read_text(encoding="utf-8")
-        block=left+"\\n"+raw+"\\n"+right
+        block=left+"\n"+raw+"\n"+right
         updated=updated[:start_at]+block+updated[end_at:]
     return updated
 
