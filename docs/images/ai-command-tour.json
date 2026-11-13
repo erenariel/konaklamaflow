@@ -1,0 +1,38 @@
+{
+  "kind": "ACTUAL_INTEGRATED_FICTIONAL_BROWSER_SHOWCASE",
+  "profile": "ai-command-tour",
+  "source": "demo/v04-integrated-preview.html",
+  "source_commit": "778e848a4e09ab5930a715d00aefd3ea8fbae683",
+  "source_has_uncommitted_changes": true,
+  "browser_version": "151.0.7922.34",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "html_sha256": "4456564f9354fb3460d505389d5ecf22e944fc44141ec672d602023d51ffde0d",
+  "snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10",
+  "report_sha256": "3242b77496e011286574c1e9515d3519c020bb0f361f0df1449d96075a398013",
+  "gif_sha256": "684fb65f6db00b35e3f929b8de3c6b4b6f746b32251a879a4a2146a69da792d0",
+  "poster_sha256": "eaa0aea22ff42428a66a9d1b4ba93c96687f987cc5b5380b3e4a0b7324f963e4",
+  "frames": 26,
+  "fps": 2,
+  "observed_story_steps": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "idle"
+  ],
+  "interactions": [
+    "play_actual_scripted_tour"
+  ],
+  "external_requests": 0,
+  "browser_errors": 0,
+  "canonical_source_unchanged": true,
+  "canonical_report_unchanged": true,
+  "live_ai_calls": false,
+  "pms_writes": false,
+  "payments": false,
+  "kbs": false
+}

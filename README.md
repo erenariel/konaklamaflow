@@ -2,11 +2,27 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
-[![KonaklamaFlow interactive hotel workbench: room timeline and two-assistant review simulation](docs/images/operations-tour.gif)](demo/hotel-suite.html)
+[![KonaklamaFlow v0.5.2 visual candidate: colorful AI review center, fictional room plan and human approval boundary](docs/images/ai-command-tour-poster.png)](demo/v04-integrated-preview.html)
 
 **[Open KonaklamaFlow v0.5 integrated hotel demo / Birleşik otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Global 10-language guided presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html) · [Offline integrated HTML](demo/v04-integrated-preview.html) · [Original room workbench](demo/hotel-suite.html) · [Latest tagged package release](https://github.com/erenariel/konaklamaflow/releases/latest)
 
-Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The Pages entry point contains the original 10 modules plus eight hotel-operations modules: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above records the earlier room-workbench view; it is not a recording of the new v0.5 modules. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
+Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The candidate contains 20 navigable sections, combining front-desk reviews, hotel operations and workflow views: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above is a real screenshot of the **v0.5.2 visual candidate in draft PR #31**; the published Pages site changes only after human review and explicit merge approval. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
+
+### AI review, made visible — v0.5.2 visual candidate
+
+**[Open the offline candidate](demo/v04-integrated-preview.html)** · [Draft PR #31](https://github.com/erenariel/konaklamaflow/pull/31) · [Static desktop preview](docs/images/v052-overview-1440.png) · [Mobile preview](docs/images/v052-mobile.png)
+
+Source → Python rule engine → scripted AI insight → staff review. The colorful command center highlights the current evidence, corresponding fictional rooms and the next human boundary. Gradients, restrained motion, snapshot charts and a status ticker make the flow visible; they do not connect a model, approve an arrival or create new operating results. Room counts stay bound to the same fictional snapshot. The chart shows sample assignments, not verified physical occupancy, revenue or a forecast.
+
+Motion is optional. The app respects system reduced-motion and its own motion switch. Static posters are shown first here; open an animation when desired:
+
+| Actual application recording | Motion preview | Static alternative |
+| --- | --- | --- |
+| AI evidence and human handoff | [ai-command-tour.gif](docs/images/ai-command-tour.gif) | [Poster](docs/images/ai-command-tour-poster.png) |
+| Room plan, housekeeping and technical hold | [roomplan-story.gif](docs/images/roomplan-story.gif) | [Poster](docs/images/roomplan-story-poster.png) |
+| Overview, source charts and progress | [overview-pulse.gif](docs/images/overview-pulse.gif) | [Poster](docs/images/overview-pulse-poster.png) |
+
+All three GIFs are captured from the running integrated HTML with `python scripts/record_demo_tour.py --showcase all`. Each has a source/report/GIF/poster hash manifest, recorded interactions, a 5 MB limit and zero external requests/browser errors. `python scripts/capture_previews.py` refreshes the actual desktop, RTL, mobile and presentation screenshots. These are synthetic demonstrations, not measured hotel adoption or real AI-provider results. The ten-language UI remains a translation draft pending human review.
 
 [![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
 
