@@ -71,7 +71,7 @@ function wfView(pageId){
  if(pageId==='ops_staff')return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'">'+wfRenderProfile()+'</section>';
  if(pageId!=='ops_workflows')return '';
  const flow=wfDefinitions.find(f=>f.id===wfState.selected)||wfDefinitions[0];
- const options=wfDefinitions.map(x=>'<option value="'+x.id+'"'+(x.id===wfState.selected?' selected':'')+''+wfLocalized(x.name)+'</option>').join('');
+ const options=wfDefinitions.map(x=>'<option value="'+x.id+'"'+(x.id===wfState.selected?' selected':'')+'>'+wfLocalized(x.name)+'</option>').join('');
  const allowed=wfAllowed(flow);
  const checks=flow.checks.map(c=>'<li><code dir="ltr">'+c+'</code></li>').join('');
  return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'"><div class="ops-stack">'+

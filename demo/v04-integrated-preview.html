@@ -299,7 +299,7 @@ PAGE_LIST.push(
  ['ops_workflows','↗','İş Akışları','Otel iş akışı merkezi','PMS / OTA güvenli ön inceleme ve AI senaryo anlatımı'],
  ['ops_staff','♙','Personel ve Oturum','Personel kimliği ve oturum','Kurgusal personel yetkileri ve görev devri']
 );
-let state=JSON.parse(JSON.stringify(INITIAL_DATA));let page='rooms';let search='';let statusFilter='all';let log=[{time:'09:00',label:'Kurgusal demo verileri yüklendi',info:'Herhangi bir dış sisteme bağlanılmadı'}];let detail=null;let toastTimeout=null;let reportStale=false;let returnFocus=null;let taskSequence=1;
+let state=JSON.parse(JSON.stringify(INITIAL_DATA));let page='dashboard';let search='';let statusFilter='all';let log=[{time:'09:00',label:'Kurgusal demo verileri yüklendi',info:'Herhangi bir dış sisteme bağlanılmadı'}];let detail=null;let toastTimeout=null;let reportStale=false;let returnFocus=null;let taskSequence=1;
 const roomName={economy:'Ekonomik',standard:'Standart',superior:'Superior',deluxe:'Deluxe',triple:'Triple',family:'Aile'};
 const channelName={channel_manager:'Channel manager',booking:'Booking.com',expedia:'Expedia',trip:'Trip.com',hotelbeds:'Hotelbeds',direct:'Direkt',agency:'Acente'};
 const issueLabel={REPORT_STALE:'Görsel simülasyon değişti; Yeni kontrol gerekiyor',REPORT_MISSING:'Kontrol raporunda kayıt bulunamadı',ARRIVAL_DATE_NOT_TODAY:'Giriş tarihi bugün değil',SPECIAL_REQUEST_REVIEW:'Özel talepler için yetkili personel incelemesi gerekli',CHANNEL_REFERENCE_MISMATCH:'Kanal ve dış referans eşleşmiyor',CHANNEL_EVENT_REVIEW:'Kaynak olay personel incelemesi istiyor',CANCELLED_ASSIGNED:'İptal edilmiş rezervasyonda oda blokajı',NOT_CONFIRMED:'Rezervasyon durumu onaylı değil',UNMAPPED_PMS:'PMS rezervasyon bağlantısı bulunamadı',DUPLICATE_CHANNEL_REF:'Aynı kanal onay kodu tekrar ediyor',NO_ASSIGNED_ROOM:'Henüz oda atanmadı',ROOM_INCOMPATIBLE:'Oda kategorisi, kapasitesi veya yatak tipi uyuşmuyor',HOUSEKEEPING_NOT_INSPECTED:'Oda kat hizmetleri tarafından onaylanmamış',ROOM_CONFLICT:'Konaklama tarihleri çakışıyor',IDENTITY_STAFF_REVIEW:'Yetkili personelin kimlik doğrulaması gerekli',PAYMENT_REVIEW:'Ödeme / folyo incelemesi gerekiyor'};
@@ -1093,7 +1093,7 @@ function wfView(pageId){
  if(pageId==='ops_staff')return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'">'+wfRenderProfile()+'</section>';
  if(pageId!=='ops_workflows')return '';
  const flow=wfDefinitions.find(f=>f.id===wfState.selected)||wfDefinitions[0];
- const options=wfDefinitions.map(x=>'<option value="'+x.id+'"'+(x.id===wfState.selected?' selected':'')+''+wfLocalized(x.name)+'</option>').join('');
+ const options=wfDefinitions.map(x=>'<option value="'+x.id+'"'+(x.id===wfState.selected?' selected':'')+'>'+wfLocalized(x.name)+'</option>').join('');
  const allowed=wfAllowed(flow);
  const checks=flow.checks.map(c=>'<li><code dir="ltr">'+c+'</code></li>').join('');
  return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'"><div class="ops-stack">'+
