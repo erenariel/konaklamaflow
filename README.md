@@ -140,3 +140,9 @@ The suite adapts its schema to the existing v0.2 rule engine. Capacity, bed/amen
 Booking.com, Expedia, Trip.com/Ctrip and channel-manager labels describe **synthetic source reconciliation**, not connected accounts. Amounts use decimal strings; reservation totals are not daily revenue, cash receipts or a reconciled folio. The two-assistant contract exposes only opaque, expiring review references and rechecks the current trusted snapshot. Hashes and TTL do not authenticate an operator or authorize an action. Durable audit, RBAC/MFA, operation idempotency and human approval in a real PMS remain future architecture.
 
 Read the [schema and trust contract](docs/V03_SCHEMA_TR.md), [integration record](docs/V03_INTEGRATION_REPORT_TR.md), [official-source research](docs/RESEARCH_MATRIX_TR.md), [threat model](docs/GUVENLIK_TEHDIT_MODELI_TR.md) and [phased roadmap](docs/GELISTIRME_YOL_HARITASI_TR.md). The supplied [integration instructions](docs/CODEX_INTEGRATION_TR.md) are preserved. No adoption, time-saving, vendor partnership or production-performance result is claimed.
+
+### v0.5.1 — language switching and workflow reference (draft)
+
+The top-bar language selector updates the 20-module navigation, headings and shared actions in TR/EN/FR/EL/HE/AR/DE/RU/ES/UK. Some specialist strings fall back to English until native-language review. Desktop sidebar navigation scrolls to all modules; on mobile the module row scrolls horizontally. “Explore AI scenarios” opens a fictional five-case sequential hotel workflow simulation. There are separate staff-ID/role and vendor-neutral workflow panels. [Public vendor research and delivery limits](docs/PMS_PUBLIC_GUIDES_AND_WORKFLOWS_V051_TR.md).
+
+No connection to ElektraWeb, Sistem Otel, Sedna or real identities/payment/KBS/fiscal software is implied. All real execution remains disabled.

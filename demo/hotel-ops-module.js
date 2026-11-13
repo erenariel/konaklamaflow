@@ -222,9 +222,11 @@ function opsSyncLocale(lang){
  const e=document.getElementById('v04Locale');
  if(e){e.value=lang;e.dispatchEvent(new Event('change'));}
  const global=document.getElementById('globalLanguage');if(global)global.value=lang;
- for(const item of PAGE_LIST){const key=opsNavigation[item[0]];if(key)item[2]=opsT(key);}
- const top=PAGE_LIST.find(x=>x[0]===page);if(top&&opsNavigation[page]){
-   top[3]=opsT(opsNavigation[page]);top[4]=opsT('safe');
+ if(window.localizePageMetadata)window.localizePageMetadata(lang);
+ else {
+   for(const item of PAGE_LIST){const key=opsNavigation[item[0]];if(key)item[2]=opsT(key);}
+   const top=PAGE_LIST.find(x=>x[0]===page);
+   if(top&&opsNavigation[page]){top[3]=opsT(opsNavigation[page]);top[4]=opsT('safe');}
  }
  render();
 }
@@ -232,6 +234,11 @@ function opsSyncLocale(lang){
  const root=document.getElementById('content'),language=document.getElementById('globalLanguage');
  if(!root||!language)return;
  language.addEventListener('change',()=>opsSyncLocale(language.value));
+ // The secondary explanation language selector must never disagree with the
+ // main page selector. Guard against feedback from the dispatch above.
+ document.getElementById('v04Locale')?.addEventListener('change',event=>{
+   if(event.target.value!==opsState.lang)opsSyncLocale(event.target.value);
+ });
  language.setAttribute('aria-label','🌐 Dil / Language');
  root.addEventListener('click',event=>{
    const action=event.target.closest('[data-op-action]')?.dataset.opAction;
