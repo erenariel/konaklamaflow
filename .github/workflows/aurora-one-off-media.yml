@@ -28,6 +28,11 @@ jobs:
         run: |
           python -m pip install -e '.[browser]'
           python -m playwright install --with-deps chromium
+      - name: Ensure GIF encoder is available
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          command -v ffmpeg
       - name: Ensure source and synthetic data match
         run: |
           python scripts/generate_suite_demo.py --check
@@ -35,6 +40,13 @@ jobs:
       - name: Capture actual fictional offline UI
         run: |
           python scripts/capture_previews.py
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from record_demo_tour import record_showcase
+          record_showcase('ai-command-tour', Path('docs/images/ai-command-tour.gif'))
+          PY
           python scripts/build_promo_gifs.py
       - name: Verify all media and browser-bound sources
         run: |
