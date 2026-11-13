@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_ASSETS = {
     'index.html': 'demo/v04-integrated-preview.html',
     'hotel-operations.html': 'demo/v04-integrated-preview.html',
+    'global-presentation.html': 'demo/global-presentation-concept.html',
     'hotel-suite.html': 'demo/hotel-suite.html',
     'reviewer.html': 'demo/viewer.html',
     'operations.html': 'demo/operations.html',
@@ -47,7 +48,7 @@ def main(argv=None):
     except (OSError, ValueError):
         print('Demo staging rejected: reviewed assets and a new output directory are required.', file=sys.stderr)
         return 2
-    print('Fictional hotel suite staged as the entry page; earlier viewers retained.')
+    print('Fictional integrated hotel workbench staged with global presentation and legacy viewers.')
     return 0
 
 
