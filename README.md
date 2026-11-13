@@ -8,6 +8,8 @@
 
 Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The candidate contains 20 navigable sections, combining front-desk reviews, hotel operations and workflow views: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above is a real screenshot of the **v0.5.2 visual candidate in draft PR #31**; the published Pages site changes only after human review and explicit merge approval. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
 
+Original illustrated concepts remain available separately: [AI hero illustration](docs/images/ai-presentation-hero.svg) and [explanation-flow illustration](docs/images/ai-explanation-flow.svg). These SVG concepts are distinct from the real application screenshots and recordings below.
+
 ### AI review, made visible — v0.5.2 visual candidate
 
 **[Open the offline candidate](demo/v04-integrated-preview.html)** · [Draft PR #31](https://github.com/erenariel/konaklamaflow/pull/31) · [Static desktop preview](docs/images/v052-overview-1440.png) · [Mobile preview](docs/images/v052-mobile.png)
