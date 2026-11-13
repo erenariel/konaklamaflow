@@ -34,6 +34,14 @@ All three GIFs are captured from the running integrated HTML with `python script
 
 **EN:** A deterministic, provider-neutral dry-run reviewer: ingest pseudonymized reservations and room availability, inspect possible conflicts, suggest safe room choices, and print a next-day arrival checklist. Every proposed action needs a human decision in the authorized property-management system.
 
+## Maintained open source / Açık kaynak bakım ve katılım
+
+**TR:** GitHub'da herkes kaynak kodu, testleri ve kurgusal demoyu inceleyebilir. Otel operasyonu deneyimini paylaşmak isteyenler, **gerçek misafir bilgileri veya PMS çıktısı göndermeden** [kurgusal operatör testlerini](docs/OPERATOR_FEEDBACK_TR_EN.md) uygulayıp [geri bildirim issue'su](https://github.com/erenariel/konaklamaflow/issues/new/choose) açabilir.
+
+**EN:** Inspect the code, reproduce an offline test case, and open an issue using synthetic data only. [Operator feedback guide](docs/OPERATOR_FEEDBACK_TR_EN.md) · [Contributor guide](CONTRIBUTING.md) · [Release channels](docs/RELEASE_CHANNELS_TR_EN.md) · [Public maintenance evidence and gaps](docs/OSS_MAINTAINER_EVIDENCE_TR_EN.md).
+
+Current adoption, independently verified pilots, third-party review and production usage have **not** been established. A passing CI badge is not a claim of real-world validation.
+
 ## Problems we are solving / Ne işe yarıyor?
 
 - **Overbooking / duplicate booking review:** overlapping confirmed room assignments, repeated OTA references, incompatible categories.

@@ -34,6 +34,12 @@ Keep the changelog aligned with implemented behavior. Check CI for the release c
 
 Property policies, a stable input schema, an audit format, and vendor-supported read-only adapters require separate designs and review. Any adapter must have property and vendor authorization. Guest messaging, official KBS reporting, and writes to live hotel systems remain outside this prototype.
 
-## v0.2 feature branch status
+## Current application maintenance boundary
+
+The latest published tagged package is currently v0.1.1, while `pyproject.toml` identifies an unreleased `0.2.0rc1` candidate and the browser experience has a separate v0.5 *fictional demo* label. See [release channels](RELEASE_CHANNELS_TR_EN.md). Do not present browser demo labels as production releases.
+
+Open a reproducible, sanitized issue before major rule changes. The [operator feedback guide](OPERATOR_FEEDBACK_TR_EN.md) offers a no-PII entrypoint. A public issue and maintainer-authored PR are not evidence of third-party use, independent code review, or genuine adoption.
+
+## Historical v0.2 feature branch status
 
 A separate feature branch contains a pseudonymized front-desk readiness queue, a non-executing AI handoff manifest, an original offline cockpit, new tests and an operator-focused marketing plan. **These do not constitute a live check-in integration or a production deployment**. After CI and review, the changes can be considered for merging into the maintained branch. User research, authorized PMS adapters, real audit logs, vendor permissions, multi-property isolation and identity/payment/compliance reviews remain future work.

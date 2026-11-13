@@ -26,4 +26,6 @@ Only JSON input is supported in v0.1.0. All examples must be fictional. Normaliz
 - Future unassigned **confirmed** reservations may get a room proposal; no action is executed.
 - Already assigned **pending** reservations are treated conservatively as inventory holds, subject to property policy.
 
+The offline Python CLI has a **32 MiB input byte limit** before JSON decoding. Files above this limit are rejected, not partially processed. The `--output` destination must be a different file from the input (including hard links and symlinks); this protects the original source from accidental overwrite. These are prototype safety checks, **not** a certification that the file is anonymous or safe.
+
 Output JSON contains `summary`, `issues`, `room_proposals`, and `tomorrow_arrivals`. It is intended for review only. There is no guest communication, update or write-back API.
