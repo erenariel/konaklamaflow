@@ -260,6 +260,7 @@ def _report_rows(snapshot):
 def build_operations_report(source):
     """Show only derived synthetic reports; never imply fiscal-compliant mizan."""
     x=validate_fictional_hotel(source)
+    bookings=x["reservations"]
     overview,postings,payments,receivables,prices=_report_rows(x)
     reports={}
     for entry in x["report_catalog"]:
