@@ -112,7 +112,7 @@ class FullLanguageSwitchTests(unittest.TestCase):
         raw = HTML.read_text(encoding='utf-8')
         self.assertIn("connect-src 'none'", raw)
         self.assertNotIn('translate.googleapis.com', raw)
-        self.assertNotIn('fetch(', raw.split("// BEGIN GENERATED_FULL_UI_I18N")[1].split("// END GENERATED_FULL_UI_I18N")[0])
+        self.assertNotIn('fetch(', raw.split("// BEGIN GENERATED_FULL_UI_RUNTIME")[1].split("// END GENERATED_FULL_UI_RUNTIME")[0])
 
     def test_mobile_ltr_and_rtl_do_not_overflow(self):
         for lang in ('en', 'ar', 'he', 'ru'):
