@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased — OSS maintenance and CLI safety]
+
+- Bound command-line JSON input to 32 MiB before parsing; reject oversized files without printing private file paths or contents.
+- Refuse report output paths that resolve to the input file, including symlinks and hard links; prevent accidental source overwrite.
+- Add regression tests for file-size limits, safe output and private-path redaction.
+- Document honest release channels, public maintainer evidence, a synthetic-data-only hotel operator feedback workflow and contribution instructions.
+- No live PMS, OTA, payment, government-reporting, identity or AI-provider integrations are added.
+
+
 ## [Unreleased — v0.2.0rc1]
 
 - Added a dry-run front-desk readiness queue with pseudonymous reservation and housekeeping signals.

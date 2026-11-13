@@ -11,6 +11,13 @@ Thank you for supporting open hospitality software!
 
 AI-generated patches are welcome if they are reviewed, tested and clearly described. Synthetic fixtures only. Please keep changes focused.
 
+### Operator feedback without sensitive data
+
+Hotel staff and independent testers can contribute without coding:
+read the [TR/EN fictional test guide](docs/OPERATOR_FEEDBACK_TR_EN.md), execute one synthetic scenario and use the **Operator feedback (fictional data only)** issue template. Do not upload PMS exports, guest details or non-public access links.
+
+Before proposing a release, check the [release channel guide](docs/RELEASE_CHANNELS_TR_EN.md). A PR and green tests are evidence of implementation, not evidence of production use.
+
 ### First issues
 
 - Make the CLI error messages bilingual (Turkish + English).
