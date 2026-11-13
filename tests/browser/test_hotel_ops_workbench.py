@@ -39,7 +39,9 @@ class TestIntegratedHotelOperations(unittest.TestCase):
     def nav(self,id):
         self.page.locator('nav [data-nav="'+id+'"]').click()
 
-    def test_room_plan_is_entrypoint_and_new_menus_are_real(self):
+    def test_dashboard_is_entrypoint_and_room_plan_is_accessible(self):
+        self.assertEqual(self.page.evaluate("() => page"),"dashboard")
+        self.page.locator('nav [data-nav="rooms"]').click()
         self.assertEqual(self.page.evaluate("() => page"),"rooms")
         self.assertEqual(self.page.locator("nav [data-nav]").count(),20)
         self.assertTrue(self.page.locator('nav [data-nav="ops_folios"]').is_visible())

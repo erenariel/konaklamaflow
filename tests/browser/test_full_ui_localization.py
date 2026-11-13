@@ -39,7 +39,7 @@ class FullApplicationLanguageTests(unittest.TestCase):
 
     def test_all_twenty_modules_and_left_sidebar_scrollable(self):
         self.assertEqual(self.page.locator("nav [data-nav]").count(),20)
-        self.assertEqual(self.page.evaluate("() => page"),"rooms")
+        self.assertEqual(self.page.evaluate("() => page"),"dashboard")
         state=self.page.evaluate("""() => {
             const m=document.getElementById('nav');
             return {scroll:m.scrollHeight,client:m.clientHeight,
@@ -54,6 +54,7 @@ class FullApplicationLanguageTests(unittest.TestCase):
         self.assertTrue(self.page.locator("#wfView").is_visible())
 
     def test_locale_switch_translates_entire_nav_title_controls_and_rtl(self):
+        self.page.locator('nav [data-nav="rooms"]').click()
         original=self.page.evaluate("() => JSON.stringify(INITIAL_EVALUATION)")
         for locale in LANGS:
             self.page.locator("#globalLanguage").select_option(locale)
