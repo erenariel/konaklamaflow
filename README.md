@@ -2,11 +2,48 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
-[![KonaklamaFlow interactive hotel workbench: room timeline and two-assistant review simulation](docs/images/operations-tour.gif)](demo/hotel-suite.html)
+[![KonaklamaFlow — animated AI operations concept, fictional offline showcase](docs/images/ai-presentation-hero.svg)](https://erenariel.github.io/konaklamaflow/)
+
+*Animated concept / Hareketli konsept: rezervasyon kaynağı → kural kontrolü → AI açıklaması → personel değerlendirmesi. Tümü **kurgusal, çevrimdışı ve salt okunur**. Gerçek AI/PMS/OTA/KBS bağlantısı veya otomatik check-in yok. Hareket azaltma tercihlerine uyumlu; [akışın ayrıntılı animasyonu](docs/images/ai-explanation-flow.svg).*
+
+
+## ✨ KonaklamaFlow in Motion · Hareketli Proje Tanıtımı
+
+**TR:** Yapay zekânın otel operasyonunda nasıl destek verdiğini üç ayrı hareketli sahnede keşfet. Animasyonlar, kurgusal rezervasyonlar ve çevrimdışı ekran kayıtları üzerinden oluşturulmuştur; gerçek bir AI modelinin çalıştığını veya canlı PMS bağlantısını göstermez.
+
+**EN:** Explore how an explainable AI workflow could assist hotel teams through three animated scenes. These loops are made from fictional, offline application captures—not a live AI model or an operational PMS connection.
+
+### 01 · AI Karar Yolculuğu / AI Decision Journey
+
+![KonaklamaFlow: animated AI source review, rule checks, explanation and human approval](docs/images/ai-command-tour.gif)
+
+**TR — AI ne yapıyor?** Rezervasyon ve oda envanteri kontrol ediliyor; kurallar çakışma veya blokaj ihtimalini belirliyor. Ardından AI destekli açıklama *simüle ediliyor* ve güvenli sonraki adım yetkili personele bırakılıyor. Beş sahne, incelemenin neden-sonuç zincirini gözle görünür hale getiriyor.
+
+**EN — What does the AI workflow show?** A reservation moves from source inspection through deterministic checks, a simulated AI explanation and a human review handoff. The five scenes make the evidence and proposed next step easy to follow.
+
+### 02 · Hareketli Oda Planı / Room Plan in Action
+
+![KonaklamaFlow: animated fictional room rack and booking conflict walkthrough](docs/images/roomplan-story.gif)
+
+**TR — Oda planı nasıl yorumlanıyor?** Kurgusal oda çizelgesinde ilgili rezervasyon, oda uygunluğu ve potansiyel blokajlar sırayla vurgulanıyor. Bu görsel bir kontrol senaryosudur; oda ataması veya check-in işlemi gerçekleştirmez.
+
+**EN — How is room availability reviewed?** The fictional room rack highlights a booking, inventory constraints and supporting evidence in sequence. No actual room assignment or check-in is executed.
+
+### 03 · Canlı Hisseden Genel Bakış / Animated Operations Overview
+
+![KonaklamaFlow: colorful overview, occupancy, channels and AI human-review stages](docs/images/overview-pulse.gif)
+
+**TR — İlk bakışta ne görüyorsun?** Doluluk görünümü, rezervasyon kanalları ve resepsiyonun operasyon öncelikleri tek bir renkli ekranda buluşuyor. Hareketli vurgu kaynaktan kural kontrolüne, açıklamaya ve personel incelemesine ilerliyor.
+
+**EN — What does the dashboard communicate?** A colorful overview introduces occupancy, booking channels and front-desk priorities, then visually follows Source → Rules → Explanation → Staff.
+
+*Erişilebilirlik / Accessibility:* Animasyonları izlemek istemiyorsan [hareketsiz konsept açıklamasını](docs/images/ai-explanation-flow.svg) açabilirsin. Tüm sahneler sentetik demonstrasyondur; PMS, OTA, KBS, ödeme veya gerçek AI sağlayıcısına bağlı değildir.
+
+---
 
 **[Open KonaklamaFlow v0.5 integrated hotel demo / Birleşik otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Global 10-language guided presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html) · [Offline integrated HTML](demo/v04-integrated-preview.html) · [Original room workbench](demo/hotel-suite.html) · [Latest tagged package release](https://github.com/erenariel/konaklamaflow/releases/latest)
 
-Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The Pages entry point contains the original 10 modules plus eight hotel-operations modules: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above records the earlier room-workbench view; it is not a recording of the new v0.5 modules. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
+Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The Pages entry point contains the original 10 modules plus eight hotel-operations modules: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The hero above is an original illustrated animated concept rather than a recording of a live PMS. The historical [room-workbench tour](docs/images/operations-tour.gif) remains available for reference. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
 
 [![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
 
