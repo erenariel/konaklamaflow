@@ -33,3 +33,12 @@ A caller-provided report is re-evaluated against the supplied minimized snapshot
 This first contract does not prove the upstream source, source revision, timestamp, translation correctness or operator identity. It is not linked to the HTML viewer yet. The next integration should use an explicitly versioned report extension or dedicated explanation artifact and preserve the generated-fixture and browser parity tests. The 10-language demo remains a separate prototype pending full i18n integration (Issue #19).
 
 Issue #5. No production feature claim until CI and review.
+
+## Bağımsız çevrimdışı CLI
+
+```sh
+python -m konaklamaflow.experience_cli examples/fictional-hotel.json /tmp/suite-report.json
+python -m konaklamaflow.explain_cli examples/fictional-hotel.json /tmp/suite-report.json /tmp/explanations.json
+```
+
+CLI kaynak raporu tekrar hesaplayarak eşleştirir. Girdi geçersiz/eskiyse hata içeriğini yansıtmaz ve önceki çıktı dosyasını değiştirmez. Örnek yalnızca kurgusal veriye uygundur; gerçek misafir kayıtlarıyla kullanılmamalıdır.
