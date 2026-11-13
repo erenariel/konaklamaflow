@@ -45,10 +45,11 @@ for(const code of fullUiLocales)fullUiPhrases[code]=new Map();
 const fullUiFallbacks={};
 function fullUiRows(rows){
  for(const row of rows){
-   if(row.length!==11)throw new Error('Incomplete locale row');
+   if(row.length!==10)throw new Error('Incomplete locale row');
    const [key,...phrases]=row;
    if(!key||phrases.some(p=>typeof p!=='string'||!p.trim()))throw new Error('Invalid locale entry');
-   for(let i=0;i<10;i++)fullUiPhrases[fullUiLocales[i]].set(key,phrases[i]);
+   fullUiPhrases.tr.set(key,key);
+   for(let i=1;i<10;i++)fullUiPhrases[fullUiLocales[i]].set(key,phrases[i-1]);
  }
 }
 function fullUiEnglishRows(rows){
