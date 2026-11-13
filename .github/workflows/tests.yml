@@ -31,6 +31,7 @@ jobs:
           python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12 --at-time 14:01 --output /tmp/ops-report.json
           python -m konaklamaflow.experience_cli examples/fictional-hotel.json /tmp/suite-report.json
           python scripts/generate_suite_demo.py --check
+          python scripts/generate_hotel_ops_demo.py --check
           python scripts/stage_demo_site.py --output /tmp/demo-site
 
   browser:
