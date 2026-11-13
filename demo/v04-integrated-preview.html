@@ -603,7 +603,7 @@ function opsReservations(){
  ].map(([k,v])=>'<div><small>'+opsHtml(k)+'</small><strong>'+opsHtml(v)+'</strong></div>').join('')+'</div>'+
  opsTable(['Oda','Kategori','Yetişkin','Çocuk','Günlük fiyat / tarih'],selected.rooms.map(part=>
  opsTr([opsHtml(part.room_id||'ATANMADI'),opsHtml(part.category),opsHtml(part.adults),opsHtml(part.children),
- part.nightly_rates.map(n=>opsHtml(n.date)+' '+opsMoney(n.amount,selected.currency)).join('<div class="ops-divider"></div>')]))):'';
+ part.nightly_rates.map(n=>opsHtml(n.date)+' '+opsMoney(n.amount,selected.currency)).join('<div class="ops-divider"></div>')])))):'';
  return '<div class="ops-stack">'+opsNotice()+view+detail+(opsState.formOpen?opsBookingForm():'')+'</div>';
 }
 function opsBookingForm(){
