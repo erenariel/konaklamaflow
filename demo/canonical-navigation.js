@@ -79,7 +79,7 @@ window.openCanonicalReview=function(id){
 window.openCanonicalReservation=function(id,options={}){return window.opsFocusReservation?.(id,options)||false;};
 document.addEventListener('click',event=>{
  const action=event.target.closest('[data-canonical-action]');
- if(action&&!action.closest('#opsView')){
+ if(action&&action.closest('.canonical-links')&&!action.closest('#opsView')){
   const id=action.dataset.reservationId;if(!canonicalLink(id))return;
   if(action.dataset.canonicalAction==='room-plan')window.focusCanonicalRoomPlan(id);
   else if(action.dataset.canonicalAction==='folio'){closeDetail();window.opsFocusFolio?.(action.dataset.folioId);}
