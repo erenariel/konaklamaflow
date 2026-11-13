@@ -61,19 +61,11 @@ def main(argv=None):
     parser.add_argument("--check",action="store_true")
     args=parser.parse_args(argv)
     try:
-        data=validate_fictional_hotel(json.loads(
-            (ROOT/"examples/hotel-operations-fictional.json").read_text(encoding="utf-8")))
-        report=build_operations_report(data)
-        path=ROOT/"demo/v04-integrated-preview.html"
-        actual=path.read_text(encoding="utf-8")
-        expected=embed(actual,data,report)
-        if actual!=expected:
-            if args.check:
-                print("Fictional hotel operations fixture out of sync",file=sys.stderr)
-                return 1
-            path.write_text(expected,encoding="utf-8")
-        print("Integrated hotel operations fixture matches read-only Python reports.")
+        from scripts.generate_canonical_demo import generate
+        generate(args.check)
+        print("Integrated operations reports match the canonical Python projections.")
         return 0
+
     except (ValueError,OSError,TypeError,RecursionError,OverflowError):
         print("Could not safely generate fictional hotel operations",file=sys.stderr)
         return 2

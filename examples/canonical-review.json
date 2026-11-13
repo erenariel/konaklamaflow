@@ -1,0 +1,539 @@
+{
+  "schema_version": "0.3",
+  "property_id": "SAMPLE_HOTEL_01",
+  "as_of": "2026-11-12",
+  "at_time": "14:01",
+  "rooms": [
+    {
+      "id": "B01",
+      "category": "economy",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": -1,
+      "amenities": [
+        "window"
+      ],
+      "maintenance": []
+    },
+    {
+      "id": "B02",
+      "category": "economy",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "dirty",
+      "floor": -1,
+      "amenities": [
+        "window"
+      ],
+      "maintenance": []
+    },
+    {
+      "id": "101",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": 1,
+      "amenities": [
+        "quiet"
+      ],
+      "maintenance": []
+    },
+    {
+      "id": "102",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": 1,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "103",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "twin",
+      "housekeeping": "inspected",
+      "floor": 1,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "104",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": 1,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "201",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": 2,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "202",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "dirty",
+      "floor": 2,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "203",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "twin",
+      "housekeeping": "inspected",
+      "floor": 2,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "301",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": 3,
+      "amenities": [
+        "cityview"
+      ],
+      "maintenance": []
+    },
+    {
+      "id": "302",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "twin",
+      "housekeeping": "inspected",
+      "floor": 3,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "303",
+      "category": "deluxe",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "dirty",
+      "floor": 3,
+      "amenities": [
+        "balcony"
+      ],
+      "maintenance": []
+    },
+    {
+      "id": "304",
+      "category": "triple",
+      "capacity": 3,
+      "bed": "flex",
+      "housekeeping": "inspected",
+      "floor": 3,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "401",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "twin",
+      "housekeeping": "out_of_order",
+      "floor": 4,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "402",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": 4,
+      "amenities": [
+        "cityview"
+      ],
+      "maintenance": []
+    },
+    {
+      "id": "403",
+      "category": "deluxe",
+      "capacity": 2,
+      "bed": "double",
+      "housekeeping": "inspected",
+      "floor": 4,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "404",
+      "category": "family",
+      "capacity": 4,
+      "bed": "flex",
+      "housekeeping": "inspected",
+      "floor": 4,
+      "amenities": [],
+      "maintenance": []
+    },
+    {
+      "id": "405",
+      "category": "family",
+      "capacity": 4,
+      "bed": "flex",
+      "housekeeping": "inspected",
+      "floor": 4,
+      "amenities": [],
+      "maintenance": []
+    }
+  ],
+  "reservations": [
+    {
+      "id": "KF1001",
+      "channel": "booking",
+      "external_ref": "BK30041",
+      "pms_ref": "PMS501",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-15",
+      "category": "standard",
+      "persons": 2,
+      "bed_request": "double",
+      "status": "confirmed",
+      "room_id": "101",
+      "identity_signal": "staff_verified",
+      "payment_signal": "ready",
+      "requests": [
+        "quiet"
+      ],
+      "price_total": "280.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1002",
+      "channel": "expedia",
+      "external_ref": "EX30042",
+      "pms_ref": "PMS502",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "category": "superior",
+      "persons": 2,
+      "bed_request": "twin",
+      "status": "confirmed",
+      "room_id": null,
+      "identity_signal": "pending_staff",
+      "payment_signal": "agency_ledger",
+      "requests": [
+        "twin"
+      ],
+      "price_total": "240.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1003",
+      "channel": "trip",
+      "external_ref": "TR30043",
+      "pms_ref": "PMS503",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "category": "deluxe",
+      "persons": 2,
+      "bed_request": "double",
+      "status": "confirmed",
+      "room_id": "303",
+      "identity_signal": "staff_verified",
+      "payment_signal": "ready",
+      "requests": [
+        "balcony"
+      ],
+      "price_total": "420.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1004",
+      "channel": "direct",
+      "external_ref": "DR30044",
+      "pms_ref": "PMS504",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-13",
+      "category": "standard",
+      "persons": 2,
+      "bed_request": "double",
+      "status": "confirmed",
+      "room_id": "104",
+      "identity_signal": "staff_verified",
+      "payment_signal": "review",
+      "requests": [],
+      "price_total": "99.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1005",
+      "channel": "booking",
+      "external_ref": "BK30045",
+      "pms_ref": "PMS505",
+      "arrival": "2026-11-13",
+      "departure": "2026-11-15",
+      "category": "family",
+      "persons": 4,
+      "bed_request": "none",
+      "status": "confirmed",
+      "room_id": "404",
+      "identity_signal": "pending_staff",
+      "payment_signal": "ready",
+      "requests": [
+        "cot"
+      ],
+      "price_total": "430.00",
+      "currency": "EUR",
+      "arrival_state": "expected"
+    },
+    {
+      "id": "KF1006",
+      "channel": "expedia",
+      "external_ref": "EX30046",
+      "pms_ref": "PMS506",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "category": "standard",
+      "persons": 2,
+      "bed_request": "none",
+      "status": "cancelled",
+      "room_id": "102",
+      "identity_signal": "pending_staff",
+      "payment_signal": "review",
+      "requests": [],
+      "price_total": "190.00",
+      "currency": "EUR",
+      "arrival_state": "expected"
+    },
+    {
+      "id": "KF1007",
+      "channel": "hotelbeds",
+      "external_ref": "HB30047",
+      "pms_ref": "PMS507",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-16",
+      "category": "triple",
+      "persons": 3,
+      "bed_request": "none",
+      "status": "confirmed",
+      "room_id": "304",
+      "identity_signal": "staff_verified",
+      "payment_signal": "agency_ledger",
+      "requests": [
+        "extra-pillow"
+      ],
+      "price_total": "510.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1008",
+      "channel": "booking",
+      "external_ref": "BK30048",
+      "pms_ref": null,
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "category": "superior",
+      "persons": 2,
+      "bed_request": "double",
+      "status": "confirmed",
+      "room_id": "301",
+      "identity_signal": "pending_staff",
+      "payment_signal": "ready",
+      "requests": [
+        "cityview"
+      ],
+      "price_total": "260.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1009",
+      "channel": "agency",
+      "external_ref": "AG30049",
+      "pms_ref": "PMS509",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-14",
+      "category": "economy",
+      "persons": 2,
+      "bed_request": "none",
+      "status": "confirmed",
+      "room_id": "B01",
+      "identity_signal": "staff_verified",
+      "payment_signal": "ready",
+      "requests": [],
+      "price_total": "110.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1010",
+      "channel": "direct",
+      "external_ref": "DR30050",
+      "pms_ref": "PMS510",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-13",
+      "category": "standard",
+      "persons": 2,
+      "bed_request": "none",
+      "status": "confirmed",
+      "room_id": "201",
+      "identity_signal": "staff_verified",
+      "payment_signal": "ready",
+      "requests": [],
+      "price_total": "89.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    },
+    {
+      "id": "KF1011",
+      "channel": "booking",
+      "external_ref": "BK30051",
+      "pms_ref": "PMS511",
+      "arrival": "2026-11-13",
+      "departure": "2026-11-15",
+      "category": "superior",
+      "persons": 2,
+      "bed_request": "twin",
+      "status": "confirmed",
+      "room_id": "302",
+      "identity_signal": "pending_staff",
+      "payment_signal": "ready",
+      "requests": [
+        "twin"
+      ],
+      "price_total": "310.00",
+      "currency": "EUR",
+      "arrival_state": "expected"
+    },
+    {
+      "id": "KF1012",
+      "channel": "trip",
+      "external_ref": "TR30052",
+      "pms_ref": "PMS512",
+      "arrival": "2026-11-12",
+      "departure": "2026-11-15",
+      "category": "deluxe",
+      "persons": 2,
+      "bed_request": "double",
+      "status": "confirmed",
+      "room_id": "403",
+      "identity_signal": "staff_verified",
+      "payment_signal": "ready",
+      "requests": [
+        "upper-floor"
+      ],
+      "price_total": "400.00",
+      "currency": "EUR",
+      "arrival_state": "arrived"
+    }
+  ],
+  "channel_events": [
+    {
+      "id": "E1001",
+      "channel": "booking",
+      "external_ref": "BK30041",
+      "status": "mapped",
+      "reservation_id": "KF1001"
+    },
+    {
+      "id": "E1002",
+      "channel": "expedia",
+      "external_ref": "EX30042",
+      "status": "mapped",
+      "reservation_id": "KF1002"
+    },
+    {
+      "id": "E1003",
+      "channel": "trip",
+      "external_ref": "TR30043",
+      "status": "mapped",
+      "reservation_id": "KF1003"
+    },
+    {
+      "id": "E1004",
+      "channel": "booking",
+      "external_ref": "BK30048",
+      "status": "needs_review",
+      "reservation_id": "KF1008"
+    },
+    {
+      "id": "E1005",
+      "channel": "expedia",
+      "external_ref": "EX30053",
+      "status": "received",
+      "reservation_id": null
+    },
+    {
+      "id": "E1006",
+      "channel": "hotelbeds",
+      "external_ref": "HB30047",
+      "status": "mapped",
+      "reservation_id": "KF1007"
+    },
+    {
+      "id": "E1007",
+      "channel": "booking",
+      "external_ref": "BK30045",
+      "status": "mapped",
+      "reservation_id": "KF1005"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1001",
+      "kind": "housekeeping",
+      "room_id": "303",
+      "reservation_id": "KF1003",
+      "status": "open",
+      "priority": "high"
+    },
+    {
+      "id": "T1002",
+      "kind": "maintenance",
+      "room_id": "401",
+      "reservation_id": null,
+      "status": "in_progress",
+      "priority": "high"
+    },
+    {
+      "id": "T1003",
+      "kind": "guest_request",
+      "room_id": "404",
+      "reservation_id": "KF1005",
+      "status": "open",
+      "priority": "normal"
+    },
+    {
+      "id": "T1004",
+      "kind": "frontdesk",
+      "room_id": null,
+      "reservation_id": "KF1008",
+      "status": "open",
+      "priority": "high"
+    },
+    {
+      "id": "T1005",
+      "kind": "housekeeping",
+      "room_id": "202",
+      "reservation_id": null,
+      "status": "open",
+      "priority": "normal"
+    }
+  ]
+}

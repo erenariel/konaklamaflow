@@ -1,12 +1,12 @@
 /* Demo-only AI command center. All metrics are derived from the existing
  * fictional in-memory snapshot; this module never submits hotel changes. */
-const DEMO_GUEST_NAMES=Object.freeze({
- KF1001:'Sofia Bennett',KF1002:'Mateo Costa',KF1003:'Emma Laurent',
- KF1004:'Daniel Reed',KF1005:'Isabella Moretti',KF1006:'Noah Fischer',
- KF1007:'Olivia Martin',KF1008:'Lukas Weber',KF1009:'Ava Wilson',
- KF1010:'Leo Novak',KF1011:'Maya Chen',KF1012:'Amelia Stone'
-});
-function demoGuestName(id){return DEMO_GUEST_NAMES[id]||'Örnek misafir';}
+function demoGuestName(id){
+ if(typeof CANONICAL_DATA!=='object'||typeof CANONICAL_LINKS!=='object')return 'ÖRNEK';
+ const parent=Object.hasOwn(CANONICAL_LINKS.reservations,id)?id:CANONICAL_LINKS.review_links[id]?.reservation_id;
+ const booking=CANONICAL_DATA.reservations.find(row=>row.id===parent);
+ const guest=booking&&CANONICAL_DATA.guests.find(row=>row.id===booking.guest_ids[0]);
+ return guest?.display_label||booking?.display_name||'ÖRNEK';
+}
 const COMMAND_LANG={
  tr:['AI Operasyon Merkezi','Örnek veri · Çevrimdışı','Kaynak → Kural motoru → AI açıklaması → Personel','Operasyonun merkezinde yapay zekâ','Senaryoyu oynat','Duraklat','İleri','Sıfırla','İncelenen rezervasyon','Mevcut adım','Kanıt ve güvenli karar','Kontrol personelde','Yedi günlük doluluk','Kanallara göre rezervasyon','Kurgusal 12 Kasım 2026 veri anlık görüntüsü','Gösterilen adımlar gerçek PMS işlemi değildir.','Başlamak için senaryoyu oynat.'],
  en:['AI Operations Center','Sample data · Offline','Source → Rule engine → AI explanation → Staff','AI at the center of operations','Play scenario','Pause','Next','Reset','Reservation in focus','Current step','Evidence and safe decision','Staff retains control','Seven-day occupancy','Bookings by channel','Fictional snapshot: 12 November 2026','No live PMS actions are performed.','Play a scenario to begin.'],

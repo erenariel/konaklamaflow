@@ -1,0 +1,3590 @@
+{
+  "schema": "konaklamaflow.canonical-operations-report.v1",
+  "mode": "READ_ONLY_SYNTHETIC",
+  "property_id": "SAMPLE_HOTEL_01",
+  "as_of": "2026-11-12",
+  "report_count": 32,
+  "folios": [
+    {
+      "folio_id": "FOL-CAN-KF1001",
+      "reservation_id": "KF1001",
+      "room_id": "101",
+      "payer_type": "guest",
+      "agency": null,
+      "agency_legal_name": null,
+      "currency": "EUR",
+      "postings": "90.00",
+      "payments": "0.00",
+      "balance": "90.00",
+      "status": "open",
+      "due_date": null,
+      "invoice_status": "not_issued",
+      "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1001",
+      "room_stay_id": "STAY-KF1001-A",
+      "source_record_id": "FOL-CAN-KF1001",
+      "source_kind": "explicit_fictional_folio"
+    },
+    {
+      "folio_id": "FOL-CAN-KF1004",
+      "reservation_id": "KF1004",
+      "room_id": "104",
+      "payer_type": "guest",
+      "agency": null,
+      "agency_legal_name": null,
+      "currency": "EUR",
+      "postings": "99.00",
+      "payments": "0.00",
+      "balance": "99.00",
+      "status": "open",
+      "due_date": null,
+      "invoice_status": "not_issued",
+      "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1004",
+      "room_stay_id": "STAY-KF1004-A",
+      "source_record_id": "FOL-CAN-KF1004",
+      "source_kind": "explicit_fictional_folio"
+    },
+    {
+      "folio_id": "FOL-CAN-KF1007",
+      "reservation_id": "KF1007",
+      "room_id": "304",
+      "payer_type": "agency",
+      "agency": "Hotelbeds (DEMO)",
+      "agency_legal_name": "Demo Hotelbeds Turizm A.Ş.",
+      "currency": "EUR",
+      "postings": "127.50",
+      "payments": "0.00",
+      "balance": "127.50",
+      "status": "open",
+      "due_date": "2026-11-26",
+      "invoice_status": "not_issued",
+      "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
+      "room_stay_id": "STAY-KF1007-A",
+      "source_record_id": "FOL-CAN-KF1007",
+      "source_kind": "explicit_fictional_folio"
+    }
+  ],
+  "city_ledger": [
+    {
+      "folio_id": "FOL-CAN-KF1007",
+      "reservation_id": "KF1007",
+      "room_id": "304",
+      "payer_type": "agency",
+      "agency": "Hotelbeds (DEMO)",
+      "agency_legal_name": "Demo Hotelbeds Turizm A.Ş.",
+      "currency": "EUR",
+      "postings": "127.50",
+      "payments": "0.00",
+      "balance": "127.50",
+      "status": "open",
+      "due_date": "2026-11-26",
+      "invoice_status": "not_issued",
+      "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
+      "room_stay_id": "STAY-KF1007-A",
+      "source_record_id": "FOL-CAN-KF1007",
+      "source_kind": "explicit_fictional_folio"
+    }
+  ],
+  "reports": {
+    "active_folios": {
+      "id": "active_folios",
+      "label": "Aktif Folyolar",
+      "status": "implemented",
+      "rows": [
+        {
+          "folio_id": "FOL-CAN-KF1001",
+          "reservation_id": "KF1001",
+          "room_id": "101",
+          "payer_type": "guest",
+          "agency": null,
+          "agency_legal_name": null,
+          "currency": "EUR",
+          "postings": "90.00",
+          "payments": "0.00",
+          "balance": "90.00",
+          "status": "open",
+          "due_date": null,
+          "invoice_status": "not_issued",
+          "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "source_record_id": "FOL-CAN-KF1001",
+          "source_kind": "explicit_fictional_folio"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1004",
+          "reservation_id": "KF1004",
+          "room_id": "104",
+          "payer_type": "guest",
+          "agency": null,
+          "agency_legal_name": null,
+          "currency": "EUR",
+          "postings": "99.00",
+          "payments": "0.00",
+          "balance": "99.00",
+          "status": "open",
+          "due_date": null,
+          "invoice_status": "not_issued",
+          "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1004",
+          "room_stay_id": "STAY-KF1004-A",
+          "source_record_id": "FOL-CAN-KF1004",
+          "source_kind": "explicit_fictional_folio"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1007",
+          "reservation_id": "KF1007",
+          "room_id": "304",
+          "payer_type": "agency",
+          "agency": "Hotelbeds (DEMO)",
+          "agency_legal_name": "Demo Hotelbeds Turizm A.Ş.",
+          "currency": "EUR",
+          "postings": "127.50",
+          "payments": "0.00",
+          "balance": "127.50",
+          "status": "open",
+          "due_date": "2026-11-26",
+          "invoice_status": "not_issued",
+          "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "source_record_id": "FOL-CAN-KF1007",
+          "source_kind": "explicit_fictional_folio"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "monthly_revenue": {
+      "id": "monthly_revenue",
+      "label": "Aylık Detaylı Gelir",
+      "status": "implemented",
+      "rows": [
+        {
+          "month": "2026-11",
+          "currency": "EUR",
+          "total": "316.50"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "recorded_folio_postings_only_not_earned_revenue",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "detailed_revenue": {
+      "id": "detailed_revenue",
+      "label": "Detaylı Gelir",
+      "status": "implemented",
+      "rows": [
+        {
+          "folio_id": "FOL-CAN-KF1001",
+          "reservation_id": "KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "room_id": "101",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1001",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "90.00",
+          "description": "Explicit fictional room posting"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1004",
+          "reservation_id": "KF1004",
+          "room_stay_id": "STAY-KF1004-A",
+          "room_id": "104",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1004",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "99.00",
+          "description": "Explicit fictional room posting"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1007",
+          "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "room_id": "304",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1007",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "127.50",
+          "description": "Explicit fictional room posting"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "recorded_folio_postings_only_not_earned_revenue",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "folio_analysis": {
+      "id": "folio_analysis",
+      "label": "Folyo Analiz",
+      "status": "implemented",
+      "rows": [
+        {
+          "folio_id": "FOL-CAN-KF1001",
+          "reservation_id": "KF1001",
+          "room_id": "101",
+          "payer_type": "guest",
+          "agency": null,
+          "agency_legal_name": null,
+          "currency": "EUR",
+          "postings": "90.00",
+          "payments": "0.00",
+          "balance": "90.00",
+          "status": "open",
+          "due_date": null,
+          "invoice_status": "not_issued",
+          "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "source_record_id": "FOL-CAN-KF1001",
+          "source_kind": "explicit_fictional_folio"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1004",
+          "reservation_id": "KF1004",
+          "room_id": "104",
+          "payer_type": "guest",
+          "agency": null,
+          "agency_legal_name": null,
+          "currency": "EUR",
+          "postings": "99.00",
+          "payments": "0.00",
+          "balance": "99.00",
+          "status": "open",
+          "due_date": null,
+          "invoice_status": "not_issued",
+          "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1004",
+          "room_stay_id": "STAY-KF1004-A",
+          "source_record_id": "FOL-CAN-KF1004",
+          "source_kind": "explicit_fictional_folio"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1007",
+          "reservation_id": "KF1007",
+          "room_id": "304",
+          "payer_type": "agency",
+          "agency": "Hotelbeds (DEMO)",
+          "agency_legal_name": "Demo Hotelbeds Turizm A.Ş.",
+          "currency": "EUR",
+          "postings": "127.50",
+          "payments": "0.00",
+          "balance": "127.50",
+          "status": "open",
+          "due_date": "2026-11-26",
+          "invoice_status": "not_issued",
+          "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "source_record_id": "FOL-CAN-KF1007",
+          "source_kind": "explicit_fictional_folio"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "daily_balance": {
+      "id": "daily_balance",
+      "label": "Günlük Denge",
+      "status": "implemented",
+      "rows": [
+        {
+          "date": "2026-11-12",
+          "currency": "EUR",
+          "postings": "316.50",
+          "payments": "0.00",
+          "net": "316.50"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "recorded_folio_movements_on_business_date_not_cash_reconciliation",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "trial_balance": {
+      "id": "trial_balance",
+      "label": "Günlük Mizan",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "accounting"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "transactions": {
+      "id": "transactions",
+      "label": "Hareketler",
+      "status": "implemented",
+      "rows": [
+        {
+          "folio_id": "FOL-CAN-KF1001",
+          "reservation_id": "KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "room_id": "101",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1001",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "90.00",
+          "description": "Explicit fictional room posting"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1004",
+          "reservation_id": "KF1004",
+          "room_stay_id": "STAY-KF1004-A",
+          "room_id": "104",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1004",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "99.00",
+          "description": "Explicit fictional room posting"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1007",
+          "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "room_id": "304",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1007",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "127.50",
+          "description": "Explicit fictional room posting"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "grouped_transactions": {
+      "id": "grouped_transactions",
+      "label": "Gruplu Hareketler",
+      "status": "implemented",
+      "rows": [
+        {
+          "posting_type": "ROOM",
+          "currency": "EUR",
+          "total": "316.50"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "fiscal_list": {
+      "id": "fiscal_list",
+      "label": "Maliye Listesi",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "fiscal"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "room_list": {
+      "id": "room_list",
+      "label": "Oda Listesi",
+      "status": "implemented",
+      "rows": [
+        {
+          "id": "B01",
+          "category": "economy",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": -1,
+          "amenities": [
+            "window"
+          ],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "B02",
+          "category": "economy",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "dirty",
+          "floor": -1,
+          "amenities": [
+            "window"
+          ],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "101",
+          "category": "standard",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": 1,
+          "amenities": [
+            "quiet"
+          ],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "102",
+          "category": "standard",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": 1,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "103",
+          "category": "standard",
+          "capacity": 2,
+          "bed": "twin",
+          "housekeeping": "inspected",
+          "floor": 1,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "104",
+          "category": "standard",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": 1,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "201",
+          "category": "standard",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": 2,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "202",
+          "category": "standard",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "dirty",
+          "floor": 2,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "203",
+          "category": "standard",
+          "capacity": 2,
+          "bed": "twin",
+          "housekeeping": "inspected",
+          "floor": 2,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "301",
+          "category": "superior",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": 3,
+          "amenities": [
+            "cityview"
+          ],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "302",
+          "category": "superior",
+          "capacity": 2,
+          "bed": "twin",
+          "housekeeping": "inspected",
+          "floor": 3,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "303",
+          "category": "deluxe",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "dirty",
+          "floor": 3,
+          "amenities": [
+            "balcony"
+          ],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "304",
+          "category": "triple",
+          "capacity": 3,
+          "bed": "flex",
+          "housekeeping": "inspected",
+          "floor": 3,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "401",
+          "category": "superior",
+          "capacity": 2,
+          "bed": "twin",
+          "housekeeping": "out_of_order",
+          "floor": 4,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": true,
+          "room_block_ids": [
+            "BLOCK-401-TECH"
+          ]
+        },
+        {
+          "id": "402",
+          "category": "superior",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": 4,
+          "amenities": [
+            "cityview"
+          ],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "403",
+          "category": "deluxe",
+          "capacity": 2,
+          "bed": "double",
+          "housekeeping": "inspected",
+          "floor": 4,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "404",
+          "category": "family",
+          "capacity": 4,
+          "bed": "flex",
+          "housekeeping": "inspected",
+          "floor": 4,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        },
+        {
+          "id": "405",
+          "category": "family",
+          "capacity": 4,
+          "bed": "flex",
+          "housekeeping": "inspected",
+          "floor": 4,
+          "amenities": [],
+          "maintenance": [],
+          "assets": [
+            "tv",
+            "air_conditioning"
+          ],
+          "blocked": false,
+          "room_block_ids": []
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ],
+        "missing_reservation_ids": []
+      }
+    },
+    "room_rate_control": {
+      "id": "room_rate_control",
+      "label": "Oda Fiyat Kontrol",
+      "status": "implemented",
+      "rows": [
+        {
+          "reservation_id": "KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "date": "2026-11-12",
+          "room": "101",
+          "category": "standard",
+          "amount": "90.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "date": "2026-11-13",
+          "room": "101",
+          "category": "standard",
+          "amount": "95.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "date": "2026-11-14",
+          "room": "101",
+          "category": "standard",
+          "amount": "95.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1002",
+          "room_stay_id": "STAY-KF1002-A",
+          "date": "2026-11-12",
+          "room": null,
+          "category": "superior",
+          "amount": "120.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1002",
+          "room_stay_id": "STAY-KF1002-A",
+          "date": "2026-11-13",
+          "room": null,
+          "category": "superior",
+          "amount": "120.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1003",
+          "room_stay_id": "STAY-KF1003-A",
+          "date": "2026-11-12",
+          "room": "303",
+          "category": "deluxe",
+          "amount": "210.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1003",
+          "room_stay_id": "STAY-KF1003-A",
+          "date": "2026-11-13",
+          "room": "303",
+          "category": "deluxe",
+          "amount": "210.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1004",
+          "room_stay_id": "STAY-KF1004-A",
+          "date": "2026-11-12",
+          "room": "104",
+          "category": "standard",
+          "amount": "99.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1005",
+          "room_stay_id": "STAY-KF1005-A",
+          "date": "2026-11-13",
+          "room": "404",
+          "category": "family",
+          "amount": "215.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1005",
+          "room_stay_id": "STAY-KF1005-A",
+          "date": "2026-11-14",
+          "room": "404",
+          "category": "family",
+          "amount": "215.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1006",
+          "room_stay_id": "STAY-KF1006-A",
+          "date": "2026-11-12",
+          "room": "102",
+          "category": "standard",
+          "amount": "95.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1006",
+          "room_stay_id": "STAY-KF1006-A",
+          "date": "2026-11-13",
+          "room": "102",
+          "category": "standard",
+          "amount": "95.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "date": "2026-11-12",
+          "room": "304",
+          "category": "triple",
+          "amount": "127.50",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "date": "2026-11-13",
+          "room": "304",
+          "category": "triple",
+          "amount": "127.50",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "date": "2026-11-14",
+          "room": "304",
+          "category": "triple",
+          "amount": "127.50",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "date": "2026-11-15",
+          "room": "304",
+          "category": "triple",
+          "amount": "127.50",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1008",
+          "room_stay_id": "STAY-KF1008-A",
+          "date": "2026-11-12",
+          "room": "301",
+          "category": "superior",
+          "amount": "130.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1008",
+          "room_stay_id": "STAY-KF1008-A",
+          "date": "2026-11-13",
+          "room": "301",
+          "category": "superior",
+          "amount": "130.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1009",
+          "room_stay_id": "STAY-KF1009-A",
+          "date": "2026-11-12",
+          "room": "B01",
+          "category": "economy",
+          "amount": "55.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1009",
+          "room_stay_id": "STAY-KF1009-A",
+          "date": "2026-11-13",
+          "room": "B01",
+          "category": "economy",
+          "amount": "55.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1010",
+          "room_stay_id": "STAY-KF1010-A",
+          "date": "2026-11-12",
+          "room": "201",
+          "category": "standard",
+          "amount": "89.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1011",
+          "room_stay_id": "STAY-KF1011-A",
+          "date": "2026-11-13",
+          "room": "302",
+          "category": "superior",
+          "amount": "155.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1011",
+          "room_stay_id": "STAY-KF1011-A",
+          "date": "2026-11-14",
+          "room": "302",
+          "category": "superior",
+          "amount": "155.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1012",
+          "room_stay_id": "STAY-KF1012-A",
+          "date": "2026-11-12",
+          "room": "403",
+          "category": "deluxe",
+          "amount": "130.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1012",
+          "room_stay_id": "STAY-KF1012-A",
+          "date": "2026-11-13",
+          "room": "403",
+          "category": "deluxe",
+          "amount": "135.00",
+          "currency": "EUR"
+        },
+        {
+          "reservation_id": "KF1012",
+          "room_stay_id": "STAY-KF1012-A",
+          "date": "2026-11-14",
+          "room": "403",
+          "category": "deluxe",
+          "amount": "135.00",
+          "currency": "EUR"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_nightly_rates_only_not_inferred_from_quote",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ],
+        "missing_reservation_ids": []
+      }
+    },
+    "agency_monthly": {
+      "id": "agency_monthly",
+      "label": "Acente Aylık Performans",
+      "status": "implemented",
+      "rows": [
+        {
+          "agency": "Hotelbeds (DEMO)",
+          "month": "2026-11",
+          "currency": "EUR",
+          "total": "127.50"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "recorded_folio_postings_only_not_earned_revenue",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "agency_sales": {
+      "id": "agency_sales",
+      "label": "Acente Satış Detayı",
+      "status": "implemented",
+      "rows": [
+        {
+          "folio_id": "FOL-CAN-KF1007",
+          "reservation_id": "KF1007",
+          "room_id": "304",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "127.50",
+          "currency": "EUR",
+          "description": "Explicit fictional room posting",
+          "agency": "Hotelbeds (DEMO)",
+          "legal_name": "Demo Hotelbeds Turizm A.Ş."
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "recorded_folio_postings_only_not_earned_revenue",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "agency_annual": {
+      "id": "agency_annual",
+      "label": "Acente Yıllık Kümülatif Performans",
+      "status": "implemented",
+      "rows": [
+        {
+          "agency": "Hotelbeds (DEMO)",
+          "year": "2026",
+          "currency": "EUR",
+          "total": "127.50"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "recorded_folio_postings_only_not_earned_revenue",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "checkin_cancellations": {
+      "id": "checkin_cancellations",
+      "label": "Check-in İptal",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "immutable_checkin_audit"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "linen_list": {
+      "id": "linen_list",
+      "label": "Çarşaf Listesi",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "linen_usage"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "budget_analysis": {
+      "id": "budget_analysis",
+      "label": "Bütçe Analiz",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "budget"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "blockage_report": {
+      "id": "blockage_report",
+      "label": "Blokaj",
+      "status": "implemented",
+      "rows": [
+        {
+          "room": "B01",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1009"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1009-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1009"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1009",
+              "room_stay_id": "STAY-KF1009-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "101",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1001"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1001-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1001"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1001",
+              "room_stay_id": "STAY-KF1001-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "104",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1004"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1004-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1004"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1004",
+              "room_stay_id": "STAY-KF1004-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "201",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1010"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1010-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1010"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1010",
+              "room_stay_id": "STAY-KF1010-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "301",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1008"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1008-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1008"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1008",
+              "room_stay_id": "STAY-KF1008-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "303",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1003"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1003-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1003"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1003",
+              "room_stay_id": "STAY-KF1003-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW",
+            "HOUSEKEEPING_NOT_INSPECTED",
+            "HOUSEKEEPING_TASK_OPEN"
+          ]
+        },
+        {
+          "room": "304",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1007"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1007-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1007"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1007",
+              "room_stay_id": "STAY-KF1007-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "401",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [
+            "BLOCK-401-TECH"
+          ],
+          "reason_codes": [
+            "OUT_OF_SERVICE_OR_MAINTENANCE",
+            "HOUSEKEEPING_NOT_INSPECTED",
+            "MAINTENANCE_TASK_OPEN"
+          ]
+        },
+        {
+          "room": "403",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1012"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1012-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1012"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1012",
+              "room_stay_id": "STAY-KF1012-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "review_engine_hold_signals_not_verified_physical_occupancy",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ],
+        "missing_reservation_ids": []
+      }
+    },
+    "it_report": {
+      "id": "it_report",
+      "label": "Bilgi İşlem",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "system_logs"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "extra_bed": {
+      "id": "extra_bed",
+      "label": "Ekstra Yatak",
+      "status": "implemented",
+      "rows": [],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "email_report": {
+      "id": "email_report",
+      "label": "E-posta Gönderim",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "mail_permissions"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "safe_deposit": {
+      "id": "safe_deposit",
+      "label": "Emanet Kasa",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "safe_ledger"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "advance_payment": {
+      "id": "advance_payment",
+      "label": "Erken Ödeme",
+      "status": "implemented",
+      "rows": [],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "posting_invoice": {
+      "id": "posting_invoice",
+      "label": "Fatura Posting Detay",
+      "status": "implemented",
+      "rows": [
+        {
+          "folio_id": "FOL-CAN-KF1001",
+          "reservation_id": "KF1001",
+          "room_stay_id": "STAY-KF1001-A",
+          "room_id": "101",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1001",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "90.00",
+          "description": "Explicit fictional room posting"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1004",
+          "reservation_id": "KF1004",
+          "room_stay_id": "STAY-KF1004-A",
+          "room_id": "104",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1004",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "99.00",
+          "description": "Explicit fictional room posting"
+        },
+        {
+          "folio_id": "FOL-CAN-KF1007",
+          "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "room_id": "304",
+          "currency": "EUR",
+          "posting_id": "POST-CAN-KF1007",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "amount": "127.50",
+          "description": "Explicit fictional room posting"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "recorded_folio_postings_only_not_a_fiscal_invoice",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "invoice_register": {
+      "id": "invoice_register",
+      "label": "Fatura Listesi",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "fiscal_invoices"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "income_expense": {
+      "id": "income_expense",
+      "label": "Gelir Gider",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "expense_ledger"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "revenue_management": {
+      "id": "revenue_management",
+      "label": "Gelir Yönetimi",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "missing_source",
+      "missing_sources": [
+        "revenue_management_inputs"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "occupancy": {
+      "id": "occupancy",
+      "label": "Doluluk",
+      "status": "implemented",
+      "rows": [
+        {
+          "room": "B01",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1009"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1009-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1009"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1009",
+              "room_stay_id": "STAY-KF1009-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "B02",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [],
+          "reason_codes": [
+            "HOUSEKEEPING_NOT_INSPECTED"
+          ]
+        },
+        {
+          "room": "101",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1001"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1001-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1001"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1001",
+              "room_stay_id": "STAY-KF1001-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "102",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [],
+          "reason_codes": []
+        },
+        {
+          "room": "103",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [],
+          "reason_codes": []
+        },
+        {
+          "room": "104",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1004"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1004-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1004"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1004",
+              "room_stay_id": "STAY-KF1004-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "201",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1010"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1010-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1010"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1010",
+              "room_stay_id": "STAY-KF1010-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "202",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [],
+          "reason_codes": [
+            "HOUSEKEEPING_NOT_INSPECTED",
+            "HOUSEKEEPING_TASK_OPEN"
+          ]
+        },
+        {
+          "room": "203",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [],
+          "reason_codes": []
+        },
+        {
+          "room": "301",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1008"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1008-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1008"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1008",
+              "room_stay_id": "STAY-KF1008-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "302",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [
+            "KF1011"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1011",
+              "room_stay_id": "STAY-KF1011-A",
+              "status": "confirmed",
+              "arrival_state": "expected"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": []
+        },
+        {
+          "room": "303",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1003"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1003-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1003"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1003",
+              "room_stay_id": "STAY-KF1003-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW",
+            "HOUSEKEEPING_NOT_INSPECTED",
+            "HOUSEKEEPING_TASK_OPEN"
+          ]
+        },
+        {
+          "room": "304",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1007"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1007-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1007"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1007",
+              "room_stay_id": "STAY-KF1007-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "401",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [
+            "BLOCK-401-TECH"
+          ],
+          "reason_codes": [
+            "OUT_OF_SERVICE_OR_MAINTENANCE",
+            "HOUSEKEEPING_NOT_INSPECTED",
+            "MAINTENANCE_TASK_OPEN"
+          ]
+        },
+        {
+          "room": "402",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [],
+          "reason_codes": []
+        },
+        {
+          "room": "403",
+          "held_in_review_snapshot": true,
+          "reservation_ids": [
+            "KF1012"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1012-A"
+          ],
+          "all_hold_reservation_ids": [
+            "KF1012"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1012",
+              "room_stay_id": "STAY-KF1012-A",
+              "status": "confirmed",
+              "arrival_state": "arrived"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": [
+            "INVENTORY_HOLD_OR_DEPARTURE_REVIEW"
+          ]
+        },
+        {
+          "room": "404",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [
+            "KF1005"
+          ],
+          "source_physical_signals": [
+            {
+              "reservation_id": "KF1005",
+              "room_stay_id": "STAY-KF1005-A",
+              "status": "confirmed",
+              "arrival_state": "expected"
+            }
+          ],
+          "room_block_ids": [],
+          "reason_codes": []
+        },
+        {
+          "room": "405",
+          "held_in_review_snapshot": false,
+          "reservation_ids": [],
+          "room_stay_ids": [],
+          "all_hold_reservation_ids": [],
+          "source_physical_signals": [],
+          "room_block_ids": [],
+          "reason_codes": []
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "review_engine_hold_signals_not_verified_physical_occupancy",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ],
+        "missing_reservation_ids": []
+      }
+    },
+    "city_ledger": {
+      "id": "city_ledger",
+      "label": "City Ledger Acente Alacakları",
+      "status": "implemented",
+      "rows": [
+        {
+          "folio_id": "FOL-CAN-KF1007",
+          "reservation_id": "KF1007",
+          "room_id": "304",
+          "payer_type": "agency",
+          "agency": "Hotelbeds (DEMO)",
+          "agency_legal_name": "Demo Hotelbeds Turizm A.Ş.",
+          "currency": "EUR",
+          "postings": "127.50",
+          "payments": "0.00",
+          "balance": "127.50",
+          "status": "open",
+          "due_date": "2026-11-26",
+          "invoice_status": "not_issued",
+          "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
+          "room_stay_id": "STAY-KF1007-A",
+          "source_record_id": "FOL-CAN-KF1007",
+          "source_kind": "explicit_fictional_folio"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1004",
+          "KF1007"
+        ],
+        "missing_reservation_ids": [
+          "KF1002",
+          "KF1003",
+          "KF1005",
+          "KF1006",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "exchange_rates": {
+      "id": "exchange_rates",
+      "label": "Kur Takibi",
+      "status": "not_implemented",
+      "rows": [],
+      "source_state": "source_not_connected",
+      "missing_sources": [
+        "fx_rates"
+      ],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [],
+        "missing_reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ]
+      }
+    },
+    "reservation_list": {
+      "id": "reservation_list",
+      "label": "Rezervasyon Listesi",
+      "status": "implemented",
+      "rows": [
+        {
+          "id": "KF1001",
+          "name": "ÖRNEK KF1001",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-15",
+          "agency_id": "BOOKING",
+          "agency_ref": "BK30041",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "booking",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "BK30041"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS501"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1001-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1001-1",
+            "GUEST-KF1001-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1001-A",
+              "room_id": "101",
+              "category": "standard",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-15",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1001-1",
+                "GUEST-KF1001-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "90.00"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "95.00"
+                },
+                {
+                  "date": "2026-11-14",
+                  "amount": "95.00"
+                }
+              ],
+              "bed_request": "double",
+              "requests": [
+                "quiet"
+              ],
+              "arrival_state": "arrived",
+              "quote_total": "280.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "quiet"
+          ]
+        },
+        {
+          "id": "KF1002",
+          "name": "ÖRNEK KF1002",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14",
+          "agency_id": "EXPEDIA",
+          "agency_ref": "EX30042",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "expedia",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "EX30042"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS502"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "city_ledger",
+          "commission_type": "net",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1002-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1002-1",
+            "GUEST-KF1002-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1002-A",
+              "room_id": null,
+              "category": "superior",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-14",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1002-1",
+                "GUEST-KF1002-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "120.00"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "120.00"
+                }
+              ],
+              "bed_request": "twin",
+              "requests": [
+                "twin"
+              ],
+              "arrival_state": "arrived",
+              "quote_total": "240.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "twin"
+          ]
+        },
+        {
+          "id": "KF1003",
+          "name": "ÖRNEK KF1003",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14",
+          "agency_id": "TRIP",
+          "agency_ref": "TR30043",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "trip",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "TR30043"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS503"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1003-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1003-1",
+            "GUEST-KF1003-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1003-A",
+              "room_id": "303",
+              "category": "deluxe",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-14",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1003-1",
+                "GUEST-KF1003-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "210.00"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "210.00"
+                }
+              ],
+              "bed_request": "double",
+              "requests": [
+                "balcony"
+              ],
+              "arrival_state": "arrived",
+              "quote_total": "420.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "balcony"
+          ]
+        },
+        {
+          "id": "KF1004",
+          "name": "ÖRNEK KF1004",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-13",
+          "agency_id": "DIRECT",
+          "agency_ref": "DR30044",
+          "source_ref": {
+            "kind": "direct",
+            "provider": "direct",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "DR30044"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS504"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1004-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1004-1",
+            "GUEST-KF1004-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1004-A",
+              "room_id": "104",
+              "category": "standard",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-13",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1004-1",
+                "GUEST-KF1004-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "99.00"
+                }
+              ],
+              "bed_request": "double",
+              "requests": [],
+              "arrival_state": "arrived",
+              "quote_total": "99.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": []
+        },
+        {
+          "id": "KF1005",
+          "name": "ÖRNEK KF1005",
+          "group_name": null,
+          "checkin": "2026-11-13",
+          "checkout": "2026-11-15",
+          "agency_id": "BOOKING",
+          "agency_ref": "BK30045",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "booking",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "BK30045"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS505"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "expected",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1005-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1005-1",
+            "GUEST-KF1005-2",
+            "GUEST-KF1005-3",
+            "GUEST-KF1005-4"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1005-A",
+              "room_id": "404",
+              "category": "family",
+              "arrival": "2026-11-13",
+              "departure": "2026-11-15",
+              "adults": 4,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1005-1",
+                "GUEST-KF1005-2",
+                "GUEST-KF1005-3",
+                "GUEST-KF1005-4"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-13",
+                  "amount": "215.00"
+                },
+                {
+                  "date": "2026-11-14",
+                  "amount": "215.00"
+                }
+              ],
+              "bed_request": "none",
+              "requests": [
+                "cot"
+              ],
+              "arrival_state": "expected",
+              "quote_total": "430.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "cot"
+          ]
+        },
+        {
+          "id": "KF1006",
+          "name": "ÖRNEK KF1006",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14",
+          "agency_id": "EXPEDIA",
+          "agency_ref": "EX30046",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "expedia",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "EX30046"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS506"
+          },
+          "status": "cancelled",
+          "source_status": "cancelled",
+          "arrival_state": "expected",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1006-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1006-1",
+            "GUEST-KF1006-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1006-A",
+              "room_id": "102",
+              "category": "standard",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-14",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1006-1",
+                "GUEST-KF1006-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "95.00"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "95.00"
+                }
+              ],
+              "bed_request": "none",
+              "requests": [],
+              "arrival_state": "expected",
+              "quote_total": "190.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": []
+        },
+        {
+          "id": "KF1007",
+          "name": "ÖRNEK KF1007",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-16",
+          "agency_id": "HOTELBEDS",
+          "agency_ref": "HB30047",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "hotelbeds",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "HB30047"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS507"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "city_ledger",
+          "commission_type": "net",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1007-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1007-1",
+            "GUEST-KF1007-2",
+            "GUEST-KF1007-3"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1007-A",
+              "room_id": "304",
+              "category": "triple",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-16",
+              "adults": 3,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1007-1",
+                "GUEST-KF1007-2",
+                "GUEST-KF1007-3"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "127.50"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "127.50"
+                },
+                {
+                  "date": "2026-11-14",
+                  "amount": "127.50"
+                },
+                {
+                  "date": "2026-11-15",
+                  "amount": "127.50"
+                }
+              ],
+              "bed_request": "none",
+              "requests": [
+                "extra-pillow"
+              ],
+              "arrival_state": "arrived",
+              "quote_total": "510.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "extra-pillow"
+          ]
+        },
+        {
+          "id": "KF1008",
+          "name": "ÖRNEK KF1008",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14",
+          "agency_id": "BOOKING",
+          "agency_ref": "BK30048",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "booking",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "BK30048"
+          },
+          "pms_ref": null,
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1008-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1008-1",
+            "GUEST-KF1008-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1008-A",
+              "room_id": "301",
+              "category": "superior",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-14",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1008-1",
+                "GUEST-KF1008-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "130.00"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "130.00"
+                }
+              ],
+              "bed_request": "double",
+              "requests": [
+                "cityview"
+              ],
+              "arrival_state": "arrived",
+              "quote_total": "260.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "cityview"
+          ]
+        },
+        {
+          "id": "KF1009",
+          "name": "ÖRNEK KF1009",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-14",
+          "agency_id": "AGENCY",
+          "agency_ref": "AG30049",
+          "source_ref": {
+            "kind": "agency",
+            "provider": "agency",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "AG30049"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS509"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1009-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1009-1",
+            "GUEST-KF1009-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1009-A",
+              "room_id": "B01",
+              "category": "economy",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-14",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1009-1",
+                "GUEST-KF1009-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "55.00"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "55.00"
+                }
+              ],
+              "bed_request": "none",
+              "requests": [],
+              "arrival_state": "arrived",
+              "quote_total": "110.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": []
+        },
+        {
+          "id": "KF1010",
+          "name": "ÖRNEK KF1010",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-13",
+          "agency_id": "DIRECT",
+          "agency_ref": "DR30050",
+          "source_ref": {
+            "kind": "direct",
+            "provider": "direct",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "DR30050"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS510"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1010-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1010-1",
+            "GUEST-KF1010-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1010-A",
+              "room_id": "201",
+              "category": "standard",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-13",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1010-1",
+                "GUEST-KF1010-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "89.00"
+                }
+              ],
+              "bed_request": "none",
+              "requests": [],
+              "arrival_state": "arrived",
+              "quote_total": "89.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": []
+        },
+        {
+          "id": "KF1011",
+          "name": "ÖRNEK KF1011",
+          "group_name": null,
+          "checkin": "2026-11-13",
+          "checkout": "2026-11-15",
+          "agency_id": "BOOKING",
+          "agency_ref": "BK30051",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "booking",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "BK30051"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS511"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "expected",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1011-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1011-1",
+            "GUEST-KF1011-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1011-A",
+              "room_id": "302",
+              "category": "superior",
+              "arrival": "2026-11-13",
+              "departure": "2026-11-15",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1011-1",
+                "GUEST-KF1011-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-13",
+                  "amount": "155.00"
+                },
+                {
+                  "date": "2026-11-14",
+                  "amount": "155.00"
+                }
+              ],
+              "bed_request": "twin",
+              "requests": [
+                "twin"
+              ],
+              "arrival_state": "expected",
+              "quote_total": "310.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "twin"
+          ]
+        },
+        {
+          "id": "KF1012",
+          "name": "ÖRNEK KF1012",
+          "group_name": null,
+          "checkin": "2026-11-12",
+          "checkout": "2026-11-15",
+          "agency_id": "TRIP",
+          "agency_ref": "TR30052",
+          "source_ref": {
+            "kind": "ota",
+            "provider": "trip",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "TR30052"
+          },
+          "pms_ref": {
+            "kind": "pms",
+            "property_id": "SAMPLE_HOTEL_01",
+            "external_id": "PMS512"
+          },
+          "status": "confirmed",
+          "source_status": "confirmed",
+          "arrival_state": "arrived",
+          "board": "BB",
+          "payment_type": "self_payment",
+          "commission_type": "none",
+          "option_expiry": null,
+          "room_stay_ids": [
+            "STAY-KF1012-A"
+          ],
+          "guest_ids": [
+            "GUEST-KF1012-1",
+            "GUEST-KF1012-2"
+          ],
+          "rooms": [
+            {
+              "room_stay_id": "STAY-KF1012-A",
+              "room_id": "403",
+              "category": "deluxe",
+              "arrival": "2026-11-12",
+              "departure": "2026-11-15",
+              "adults": 2,
+              "children": 0,
+              "guest_ids": [
+                "GUEST-KF1012-1",
+                "GUEST-KF1012-2"
+              ],
+              "nightly_rates": [
+                {
+                  "date": "2026-11-12",
+                  "amount": "130.00"
+                },
+                {
+                  "date": "2026-11-13",
+                  "amount": "135.00"
+                },
+                {
+                  "date": "2026-11-14",
+                  "amount": "135.00"
+                }
+              ],
+              "bed_request": "double",
+              "requests": [
+                "upper-floor"
+              ],
+              "arrival_state": "arrived",
+              "quote_total": "400.00"
+            }
+          ],
+          "currency": "EUR",
+          "special_requests": [
+            "upper-floor"
+          ]
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ],
+        "missing_reservation_ids": []
+      }
+    },
+    "guest_list": {
+      "id": "guest_list",
+      "label": "Misafirler",
+      "status": "implemented",
+      "rows": [
+        {
+          "id": "GUEST-KF1001-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1001_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1001-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1001_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1002-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1002_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1002-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1002_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1003-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1003_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1003-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1003_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1004-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1004_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1004-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1004_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1005-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1005_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1005-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1005_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1005-3",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1005_3",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1005-4",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1005_4",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1006-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1006_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1006-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1006_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1007-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1007_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1007-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1007_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1007-3",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1007_3",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1008-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1008_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1008-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1008_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1009-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1009_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1009-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1009_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1010-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1010_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1010-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1010_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1011-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1011_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1011-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1011_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1012-1",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1012_1",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        },
+        {
+          "id": "GUEST-KF1012-2",
+          "given_name": "ÖRNEK",
+          "surname": "DEMO_KF1012_2",
+          "country": "DE",
+          "identity_status": "NOT_COLLECTED_DEMO"
+        }
+      ],
+      "source_state": "synthetic_snapshot",
+      "missing_sources": [],
+      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "scope": "explicit_canonical_source_only",
+      "coverage": {
+        "reservation_ids": [
+          "KF1001",
+          "KF1002",
+          "KF1003",
+          "KF1004",
+          "KF1005",
+          "KF1006",
+          "KF1007",
+          "KF1008",
+          "KF1009",
+          "KF1010",
+          "KF1011",
+          "KF1012"
+        ],
+        "missing_reservation_ids": []
+      }
+    }
+  },
+  "safety": {
+    "guest_identity_data": false,
+    "pms_writes": false,
+    "ota_writes": false,
+    "fiscal_invoices": false,
+    "payments": false,
+    "kbs": false,
+    "live_exchange_rates": false,
+    "human_approval_required": true
+  },
+  "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+  "source_state": "synthetic_snapshot",
+  "scenario_id": "CANONICAL_REVIEW_DEMO_V1",
+  "reservation_links": {
+    "KF1001": {
+      "reservation_id": "KF1001",
+      "room_stay_ids": [
+        "STAY-KF1001-A"
+      ],
+      "folio_ids": [
+        "FOL-CAN-KF1001"
+      ],
+      "finance_status": "available",
+      "reason_code": "EXPLICIT_FOLIO_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control",
+        "folio_analysis",
+        "transactions"
+      ]
+    },
+    "KF1002": {
+      "reservation_id": "KF1002",
+      "room_stay_ids": [
+        "STAY-KF1002-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1003": {
+      "reservation_id": "KF1003",
+      "room_stay_ids": [
+        "STAY-KF1003-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1004": {
+      "reservation_id": "KF1004",
+      "room_stay_ids": [
+        "STAY-KF1004-A"
+      ],
+      "folio_ids": [
+        "FOL-CAN-KF1004"
+      ],
+      "finance_status": "available",
+      "reason_code": "EXPLICIT_FOLIO_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control",
+        "folio_analysis",
+        "transactions"
+      ]
+    },
+    "KF1005": {
+      "reservation_id": "KF1005",
+      "room_stay_ids": [
+        "STAY-KF1005-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1006": {
+      "reservation_id": "KF1006",
+      "room_stay_ids": [
+        "STAY-KF1006-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1007": {
+      "reservation_id": "KF1007",
+      "room_stay_ids": [
+        "STAY-KF1007-A"
+      ],
+      "folio_ids": [
+        "FOL-CAN-KF1007"
+      ],
+      "finance_status": "available",
+      "reason_code": "EXPLICIT_FOLIO_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control",
+        "folio_analysis",
+        "transactions"
+      ]
+    },
+    "KF1008": {
+      "reservation_id": "KF1008",
+      "room_stay_ids": [
+        "STAY-KF1008-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1009": {
+      "reservation_id": "KF1009",
+      "room_stay_ids": [
+        "STAY-KF1009-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1010": {
+      "reservation_id": "KF1010",
+      "room_stay_ids": [
+        "STAY-KF1010-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1011": {
+      "reservation_id": "KF1011",
+      "room_stay_ids": [
+        "STAY-KF1011-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    },
+    "KF1012": {
+      "reservation_id": "KF1012",
+      "room_stay_ids": [
+        "STAY-KF1012-A"
+      ],
+      "folio_ids": [],
+      "finance_status": "not_applicable",
+      "reason_code": "NO_FOLIO_IN_SYNTHETIC_SOURCE",
+      "report_ids": [
+        "reservation_list",
+        "occupancy",
+        "room_rate_control"
+      ]
+    }
+  },
+  "integrations": {
+    "pms": "source_not_connected",
+    "ota": "source_not_connected",
+    "ai": "source_not_connected",
+    "payments": "source_not_connected",
+    "kbs": "source_not_connected"
+  },
+  "review_snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10"
+}
