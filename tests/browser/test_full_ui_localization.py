@@ -117,14 +117,20 @@ class FullApplicationLanguageTests(unittest.TestCase):
         self.assertIn("HUMAN_APPROVAL_REQUIRED",self.page.locator("#wfPreviewResult").inner_text())
         self.assertIn("NO_LIVE_EXECUTION",self.page.locator("#wfPreviewResult").inner_text())
 
-    def test_demo_launch_runs_multi_scenario_not_just_dashboard(self):
+    def test_demo_launch_runs_multiple_stories_on_ai_dashboard(self):
         self.page.locator("#startShowcase").click()
-        self.assertEqual(self.page.evaluate("() => page"),"ops_workflows")
+        self.assertEqual(self.page.evaluate("() => page"),"dashboard")
+        self.assertTrue(self.page.evaluate("() => commandTourAll && storyPlaying"))
+        self.assertGreaterEqual(self.page.evaluate("() => stories().length"),4)
+        self.assertEqual(self.page.locator("#aiCommandCenter").count(),1)
+        first=self.page.evaluate("() => selectedStoryId")
+        self.page.evaluate("() => {storyStep=currentStory().steps.length-1;}")
+        self.page.wait_for_function("selectedStoryId !== '"+first+"'",timeout=5000)
+        self.assertEqual(self.page.evaluate("() => storyStep"),0)
+        self.page.locator("#commandPause").click()
+        self.assertFalse(self.page.evaluate("() => commandTourAll || storyPlaying"))
+        self.page.locator('nav [data-nav="ops_workflows"]').click()
         self.assertEqual(self.page.locator("#wfScenario option").count(),5)
-        self.assertTrue(self.page.evaluate("() => wfState.playing"))
-        # Advance deterministic fake-time via one click after pausing.
-        self.page.locator("#wfPlay").click()
-        self.assertFalse(self.page.evaluate("() => wfState.playing"))
         self.page.locator("#wfScenario").select_option("payment")
         self.assertIn("PAYMENT_REVIEW",self.page.locator("#wfView").inner_text())
         self.page.locator("#wfNext").click()

@@ -20,17 +20,48 @@ const COMMAND_LANG={
  uk:['Центр операцій ШІ','Тестові дані · Офлайн','Джерело → Правила → ШІ → Персонал','ШІ в центрі операцій','Запустити сценарій','Пауза','Далі','Скинути','Бронювання у фокусі','Поточний крок','Докази та безпечне рішення','Рішення за персоналом','Завантаженість за сім днів','Бронювання за каналом','Тестові дані: 12 листопада 2026','Реальні дії PMS не виконуються.','Запусти сценарій.']
 };
 function commandText(i){return (COMMAND_LANG[typeof opsState!=='undefined'?opsState.lang:'tr']||COMMAND_LANG.en)[i];}
+let commandTourAll=false;
+function playCommandTour(){
+ const all=stories();
+ if(!all.length||reportStale)return;
+ stopStory();commandTourAll=false;
+ selectedStoryId=all[0].id;storyStep=0;storyStarted=true;
+ if(!motionAllowed()){storyMessage='Azaltılmış hareket: adımları elle ilerletin.';render();return;}
+ commandTourAll=true;storyPlaying=true;
+ storyMessage='Tüm kurgusal AI senaryoları oynatılıyor';
+ render();scheduleCommandTour();
+}
+function scheduleCommandTour(){
+ clearTimeout(storyTimer);
+ if(!commandTourAll||!storyPlaying||reportStale||!motionAllowed())return;
+ storyTimer=setTimeout(()=>{
+  if(!commandTourAll||!storyPlaying||reportStale)return;
+  const all=stories(),current=currentStory();
+  if(storyStep<current.steps.length-1)storyStep++;
+  else{
+   const next=all.findIndex(x=>x.id===current.id)+1;
+   if(next>=all.length){commandTourAll=false;stopStory('Tüm kurgusal senaryolar tamamlandı; canlı işlem yapılmadı.');render();return;}
+   selectedStoryId=all[next].id;storyStep=0;
+  }
+  storyMessage='Kurgusal kanıt güncellendi. Nihai karar personelde.';
+  render();scheduleCommandTour();
+ },1800);
+}
+function pauseCommandTour(){commandTourAll=false;stopStory('Sunum duraklatıldı.');render();}
+function nextCommandStep(){commandTourAll=false;nextStory();}
+function resetCommandTour(){commandTourAll=false;selectedStoryId=stories()[0]?.id||null;resetStory();}
 function aiCommandCenter(){
  const story=currentStory(),step=storyStarted?story.steps[storyStep]:null;
  const booking=state.reservations.find(b=>b.id===story?.booking_id);
  const current=step?Math.min(storyStep+1,story.steps.length):0;
+ const index=Math.max(1,stories().findIndex(x=>x.id===story.id)+1);
  const safeText=x=>esc(x||'');
  return `<section id="aiCommandCenter" class="ai-command" aria-label="${safeText(commandText(0))}">
  <div class="ai-command-top"><div><span class="ai-command-eyebrow">✦ ${safeText(commandText(0))}</span><h2>${safeText(commandText(3))}</h2><p>${safeText(commandText(2))}</p></div><span class="ai-command-badge">${safeText(commandText(1))}</span></div>
  <div class="ai-command-body"><div class="ai-command-main"><div class="ai-command-steps" aria-label="${safeText(commandText(5))}">${story.steps.map((s,i)=>`<span class="${storyStarted?(i<storyStep?'complete':i===storyStep?'active':''):''}" aria-label="${i+1} / ${story.steps.length}">${String(i+1).padStart(2,'0')}</span>`).join('')}</div>
- <div class="ai-command-caption">${safeText(commandText(9))} · ${current}/${story.steps.length}</div>
+ <div class="ai-command-caption">${safeText(commandText(9))} · ${current}/${story.steps.length} · ${index}/${stories().length} senaryo</div>
  <h3 aria-live="polite">${safeText(step?step.title:commandText(16))}</h3><p class="ai-command-description">${safeText(step?step.body:story.summary)}</p>
- <div class="ai-command-controls"><button id="commandPlay" class="primary" ${reportStale?'disabled':''}>${icon('play')} ${safeText(commandText(4))}</button><button id="commandPause" class="secondary" ${!storyPlaying?'disabled':''}>${safeText(commandText(5))}</button><button id="commandNext" class="secondary" ${reportStale?'disabled':''}>${safeText(commandText(6))}</button><button id="commandReset" class="ghost">${safeText(commandText(7))}</button></div><p class="ai-command-foot">${safeText(commandText(15))}</p></div>
+ <div class="ai-command-controls"><button id="commandPlay" class="primary" ${reportStale||storyPlaying?'disabled':''}>${icon('play')} ${safeText(commandText(4))}</button><button id="commandPause" class="secondary" ${!storyPlaying?'disabled':''}>${safeText(commandText(5))}</button><button id="commandNext" class="secondary" ${reportStale?'disabled':''}>${safeText(commandText(6))}</button><button id="commandReset" class="ghost">${safeText(commandText(7))}</button></div><p class="ai-command-foot">${safeText(commandText(15))}</p></div>
  <div class="ai-command-focus"><span class="ai-command-caption">${safeText(commandText(8))} · ÖRNEK</span><h3>${safeText(demoGuestName(booking?.id))}</h3><p>${safeText(booking?.id)} · ${safeText(channelName[booking?.channel])}</p><dl><div><dt>Check-in</dt><dd>${safeText(booking?.arrival)}</dd></div><div><dt>Check-out</dt><dd>${safeText(booking?.departure)}</dd></div><div><dt>${safeText(commandText(10))}</dt><dd>${safeText(step?.evidence?.[0]?.value||story.final_status)}</dd></div></dl><span class="ai-command-human">${icon('shield')} ${safeText(commandText(11))}</span></div></div>
  </section>`;
 }
