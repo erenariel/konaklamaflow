@@ -74,3 +74,15 @@ Arapça (`ar`) ve İbranice (`he`) için `dir=rtl`, logical CSS özellikleri, `b
 - İşletim sisteminin `prefers-reduced-motion: reduce` ayarı önceliklidir. Bu durumda animasyon ve otomatik zamanlayıcı çalışmaz; kullanıcı isteğiyle yalnız tek adım ilerlenir.
 - Animasyon ve hız ayarları **yalnızca anlatımı** etkiler; hikâyenin kurgu nedenlerini, rezervasyon karar kodlarını veya gerçek sistem durumunu değiştirmez.
 - Mevcut konsept, gerçek Python otel karar motoru ve on modüllü üretim demosu ile henüz birleştirilmemiştir. Yayınlanan tamamlanmış özellik gibi gösterilmemelidir.
+
+
+## Rehberli sunum süreleri
+
+Üç **isteğe bağlı, sessiz ve kurgusal** rehberli sunum modu eklendi:
+- **90 saniye**: dört senaryo × beş aşama, varsayılan hızda aşama başına yaklaşık 4,5 saniye
+- **3 dakika**: aynı 20 aşamanın detaylı anlatımı, aşama başına yaklaşık 9 saniye
+- **7 dakika**: teknik inceleme akışı, aşama başına yaklaşık 21 saniye
+
+Akış sırası: Twin oda kıtlığı → Housekeeping/teknik engel → OTA uyuşmazlığı → Personel ön incelemesi. Başlat/duraklat/manuel kontrol ve süre seçimi için on dilde erişilebilir etiketler vardır. Saniye süreleri nominaldir, tarayıcı sekmesinin zamanlayıcı gecikmeleri nedeniyle milisaniye hassasiyetinde garanti edilmez. Hareket azaltma isteğinde otomatik oynatma kapalı kalır ve senaryolar manuel seçilebilir.
+
+Bu turlar **ana uygulamanın Python motoruyla henüz entegre değil**; statik ve kurgusal konsept gösterimidir. İnsan tarafından onaylanmış çeviriler, kayıt/video üretimi ve #6 kapsamındaki tüm sunum kabul kriterleri ayrıca tamamlanmalıdır.
