@@ -1,50 +1,72 @@
-"""Capture fictional report and share previews with the optional browser extra.
-
-Run from any directory: python scripts/capture_previews.py
-Set KONAKLAMAFLOW_CHROMIUM to use a locally installed Chromium executable.
-"""
+"""Capture current offline app screenshots; no decorative mockups or deployment."""
+from __future__ import annotations
 import asyncio
+from hashlib import sha256
+import json
 import os
 from pathlib import Path
-
+import subprocess
 from playwright.async_api import async_playwright
-
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'docs/images'
 
-
 async def main():
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    async with async_playwright() as playwright:
+    sources = {name: (ROOT / 'demo' / name).read_text(encoding='utf-8')
+               for name in ('v04-integrated-preview.html', 'global-presentation-concept.html', 'viewer.html')}
+    evidence = {'kind': 'ACTUAL_OFFLINE_BROWSER_SCREENSHOTS',
+        'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+        'source_has_uncommitted_changes': bool(subprocess.check_output(
+            ['git', 'status', '--porcelain', '--', 'demo/v04-integrated-preview.html',
+             'demo/global-presentation-concept.html', 'demo/viewer.html'], cwd=ROOT, text=True).strip()),
+        'source_files': {name: sha256(content.encode()).hexdigest() for name, content in sources.items()},
+        'requests': [], 'errors': [], 'captures': [], 'fictional': True,
+        'live_ai_calls': False, 'pms_writes': False, 'payments': False, 'kbs': False}
+    profiles = [
+        ('v052-overview-1366.png', 'v04-integrated-preview.html', 1366, 768, 'en', 'light'),
+        ('v052-overview-1440.png', 'v04-integrated-preview.html', 1440, 900, 'en', 'light'),
+        ('v052-overview-1600.png', 'v04-integrated-preview.html', 1600, 900, 'en', 'light'),
+        ('v052-overview-dark.png', 'v04-integrated-preview.html', 1440, 900, 'en', 'dark'),
+        ('v052-overview-night.png', 'v04-integrated-preview.html', 1440, 900, 'en', 'night'),
+        ('v052-overview-rtl.png', 'v04-integrated-preview.html', 1440, 900, 'ar', 'light'),
+        ('v052-mobile.png', 'v04-integrated-preview.html', 390, 844, 'en', 'light'),
+        ('v052-global-presentation.png', 'global-presentation-concept.html', 1440, 900, 'en', 'light'),
+        ('demo-report.png', 'viewer.html', 1440, 1000, 'tr', 'light'),
+        ('social-card.png', 'v04-integrated-preview.html', 1200, 630, 'en', 'light')]
+    async with async_playwright() as driver:
         options = {'headless': True}
         if os.environ.get('KONAKLAMAFLOW_CHROMIUM'):
             options['executable_path'] = os.environ['KONAKLAMAFLOW_CHROMIUM']
-        browser = await playwright.chromium.launch(**options)
-        page = await browser.new_page(viewport={'width': 1440, 'height': 1000}, reduced_motion='reduce')
-        requests, errors = [], []
-        page.on('request', lambda request: requests.append(request.url))
-        page.on('pageerror', lambda error: errors.append(str(error)))
-        await page.set_content((ROOT / 'demo/viewer.html').read_text(encoding='utf-8'))
-        await page.locator('.report-shell').screenshot(path=str(OUTPUT / 'demo-report.png'))
-        brand = await page.locator('.brand-mark').evaluate('node => node.outerHTML')
-        art = await page.locator('.hotel-art').evaluate('node => node.outerHTML')
-        # These are static, repository-owned SVGs, never selected report content.
-        card = '''<!doctype html><html lang="en"><meta charset="utf-8"><style>
-        *{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:#f5f2eb;color:#203d35;font-family:Arial,sans-serif;padding:49px 58px}
-        header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d8ddd0;padding-bottom:25px}.brand{display:flex;gap:12px;align-items:center;font-size:27px;letter-spacing:-1px;font-weight:700}.brand span{font-weight:400}.brand svg{width:37px;height:43px}.tag{font-size:11px;letter-spacing:1.8px;color:#5e7058}
-        main{display:grid;grid-template-columns:1.6fr 1fr;gap:32px;align-items:center;padding:32px 0 29px}.eyebrow{font-size:11px;letter-spacing:1.7px;color:#637457;margin-bottom:18px}h1{font-family:Georgia,serif;font-size:61px;line-height:1.08;font-weight:400;letter-spacing:-2px;margin:0 0 20px}h1 em{color:#728369;font-weight:400}p{font-size:18px;line-height:1.55;color:#63715f;margin:0}.art{height:329px;border-radius:180px 180px 10px 10px;overflow:hidden;background:#e8e9df}.art svg{width:100%;height:100%}
-        footer{border-top:1px solid #d8ddd0;padding-top:22px;display:flex;align-items:center;justify-content:space-between}.url{font-size:14px;color:#50664a}.labels{display:flex;gap:9px}.labels span{border:1px solid #d2dcc9;border-radius:4px;padding:7px 10px;font-size:10px;color:#50664a}.labels .demo{background:#163e37;color:#fffdf4;border-color:#163e37}
-        </style><header><div class="brand">BRAND<div>Konaklama<span>Flow</span></div></div><div class="tag">THOUGHTFUL TOOLS FOR INDEPENDENT HOTELS</div></header>
-        <main><div><div class="eyebrow">OPEN SOURCE. PRIVACY FIRST.</div><h1>A calmer front desk.<br><em>Clearer decisions.</em></h1><p>Offline reservation review.<br>Built for small &amp; boutique hotels.</p></div><div class="art">ART</div></main>
-        <footer><div class="url">erenariel.github.io/konaklamaflow</div><div class="labels"><span>MIT LICENSE</span><span class="demo">EXPLORE THE FICTIONAL DEMO</span></div></footer></html>'''
-        await page.set_viewport_size({'width': 1200, 'height': 630})
-        await page.set_content(card.replace('BRAND', brand).replace('ART', art))
-        await page.screenshot(path=str(OUTPUT / 'social-card.png'))
-        assert not requests, 'Preview generation must not access the network'
-        assert not errors, errors
-        await browser.close()
-        print('Captured fictional report and 1200x630 share card; no network requests.')
-
+        browser = await driver.chromium.launch(**options)
+        try:
+            for filename, source, width, height, locale, theme in profiles:
+                page = await browser.new_page(viewport={'width': width, 'height': height}, locale='en', reduced_motion='reduce')
+                page.on('request', lambda request: evidence['requests'].append(request.url))
+                page.on('pageerror', lambda error: evidence['errors'].append(str(error)))
+                await page.set_content(sources[source], wait_until='load')
+                if source == 'v04-integrated-preview.html':
+                    await page.locator('#globalLanguage').select_option(locale)
+                    await page.locator('#kfTheme').select_option(theme)
+                    await page.locator('#aiCommandCenter').wait_for(state='visible')
+                elif source == 'global-presentation-concept.html':
+                    await page.locator('#locale').select_option(locale)
+                within = await page.evaluate('() => document.documentElement.scrollWidth <= innerWidth')
+                if not within:
+                    raise RuntimeError('Preview body overflowed its viewport')
+                await page.screenshot(path=str(OUTPUT / filename), animations='disabled')
+                evidence['captures'].append({'file': filename, 'source': source, 'width': width, 'height': height,
+                    'locale': locale, 'theme': theme, 'body_within_viewport': within,
+                    'sha256': sha256((OUTPUT / filename).read_bytes()).hexdigest()})
+                await page.close()
+            if evidence['requests'] or evidence['errors']:
+                raise RuntimeError('Preview generation must remain offline and error-free')
+            for name, content in sources.items():
+                if (ROOT / 'demo' / name).read_text(encoding='utf-8') != content:
+                    raise RuntimeError('Preview source changed during capture')
+            (OUTPUT / 'v052-previews.json').write_text(json.dumps(evidence, indent=2) + chr(10), encoding='utf-8')
+        finally:
+            await browser.close()
+    print('Captured 10 actual app screenshots; zero requests and browser errors.')
 
 if __name__ == '__main__':
     asyncio.run(main())

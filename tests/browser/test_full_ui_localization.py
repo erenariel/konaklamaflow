@@ -39,7 +39,7 @@ class FullApplicationLanguageTests(unittest.TestCase):
 
     def test_all_twenty_modules_and_left_sidebar_scrollable(self):
         self.assertEqual(self.page.locator("nav [data-nav]").count(),20)
-        self.assertEqual(self.page.evaluate("() => page"),"rooms")
+        self.assertEqual(self.page.evaluate("() => page"),"dashboard")
         state=self.page.evaluate("""() => {
             const m=document.getElementById('nav');
             return {scroll:m.scrollHeight,client:m.clientHeight,
@@ -54,6 +54,7 @@ class FullApplicationLanguageTests(unittest.TestCase):
         self.assertTrue(self.page.locator("#wfView").is_visible())
 
     def test_locale_switch_translates_entire_nav_title_controls_and_rtl(self):
+        self.page.locator('nav [data-nav="rooms"]').click()
         original=self.page.evaluate("() => JSON.stringify(INITIAL_EVALUATION)")
         for locale in LANGS:
             self.page.locator("#globalLanguage").select_option(locale)
@@ -116,14 +117,21 @@ class FullApplicationLanguageTests(unittest.TestCase):
         self.assertIn("HUMAN_APPROVAL_REQUIRED",self.page.locator("#wfPreviewResult").inner_text())
         self.assertIn("NO_LIVE_EXECUTION",self.page.locator("#wfPreviewResult").inner_text())
 
-    def test_demo_launch_runs_multi_scenario_not_just_dashboard(self):
+    def test_demo_launch_runs_multiple_stories_on_ai_dashboard(self):
         self.page.locator("#startShowcase").click()
-        self.assertEqual(self.page.evaluate("() => page"),"ops_workflows")
+        self.assertEqual(self.page.evaluate("() => page"),"dashboard")
+        self.assertTrue(self.page.evaluate("() => commandTourAll && storyPlaying"))
+        self.assertGreaterEqual(self.page.evaluate("() => stories().length"),4)
+        self.assertEqual(self.page.locator("#aiCommandCenter").count(),1)
+        first=self.page.evaluate("() => selectedStoryId")
+        self.page.evaluate("() => {storyStep=currentStory().steps.length-1;}")
+        self.page.wait_for_timeout(2400)
+        self.assertNotEqual(self.page.evaluate("() => selectedStoryId"),first)
+        self.assertEqual(self.page.evaluate("() => storyStep"),0)
+        self.page.locator("#commandPause").click()
+        self.assertFalse(self.page.evaluate("() => commandTourAll || storyPlaying"))
+        self.page.locator('nav [data-nav="ops_workflows"]').click()
         self.assertEqual(self.page.locator("#wfScenario option").count(),5)
-        self.assertTrue(self.page.evaluate("() => wfState.playing"))
-        # Advance deterministic fake-time via one click after pausing.
-        self.page.locator("#wfPlay").click()
-        self.assertFalse(self.page.evaluate("() => wfState.playing"))
         self.page.locator("#wfScenario").select_option("payment")
         self.assertIn("PAYMENT_REVIEW",self.page.locator("#wfView").inner_text())
         self.page.locator("#wfNext").click()

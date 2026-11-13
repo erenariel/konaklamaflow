@@ -70,3 +70,15 @@ jobs:
           path: demo/v04-integrated-preview.html
           if-no-files-found: error
           retention-days: 14
+      - name: Preserve current v0.5.2 showcase media and provenance
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: konaklamaflow-v052-showcase-${{ github.sha }}
+          path: |
+            docs/images/ai-command-tour*
+            docs/images/roomplan-story*
+            docs/images/overview-pulse*
+            docs/images/v052-*
+          if-no-files-found: error
+          retention-days: 14
