@@ -7,9 +7,27 @@ Bu dosya, Codex'in uygulama geliştirmesiyle çakışmadan hazırlanmış özgü
 - `docs/images/ai-explanation-flow.svg`: Kaynak → kural → açıklama → personel akışını tanıtan kısa diyagram.
 - Önceki `docs/images/operations-tour.gif` korunur, ancak README'nin üstündeki ilk görsel değildir.
 
-## Gerçek arayüzden üretilen GIF adayları
+## GitHub tanıtımına eklenen hareketli GIF'ler
 
-Yerel tarayıcıda mevcut sentetik v0.5.2 HTML'inden üretilen adaylar: `ai-command-tour.gif`, `roomplan-story.gif`, `overview-pulse.gif`. Bu dalda binary GIF'ler **henüz bulunmaz**; uygun güvenli ekleme/yükleme kanalı ile Codex'in PR'ına veya ayrı revizyona aktarılmadan README'de bu dosyalara bağlantı vermeyin.
+Üç animasyon **doğrudan bu PR'ın `docs/images/` klasörüne** eklendi. README'deki hareketli tanıtım bölümünde her birinin altında Türkçe ve İngilizce kullanım açıklaması bulunur:
+
+- `docs/images/ai-command-tour.gif` — kaynak incelemesi → kurallar → simüle AI açıklaması → personel değerlendirmesi
+- `docs/images/roomplan-story.gif` — kurgusal rezervasyona bağlı oda planı vurguları
+- `docs/images/overview-pulse.gif` — doluluk, kanallar ve AI destekli inceleme özetini tanıtan renkli döngü
+
+İlk kareler ve hareketler gerçek kurgusal/çevrimdışı HTML'in Playwright/Chromium ekran görüntülerinden üretilmiştir. Görseller yalnızca **tanıtım README'sinde** kullanılır; çalışan demo HTML dosyalarında GIF oynatımı eklenmedi.
+
+## Yeniden üretim
+
+`scripts/build_promo_gifs.py` dosyası yerel HTML ekran görüntülerinden aynı üç medya türünü yeniden üretir. Örnek:
+
+```bash
+python -m pip install pillow playwright
+python -m playwright install chromium
+python scripts/build_promo_gifs.py --html demo/v04-integrated-preview.html --out docs/images
+```
+
+Not: Bu kayıtta AI operasyon panelini içeren `feat/ai-operations-dashboard-desktop-v052` dalındaki **sentetik HTML** kaynak alınmıştır. Codex demo tasarımını değiştirirse, tanıtım GIF'leri yeni sürümle tekrar eşleştirilmelidir.
 
 ## Hareket kuralları
 1. Profesyonel palet: gece laciverti `#071426`, elektrik camgöbeği `#3EE2DF`, mint `#4FF1C4`, mor `#8873F9`, amber `#FFC45B`.
