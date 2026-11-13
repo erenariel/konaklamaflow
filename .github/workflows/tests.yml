@@ -35,6 +35,8 @@ jobs:
           node --check demo/hotel-ops-module.js
           node --check demo/full-ui-i18n.js
           node --check demo/full-ui-i18n-catalog.js
+          node --check demo/full-ui-lexicon.js
+          node --check demo/hotel-workflow-ui.js
           python scripts/stage_demo_site.py --output /tmp/demo-site
 
   browser:
