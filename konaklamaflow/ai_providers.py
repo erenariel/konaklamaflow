@@ -75,7 +75,7 @@ def mock_explain_decision(*, trusted_task_id: str, trusted_report_sha256: str,
     if (not isinstance(trusted_task_id, str) or not _TASK.fullmatch(trusted_task_id)
             or not isinstance(trusted_report_sha256, str)
             or not _DIGEST.fullmatch(trusted_report_sha256)
-            or trusted_state not in _ALLOWED_STATE
+            or not isinstance(trusted_state, str) or trusted_state not in _ALLOWED_STATE
             or not isinstance(reason_codes, list)
             or len(reason_codes) > len(BLOCKER_CODES)
             or any(not isinstance(code, str) or code not in BLOCKER_CODES for code in reason_codes)
