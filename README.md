@@ -2,11 +2,15 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
-[![KonaklamaFlow interactive hotel workbench: room timeline and two-assistant review simulation](docs/images/operations-tour.gif)](demo/hotel-suite.html)
+[![KonaklamaFlow — animated AI operations concept, fictional offline showcase](docs/images/ai-presentation-hero.svg)](https://erenariel.github.io/konaklamaflow/)
+
+*Animated concept / Hareketli konsept: rezervasyon kaynağı → kural kontrolü → AI açıklaması → personel değerlendirmesi. Tümü **kurgusal, çevrimdışı ve salt okunur**. Gerçek AI/PMS/OTA/KBS bağlantısı veya otomatik check-in yok. Hareket azaltma tercihlerine uyumlu; [akışın ayrıntılı animasyonu](docs/images/ai-explanation-flow.svg).*
+
+
 
 **[Open KonaklamaFlow v0.5 integrated hotel demo / Birleşik otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Global 10-language guided presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html) · [Offline integrated HTML](demo/v04-integrated-preview.html) · [Original room workbench](demo/hotel-suite.html) · [Latest tagged package release](https://github.com/erenariel/konaklamaflow/releases/latest)
 
-Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The Pages entry point contains the original 10 modules plus eight hotel-operations modules: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above records the earlier room-workbench view; it is not a recording of the new v0.5 modules. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
+Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The Pages entry point contains the original 10 modules plus eight hotel-operations modules: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The hero above is an original illustrated animated concept rather than a recording of a live PMS. The historical [room-workbench tour](docs/images/operations-tour.gif) remains available for reference. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
 
 [![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
 

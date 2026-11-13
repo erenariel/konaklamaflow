@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 286" role="img" aria-labelledby="flowTitle flowDescription">
+<title id="flowTitle">Four-step KonaklamaFlow review sequence</title>
+<desc id="flowDescription">An animated original diagram showing source booking data, deterministic rule checks, AI demo narration and human approval. It uses fictional data and has no live integrations.</desc>
+<defs>
+<linearGradient id="fBg"><stop stop-color="#09172C"/><stop offset=".55" stop-color="#10345A"/><stop offset="1" stop-color="#143D53"/></linearGradient>
+<linearGradient id="fLine"><stop stop-color="#52E6C8"/><stop offset=".5" stop-color="#8D8CFF"/><stop offset="1" stop-color="#FFBE75"/></linearGradient>
+<style><![CDATA[
+.strong{font:700 20px Arial,Helvetica,sans-serif;fill:#F3F8FF}
+.small{font:13px Arial,Helvetica,sans-serif;fill:#C1DDEB}
+.tag{font:700 11px Arial,Helvetica,sans-serif;fill:#9CF8DE;letter-spacing:1px}
+.dot{animation:travel 6s ease-in-out infinite}
+.pulse{animation:pop 3s ease-in-out infinite}
+@keyframes travel{0%{transform:translateX(0);opacity:0}10%{opacity:1}85%{opacity:1}100%{transform:translateX(820px);opacity:0}}
+@keyframes pop{0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+]]></style></defs>
+<rect width="1200" height="286" rx="20" fill="url(#fBg)"/>
+<text x="35" y="43" class="tag">EXPLAINABLE OPERATIONS · ORIGINAL MOTION CONCEPT</text>
+<path d="M132 133H1071" stroke="url(#fLine)" stroke-width="4" stroke-dasharray="12 9" opacity=".7"/>
+<circle cx="133" cy="133" r="8" fill="#56F0D0" class="dot"/>
+
+<rect x="43" y="78" width="250" height="116" rx="15" fill="#153F58" stroke="#56F0D0" stroke-opacity=".8"/>
+<rect x="58" y="93" width="35" height="28" rx="8" fill="#56F0D0" fill-opacity=".18"/>
+<text x="65" y="112" class="tag" fill="#56F0D0">01</text>
+<text x="59" y="152" class="strong">SOURCE</text>
+<text x="59" y="177" class="small">Booking / Room</text>
+<circle cx="269" cy="102" r="5" fill="#56F0D0" class="pulse"/>
+
+<rect x="325" y="78" width="250" height="116" rx="15" fill="#153F58" stroke="#839DFE" stroke-opacity=".8"/>
+<rect x="340" y="93" width="35" height="28" rx="8" fill="#839DFE" fill-opacity=".18"/>
+<text x="347" y="112" class="tag" fill="#839DFE">02</text>
+<text x="341" y="152" class="strong">RULE CHECK</text>
+<text x="341" y="177" class="small">Policy / Occupancy</text>
+<circle cx="551" cy="102" r="5" fill="#839DFE" class="pulse"/>
+
+<rect x="607" y="78" width="250" height="116" rx="15" fill="#153F58" stroke="#AF8CFF" stroke-opacity=".8"/>
+<rect x="622" y="93" width="35" height="28" rx="8" fill="#AF8CFF" fill-opacity=".18"/>
+<text x="629" y="112" class="tag" fill="#AF8CFF">03</text>
+<text x="623" y="152" class="strong">AI NARRATION</text>
+<text x="623" y="177" class="small">Reason / Evidence</text>
+<circle cx="833" cy="102" r="5" fill="#AF8CFF" class="pulse"/>
+
+<rect x="889" y="78" width="250" height="116" rx="15" fill="#153F58" stroke="#FFC576" stroke-opacity=".8"/>
+<rect x="904" y="93" width="35" height="28" rx="8" fill="#FFC576" fill-opacity=".18"/>
+<text x="911" y="112" class="tag" fill="#FFC576">04</text>
+<text x="905" y="152" class="strong">STAFF REVIEW</text>
+<text x="905" y="177" class="small">Approve or reject</text>
+<circle cx="1115" cy="102" r="5" fill="#FFC576" class="pulse"/>
+
+<text x="34" y="240" class="small">Fictional read-only demonstration. No identity submission, payment, live PMS action or automated approval.</text>
+<text x="35" y="264" class="tag">HUMAN-IN-CONTROL  /  REDUCED-MOTION FRIENDLY</text>
+</svg>
