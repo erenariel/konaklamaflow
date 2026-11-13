@@ -1,0 +1,1114 @@
+{
+  "schema_version": "0.5-fiction-only",
+  "property_id": "SAMPLE_HOTEL_01",
+  "as_of": "2026-11-13",
+  "default_currency": "TRY",
+  "fictional": true,
+  "privacy_policy": "SYNTHETIC_NO_REAL_IDENTITIES",
+  "rooms": [
+    {
+      "id": "B01",
+      "category": "economy",
+      "capacity": 2,
+      "bed": "double",
+      "floor": -1,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "B02",
+      "category": "economy",
+      "capacity": 2,
+      "bed": "double",
+      "floor": -1,
+      "housekeeping": "dirty",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "101",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 1,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "102",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 1,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "103",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "twin",
+      "floor": 1,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "104",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 1,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "201",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 2,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "202",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 2,
+      "housekeeping": "dirty",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "203",
+      "category": "standard",
+      "capacity": 2,
+      "bed": "twin",
+      "floor": 2,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "301",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 3,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "302",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "twin",
+      "floor": 3,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "303",
+      "category": "deluxe",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 3,
+      "housekeeping": "dirty",
+      "assets": [
+        "tv",
+        "air_conditioning",
+        "balcony"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "304",
+      "category": "triple",
+      "capacity": 3,
+      "bed": "flex",
+      "floor": 3,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "401",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "twin",
+      "floor": 4,
+      "housekeeping": "out_of_order",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": true,
+      "notes": null
+    },
+    {
+      "id": "402",
+      "category": "superior",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 4,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "403",
+      "category": "deluxe",
+      "capacity": 2,
+      "bed": "double",
+      "floor": 4,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "404",
+      "category": "family",
+      "capacity": 4,
+      "bed": "flex",
+      "floor": 4,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    },
+    {
+      "id": "405",
+      "category": "family",
+      "capacity": 4,
+      "bed": "flex",
+      "floor": 4,
+      "housekeeping": "inspected",
+      "assets": [
+        "tv",
+        "air_conditioning"
+      ],
+      "blocked": false,
+      "notes": null
+    }
+  ],
+  "agencies": [
+    {
+      "id": "DIRECT",
+      "name": "Doğrudan / Walk-in",
+      "legal_name": null,
+      "type": "direct",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "BOOKING",
+      "name": "Booking.com (DEMO)",
+      "legal_name": "Demo Booking Travel A.Ş.",
+      "type": "ota",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "EXPEDIA",
+      "name": "Expedia (DEMO)",
+      "legal_name": "Demo Expedia Seyahat Ltd.",
+      "type": "ota",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "TRIP",
+      "name": "Trip.com (DEMO)",
+      "legal_name": "Demo Trip Seyahat Ltd.",
+      "type": "ota",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "CTRIP",
+      "name": "Ctrip (DEMO)",
+      "legal_name": "Demo Ctrip Travel Co.",
+      "type": "ota",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "HOTELBEDS",
+      "name": "Hotelbeds (DEMO)",
+      "legal_name": "Demo Hotelbeds Turizm A.Ş.",
+      "type": "wholesale",
+      "city_ledger_terms_days": 30,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "AGODA",
+      "name": "Agoda (DEMO)",
+      "legal_name": "Demo Agoda Travel Ltd.",
+      "type": "ota",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "AIRBNB",
+      "name": "Airbnb (DEMO)",
+      "legal_name": "Demo Airbnb Partner Ltd.",
+      "type": "ota",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    },
+    {
+      "id": "AGENCY",
+      "name": "Kurumsal acente (DEMO)",
+      "legal_name": "Demo Corporate Travel A.Ş.",
+      "type": "agency",
+      "city_ledger_terms_days": 14,
+      "settlement_currency": "EUR"
+    }
+  ],
+  "guests": [
+    {
+      "id": "GUEST_DEMO_001",
+      "surname": "DEMO_01",
+      "given_name": "ÖRNEK",
+      "identity_type": "national_id",
+      "country": "TR",
+      "preferred_language": "tr",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_002",
+      "surname": "DEMO_02",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_003",
+      "surname": "DEMO_03",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_004",
+      "surname": "DEMO_04",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_005",
+      "surname": "DEMO_05",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_006",
+      "surname": "DEMO_06",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_007",
+      "surname": "DEMO_07",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_008",
+      "surname": "DEMO_08",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    },
+    {
+      "id": "GUEST_DEMO_009",
+      "surname": "DEMO_09",
+      "given_name": "ÖRNEK",
+      "identity_type": "passport",
+      "country": "DE",
+      "preferred_language": "en",
+      "title": "unspecified",
+      "gender": "unspecified",
+      "identity_number": null,
+      "turkish_national_id": null,
+      "birth_place": null,
+      "date_of_birth": null,
+      "address": null,
+      "telephone": null,
+      "email": null,
+      "privacy_status": "NO_REAL_PERSONAL_DATA"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "KFD-2026-0001",
+      "name": "ÖRNEK REZERVASYON A",
+      "group_name": null,
+      "checkin": "2026-11-12",
+      "checkout": "2026-11-15",
+      "agency_id": "BOOKING",
+      "agency_ref": "DEMO_BOOK_1",
+      "status": "in_house",
+      "board": "BB",
+      "payment_type": "city_ledger",
+      "commission_type": "net",
+      "option_expiry": null,
+      "rooms": [
+        {
+          "room_id": "101",
+          "category": "standard",
+          "adults": 2,
+          "children": 0,
+          "guest_ids": [
+            "GUEST_DEMO_001",
+            "GUEST_DEMO_002"
+          ],
+          "nightly_rates": [
+            {
+              "date": "2026-11-12",
+              "amount": "75.00"
+            },
+            {
+              "date": "2026-11-13",
+              "amount": "80.00"
+            },
+            {
+              "date": "2026-11-14",
+              "amount": "80.00"
+            }
+          ]
+        }
+      ],
+      "currency": "EUR",
+      "notes": "Demo rezervasyonu",
+      "special_requests": [
+        "quiet"
+      ]
+    },
+    {
+      "id": "KFD-2026-0002",
+      "name": "ÖRNEK GRUP B",
+      "group_name": "DEMO GROUP B",
+      "checkin": "2026-11-13",
+      "checkout": "2026-11-16",
+      "agency_id": "HOTELBEDS",
+      "agency_ref": "DEMO_HB_2",
+      "status": "confirmed",
+      "board": "BB",
+      "payment_type": "city_ledger",
+      "commission_type": "net",
+      "option_expiry": null,
+      "rooms": [
+        {
+          "room_id": "301",
+          "category": "superior",
+          "adults": 2,
+          "children": 0,
+          "guest_ids": [
+            "GUEST_DEMO_003"
+          ],
+          "nightly_rates": [
+            {
+              "date": "2026-11-13",
+              "amount": "110.00"
+            },
+            {
+              "date": "2026-11-14",
+              "amount": "120.00"
+            },
+            {
+              "date": "2026-11-15",
+              "amount": "120.00"
+            }
+          ]
+        },
+        {
+          "room_id": "302",
+          "category": "superior",
+          "adults": 2,
+          "children": 0,
+          "guest_ids": [
+            "GUEST_DEMO_004"
+          ],
+          "nightly_rates": [
+            {
+              "date": "2026-11-13",
+              "amount": "100.00"
+            },
+            {
+              "date": "2026-11-14",
+              "amount": "100.00"
+            },
+            {
+              "date": "2026-11-15",
+              "amount": "105.00"
+            }
+          ]
+        }
+      ],
+      "currency": "EUR",
+      "notes": "Birden fazla oda örneği",
+      "special_requests": [
+        "twin_if_possible"
+      ]
+    },
+    {
+      "id": "KFD-2026-0003",
+      "name": "ÖRNEK MİSAFİR C",
+      "group_name": null,
+      "checkin": "2026-11-13",
+      "checkout": "2026-11-14",
+      "agency_id": "DIRECT",
+      "agency_ref": "DEMO_DIRECT_3",
+      "status": "confirmed",
+      "board": "RO",
+      "payment_type": "self_payment",
+      "commission_type": "none",
+      "option_expiry": null,
+      "rooms": [
+        {
+          "room_id": "304",
+          "category": "triple",
+          "adults": 3,
+          "children": 0,
+          "guest_ids": [
+            "GUEST_DEMO_005"
+          ],
+          "nightly_rates": [
+            {
+              "date": "2026-11-13",
+              "amount": "3800.00"
+            }
+          ]
+        }
+      ],
+      "currency": "TRY",
+      "notes": null,
+      "special_requests": []
+    },
+    {
+      "id": "KFD-2026-0004",
+      "name": "ÖRNEK MİSAFİR D",
+      "group_name": null,
+      "checkin": "2026-11-14",
+      "checkout": "2026-11-18",
+      "agency_id": "EXPEDIA",
+      "agency_ref": "DEMO_EXP_4",
+      "status": "option",
+      "board": "HB",
+      "payment_type": "self_payment",
+      "commission_type": "commission",
+      "option_expiry": "2026-11-14",
+      "rooms": [
+        {
+          "room_id": null,
+          "category": "deluxe",
+          "adults": 2,
+          "children": 0,
+          "guest_ids": [
+            "GUEST_DEMO_006"
+          ],
+          "nightly_rates": [
+            {
+              "date": "2026-11-14",
+              "amount": "140.00"
+            },
+            {
+              "date": "2026-11-15",
+              "amount": "140.00"
+            },
+            {
+              "date": "2026-11-16",
+              "amount": "145.00"
+            },
+            {
+              "date": "2026-11-17",
+              "amount": "150.00"
+            }
+          ]
+        }
+      ],
+      "currency": "EUR",
+      "notes": "Opsiyon tarihli",
+      "special_requests": []
+    },
+    {
+      "id": "KFD-2026-0005",
+      "name": "ÖRNEK MİSAFİR E",
+      "group_name": null,
+      "checkin": "2026-11-14",
+      "checkout": "2026-11-16",
+      "agency_id": "TRIP",
+      "agency_ref": "DEMO_TRIP_5",
+      "status": "waitlist",
+      "board": "BB",
+      "payment_type": "city_ledger",
+      "commission_type": "net",
+      "option_expiry": null,
+      "rooms": [
+        {
+          "room_id": null,
+          "category": "family",
+          "adults": 2,
+          "children": 2,
+          "guest_ids": [
+            "GUEST_DEMO_007"
+          ],
+          "nightly_rates": [
+            {
+              "date": "2026-11-14",
+              "amount": "180.00"
+            },
+            {
+              "date": "2026-11-15",
+              "amount": "185.00"
+            }
+          ]
+        }
+      ],
+      "currency": "EUR",
+      "notes": "Bekleme listesi",
+      "special_requests": []
+    },
+    {
+      "id": "KFD-2026-0006",
+      "name": "ÖRNEK MİSAFİR F",
+      "group_name": null,
+      "checkin": "2026-11-13",
+      "checkout": "2026-11-15",
+      "agency_id": "AGODA",
+      "agency_ref": "DEMO_AGODA_6",
+      "status": "cancelled",
+      "board": "BB",
+      "payment_type": "self_payment",
+      "commission_type": "commission",
+      "option_expiry": null,
+      "rooms": [
+        {
+          "room_id": null,
+          "category": "standard",
+          "adults": 2,
+          "children": 0,
+          "guest_ids": [],
+          "nightly_rates": [
+            {
+              "date": "2026-11-13",
+              "amount": "82.00"
+            },
+            {
+              "date": "2026-11-14",
+              "amount": "82.00"
+            }
+          ]
+        }
+      ],
+      "currency": "EUR",
+      "notes": "İptal örneği",
+      "special_requests": []
+    }
+  ],
+  "folios": [
+    {
+      "id": "FOL-001",
+      "reservation_id": "KFD-2026-0001",
+      "room_id": "101",
+      "payer_type": "agency",
+      "agency_id": "BOOKING",
+      "status": "open",
+      "currency": "EUR",
+      "invoice_status": "not_issued",
+      "invoice_region": "TR",
+      "explanation": "Demo agency folio",
+      "postings": [
+        {
+          "id": "P1",
+          "date": "2026-11-12",
+          "kind": "ROOM",
+          "description": "Konaklama (1 gece)",
+          "amount": "75.00"
+        },
+        {
+          "id": "P2",
+          "date": "2026-11-12",
+          "kind": "RESTAURANT",
+          "description": "Restoran",
+          "amount": "15.00"
+        },
+        {
+          "id": "P3",
+          "date": "2026-11-12",
+          "kind": "MINIBAR",
+          "description": "Minibar",
+          "amount": "5.00"
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY1",
+          "date": "2026-11-12",
+          "method": "cash",
+          "amount": "20.00",
+          "reference": "DEMO_CASH"
+        }
+      ],
+      "city_ledger_due": "2026-11-27",
+      "agency_invoice_reference": "DEMO_INV_NOT_ISSUED"
+    },
+    {
+      "id": "FOL-002",
+      "reservation_id": "KFD-2026-0002",
+      "room_id": "301",
+      "payer_type": "agency",
+      "agency_id": "HOTELBEDS",
+      "status": "open",
+      "currency": "EUR",
+      "invoice_status": "not_issued",
+      "invoice_region": "TR",
+      "explanation": "Demo City Ledger",
+      "postings": [
+        {
+          "id": "P4",
+          "date": "2026-11-13",
+          "kind": "ROOM",
+          "description": "Oda",
+          "amount": "110.00"
+        },
+        {
+          "id": "P5",
+          "date": "2026-11-13",
+          "kind": "TRANSFER",
+          "description": "Transfer",
+          "amount": "50.00"
+        }
+      ],
+      "payments": [],
+      "city_ledger_due": "2026-12-13",
+      "agency_invoice_reference": null
+    },
+    {
+      "id": "FOL-003",
+      "reservation_id": "KFD-2026-0003",
+      "room_id": "304",
+      "payer_type": "guest",
+      "agency_id": null,
+      "status": "open",
+      "currency": "TRY",
+      "invoice_status": "draft",
+      "invoice_region": "TR",
+      "explanation": "Örnek bireysel folyo",
+      "postings": [
+        {
+          "id": "P6",
+          "date": "2026-11-13",
+          "kind": "ROOM",
+          "description": "Oda",
+          "amount": "3800.00"
+        },
+        {
+          "id": "P7",
+          "date": "2026-11-13",
+          "kind": "EXTRA_BED",
+          "description": "Ekstra yatak",
+          "amount": "450.00"
+        }
+      ],
+      "payments": [
+        {
+          "id": "PAY2",
+          "date": "2026-11-12",
+          "method": "bank_transfer",
+          "amount": "1000.00",
+          "reference": "DEMO_ADVANCE"
+        }
+      ],
+      "city_ledger_due": null,
+      "agency_invoice_reference": null
+    }
+  ],
+  "report_catalog": [
+    {
+      "id": "active_folios",
+      "label": "Aktif Folyolar",
+      "status": "implemented"
+    },
+    {
+      "id": "monthly_revenue",
+      "label": "Aylık Detaylı Gelir",
+      "status": "implemented"
+    },
+    {
+      "id": "detailed_revenue",
+      "label": "Detaylı Gelir",
+      "status": "implemented"
+    },
+    {
+      "id": "folio_analysis",
+      "label": "Folyo Analiz",
+      "status": "implemented"
+    },
+    {
+      "id": "daily_balance",
+      "label": "Günlük Denge",
+      "status": "implemented"
+    },
+    {
+      "id": "trial_balance",
+      "label": "Günlük Mizan",
+      "status": "requires_accounting"
+    },
+    {
+      "id": "transactions",
+      "label": "Hareketler",
+      "status": "implemented"
+    },
+    {
+      "id": "grouped_transactions",
+      "label": "Gruplu Hareketler",
+      "status": "implemented"
+    },
+    {
+      "id": "fiscal_list",
+      "label": "Maliye Listesi",
+      "status": "requires_fiscal"
+    },
+    {
+      "id": "room_list",
+      "label": "Oda Listesi",
+      "status": "implemented"
+    },
+    {
+      "id": "room_rate_control",
+      "label": "Oda Fiyat Kontrol",
+      "status": "implemented"
+    },
+    {
+      "id": "agency_monthly",
+      "label": "Acente Aylık Performans",
+      "status": "implemented"
+    },
+    {
+      "id": "agency_sales",
+      "label": "Acente Satış Detayı",
+      "status": "implemented"
+    },
+    {
+      "id": "agency_annual",
+      "label": "Acente Yıllık Kümülatif Performans",
+      "status": "implemented"
+    },
+    {
+      "id": "checkin_cancellations",
+      "label": "Check-in İptal",
+      "status": "requires_audit"
+    },
+    {
+      "id": "linen_list",
+      "label": "Çarşaf Listesi",
+      "status": "requires_housekeeping"
+    },
+    {
+      "id": "budget_analysis",
+      "label": "Bütçe Analiz",
+      "status": "requires_budget"
+    },
+    {
+      "id": "blockage_report",
+      "label": "Blokaj",
+      "status": "implemented"
+    },
+    {
+      "id": "it_report",
+      "label": "Bilgi İşlem",
+      "status": "requires_system_logs"
+    },
+    {
+      "id": "extra_bed",
+      "label": "Ekstra Yatak",
+      "status": "implemented"
+    },
+    {
+      "id": "email_report",
+      "label": "E-posta Gönderim",
+      "status": "requires_mail_permissions"
+    },
+    {
+      "id": "safe_deposit",
+      "label": "Emanet Kasa",
+      "status": "requires_safe_ledger"
+    },
+    {
+      "id": "advance_payment",
+      "label": "Erken Ödeme",
+      "status": "implemented"
+    },
+    {
+      "id": "posting_invoice",
+      "label": "Fatura Posting Detay",
+      "status": "implemented"
+    },
+    {
+      "id": "invoice_register",
+      "label": "Fatura Listesi",
+      "status": "requires_invoicing"
+    },
+    {
+      "id": "income_expense",
+      "label": "Gelir Gider",
+      "status": "requires_expense_ledger"
+    },
+    {
+      "id": "revenue_management",
+      "label": "Gelir Yönetimi",
+      "status": "requires_rm_data"
+    },
+    {
+      "id": "occupancy",
+      "label": "Doluluk",
+      "status": "implemented"
+    },
+    {
+      "id": "city_ledger",
+      "label": "City Ledger Acente Alacakları",
+      "status": "implemented"
+    },
+    {
+      "id": "exchange_rates",
+      "label": "Kur Takibi",
+      "status": "implemented"
+    },
+    {
+      "id": "reservation_list",
+      "label": "Rezervasyon Listesi",
+      "status": "implemented"
+    },
+    {
+      "id": "guest_list",
+      "label": "Misafirler",
+      "status": "implemented"
+    }
+  ],
+  "fx_rates": [
+    {
+      "currency": "EUR",
+      "to": "TRY",
+      "rate": "50.0000",
+      "as_of": "2026-11-13",
+      "source": "FICTIONAL_DEMO_RATE"
+    },
+    {
+      "currency": "USD",
+      "to": "TRY",
+      "rate": "43.0000",
+      "as_of": "2026-11-13",
+      "source": "FICTIONAL_DEMO_RATE"
+    },
+    {
+      "currency": "GBP",
+      "to": "TRY",
+      "rate": "57.0000",
+      "as_of": "2026-11-13",
+      "source": "FICTIONAL_DEMO_RATE"
+    }
+  ],
+  "payment_methods": [
+    "cash",
+    "credit_card",
+    "mail_order",
+    "bank_transfer"
+  ],
+  "board_types": [
+    "BB",
+    "HB",
+    "RO",
+    "FB"
+  ],
+  "reservation_statuses": [
+    "confirmed",
+    "option",
+    "waitlist",
+    "cancelled",
+    "in_house",
+    "checked_out"
+  ],
+  "report_versions": {
+    "accounting": "not_configured",
+    "fiscal": "not_configured",
+    "hotel_clock": "2026-11-13"
+  },
+  "contact_fields_schema": [
+    "customer_id",
+    "surname",
+    "given_name",
+    "identity_type",
+    "country",
+    "preferred_language",
+    "title",
+    "gender",
+    "identity_number",
+    "turkish_national_id",
+    "birth_place",
+    "date_of_birth",
+    "address",
+    "telephone",
+    "email"
+  ]
+}

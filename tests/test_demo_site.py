@@ -10,8 +10,10 @@ class DemoSiteTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             site = Path(directory)/'site'
             stage_site(site)
-            self.assertEqual((site/'index.html').read_bytes(),(ROOT/'demo/hotel-suite.html').read_bytes())
-            self.assertEqual((site/'index.html').read_bytes(),(site/'hotel-suite.html').read_bytes())
+            self.assertEqual((site/'index.html').read_bytes(),(ROOT/'demo/v04-integrated-preview.html').read_bytes())
+            self.assertEqual((site/'index.html').read_bytes(),(site/'hotel-operations.html').read_bytes())
+            self.assertEqual((site/'hotel-suite.html').read_bytes(),(ROOT/'demo/hotel-suite.html').read_bytes())
+            self.assertEqual((site/'global-presentation.html').read_bytes(),(ROOT/'demo/global-presentation-concept.html').read_bytes())
             self.assertEqual((site/'reviewer.html').read_bytes(),(ROOT/'demo/viewer.html').read_bytes())
             self.assertEqual((site/'operations.html').read_bytes(),(ROOT/'demo/operations.html').read_bytes())
             self.assertEqual({p.name for p in site.iterdir()},set(PUBLIC_ASSETS)|{'.nojekyll'})

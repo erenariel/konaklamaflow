@@ -31,6 +31,8 @@ jobs:
           python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12 --at-time 14:01 --output /tmp/ops-report.json
           python -m konaklamaflow.experience_cli examples/fictional-hotel.json /tmp/suite-report.json
           python scripts/generate_suite_demo.py --check
+          python scripts/generate_hotel_ops_demo.py --check
+          node --check demo/hotel-ops-module.js
           python scripts/stage_demo_site.py --output /tmp/demo-site
 
   browser:
@@ -46,3 +48,21 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - name: Check offline viewer and report imports
         run: python -m unittest discover -s tests/browser -v
+      - name: Verify themes, modes and offline screenshots
+        run: python scripts/verify_demo_experience.py --output /tmp/demo-experience
+      - name: Preserve visual verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-experience-${{ github.sha }}
+          path: /tmp/demo-experience
+          if-no-files-found: error
+          retention-days: 14
+      - name: Downloadable v0.4 offline preview (synthetic data only)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: konaklamaflow-v04-preview-${{ github.sha }}
+          path: demo/v04-integrated-preview.html
+          if-no-files-found: error
+          retention-days: 14

@@ -31,6 +31,44 @@ class TestBrowserSuite(unittest.TestCase):
         # file:// initial document request is expected; all network requests rejected.
         self.assertEqual([url for url in self.requests if not url.startswith('file://')],[])
         self.page.close()
+    def test_visual_theme_and_presentation_do_not_change_rule_report(self):
+        original=self.page.evaluate('() => JSON.stringify(INITIAL_EVALUATION)')
+        self.assertEqual(self.page.locator('#kfTheme').input_value(),'light')
+        self.page.locator('#kfTheme').select_option('dark')
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfTheme'),'dark')
+        self.page.locator('#kfTheme').select_option('night')
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfTheme'),'night')
+        self.page.locator('#kfMode').click()
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMode'),'presentation')
+        self.assertEqual(self.page.locator('#kfMode').get_attribute('aria-pressed'),'true')
+        self.assertEqual(self.page.locator('nav button').count(),10)
+        self.assertEqual(self.page.evaluate('() => JSON.stringify(INITIAL_EVALUATION)'),original)
+        self.assertFalse(self.page.evaluate('() => reportStale'))
+        self.assertFalse(self.page.locator('#exportButton').is_disabled())
+        self.page.locator('#kfMode').click()
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMode'),'operator')
+
+    def test_visual_motion_toggle_and_reduced_motion(self):
+        toggle=self.page.locator('#kfMotion')
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'on')
+        toggle.click()
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'off')
+        toggle.click()
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'on')
+        self.page.emulate_media(reduced_motion='reduce')
+        # CSP forbids string-eval; Playwright locator polling needs no unsafe-eval.
+        self.page.locator('html[data-kf-motion="off"]').wait_for(state='attached',timeout=5000)
+        self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfMotion'),'off')
+        self.assertTrue(toggle.is_disabled())
+
+    def test_visual_modes_keep_mobile_body_in_bounds(self):
+        for width in (320,375,768):
+            self.page.set_viewport_size({'width':width,'height':800})
+            for mode in ('presentation','operator'):
+                if (self.page.evaluate('() => document.documentElement.dataset.kfMode')!=mode):
+                    self.page.locator('#kfMode').click()
+                self.assertTrue(self.page.evaluate('() => document.documentElement.scrollWidth <= window.innerWidth'),(width,mode))
+
     def test_dashboard_metrics(self):
         self.assertIn('Resepsiyon kontrol merkezi',self.page.locator('h1').inner_text())
         self.assertIn('18',self.page.locator('.metrics').inner_text())
