@@ -2,18 +2,18 @@
   "kind": "ACTUAL_INTEGRATED_FICTIONAL_BROWSER_SHOWCASE",
   "profile": "overview-pulse",
   "source": "demo/v04-integrated-preview.html",
-  "source_commit": "778e848a4e09ab5930a715d00aefd3ea8fbae683",
-  "source_has_uncommitted_changes": true,
+  "source_commit": "bda3eb363960f8b41af114f2a2cd0cb24a8c91bb",
+  "source_has_uncommitted_changes": false,
   "browser_version": "151.0.7922.34",
   "viewport": {
     "width": 1440,
     "height": 900
   },
-  "html_sha256": "4456564f9354fb3460d505389d5ecf22e944fc44141ec672d602023d51ffde0d",
+  "html_sha256": "895a44d9db7b3a2b398d5d421641602fc00d23be9b78398f0ac6385ee86a3f37",
   "snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10",
   "report_sha256": "3242b77496e011286574c1e9515d3519c020bb0f361f0df1449d96075a398013",
-  "gif_sha256": "8a5aa223a5762ee103990004ce4ab4eda89e223a53d5a560fa183ea7a02b0ebe",
-  "poster_sha256": "bf737758f4bc4295f7b82e3bd5a3d2343a4757bc718a2dbd7edcc030ac576aca",
+  "gif_sha256": "21adfce70571651377d670af4b7a3d0286250416030bb85c04f817d186b6a1b9",
+  "poster_sha256": "c8fdecefeb0bef2f95b85725aa728ca27dfa718c3f53525534946dd2a3db3e33",
   "frames": 26,
   "fps": 2,
   "observed_story_steps": [
