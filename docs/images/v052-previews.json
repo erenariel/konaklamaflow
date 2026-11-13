@@ -1,9 +1,9 @@
 {
   "kind": "ACTUAL_OFFLINE_BROWSER_SCREENSHOTS",
-  "source_commit": "b73f393f030232a996048a9f422139b3185224c2",
+  "source_commit": "fdf23bafe426a90c94113ffc8eb5ce4852989112",
   "source_has_uncommitted_changes": false,
   "source_files": {
-    "v04-integrated-preview.html": "8bdf1e0688d9ddab65ce81216aee25895d5073e036534301ab7de43738cd9a02",
+    "v04-integrated-preview.html": "113d3328f1e471cb09bca9f72799877691d904a52e54bc6b8ce6cb5da70426ea",
     "global-presentation-concept.html": "802c3241dbed2727369faa65f9be63b4840d065dc16912ddc6a31687806bd2ec",
     "viewer.html": "9a30569cbb39af9241ec75a77364cd952721f0328bb37373bbe2d0faa4ca6dae"
   },
@@ -18,7 +18,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "e4991babb49ba8793ce2e021c40a35b43c35f44da177940fcd531098dc8c337f"
+      "sha256": "f6605e0b6e094202ff933d55d7edb4c6ef8b39b34a606ae40ec5ecf844cd1c52"
     },
     {
       "file": "v052-overview-1440.png",
@@ -28,7 +28,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "57ffcef4e29f578c8ca2bfb7e66d3f905cc10aa84da158b25cc34c22ea0cb1dd"
+      "sha256": "0a0b651dbcfc785f48d51bfbfa9f57cca1356012a1149e51576d6cd10b0c9c96"
     },
     {
       "file": "v052-overview-1600.png",
@@ -38,7 +38,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "32d085ba489de17cf651a941de7c3d89c81bf89ec79024a07a043fb864f1b6a7"
+      "sha256": "1fc69d95e5555eff4e9963501303b035401ff39b387040072c1ec30e6db4a4b9"
     },
     {
       "file": "v052-overview-dark.png",
@@ -48,7 +48,7 @@
       "locale": "en",
       "theme": "dark",
       "body_within_viewport": true,
-      "sha256": "77cea308b43fda4c089857cc2f258206abefa3960e64cdef69eb4b63772b1a67"
+      "sha256": "d83ac774459f1424b707188dca9bae7f2b7d91da7aec17cb5e5607db88e40a2c"
     },
     {
       "file": "v052-overview-night.png",
@@ -58,7 +58,7 @@
       "locale": "en",
       "theme": "night",
       "body_within_viewport": true,
-      "sha256": "73f132ba2b42f9e190c62adbf69afd44ed437c9d046618ce88b53dad12268adb"
+      "sha256": "61f2df24c6fe54ca10db22959c8f47d40f8dd0412a456aaead8d2ebb21013562"
     },
     {
       "file": "v052-overview-rtl.png",
@@ -68,7 +68,7 @@
       "locale": "ar",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "08108f1bbe0af1333eaf5aacd8f166d39b791409784cfa57b4b7402907534d56"
+      "sha256": "61d0d9246983ca0b02841f74cbc4997e631928f8393a7808fe255cf20b99eabb"
     },
     {
       "file": "v052-mobile.png",
@@ -78,7 +78,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "1b6fc22061c86348bcc316847bb63bce5b1184be76a027c98dba6201a44d56d6"
+      "sha256": "16477962bd6cb33b1ff5d38853c50190ac3167dceeacfe8d958358007da0f8ea"
     },
     {
       "file": "v052-global-presentation.png",
@@ -108,7 +108,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "8ed83d11e401585090a8f3e4bf2492f35dce7ccd328316be25eb1102e18e9c37"
+      "sha256": "b8faa3636c03d0cd037802e780ba38d1ae22bb89c46ae9328962193b64c2e875"
     }
   ],
   "fictional": true,
