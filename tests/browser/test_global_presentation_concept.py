@@ -123,7 +123,8 @@ class GlobalPresentationConceptBrowserTests(unittest.TestCase):
                 self.assertEqual(self.page.locator("#motion").get_attribute("aria-label"),
                                  self.page.evaluate("() => playbackLabels[state.lang].on"))
         self.page.emulate_media(reduced_motion="reduce")
-        self.assertEqual(self.page.locator("html").get_attribute("data-motion"), "off")
+        # Wait for the media-query change listener without CSP-unsafe string eval.
+        self.page.locator('html[data-motion="off"]').wait_for(state="attached", timeout=5000)
         self.assertTrue(self.page.locator("#motion").is_disabled())
         self.page.locator("#play").click()
         self.assertFalse(self.page.evaluate("() => state.playing"))
