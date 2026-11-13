@@ -35,8 +35,8 @@ class FullLanguageSwitchTests(unittest.TestCase):
         self.assertEqual(self.requests, [], "No translation or booking network access allowed")
         self.page.close()
 
-    def test_every_locale_changes_all_eighteen_nav_items_and_page_direction(self):
-        self.assertEqual(self.page.locator('nav [data-nav]').count(), 18)
+    def test_every_locale_changes_all_twenty_nav_items_and_page_direction(self):
+        self.assertEqual(self.page.locator('nav [data-nav]').count(), 20)
         self.assertEqual(self.page.locator('#globalLanguage').input_value(), "tr")
         for lang in LOCALES:
             self.page.locator('#globalLanguage').select_option(lang)
