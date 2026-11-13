@@ -1,9 +1,9 @@
 {
   "kind": "ACTUAL_OFFLINE_BROWSER_SCREENSHOTS",
-  "source_commit": "bda3eb363960f8b41af114f2a2cd0cb24a8c91bb",
+  "source_commit": "b73f393f030232a996048a9f422139b3185224c2",
   "source_has_uncommitted_changes": false,
   "source_files": {
-    "v04-integrated-preview.html": "895a44d9db7b3a2b398d5d421641602fc00d23be9b78398f0ac6385ee86a3f37",
+    "v04-integrated-preview.html": "8bdf1e0688d9ddab65ce81216aee25895d5073e036534301ab7de43738cd9a02",
     "global-presentation-concept.html": "802c3241dbed2727369faa65f9be63b4840d065dc16912ddc6a31687806bd2ec",
     "viewer.html": "9a30569cbb39af9241ec75a77364cd952721f0328bb37373bbe2d0faa4ca6dae"
   },

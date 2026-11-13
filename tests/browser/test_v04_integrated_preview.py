@@ -49,7 +49,7 @@ class V04WorkbenchPreviewTests(unittest.TestCase):
 
     def test_ten_language_live_panel_relabels_without_altering_decisions(self):
         initial = self.page.evaluate("() => JSON.stringify(INITIAL_EVALUATION)")
-        original_row = REPORT["arrivals"][0]
+        original_row = next(row for row in REPORT["arrivals"] if row["status"] == "blocked" and len(row["blockers"]) >= 3)
         self.assertEqual(self.page.locator("#v04Booking").input_value(), original_row["task_id"])
         for lang in LANGS:
             with self.subTest(lang=lang):
@@ -58,7 +58,7 @@ class V04WorkbenchPreviewTests(unittest.TestCase):
                 self.assertEqual(self.page.locator("#v04Global").get_attribute("dir"),
                                  "rtl" if lang in ("ar", "he") else "ltr")
                 expected = self.page.evaluate("""() => {
-                    const r=INITIAL_EVALUATION.arrivals[0],i=V04_CATALOG.codes.indexOf(r.blockers[0]);
+                    const r=INITIAL_EVALUATION.arrivals.find(x=>x.task_id===document.getElementById("v04Booking").value),i=V04_CATALOG.codes.indexOf(r.blockers[0]);
                     return V04_CATALOG.reasons[document.getElementById('v04Locale').value][i];
                 }""")
                 self.assertIn(expected, self.page.locator("#v04Reasons").inner_text())
