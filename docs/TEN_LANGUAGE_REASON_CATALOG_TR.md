@@ -47,3 +47,13 @@ The function recomputes the full rule report and rejects stale/tampered data. It
 - still no network, external API calls, writes or KBS
 
 Related: #19, #5, #9. Merge only after human review and successful CI.
+
+
+## CLI ile yerel çıktı üretimi
+
+```sh
+python -m konaklamaflow.experience_cli examples/fictional-hotel.json /tmp/konaklamaflow-report.json
+python -m konaklamaflow.reason_i18n_cli examples/fictional-hotel.json /tmp/konaklamaflow-report.json el-GR /tmp/greek-pre-review.json
+```
+
+Çıktıda yalnız sabit karar kodları, çevrilen açıklamalar, opaque task ID ve insan incelemesi sınırı bulunur; misafir adı, dış rezervasyon/PMS referansı veya finans tutarları bulunmaz. Desteklenmeyen geçerli dil kodu açıkça İngilizceye düşer. Bir rapor sonradan değişirse yeni bir çeviri ile yanıltıcı biçimde ilişkilendirilmez: CLI raporu yeniden değerlendirir ve önceki çıktı dosyasını değiştirmeden reddeder.
