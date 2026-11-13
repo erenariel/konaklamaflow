@@ -56,3 +56,11 @@ jobs:
           path: /tmp/demo-experience
           if-no-files-found: error
           retention-days: 14
+      - name: Downloadable v0.4 offline preview (synthetic data only)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: konaklamaflow-v04-preview-${{ github.sha }}
+          path: demo/v04-integrated-preview.html
+          if-no-files-found: error
+          retention-days: 14
