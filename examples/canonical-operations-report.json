@@ -22,7 +22,9 @@
       "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1001",
       "room_stay_id": "STAY-KF1001-A",
       "source_record_id": "FOL-CAN-KF1001",
-      "source_kind": "explicit_fictional_folio"
+      "source_kind": "explicit_fictional_folio",
+      "agency_id": null,
+      "booking_agency_id": "BOOKING"
     },
     {
       "folio_id": "FOL-CAN-KF1004",
@@ -41,7 +43,9 @@
       "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1004",
       "room_stay_id": "STAY-KF1004-A",
       "source_record_id": "FOL-CAN-KF1004",
-      "source_kind": "explicit_fictional_folio"
+      "source_kind": "explicit_fictional_folio",
+      "agency_id": null,
+      "booking_agency_id": "DIRECT"
     },
     {
       "folio_id": "FOL-CAN-KF1007",
@@ -60,7 +64,9 @@
       "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
       "room_stay_id": "STAY-KF1007-A",
       "source_record_id": "FOL-CAN-KF1007",
-      "source_kind": "explicit_fictional_folio"
+      "source_kind": "explicit_fictional_folio",
+      "agency_id": "HOTELBEDS",
+      "booking_agency_id": "HOTELBEDS"
     }
   ],
   "city_ledger": [
@@ -81,7 +87,9 @@
       "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
       "room_stay_id": "STAY-KF1007-A",
       "source_record_id": "FOL-CAN-KF1007",
-      "source_kind": "explicit_fictional_folio"
+      "source_kind": "explicit_fictional_folio",
+      "agency_id": "HOTELBEDS",
+      "booking_agency_id": "HOTELBEDS"
     }
   ],
   "reports": {
@@ -107,7 +115,9 @@
           "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1001",
           "room_stay_id": "STAY-KF1001-A",
           "source_record_id": "FOL-CAN-KF1001",
-          "source_kind": "explicit_fictional_folio"
+          "source_kind": "explicit_fictional_folio",
+          "agency_id": null,
+          "booking_agency_id": "BOOKING"
         },
         {
           "folio_id": "FOL-CAN-KF1004",
@@ -126,7 +136,9 @@
           "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1004",
           "room_stay_id": "STAY-KF1004-A",
           "source_record_id": "FOL-CAN-KF1004",
-          "source_kind": "explicit_fictional_folio"
+          "source_kind": "explicit_fictional_folio",
+          "agency_id": null,
+          "booking_agency_id": "DIRECT"
         },
         {
           "folio_id": "FOL-CAN-KF1007",
@@ -145,7 +157,9 @@
           "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
           "room_stay_id": "STAY-KF1007-A",
           "source_record_id": "FOL-CAN-KF1007",
-          "source_kind": "explicit_fictional_folio"
+          "source_kind": "explicit_fictional_folio",
+          "agency_id": "HOTELBEDS",
+          "booking_agency_id": "HOTELBEDS"
         }
       ],
       "source_state": "synthetic_snapshot",
@@ -216,6 +230,8 @@
           "room_stay_id": "STAY-KF1001-A",
           "room_id": "101",
           "currency": "EUR",
+          "agency_id": null,
+          "booking_agency_id": "BOOKING",
           "posting_id": "POST-CAN-KF1001",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -228,6 +244,8 @@
           "room_stay_id": "STAY-KF1004-A",
           "room_id": "104",
           "currency": "EUR",
+          "agency_id": null,
+          "booking_agency_id": "DIRECT",
           "posting_id": "POST-CAN-KF1004",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -240,6 +258,8 @@
           "room_stay_id": "STAY-KF1007-A",
           "room_id": "304",
           "currency": "EUR",
+          "agency_id": "HOTELBEDS",
+          "booking_agency_id": "HOTELBEDS",
           "posting_id": "POST-CAN-KF1007",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -292,7 +312,9 @@
           "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1001",
           "room_stay_id": "STAY-KF1001-A",
           "source_record_id": "FOL-CAN-KF1001",
-          "source_kind": "explicit_fictional_folio"
+          "source_kind": "explicit_fictional_folio",
+          "agency_id": null,
+          "booking_agency_id": "BOOKING"
         },
         {
           "folio_id": "FOL-CAN-KF1004",
@@ -311,7 +333,9 @@
           "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1004",
           "room_stay_id": "STAY-KF1004-A",
           "source_record_id": "FOL-CAN-KF1004",
-          "source_kind": "explicit_fictional_folio"
+          "source_kind": "explicit_fictional_folio",
+          "agency_id": null,
+          "booking_agency_id": "DIRECT"
         },
         {
           "folio_id": "FOL-CAN-KF1007",
@@ -330,7 +354,9 @@
           "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
           "room_stay_id": "STAY-KF1007-A",
           "source_record_id": "FOL-CAN-KF1007",
-          "source_kind": "explicit_fictional_folio"
+          "source_kind": "explicit_fictional_folio",
+          "agency_id": "HOTELBEDS",
+          "booking_agency_id": "HOTELBEDS"
         }
       ],
       "source_state": "synthetic_snapshot",
@@ -432,6 +458,8 @@
           "room_stay_id": "STAY-KF1001-A",
           "room_id": "101",
           "currency": "EUR",
+          "agency_id": null,
+          "booking_agency_id": "BOOKING",
           "posting_id": "POST-CAN-KF1001",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -444,6 +472,8 @@
           "room_stay_id": "STAY-KF1004-A",
           "room_id": "104",
           "currency": "EUR",
+          "agency_id": null,
+          "booking_agency_id": "DIRECT",
           "posting_id": "POST-CAN-KF1004",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -456,6 +486,8 @@
           "room_stay_id": "STAY-KF1007-A",
           "room_id": "304",
           "currency": "EUR",
+          "agency_id": "HOTELBEDS",
+          "booking_agency_id": "HOTELBEDS",
           "posting_id": "POST-CAN-KF1007",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -570,7 +602,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1009"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1009-A"
+          ]
         },
         {
           "id": "B02",
@@ -588,7 +626,9 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [],
+          "room_stay_ids": []
         },
         {
           "id": "101",
@@ -606,7 +646,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1001"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1001-A"
+          ]
         },
         {
           "id": "102",
@@ -622,7 +668,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1006"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1006-A"
+          ]
         },
         {
           "id": "103",
@@ -638,7 +690,9 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [],
+          "room_stay_ids": []
         },
         {
           "id": "104",
@@ -654,7 +708,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1004"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1004-A"
+          ]
         },
         {
           "id": "201",
@@ -670,7 +730,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1010"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1010-A"
+          ]
         },
         {
           "id": "202",
@@ -686,7 +752,9 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [],
+          "room_stay_ids": []
         },
         {
           "id": "203",
@@ -702,7 +770,9 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [],
+          "room_stay_ids": []
         },
         {
           "id": "301",
@@ -720,7 +790,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1008"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1008-A"
+          ]
         },
         {
           "id": "302",
@@ -736,7 +812,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1011"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1011-A"
+          ]
         },
         {
           "id": "303",
@@ -754,7 +836,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1003"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1003-A"
+          ]
         },
         {
           "id": "304",
@@ -770,7 +858,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1007"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1007-A"
+          ]
         },
         {
           "id": "401",
@@ -788,7 +882,9 @@
           "blocked": true,
           "room_block_ids": [
             "BLOCK-401-TECH"
-          ]
+          ],
+          "reservation_ids": [],
+          "room_stay_ids": []
         },
         {
           "id": "402",
@@ -806,7 +902,9 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [],
+          "room_stay_ids": []
         },
         {
           "id": "403",
@@ -822,7 +920,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1012"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1012-A"
+          ]
         },
         {
           "id": "404",
@@ -838,7 +942,13 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [
+            "KF1005"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1005-A"
+          ]
         },
         {
           "id": "405",
@@ -854,7 +964,9 @@
             "air_conditioning"
           ],
           "blocked": false,
-          "room_block_ids": []
+          "room_block_ids": [],
+          "reservation_ids": [],
+          "room_stay_ids": []
         }
       ],
       "source_state": "synthetic_snapshot",
@@ -1147,6 +1259,7 @@
       "status": "implemented",
       "rows": [
         {
+          "agency_id": "HOTELBEDS",
           "agency": "Hotelbeds (DEMO)",
           "month": "2026-11",
           "currency": "EUR",
@@ -1184,11 +1297,15 @@
         {
           "folio_id": "FOL-CAN-KF1007",
           "reservation_id": "KF1007",
+          "room_stay_id": "STAY-KF1007-A",
           "room_id": "304",
+          "currency": "EUR",
+          "agency_id": "HOTELBEDS",
+          "booking_agency_id": "HOTELBEDS",
+          "posting_id": "POST-CAN-KF1007",
           "date": "2026-11-12",
           "kind": "ROOM",
           "amount": "127.50",
-          "currency": "EUR",
           "description": "Explicit fictional room posting",
           "agency": "Hotelbeds (DEMO)",
           "legal_name": "Demo Hotelbeds Turizm A.Ş."
@@ -1223,6 +1340,7 @@
       "status": "implemented",
       "rows": [
         {
+          "agency_id": "HOTELBEDS",
           "agency": "Hotelbeds (DEMO)",
           "year": "2026",
           "currency": "EUR",
@@ -1739,6 +1857,8 @@
           "room_stay_id": "STAY-KF1001-A",
           "room_id": "101",
           "currency": "EUR",
+          "agency_id": null,
+          "booking_agency_id": "BOOKING",
           "posting_id": "POST-CAN-KF1001",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -1751,6 +1871,8 @@
           "room_stay_id": "STAY-KF1004-A",
           "room_id": "104",
           "currency": "EUR",
+          "agency_id": null,
+          "booking_agency_id": "DIRECT",
           "posting_id": "POST-CAN-KF1004",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -1763,6 +1885,8 @@
           "room_stay_id": "STAY-KF1007-A",
           "room_id": "304",
           "currency": "EUR",
+          "agency_id": "HOTELBEDS",
+          "booking_agency_id": "HOTELBEDS",
           "posting_id": "POST-CAN-KF1007",
           "date": "2026-11-12",
           "kind": "ROOM",
@@ -2261,7 +2385,9 @@
           "folio_note": "EXPLICIT_CANONICAL_FIXTURE KF1007",
           "room_stay_id": "STAY-KF1007-A",
           "source_record_id": "FOL-CAN-KF1007",
-          "source_kind": "explicit_fictional_folio"
+          "source_kind": "explicit_fictional_folio",
+          "agency_id": "HOTELBEDS",
+          "booking_agency_id": "HOTELBEDS"
         }
       ],
       "source_state": "synthetic_snapshot",
@@ -3176,189 +3302,378 @@
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1001_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Sophie Laurent",
+          "reservation_ids": [
+            "KF1001"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1001-A"
+          ]
         },
         {
           "id": "GUEST-KF1001-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1001_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1001 guest 2",
+          "reservation_ids": [
+            "KF1001"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1001-A"
+          ]
         },
         {
           "id": "GUEST-KF1002-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1002_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Mateo Costa",
+          "reservation_ids": [
+            "KF1002"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1002-A"
+          ]
         },
         {
           "id": "GUEST-KF1002-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1002_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1002 guest 2",
+          "reservation_ids": [
+            "KF1002"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1002-A"
+          ]
         },
         {
           "id": "GUEST-KF1003-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1003_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Emma Johnson",
+          "reservation_ids": [
+            "KF1003"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1003-A"
+          ]
         },
         {
           "id": "GUEST-KF1003-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1003_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1003 guest 2",
+          "reservation_ids": [
+            "KF1003"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1003-A"
+          ]
         },
         {
           "id": "GUEST-KF1004-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1004_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Daniel Reed",
+          "reservation_ids": [
+            "KF1004"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1004-A"
+          ]
         },
         {
           "id": "GUEST-KF1004-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1004_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1004 guest 2",
+          "reservation_ids": [
+            "KF1004"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1004-A"
+          ]
         },
         {
           "id": "GUEST-KF1005-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1005_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Isabella Moretti",
+          "reservation_ids": [
+            "KF1005"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1005-A"
+          ]
         },
         {
           "id": "GUEST-KF1005-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1005_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1005 guest 2",
+          "reservation_ids": [
+            "KF1005"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1005-A"
+          ]
         },
         {
           "id": "GUEST-KF1005-3",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1005_3",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1005 guest 3",
+          "reservation_ids": [
+            "KF1005"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1005-A"
+          ]
         },
         {
           "id": "GUEST-KF1005-4",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1005_4",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1005 guest 4",
+          "reservation_ids": [
+            "KF1005"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1005-A"
+          ]
         },
         {
           "id": "GUEST-KF1006-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1006_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Noah Fischer",
+          "reservation_ids": [
+            "KF1006"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1006-A"
+          ]
         },
         {
           "id": "GUEST-KF1006-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1006_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1006 guest 2",
+          "reservation_ids": [
+            "KF1006"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1006-A"
+          ]
         },
         {
           "id": "GUEST-KF1007-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1007_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Olivia Martin",
+          "reservation_ids": [
+            "KF1007"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1007-A"
+          ]
         },
         {
           "id": "GUEST-KF1007-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1007_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1007 guest 2",
+          "reservation_ids": [
+            "KF1007"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1007-A"
+          ]
         },
         {
           "id": "GUEST-KF1007-3",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1007_3",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1007 guest 3",
+          "reservation_ids": [
+            "KF1007"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1007-A"
+          ]
         },
         {
           "id": "GUEST-KF1008-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1008_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Lukas Weber",
+          "reservation_ids": [
+            "KF1008"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1008-A"
+          ]
         },
         {
           "id": "GUEST-KF1008-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1008_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1008 guest 2",
+          "reservation_ids": [
+            "KF1008"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1008-A"
+          ]
         },
         {
           "id": "GUEST-KF1009-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1009_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Ava Wilson",
+          "reservation_ids": [
+            "KF1009"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1009-A"
+          ]
         },
         {
           "id": "GUEST-KF1009-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1009_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1009 guest 2",
+          "reservation_ids": [
+            "KF1009"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1009-A"
+          ]
         },
         {
           "id": "GUEST-KF1010-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1010_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Leo Novak",
+          "reservation_ids": [
+            "KF1010"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1010-A"
+          ]
         },
         {
           "id": "GUEST-KF1010-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1010_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1010 guest 2",
+          "reservation_ids": [
+            "KF1010"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1010-A"
+          ]
         },
         {
           "id": "GUEST-KF1011-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1011_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Maya Chen",
+          "reservation_ids": [
+            "KF1011"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1011-A"
+          ]
         },
         {
           "id": "GUEST-KF1011-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1011_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1011 guest 2",
+          "reservation_ids": [
+            "KF1011"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1011-A"
+          ]
         },
         {
           "id": "GUEST-KF1012-1",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1012_1",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "Amelia Stone",
+          "reservation_ids": [
+            "KF1012"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1012-A"
+          ]
         },
         {
           "id": "GUEST-KF1012-2",
           "given_name": "ÖRNEK",
           "surname": "DEMO_KF1012_2",
           "country": "DE",
-          "identity_status": "NOT_COLLECTED_DEMO"
+          "identity_status": "NOT_COLLECTED_DEMO",
+          "display_label": "DEMO KF1012 guest 2",
+          "reservation_ids": [
+            "KF1012"
+          ],
+          "room_stay_ids": [
+            "STAY-KF1012-A"
+          ]
         }
       ],
       "source_state": "synthetic_snapshot",

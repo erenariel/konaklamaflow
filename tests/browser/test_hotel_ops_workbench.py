@@ -88,6 +88,14 @@ class TestIntegratedHotelOperations(unittest.TestCase):
     def test_all_32_reports_can_be_selected_missing_sources_are_visible(self):
         self.nav("ops_reports")
         self.assertEqual(self.page.locator("#opsReportType option").count(),32)
+        for report_id,report in build_canonical_operations_report(CANONICAL)["reports"].items():
+            with self.subTest(report_id=report_id):
+                self.page.locator("#opsReportType").select_option(report_id)
+                self.page.locator('[data-op-action="apply-report"]').click()
+                result=self.page.locator('.ops-report-result')
+                self.assertEqual(result.get_attribute('data-report-id'),report_id)
+                self.assertEqual(result.get_attribute('data-report-source-state'),report['source_state'])
+                self.assertIn(report['status'],result.inner_text())
         self.page.locator("#opsReportType").select_option("posting_invoice")
         self.page.locator('[data-op-action="apply-report"]').click()
         result=self.page.locator('.ops-report-result')

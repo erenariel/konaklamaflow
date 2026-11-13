@@ -1,12 +1,19 @@
 """Read-only identity journeys across canonical operations, folios and reports."""
 from __future__ import annotations
 
+from copy import deepcopy
 import json
+import re
 import os
 from pathlib import Path
 import unittest
 
 from playwright.sync_api import expect, sync_playwright
+
+from konaklamaflow.canonical_presentation import build_presentation
+from scripts.generate_canonical_demo import replace_block
+from scripts.generate_hotel_ops_demo import embed as embed_operations
+from scripts.generate_suite_demo import embed as embed_review, safe_json
 
 ROOT = Path(__file__).resolve().parents[2]
 HTML = ROOT / 'demo/v04-integrated-preview.html'
@@ -49,12 +56,31 @@ class CanonicalNavigationTests(unittest.TestCase):
             data:INITIAL_DATA, review:INITIAL_EVALUATION,
             operations:HOTEL_OPS_DATA, reports:HOTEL_OPS_REPORT})''')
 
+    def use_source(self, source):
+        """Embed a real Python-validated test scenario, never invent browser decisions."""
+        bundle = build_presentation(source)
+        document = embed_review(HTML.read_text(encoding='utf-8'),
+                                bundle['review_data'], bundle['review_report'])
+        document = embed_operations(document, bundle['operations_data'], bundle['operations_report'])
+        document = replace_block(document, '// BEGIN GENERATED_CANONICAL_DATA',
+            '// END GENERATED_CANONICAL_DATA',
+            'const CANONICAL_DATA=' + safe_json(bundle['canonical']) + ';\n'
+            + 'const CANONICAL_LINKS=' + safe_json(bundle['canonical_links']) + ';')
+        match = re.search(r'\bconst V04_CATALOG\s*=\s*', document)
+        catalog, size = json.JSONDecoder().raw_decode(document[match.end():])
+        catalog['sourceSha'] = bundle['review_report']['snapshot_sha256']
+        document = document[:match.end()] + safe_json(catalog) + document[match.end()+size:]
+        self.page.goto('about:blank')
+        self.page.set_content(document)
+        self.original = self.snapshot()
+        return bundle
+
     def focus(self, identifier, **options):
         self.assertTrue(self.page.evaluate('''([id,options]) =>
             window.opsFocusReservation(id,options)''', [identifier, options]))
 
     def action(self, name):
-        return self.page.locator('[data-canonical-action="' + name + '"]')
+        return self.page.locator('#opsView [data-canonical-action="' + name + '"]')
 
     def report(self, identifier, report_id):
         self.focus(identifier, tab='reports', reportId=report_id)
@@ -124,16 +150,83 @@ class CanonicalNavigationTests(unittest.TestCase):
         self.assertEqual(result.get_attribute('data-reservation-scope'), '')
 
     def test_shared_room_report_retains_source_membership_without_aliasing_bookings(self):
-        result = self.report('KF1002', 'occupancy')
+        source = deepcopy(self.source)
+        # Explicitly create a fictional conflict rather than assuming similar IDs
+        # denote the same booking or manufacturing membership in JavaScript.
+        next(stay for stay in source['room_stays']
+             if stay['reservation_id'] == 'KF1003')['room_id'] = '201'
+        for task in source['tasks']:
+            if task['reservation_id'] == 'KF1003' and task['room_id'] is not None:
+                task['room_id'] = '201'
+        self.use_source(source)
+        result = self.report('KF1003', 'occupancy')
         expect(result.locator('tbody tr')).to_have_count(1)
         text = result.inner_text()
         self.assertIn('201', text)
-        self.assertIn('KF1002', text)
         self.assertIn('KF1003', text)
-        row = result.locator('[data-op-open="res:KF1002"]')
+        self.assertIn('KF1010', text)
+        row = result.locator('[data-op-open="res:KF1003"]')
         expect(row).to_have_count(1)
         row.click()
-        expect(self.page.locator('[data-canonical-reservation="KF1002"]')).to_be_visible()
+        expect(self.page.locator('[data-canonical-reservation="KF1003"]')).to_be_visible()
+        self.focus('KF1010', tab='reports', reportId='occupancy')
+        expect(result.locator('[data-op-open="res:KF1010"]')).to_have_count(1)
+
+    def test_dashboard_room_plan_detail_and_folio_use_the_same_clicked_booking(self):
+        self.page.locator('[data-booking="KF1004"]').first.click()
+        drawer = self.page.locator('#drawer')
+        expect(drawer.locator('[data-canonical-reservation-id="KF1004"]')).to_be_visible()
+        drawer.locator('[data-canonical-action="room-plan"]').click()
+        self.assertEqual(self.page.evaluate('() => page'), 'rooms')
+        bar = self.page.locator('.stay-bar[data-booking="KF1004"]')
+        expect(bar).to_be_focused()
+        bar.press('Enter')
+        drawer.locator('[data-canonical-action="reservation"]').click()
+        expect(self.page.locator('[data-canonical-reservation="KF1004"]')).to_be_visible()
+        self.action('folio').click()
+        expect(self.page.locator('[data-canonical-folio="FOL-CAN-KF1004"]')).to_be_visible()
+        self.action('reports').click()
+        result = self.page.locator('.ops-report-result')
+        self.assertEqual(result.get_attribute('data-reservation-scope'), 'KF1004')
+        expect(result.locator('[data-op-open="res:KF1004"]')).to_have_count(1)
+
+    def test_multiroom_parent_lists_both_explicit_stays_and_keeps_their_finance_separate(self):
+        source = deepcopy(self.source)
+        booking = next(row for row in source['reservations'] if row['id'] == 'KF1011')
+        stay = deepcopy(next(row for row in source['room_stays']
+                             if row['reservation_id'] == booking['id']))
+        stay.update(id='STAY-KF1011-B', room_id='402', bed_request='none', requests=[],
+                    guest_ids=['GUEST-KF1011-3', 'GUEST-KF1011-4'], quote_total='200.00')
+        stay['nightly_rates'] = [{'date': '2026-11-13', 'amount': '100.00'},
+                                {'date': '2026-11-14', 'amount': '100.00'}]
+        for number, identifier in enumerate(stay['guest_ids'], 3):
+            guest = deepcopy(source['guests'][0])
+            guest.update(id=identifier, surname='DEMO_KF1011_' + str(number),
+                         display_label='ÖRNEK KF1011 ' + str(number))
+            source['guests'].append(guest)
+        source['room_stays'].append(stay)
+        booking['room_stay_ids'].append(stay['id'])
+        booking['guest_ids'] += stay['guest_ids']
+        self.use_source(source)
+        self.focus('KF1011')
+        detail = self.page.locator('[data-canonical-reservation="KF1011"]')
+        for stay_id in booking['room_stay_ids']:
+            self.assertIn(stay_id, detail.inner_text())
+        self.action('review').click()
+        cases = self.page.locator('#drawer [data-canonical-case]')
+        expect(cases).to_have_count(2)
+        self.assertEqual(set(cases.evaluate_all('(items) => items.map(item => item.dataset.canonicalCase)')),
+                         set(booking['room_stay_ids']))
+        cases.filter(has_text='STAY-KF1011-B').click()
+        expect(self.page.locator('#drawer [data-canonical-reservation-id="KF1011"]')).to_be_visible()
+        self.page.locator('#drawer [data-canonical-action="room-plan"]').click()
+        for stay_id in booking['room_stay_ids']:
+            expect(self.page.locator('.stay-bar[data-booking="' + stay_id + '"]')).to_be_visible()
+        self.assertEqual(set(self.page.locator('.rack-row.evidence-highlight').evaluate_all(
+            '(items) => items.map(item => item.dataset.rackRoom)')), {'302', '402'})
+        self.focus('KF1011', tab='folio')
+        expect(self.page.locator('[data-financial-state="not_applicable"]')).to_be_visible()
+        expect(self.page.locator('[data-canonical-folio]')).to_have_count(0)
 
     def test_guest_links_resolve_actual_membership_and_all_bookings_keep_their_own_stays(self):
         for reservation in self.source['reservations']:
