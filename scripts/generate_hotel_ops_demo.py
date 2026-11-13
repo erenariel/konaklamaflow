@@ -31,7 +31,21 @@ def embed(text,data,report):
     end=text.index(END,start)+len(END)
     block=(BEGIN+"\nconst HOTEL_OPS_DATA="+safe_json(data)+";\n"
            +"const HOTEL_OPS_REPORT="+safe_json(report)+";\n"+END)
-    return text[:start]+block+text[end:]
+    updated=text[:start]+block+text[end:]
+    for left,right,filename in (
+        ("/* BEGIN GENERATED_HOTEL_OPS_STYLES */",
+         "/* END GENERATED_HOTEL_OPS_STYLES */","demo/hotel-ops-styles.css"),
+        ("// BEGIN GENERATED_HOTEL_OPS_UI",
+         "// END GENERATED_HOTEL_OPS_UI","demo/hotel-ops-module.js"),
+    ):
+        if updated.count(left)!=1 or updated.count(right)!=1:
+            raise ValueError("Missing or ambiguous hotel operations source markers")
+        start_at=updated.index(left)
+        end_at=updated.index(right,start_at)+len(right)
+        raw=(ROOT/filename).read_text(encoding="utf-8")
+        block=left+"\\n"+raw+"\\n"+right
+        updated=updated[:start_at]+block+updated[end_at:]
+    return updated
 
 
 def main(argv=None):
