@@ -207,6 +207,36 @@ html[dir=rtl] .sidebar nav button{text-align:right}
 html[dir=rtl] .top-actions{flex-wrap:wrap}
 html[dir=rtl] .ops-global-language{direction:rtl}
 @media(max-width:700px){.full-ui-translation-note{max-width:unset}}
+
+/* v0.5.1: reachable navigation across all 20 modules. Original vendor UI not reused. */
+@media(min-width:761px){
+ .sidebar{height:100vh;max-height:100vh;overflow:hidden}
+ .sidebar .menu{display:flex;flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#7188a8 transparent;padding:1px 5px 15px 0}
+ .sidebar .menu::-webkit-scrollbar{width:6px}
+ .sidebar .menu::-webkit-scrollbar-thumb{background:#7188a8;border-radius:6px}
+ .sidebar .brand,.sidebar .workspace,.sidebar .navlabel,.sidebar .sidebar-bottom{flex-shrink:0}
+}
+@media(max-width:760px){
+ .sidebar .menu{display:flex;flex-direction:row;overflow-x:auto;overflow-y:hidden;max-height:none;max-width:100%;scrollbar-width:thin}
+}
+.wf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.wf-grid>.ops-card{min-width:0}
+.wf-grid label{display:grid;gap:7px;font-size:12px;font-weight:700}
+.wf-grid select,#wfScenario{width:100%;padding:10px;border:1px solid var(--line);color:var(--ink);background:var(--white);border-radius:8px}
+.wf-grid .ops-card h4{font-size:13px;margin:12px 0 8px}
+.wf-chips{display:flex;flex-wrap:wrap;gap:6px}
+.wf-chips code{background:var(--bg);border:1px solid var(--line);padding:5px 7px;border-radius:5px;font-size:10px;overflow-wrap:anywhere}
+.wf-vendor{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}
+.wf-vendor span{color:var(--muted);font-size:10px}
+.wf-vendor small{color:var(--warning);font-size:10px}
+.wf-steps{display:grid;gap:8px;list-style:decimal inside;margin:10px 0;padding:0}
+.wf-steps li{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12px;line-height:1.5}
+.wf-steps .wf-active{border:2px solid var(--teal);background:var(--greenbg);font-weight:750}
+.wf-event{padding:8px;border-bottom:1px solid var(--line);font-size:11px;overflow-wrap:anywhere}
+.wf-story .ops-grid2{margin-top:4px}
+#wfStaffButton{border:1px solid var(--line);cursor:pointer}
+@media(max-width:900px){.wf-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -219,7 +249,7 @@ html[dir=rtl] .ops-global-language{direction:rtl}
   <div class="sidebar-bottom"><div class="pilot"><b>🔒 Güvenli demo modu</b><p>Gerçek misafir bilgisi yok. PMS, OTA, ödeme ve resmî bildirim bağlantısı yok.</p></div><div class="online"><i></i> Tarayıcı içi simülasyon · çevrimdışı</div></div>
 </aside>
 <main class="main">
- <header class="topbar"><div class="crumb">Sample Boutique Hotel <span aria-hidden="true" style="padding:0 7px;color:var(--muted)">/</span> <b id="crumb">Genel Bakış</b></div><div class="top-actions"><label class="ops-global-language" for="globalLanguage"><span>🌐 Dil / Language</span><select id="globalLanguage" aria-label="Dil ve görünüm dili"><option value="tr">🇹🇷 Türkçe</option><option value="en">🇬🇧 English</option><option value="fr">🇫🇷 Français</option><option value="el">🇬🇷 Ελληνικά</option><option value="he">🇮🇱 עברית</option><option value="ar">🇸🇦 العربية</option><option value="de">🇩🇪 Deutsch</option><option value="ru">🇷🇺 Русский</option><option value="es">🇪🇸 Español</option><option value="uk">🇺🇦 Українська</option></select></label><span id="fullUiTranslationMarker" class="full-ui-translation-note" aria-live="polite">Taslak çeviriler · gerçek kişisel veri yok</span><span class="date">Perşembe, 12 Kasım 2026</span><span class="chip">● KURGUSAL DEMO</span><div class="avatar">K</div></div></header>
+ <header class="topbar"><div class="crumb">Sample Boutique Hotel <span aria-hidden="true" style="padding:0 7px;color:var(--muted)">/</span> <b id="crumb">Genel Bakış</b></div><div class="top-actions"><label class="ops-global-language" for="globalLanguage"><span>🌐 Dil / Language</span><select id="globalLanguage" aria-label="Dil ve görünüm dili"><option value="tr">🇹🇷 Türkçe</option><option value="en">🇬🇧 English</option><option value="fr">🇫🇷 Français</option><option value="el">🇬🇷 Ελληνικά</option><option value="he">🇮🇱 עברית</option><option value="ar">🇸🇦 العربية</option><option value="de">🇩🇪 Deutsch</option><option value="ru">🇷🇺 Русский</option><option value="es">🇪🇸 Español</option><option value="uk">🇺🇦 Українська</option></select></label><span id="fullUiTranslationMarker" class="full-ui-translation-note" aria-live="polite">Taslak çeviriler · gerçek kişisel veri yok</span><span class="date">Perşembe, 12 Kasım 2026</span><span class="chip">● KURGUSAL DEMO</span><button type="button" class="avatar" id="wfStaffButton" aria-label="Personel ve oturum" title="Personel ve oturum">K</button></div></header>
  <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button><div class="kf-prefs" role="group" aria-label="Görünüm tercihleri"><label for="kfTheme">Tema</label><select id="kfTheme" aria-label="Tema seçimi"><option value="light">Açık</option><option value="dark">Koyu</option><option value="night">Gece audit</option></select><button type="button" class="secondary" id="kfMode" aria-pressed="false">Sunum modu</button><button type="button" class="secondary" id="kfMotion" aria-pressed="false">Hareket: Açık</button><label class="kf-module-choice" for="kfModule">Modül</label><select class="kf-module-choice" id="kfModule" aria-label="Sunum modülü"></select></div></div></section>
   <div id="content" role="region" aria-label="Operasyon çalışma alanı" tabindex="0"></div>
 <section id="v04Global" class="v04-panel" role="region" aria-labelledby="v04Title" lang="tr" dir="ltr">
@@ -265,6 +295,10 @@ PAGE_LIST.push(
  ['ops_blocks','⚠','Blokajlar','Oda blokajları','Bakım, oda kapasiteleri ve temizlik'],
  ['ops_inventory','▤','Demirbaşlar','Oda demirbaş listeleri','Ekipman ve bakım']
 );
+PAGE_LIST.push(
+ ['ops_workflows','↗','İş Akışları','Otel iş akışı merkezi','PMS / OTA güvenli ön inceleme ve AI senaryo anlatımı'],
+ ['ops_staff','♙','Personel ve Oturum','Personel kimliği ve oturum','Kurgusal personel yetkileri ve görev devri']
+);
 let state=JSON.parse(JSON.stringify(INITIAL_DATA));let page='rooms';let search='';let statusFilter='all';let log=[{time:'09:00',label:'Kurgusal demo verileri yüklendi',info:'Herhangi bir dış sisteme bağlanılmadı'}];let detail=null;let toastTimeout=null;let reportStale=false;let returnFocus=null;let taskSequence=1;
 const roomName={economy:'Ekonomik',standard:'Standart',superior:'Superior',deluxe:'Deluxe',triple:'Triple',family:'Aile'};
 const channelName={channel_manager:'Channel manager',booking:'Booking.com',expedia:'Expedia',trip:'Trip.com',hotelbeds:'Hotelbeds',direct:'Direkt',agency:'Acente'};
@@ -308,7 +342,7 @@ function render(){
  const focusValue=focusAttribute?active.getAttribute(focusAttribute):null;
  const focusId=active?.id;
  navRender();const title=getTitle();document.getElementById('crumb').textContent=title[2];document.getElementById('pagetitle').textContent=title[3];document.getElementById('pagesub').textContent=title[4];
- const content=document.getElementById('content');const data={dashboard:dashboard(),arrivals:arrivalsView(),ota:otaView(),rooms:roomView(),housekeeping:housekeepingView(),guest:guestView(),tasks:tasksView(),revenue:revenueView(),ai:aiView(),integrations:integrationsView()};content.innerHTML=(reportStale?'<div class="note stale-warning" role="status">Rapor güncel değil. Görsel simülasyon güncel bir uygunluk kararı değildir. Hazırlık onayları ve dışa aktarım durduruldu; başlangıç verisine dönün.</div>':'')+(data[page]??window.opsView?.(page)??'');document.getElementById('exportButton').disabled=reportStale;bindDynamic();if(window.v04Render)window.v04Render();if(window.applyFullLocale)window.applyFullLocale();
+ const content=document.getElementById('content');const data={dashboard:dashboard(),arrivals:arrivalsView(),ota:otaView(),rooms:roomView(),housekeeping:housekeepingView(),guest:guestView(),tasks:tasksView(),revenue:revenueView(),ai:aiView(),integrations:integrationsView()};content.innerHTML=(reportStale?'<div class="note stale-warning" role="status">Rapor güncel değil. Görsel simülasyon güncel bir uygunluk kararı değildir. Hazırlık onayları ve dışa aktarım durduruldu; başlangıç verisine dönün.</div>':'')+(data[page]??window.opsView?.(page)??window.workflowView?.(page)??'');document.getElementById('exportButton').disabled=reportStale;bindDynamic();if(window.v04Render)window.v04Render();if(window.applyFullLocale)window.applyFullLocale();if(window.applyFullLocale)window.applyFullLocale();
  if(active&&!active.isConnected){
   const target=focusAttribute?document.querySelector('['+focusAttribute+'="'+CSS.escape(focusValue)+'"]'):focusId?document.getElementById(focusId):null;
   if(target&&!target.disabled)target.focus({preventScroll:true});
@@ -975,5 +1009,1531 @@ function opsSyncLocale(lang){
 })();
 
 // END GENERATED_HOTEL_OPS_UI
+</script>
+<script>
+/* KonaklamaFlow illustrated hotel workflows + staff ID panel.
+ * Proprietary vendor UI not copied. No auth token, PII, network, writes or storage.
+ */
+'use strict';
+const wfOperators=[
+ {id:'DEMO-REC-001',login:'sample.reception',name:'Sample Reception',dept:'Front Office',role:'reception'},
+ {id:'DEMO-HK-002',login:'sample.housekeeping',name:'Sample Housekeeping',dept:'Housekeeping',role:'housekeeping'},
+ {id:'DEMO-FIN-003',login:'sample.finance',name:'Sample Finance',dept:'Accounting',role:'finance'},
+ {id:'DEMO-MGR-004',login:'sample.manager',name:'Sample Manager',dept:'Management',role:'manager'},
+ {id:'DEMO-AUD-005',login:'sample.auditor',name:'Sample Auditor',dept:'Audit',role:'auditor'}
+];
+const wfVendors=[
+ ['ElektraWeb','https://yardim.elektraweb.com/detayli-anlatim/onburo-kontrol-paneli'],
+ ['Sistem Otel','https://sistemotel.gitbook.io/sistem-otel-kullanim-klavuzu'],
+ ['Sedna','https://kod.com.tr/Product/SednaHotel']
+];
+const wfDefinitions=[
+ ['reservation_intake','Rezervasyon ve grup taslağı','channel_reference,arrival_departure,room_capacity,staff_review','reception,manager','STAFF_REVIEW'],
+ ['room_blocking','Oda planı ve blokaj','overlap_check,maintenance,housekeeping,category_match','reception,housekeeping,manager','STAFF_REVIEW'],
+ ['arrival_preflight','Giriş hazırlığı','identity_review,room_readiness,folio_review,arrival_time','reception,manager','STAFF_REVIEW'],
+ ['checkout_preflight','Çıkış ve bakiye','departure,folio_balance,agency_receivable,invoice_review','reception,finance,manager','STAFF_REVIEW'],
+ ['folio_postings','Folyo ve posting','posting_types,payment_separation,currency,reconciliation','finance,manager','STAFF_REVIEW'],
+ ['agency_credit','Acente ve City Ledger','legal_entity,credit_terms,invoice_policy,aging','finance,manager','STAFF_REVIEW'],
+ ['night_audit','Gün sonu ve audit','arrivals,departures,zero_rate,trial_balance,audit_lock','finance,manager','MISSING_TRUSTED_SOURCE'],
+ ['housekeeping','Kat hizmetleri ve teknik bakım','room_cleanliness,work_orders,stock,supervisor_check','housekeeping,manager','STAFF_REVIEW'],
+ ['rate_contracts','Fiyat, kontenjan ve allotment','agency_rates,release_day,stop_sale,room_nights','reception,manager','MISSING_TRUSTED_SOURCE'],
+ ['guest_profile','Misafir profili ve KVKK/GDPR','identity_minimization,purpose,retention,role_scope','reception,manager','AUTHORIZATION_REQUIRED'],
+ ['invoicing','Fatura ve mali uyum','invoice_region,tax_rules,exchange_source,fiscal_authority','finance,manager','MISSING_TRUSTED_SOURCE'],
+ ['analytics','Doluluk, bütçe ve performans','room_nights,rate_plan,agency_segments,budget','finance,manager,auditor','STAFF_REVIEW'],
+ ['handover','Personel devri ve görevler','task_owner,source_revision,shift_handover,audit_trace','reception,housekeeping,finance,manager','STAFF_REVIEW'],
+ ['external_integrations','PMS, OTA, KBS entegrasyon sınırı','api_permissions,least_privilege,sandbox,human_approval','manager,auditor','AUTHORIZATION_REQUIRED']
+].map(([id,name,checks,roles,status])=>({id,name,checks:checks.split(','),roles:roles.split(','),status}));
+const wfState={operator:'DEMO-REC-001',selected:'reservation_intake',log:[],status:'not_started',scenario:'room_block',stage:0,timer:null,playing:false};
+const wfRoleText={
+tr:{title:'Personel & Oturum',workflows:'İş akışları',person:'Aktif demo personeli',login:'Giriş kimliği',staff:'Personel ID',role:'Görev',scopes:'Görüntüleme yetkisi',session:'Oturum durumu',notAuth:'Bu gerçek giriş veya kimlik doğrulaması değildir',action:'Kontrolleri göster',verify:'Kaynağı doğrula',decision:'İnsan onayı gerekli',source:'Sağlayıcı entegrasyonları',off:'Bağlı değil',scenario:'Operasyon simülasyonu',play:'Tüm senaryoları oynat',pause:'Durdur',next:'Sonraki adım',locked:'Üretim işlemi devre dışı',log:'Oturum içi işlem izi',noLog:'Henüz demo kaydı yok',status:'Durum',none:'Veri kaynağı bağlı değil',result:'Kural gerekçesi',nextStep:'Güvenli sonraki adım',demo:'Yalnızca kurgusal personel ve rezervasyonlar',type:'İş akışı',roleMissing:'Bu rolün görüntüleme izni yok',approved:'Check-in onayı değildir'},
+en:{title:'Staff & Session',workflows:'Workflows',person:'Active demo staff',login:'Login ID',staff:'Staff ID',role:'Role',scopes:'View permissions',session:'Session status',notAuth:'This is not real authentication or sign-in',action:'Show checks',verify:'Verify source',decision:'Human approval required',source:'Provider integrations',off:'Not connected',scenario:'Operations simulation',play:'Play all scenarios',pause:'Stop',next:'Next step',locked:'Production actions disabled',log:'In-session action trace',noLog:'No demo action yet',status:'Status',none:'No live source connected',result:'Rule reason',nextStep:'Next safe step',demo:'Fictional staff and bookings only',type:'Workflow',roleMissing:'This role cannot view that workflow',approved:'Not a check-in approval'}
+};
+function wfT(key){return (wfRoleText[typeof opsState==='object'?opsState.lang:'tr']||wfRoleText.en)[key]||wfRoleText.en[key]||key;}
+function wfOperator(){return wfOperators.find(p=>p.id===wfState.operator)||wfOperators[0];}
+function wfAllowed(flow){return flow.roles.includes(wfOperator().role);}
+function wfRenderProfile(){
+ const u=wfOperator();
+ const capabilities={reception:['room_read','booking_read','guest_safe_read','folio_safe_read','request_draft'],housekeeping:['room_read','hk_read','maintenance_read','request_draft'],finance:['folio_safe_read','ledger_read','reports_read','request_draft'],manager:['room_read','booking_read','guest_safe_read','folio_safe_read','hk_read','ledger_read','reports_read','review_requests','request_draft'],auditor:['room_read','booking_read','folio_safe_read','ledger_read','reports_read','audit_read']};
+ const opts=wfOperators.map(x=>'<option value="'+x.id+'"'+(u.id===x.id?' selected':'')+'>'+x.id+' · '+x.dept+'</option>').join('');
+ return '<div class="wf-grid"><section class="ops-card"><h3>'+wfT('title')+'</h3><p class="ops-notice">'+wfT('notAuth')+'</p><label>'+wfT('person')+'<select id="wfOperator">'+opts+'</select></label>'+
+ '<div class="ops-grid2">'+[['ID',u.id],[wfT('login'),u.login],[wfT('role'),u.role],[wfT('session'),'SYNTHETIC_OFFLINE'],['Department',u.dept],['Tenant','SAMPLE_HOTEL_01']].map(([key,val])=>'<div><small>'+key+'</small><strong>'+val+'</strong></div>').join('')+'</div>'+
+ '<h4>'+wfT('scopes')+'</h4><div class="wf-chips">'+capabilities[u.role].map(x=>'<code>'+x+'</code>').join('')+'</div>'+
+ '<p class="ops-notice">'+wfT('locked')+' · MFA / RBAC / audit-log backend NOT CONNECTED</p></section>'+
+ '<section class="ops-card"><h3>'+wfT('log')+'</h3><div id="wfAuditLog" aria-live="polite">'+(wfState.log.length?wfState.log.slice(-12).reverse().map((entry,i)=>'<p class="wf-event"><b>'+String(i+1)+'. </b>'+entry+'</p>').join(''):'<p>'+wfT('noLog')+'</p>')+'</div><p class="ops-note">Her işlem geçici tarayıcı belleğindedir. Gerçek kullanıcı oturumu, kalıcı audit veya yetki sağlamaz.</p></section></div>';
+}
+const wfScenarios=[
+ {id:'room_block',name:'Oda çakışması',steps:['Rezervasyon ve oda tarihleri kontrol edilir','Çakışan tahsis engeli bulundu','Kat hizmetleri ve bakım durumu yeniden kontrol edilir','Oda değiştirme önerisi yalnız taslak olarak sunulur','Yetkili resepsiyon personeline inceleme devredilir'],why:'ROOM_CONFLICT · NO_ASSIGNED_ROOM',next:'Uygun oda ve tarihleri gerçek PMS içinde insan doğrular'},
+ {id:'payment',name:'Ödeme / folyo uyarısı',steps:['Folyo posting toplamları okunur','Tahsilat, City Ledger alacağından ayrılır','Eksik bakiye veya yanlış para birimi kontrol edilir','İptal/iade işlemi yetkisi gösterilmez','Yetkili finans personelinden mutabakat istenir'],why:'PAYMENT_REVIEW · FOLIO_BALANCE',next:'Banka ve folyo bakiyesi gerçek kaynaktan doğrulanır'},
+ {id:'identity',name:'Kimlik ve giriş kontrolü',steps:['Giriş tarihi doğrulanır','Kişi sayısı ve kapasite incelenir','Kimlik verisi yalnız yetkili sistemde doğrulanmalıdır','Check-in/KBS eylemi kasten engellenir','Personel inceleme sonucunu kaynağa işler'],why:'IDENTITY_STAFF_REVIEW · GUEST_NOT_ARRIVED',next:'Gerekli kimlik kontrolü yetkili kişi tarafından yapılır'},
+ {id:'channel',name:'OTA kaynak uyuşmazlığı',steps:['Kanal referansı okunur','PMS rezervasyon eşleşmesi kontrol edilir','Çift referans veya iptal farkı tespit edilir','Düzeltme talebi onay için hazırlanır','Entegrasyon izni yoksa hiçbir kaynak değiştirilmez'],why:'CHANNEL_REFERENCE_MISMATCH · CHANNEL_STATUS_CONFLICT',next:'OTA ve PMS sistemlerinde ayrı ayrı teyit alınır'},
+ {id:'maintenance',name:'Bakım ve oda hazırlığı',steps:['Oda temizliği durumu incelenir','Açık teknik iş emri tespit edilir','Oda bloke veya kirli ise girişe hazır değildir','Kat amiri ve teknik servis kontrolü istenir','Onay verilene kadar oda önerilmez'],why:'MAINTENANCE_TASK_OPEN · HOUSEKEEPING_NOT_INSPECTED',next:'Temizlik ve teknik onay gerçek PMS kaynağına işlenmelidir'}
+];
+function wfStop(){if(wfState.timer!==null)clearTimeout(wfState.timer);wfState.timer=null;wfState.playing=false;}
+function wfRecord(message){wfState.log.push(message);if(wfState.log.length>25)wfState.log.shift();}
+function wfStage(){
+ const sc=wfScenarios.find(x=>x.id===wfState.scenario)||wfScenarios[0];
+ const i=Math.max(0,Math.min(sc.steps.length-1,wfState.stage));
+ return '<div class="wf-story"><div class="ops-grid2"><div><small>'+wfT('status')+'</small><strong>'+sc.name+' · '+(i+1)+'/'+sc.steps.length+'</strong></div><div><small>'+wfT('result')+'</small><strong>'+sc.why+'</strong></div></div>'+
+ '<ol class="wf-steps">'+sc.steps.map((x,k)=>'<li class="'+(k===i?'wf-active':'')+'">'+x+'</li>').join('')+'</ol>'+
+ '<p class="ops-notice">'+wfT('nextStep')+': '+sc.next+' · '+wfT('decision')+'</p></div>';
+}
+function wfView(pageId){
+ if(pageId==='ops_staff')return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'">'+wfRenderProfile()+'</section>';
+ if(pageId!=='ops_workflows')return '';
+ const flow=wfDefinitions.find(f=>f.id===wfState.selected)||wfDefinitions[0];
+ const options=wfDefinitions.map(x=>'<option value="'+x.id+'"'+(x.id===wfState.selected?' selected':'')+'>'+x.name+'</option>').join('');
+ const allowed=wfAllowed(flow);
+ const checks=flow.checks.map(c=>'<li><code dir="ltr">'+c+'</code></li>').join('');
+ return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'"><div class="ops-stack">'+
+ '<p class="ops-notice">'+wfT('demo')+' · '+wfT('notAuth')+' · '+wfT('locked')+'</p>'+
+ '<div class="wf-grid"><section class="ops-card"><h3>'+wfT('workflows')+'</h3><label>'+wfT('type')+'<select id="wfFlow">'+options+'</select></label>'+
+ '<div class="ops-grid2"><div><small>Workflow ID</small><strong>'+flow.id+'</strong></div><div><small>'+wfT('status')+'</small><strong>'+flow.status+'</strong></div></div>'+
+ '<h4>AI-1 → PYTHON RULES → AI-2 → HUMAN</h4><ol>'+checks+'</ol>'+
+ '<p class="ops-note">'+(allowed?wfT('decision'):wfT('roleMissing'))+'</p>'+
+ '<button class="primary" type="button" id="wfPreview"'+(allowed?'':' disabled')+'>'+wfT('action')+'</button>'+
+ '<div id="wfPreviewResult" role="status">'+wfT('none')+'</div></section>'+
+ '<section class="ops-card"><h3>'+wfT('source')+'</h3>'+
+ wfVendors.map(([name,url])=>'<div class="wf-vendor"><b>'+name+'</b> <span>'+wfT('off')+'</span> <small>NOT_CONNECTED · READ_ONLY</small></div>').join('')+
+ '<p class="ops-note">Kaynak kılavuzları: ElektraWeb / Sistem Otel / Sedna. Sağlayıcı kimliği, erişim izni, audit ve veri minimizasyonu olmadan bağlanılmaz.</p></section></div>'+
+ '<section class="ops-card"><h3>'+wfT('scenario')+'</h3><div class="ops-toolbar"><select id="wfScenario" aria-label="'+wfT('scenario')+'">'+
+ wfScenarios.map(x=>'<option value="'+x.id+'"'+(x.id===wfState.scenario?' selected':'')+'>'+x.name+'</option>').join('')+'</select>'+
+ '<button class="primary" id="wfPlay" type="button">'+(wfState.playing?wfT('pause'):wfT('play'))+'</button>'+
+ '<button id="wfNext" type="button">'+wfT('next')+'</button>'+
+ '<span>'+wfT('locked')+'</span></div>'+wfStage()+'</section></div></section>';
+}
+window.workflowView=wfView;
+window.workflowProfileState=wfState;
+(function wfBoot(){
+ const root=document.getElementById('content');
+ if(!root)return;
+ root.addEventListener('change',event=>{
+  if(event.target.id==='wfOperator'){wfStop();if(!wfOperators.some(x=>x.id===event.target.value))return;wfState.operator=event.target.value;wfRecord('DEMO ROLE SWITCH → '+wfState.operator);render();}
+  if(event.target.id==='wfFlow'){wfState.selected=event.target.value;render();}
+  if(event.target.id==='wfScenario'){wfStop();wfState.scenario=event.target.value;wfState.stage=0;render();}
+ });
+ root.addEventListener('click',event=>{
+  const id=event.target.id;
+  if(id==='wfPreview'){
+   const flow=wfDefinitions.find(x=>x.id===wfState.selected);
+   if(!flow||!wfAllowed(flow))return;
+   wfRecord(wfOperator().id+' → '+flow.id+' / READ_ONLY_PREVIEW');
+   const result=document.getElementById('wfPreviewResult');
+   if(result)result.textContent=flow.status+' · '+flow.checks.join(' → ')+' · HUMAN_APPROVAL_REQUIRED · NO_LIVE_EXECUTION';
+  }
+  if(id==='wfNext'){wfStop();const sc=wfScenarios.find(x=>x.id===wfState.scenario);wfState.stage=(wfState.stage+1)%sc.steps.length;render();}
+  if(id==='wfPlay'){
+   if(wfState.playing){wfStop();render();return;}
+   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){wfState.stage=(wfState.stage+1)%5;render();return;}
+   wfState.playing=true;render();
+   wfState.timer=setTimeout(function tick(){
+      if(!wfState.playing)return;
+      wfState.stage++;
+      const current=wfScenarios.find(x=>x.id===wfState.scenario);
+      if(wfState.stage>=current.steps.length){
+        const idx=wfScenarios.findIndex(x=>x.id===wfState.scenario);
+        if(idx===wfScenarios.length-1){wfStop();wfState.stage=current.steps.length-1;wfRecord('SCENARIOS COMPLETE · NOTHING EXECUTED');render();return;}
+        wfState.scenario=wfScenarios[idx+1].id;wfState.stage=0;
+      }
+      render();wfState.timer=setTimeout(tick,1700);
+   },1700);
+  }
+ });
+ const reset=document.getElementById('resetButton');
+ reset?.addEventListener('click',()=>{wfStop();wfState.operator='DEMO-REC-001';wfState.stage=0;wfState.scenario='room_block';wfState.log=[];});
+})();
+
+</script>
+<script>
+/* KonaklamaFlow v0.5.1 full-page locale coordination.
+ * No external translation services, private text sent nowhere.
+ * Display strings only; never change report, folio or approval logic.
+ */
+'use strict';
+const fullUiLocales=['tr','en','fr','el','he','ar','de','ru','es','uk'];
+const fullUiMenu={
+tr:['Genel Bakış','Gelişler ve Check-in','OTA & Kanal Yönetimi','Oda Planı','Housekeeping','Misafir Deneyimi','Görev Merkezi','Gelir ve Dağıtım','AI Karar Merkezi','Entegrasyonlar','Rezervasyonlar','Misafirler','Aktif Folyolar','Acente Alacakları','Rapor Merkezi','Kurlar ve Fatura','Blokajlar','Demirbaşlar',"İş Akışları","Personel ve Oturum"],
+en:['Overview','Arrivals & Check-in','OTA & Channels','Room Plan','Housekeeping','Guest Experience','Task Center','Revenue & Distribution','AI Decision Center','Integrations','Reservations','Guests','Open Folios','Agency Receivables','Report Center','FX & Invoicing','Room Blocks','Room Assets',"Workflows","Staff & Session"],
+fr:['Vue d’ensemble','Arrivées et check-in','OTA et canaux','Plan des chambres','Entretien ménager','Expérience client','Centre des tâches','Revenus et distribution','Centre de décision IA','Intégrations','Réservations','Clients','Folios ouverts','Créances des agences','Centre des rapports','Devises et factures','Blocages des chambres','Équipements des chambres',"Flux de travail","Personnel et session"],
+el:['Επισκόπηση','Αφίξεις και check-in','OTA και κανάλια','Πλάνο δωματίων','Καθαριότητα','Εμπειρία επισκέπτη','Κέντρο εργασιών','Έσοδα και διανομή','Κέντρο αποφάσεων AI','Διασυνδέσεις','Κρατήσεις','Επισκέπτες','Ανοιχτοί λογαριασμοί','Οφειλές πρακτορείων','Κέντρο αναφορών','Συνάλλαγμα και τιμολόγηση','Δεσμεύσεις δωματίων','Εξοπλισμός δωματίων',"Ροές εργασίας","Προσωπικό και συνεδρία"],
+he:['סקירה כללית','הגעות וצ׳ק-אין','OTA וערוצי מכירה','תוכנית חדרים','משק בית','חוויית אורח','מרכז משימות','הכנסות והפצה','מרכז החלטות AI','ממשקים','הזמנות','אורחים','חשבונות פתוחים','חובות סוכנויות','מרכז דוחות','מטבע וחשבוניות','חסימות חדרים','ציוד חדרים',"תהליכי עבודה","צוות והפעלה"],
+ar:['نظرة عامة','الوصول وتسجيل الدخول','وكالات الإنترنت والقنوات','مخطط الغرف','التدبير المنزلي','تجربة الضيف','مركز المهام','الإيرادات والتوزيع','مركز قرارات AI','التكاملات','الحجوزات','الضيوف','الحسابات المفتوحة','مستحقات الوكالات','مركز التقارير','العملات والفواتير','حظر الغرف','تجهيزات الغرف',"سير العمل","الموظفون والجلسة"],
+de:['Übersicht','Anreisen und Check-in','OTA und Kanäle','Zimmerplan','Housekeeping','Gästeerlebnis','Aufgabenzentrale','Umsatz und Vertrieb','KI-Entscheidungszentrum','Integrationen','Reservierungen','Gäste','Offene Folios','Agenturforderungen','Berichtszentrale','Wechselkurse und Rechnungen','Zimmerblockierungen','Zimmerausstattung',"Arbeitsabläufe","Personal und Sitzung"],
+ru:['Обзор','Заезды и регистрация','OTA и каналы','План номеров','Уборка','Гостевой сервис','Центр задач','Доходы и каналы','Центр решений ИИ','Интеграции','Бронирования','Гости','Открытые фолио','Долги агентств','Центр отчётов','Валюты и счета','Блокировки номеров','Оснащение номеров',"Рабочие процессы","Персонал и сеанс"],
+es:['Resumen','Llegadas y check-in','OTA y canales','Plan de habitaciones','Limpieza','Experiencia del huésped','Centro de tareas','Ingresos y distribución','Centro de decisiones de IA','Integraciones','Reservas','Huéspedes','Folios abiertos','Cuentas por cobrar de agencias','Centro de informes','Divisas y facturación','Bloqueos de habitaciones','Equipamiento de habitaciones',"Flujos de trabajo","Personal y sesión"],
+uk:['Огляд','Прибуття та реєстрація','OTA та канали','План номерів','Прибирання','Гостьовий сервіс','Центр завдань','Доходи й дистрибуція','Центр рішень ШІ','Інтеграції','Бронювання','Гості','Відкриті фоліо','Борги агенцій','Центр звітів','Валюти й рахунки','Блокування номерів','Оснащення номерів',"Робочі процеси","Персонал і сеанс"]
+};
+const fullUiNotes={
+tr:'Kurgusal veriler · Salt okunur ön inceleme · Nihai işlemler yetkili personelde',
+en:'Fictional data · Read-only pre-review · Final actions require authorized staff',
+fr:'Données fictives · Pré-examen en lecture seule · Actions réservées au personnel habilité',
+el:'Εικονικά δεδομένα · Προέλεγχος μόνο για ανάγνωση · Τελικές ενέργειες από εξουσιοδοτημένο προσωπικό',
+he:'נתונים מדומים · בדיקה ראשונית לקריאה בלבד · אישור סופי בידי צוות מורשה',
+ar:'بيانات افتراضية · مراجعة أولية للقراءة فقط · الإجراءات النهائية للموظفين المخولين',
+de:'Fiktive Daten · Vorprüfung im Lesemodus · Freigabe nur durch befugtes Personal',
+ru:'Тестовые данные · Предварительная проверка без записи · Итоговые действия только уполномоченным сотрудником',
+es:'Datos ficticios · Revisión preliminar de solo lectura · Acciones finales por personal autorizado',
+uk:'Тестові дані · Попередня перевірка без запису · Остаточні дії лише уповноваженого персоналу'
+};
+const fullUiMarker={
+tr:'Taslak çeviriler · gerçek kişisel veri yok',
+en:'Draft translations · no real personal data',
+fr:'Traductions provisoires · aucune donnée personnelle réelle',
+el:'Πρόχειρες μεταφράσεις · χωρίς πραγματικά προσωπικά δεδομένα',
+he:'תרגומים בטיוטה · ללא מידע אישי אמיתי',
+ar:'ترجمات أولية · دون بيانات شخصية حقيقية',
+de:'Übersetzungsentwürfe · keine echten personenbezogenen Daten',
+ru:'Черновые переводы · без реальных персональных данных',
+es:'Traducciones provisionales · sin datos personales reales',
+uk:'Чернетки перекладів · без справжніх персональних даних'
+};
+const fullUiPhrases={};
+for(const code of fullUiLocales)fullUiPhrases[code]=new Map();
+const fullUiFallbacks={};
+function fullUiRows(rows){
+ for(const row of rows){
+   if(row.length!==10)throw new Error('Incomplete locale row');
+   const [key,...phrases]=row;
+   if(!key||phrases.some(p=>typeof p!=='string'||!p.trim()))throw new Error('Invalid locale entry');
+   fullUiPhrases.tr.set(key,key);
+   for(let i=1;i<10;i++)fullUiPhrases[fullUiLocales[i]].set(key,phrases[i-1]);
+ }
+}
+function fullUiEnglishRows(rows){
+ for(const [tr,en] of rows){
+   if(!tr||!en)throw new Error('Incomplete fallback');
+   if(!fullUiPhrases.en.has(tr))fullUiPhrases.en.set(tr,en);
+ }
+}
+const fullUiSourceText=new WeakMap();
+function fullUiTranslation(source,lang){
+ const exact=fullUiPhrases[lang].get(source);
+ if(exact)return exact;
+ const english=fullUiPhrases.en.get(source);
+ if(lang!=='tr'&&english){fullUiFallbacks[lang]=(fullUiFallbacks[lang]||0)+1;return english;}
+ return source;
+}
+function fullUiTranslateTree(){
+ const lang=(typeof opsState!=='undefined'&&fullUiLocales.includes(opsState.lang))?opsState.lang:'tr';
+ fullUiFallbacks[lang]=0;
+ const selector='body';
+ const root=document.querySelector(selector);
+ if(!root)return;
+ const iter=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ const nodes=[];
+ for(let n=iter.nextNode();n;n=iter.nextNode()){
+   if(!n.nodeValue||!n.nodeValue.trim())continue;
+   const parent=n.parentElement;
+   if(!parent||parent.closest('script,style,pre,code,svg,[data-i18n-skip],.v04-panel'))continue;
+   nodes.push(n);
+ }
+ for(const node of nodes){
+    if(!fullUiSourceText.has(node))fullUiSourceText.set(node,node.nodeValue);
+    const src=fullUiSourceText.get(node);
+    const left=src.match(/^\s*/)[0],right=src.match(/\s*$/)[0],body=src.trim();
+    const translated=fullUiTranslation(body,lang);
+    node.nodeValue=left+translated+right;
+ }
+ for(const el of root.querySelectorAll('input[placeholder],textarea[placeholder],button[title],[aria-label]')){
+   if(el.closest('.v04-panel'))continue;
+   for(const attr of ['placeholder','title','aria-label']){
+     if(!el.hasAttribute(attr))continue;
+     const name='fullUiOriginal'+attr.charAt(0).toUpperCase()+attr.slice(1);
+     if(!el.dataset[name])el.dataset[name]=el.getAttribute(attr);
+     const original=el.dataset[name];
+     const translated=fullUiTranslation(original,lang);
+     if(translated!==original||lang==='tr')el.setAttribute(attr,translated);
+   }
+ }
+ const marker=document.getElementById('fullUiTranslationMarker');
+ if(marker){marker.textContent=fullUiMarker[lang];marker.lang=lang;}
+ const dateEl=document.querySelector('.top-actions .date');
+ if(dateEl){dateEl.textContent=new Intl.DateTimeFormat(lang,{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date('2026-11-12T12:00:00Z'));}
+}
+function fullUiSetMetadata(lang){
+ if(!fullUiLocales.includes(lang))return;
+ document.documentElement.lang=lang;
+ document.documentElement.dir=(lang==='ar'||lang==='he')?'rtl':'ltr';
+ const labels=fullUiMenu[lang];
+ if(labels.length!==PAGE_LIST.length)throw new Error('Navigation/catalog mismatch');
+ PAGE_LIST.forEach((row,index)=>{row[2]=labels[index];row[3]=labels[index];row[4]=fullUiNotes[lang]});
+}
+window.applyFullLocale=fullUiTranslateTree;
+window.localizePageMetadata=fullUiSetMetadata;
+
+</script>
+<script>
+/* Reviewed machine-independent UI message keys. Source phrases are original.
+ * Locales are editorial drafts. Missing material falls back to English,
+ * and a visible disclaimer remains: no false 'fully localized' claim.
+ */
+'use strict';
+fullUiRows([
+ [
+  "AI senaryosunu keşfet",
+  "AI senaryosunu keşfet",
+  "Explore AI scenarios",
+  "Explorer les scénarios IA",
+  "Εξερεύνηση σεναρίων AI",
+  "גילוי תרחישי AI",
+  "استكشاف سيناريوهات الذكاء الاصطناعي",
+  "KI-Szenarien erkunden",
+  "Просмотр сценариев ИИ",
+  "Explorar escenarios de IA",
+  "Переглянути сценарії ШІ"
+ ],
+ [
+  "Demoyu sıfırla",
+  "Demoyu sıfırla",
+  "Reset demo",
+  "Réinitialiser la démo",
+  "Επαναφορά demo",
+  "איפוס הדגמה",
+  "إعادة ضبط العرض",
+  "Demo zurücksetzen",
+  "Сбросить демо",
+  "Reiniciar demo",
+  "Скинути демо"
+ ],
+ [
+  "Rapor indir",
+  "Rapor indir",
+  "Download report",
+  "Télécharger le rapport",
+  "Λήψη αναφοράς",
+  "הורדת דוח",
+  "تنزيل التقرير",
+  "Bericht herunterladen",
+  "Скачать отчёт",
+  "Descargar informe",
+  "Завантажити звіт"
+ ],
+ [
+  "Tema",
+  "Tema",
+  "Theme",
+  "Thème",
+  "Θέμα",
+  "ערכת נושא",
+  "المظهر",
+  "Design",
+  "Тема",
+  "Tema",
+  "Тема"
+ ],
+ [
+  "Açık",
+  "Açık",
+  "Light",
+  "Clair",
+  "Φωτεινό",
+  "בהיר",
+  "فاتح",
+  "Hell",
+  "Светлая",
+  "Claro",
+  "Світла"
+ ],
+ [
+  "Koyu",
+  "Koyu",
+  "Dark",
+  "Sombre",
+  "Σκούρο",
+  "כהה",
+  "داكن",
+  "Dunkel",
+  "Тёмная",
+  "Oscuro",
+  "Темна"
+ ],
+ [
+  "Gece audit",
+  "Gece audit",
+  "Night audit",
+  "Audit de nuit",
+  "Νυχτερινός έλεγχος",
+  "ביקורת לילה",
+  "تدقيق ليلي",
+  "Nachtprüfung",
+  "Ночной аудит",
+  "Auditoría nocturna",
+  "Нічний аудит"
+ ],
+ [
+  "Sunum modu",
+  "Sunum modu",
+  "Presentation mode",
+  "Mode présentation",
+  "Λειτουργία παρουσίασης",
+  "מצב מצגת",
+  "وضع العرض",
+  "Präsentationsmodus",
+  "Режим презентации",
+  "Modo presentación",
+  "Режим презентації"
+ ],
+ [
+  "Modül",
+  "Modül",
+  "Module",
+  "Module",
+  "Ενότητα",
+  "מודול",
+  "وحدة",
+  "Modul",
+  "Модуль",
+  "Módulo",
+  "Модуль"
+ ],
+ [
+  "ÇALIŞMA ALANI",
+  "ÇALIŞMA ALANI",
+  "WORKSPACE",
+  "ESPACE DE TRAVAIL",
+  "ΧΩΡΟΣ ΕΡΓΑΣΙΑΣ",
+  "סביבת עבודה",
+  "مساحة العمل",
+  "ARBEITSBEREICH",
+  "РАБОЧАЯ ОБЛАСТЬ",
+  "ESPACIO DE TRABAJO",
+  "РОБОЧА ОБЛАСТЬ"
+ ],
+ [
+  "Güvenli demo modu",
+  "Güvenli demo modu",
+  "Safe demo mode",
+  "Mode démo sécurisé",
+  "Ασφαλής λειτουργία demo",
+  "מצב הדגמה בטוח",
+  "وضع تجريبي آمن",
+  "Sicherer Demomodus",
+  "Безопасный режим демо",
+  "Modo demo seguro",
+  "Безпечний деморежим"
+ ],
+ [
+  "Tarayıcı içi simülasyon · çevrimdışı",
+  "Tarayıcı içi simülasyon · çevrimdışı",
+  "In-browser simulation · offline",
+  "Simulation dans le navigateur · hors ligne",
+  "Προσομοίωση στο πρόγραμμα περιήγησης · offline",
+  "הדמיה בדפדפן · לא מקוון",
+  "محاكاة داخل المتصفح · دون اتصال",
+  "Browser-Simulation · offline",
+  "Симуляция в браузере · офлайн",
+  "Simulación en navegador · sin conexión",
+  "Симуляція у браузері · офлайн"
+ ],
+ [
+  "Kurgusal kaynak anlık görüntüsü · Tüm nihai işlemler yetkili personelde",
+  "Kurgusal kaynak anlık görüntüsü · Tüm nihai işlemler yetkili personelde",
+  "Fictional source snapshot · Final actions require authorized staff",
+  "Données fictives · Actions finales réservées au personnel habilité",
+  "Εικονικά δεδομένα · Τελικές ενέργειες μόνο από εξουσιοδοτημένο προσωπικό",
+  "נתונים מדומים · פעולות סופיות בידי צוות מורשה",
+  "بيانات افتراضية · الإجراءات النهائية للموظفين المخولين",
+  "Fiktiver Datenstand · Finale Aktionen nur durch befugtes Personal",
+  "Тестовый снимок · Финальные действия только у сотрудника",
+  "Datos ficticios · Acciones finales solo por personal autorizado",
+  "Тестові дані · Остаточні дії лише уповноваженими працівниками"
+ ],
+ [
+  "Bugün",
+  "Bugün",
+  "Today",
+  "Aujourd’hui",
+  "Σήμερα",
+  "היום",
+  "اليوم",
+  "Heute",
+  "Сегодня",
+  "Hoy",
+  "Сьогодні"
+ ],
+ [
+  "Öncelikli girişler",
+  "Öncelikli girişler",
+  "Priority arrivals",
+  "Arrivées prioritaires",
+  "Αφίξεις προτεραιότητας",
+  "הגעות בעדיפות",
+  "الوصول ذو الأولوية",
+  "Priorisierte Anreisen",
+  "Приоритетные заезды",
+  "Llegadas prioritarias",
+  "Пріоритетні прибуття"
+ ],
+ [
+  "Operasyon durumu",
+  "Operasyon durumu",
+  "Operations status",
+  "État des opérations",
+  "Κατάσταση λειτουργίας",
+  "מצב תפעולי",
+  "الحالة التشغيلية",
+  "Betriebsstatus",
+  "Состояние операций",
+  "Estado operativo",
+  "Операційний стан"
+ ],
+ [
+  "Bugün beklenen girişler",
+  "Bugün beklenen girişler",
+  "Expected arrivals today",
+  "Arrivées prévues aujourd’hui",
+  "Αναμενόμενες αφίξεις σήμερα",
+  "הגעות צפויות היום",
+  "الواصلون المتوقعون اليوم",
+  "Erwartete Anreisen heute",
+  "Ожидаемые заезды сегодня",
+  "Llegadas previstas hoy",
+  "Очікувані прибуття сьогодні"
+ ],
+ [
+  "Gelen OTA olayları",
+  "Gelen OTA olayları",
+  "Incoming OTA events",
+  "Événements OTA entrants",
+  "Εισερχόμενα συμβάντα OTA",
+  "אירועי OTA נכנסים",
+  "أحداث OTA الواردة",
+  "Eingehende OTA-Ereignisse",
+  "Входящие события OTA",
+  "Eventos OTA entrantes",
+  "Вхідні події OTA"
+ ],
+ [
+  "Grafik oda planı",
+  "Grafik oda planı",
+  "Graphical room plan",
+  "Plan graphique des chambres",
+  "Γραφικό πλάνο δωματίων",
+  "תוכנית חדרים גרפית",
+  "مخطط الغرف",
+  "Grafischer Zimmerplan",
+  "Графический план номеров",
+  "Plan gráfico de habitaciones",
+  "Графічний план номерів"
+ ],
+ [
+  "Kat hizmetleri kontrol kuyruğu",
+  "Kat hizmetleri kontrol kuyruğu",
+  "Housekeeping inspection queue",
+  "File d’inspection du ménage",
+  "Ουρά ελέγχου καθαριότητας",
+  "תור בדיקת ניקיון",
+  "قائمة فحص التدبير المنزلي",
+  "Housekeeping-Prüfwarteschlange",
+  "Очередь проверки уборки",
+  "Cola de inspección de limpieza",
+  "Черга перевірки прибирання"
+ ],
+ [
+  "Konaklama öncesi özel talepler",
+  "Konaklama öncesi özel talepler",
+  "Pre-arrival special requests",
+  "Demandes spéciales avant arrivée",
+  "Ειδικά αιτήματα πριν την άφιξη",
+  "בקשות מיוחדות לפני הגעה",
+  "طلبات خاصة قبل الوصول",
+  "Sonderwünsche vor Anreise",
+  "Особые запросы до прибытия",
+  "Solicitudes especiales antes de llegada",
+  "Особливі запити до прибуття"
+ ],
+ [
+  "Departman iş listesi",
+  "Departman iş listesi",
+  "Department task list",
+  "Liste des tâches",
+  "Εργασίες τμημάτων",
+  "רשימת משימות",
+  "قائمة مهام الأقسام",
+  "Aufgaben der Abteilungen",
+  "Список задач отделов",
+  "Lista de tareas",
+  "Список завдань"
+ ],
+ [
+  "Folyo ve gece audit hazırlığı",
+  "Folyo ve gece audit hazırlığı",
+  "Folio and night audit preparation",
+  "Préparation des folios et audit de nuit",
+  "Προετοιμασία λογαριασμών και νυχτερινού ελέγχου",
+  "הכנת חשבונות וביקורת לילה",
+  "تحضير الحسابات والتدقيق الليلي",
+  "Folio- und Nachtprüfung vorbereiten",
+  "Подготовка фолио и ночного аудита",
+  "Preparación de folios y auditoría nocturna",
+  "Підготовка фоліо й нічного аудиту"
+ ],
+ [
+  "Entegrasyon katmanları",
+  "Entegrasyon katmanları",
+  "Integration layers",
+  "Couches d’intégration",
+  "Επίπεδα διασύνδεσης",
+  "שכבות שילוב",
+  "طبقات التكامل",
+  "Integrationsschichten",
+  "Уровни интеграции",
+  "Capas de integración",
+  "Рівні інтеграції"
+ ],
+ [
+  "Ön inceleme durumu",
+  "Ön inceleme durumu",
+  "Pre-review status",
+  "Statut du pré-examen",
+  "Κατάσταση προελέγχου",
+  "מצב בדיקה מוקדמת",
+  "حالة المراجعة الأولية",
+  "Vorprüfungsstatus",
+  "Статус предварительной проверки",
+  "Estado de revisión previa",
+  "Статус попередньої перевірки"
+ ],
+ [
+  "Personel incelemesi gerekli",
+  "Personel incelemesi gerekli",
+  "Staff review required",
+  "Examen du personnel requis",
+  "Απαιτείται έλεγχος προσωπικού",
+  "נדרשת בדיקת צוות",
+  "يلزم تدقيق الموظفين",
+  "Prüfung durch Personal erforderlich",
+  "Требуется проверка сотрудника",
+  "Revisión del personal requerida",
+  "Потрібна перевірка персоналу"
+ ],
+ [
+  "Personel kontrolüne hazır",
+  "Personel kontrolüne hazır",
+  "Ready for staff pre-review",
+  "Prêt pour pré-examen",
+  "Έτοιμο για προέλεγχο",
+  "מוכן לבדיקה מוקדמת",
+  "جاهز للمراجعة الأولية",
+  "Bereit zur Vorprüfung",
+  "Готово к предварительной проверке",
+  "Listo para revisión previa",
+  "Готово до перевірки"
+ ],
+ [
+  "Sıradaki güvenli adım",
+  "Sıradaki güvenli adım",
+  "Next safe step",
+  "Prochaine étape sûre",
+  "Επόμενο ασφαλές βήμα",
+  "השלב הבטוח הבא",
+  "الخطوة الآمنة التالية",
+  "Nächster sicherer Schritt",
+  "Следующий безопасный шаг",
+  "Siguiente paso seguro",
+  "Наступний безпечний крок"
+ ],
+ [
+  "Kaynak doğrulanmadı",
+  "Kaynak doğrulanmadı",
+  "Source not verified",
+  "Source non vérifiée",
+  "Μη επαληθευμένη πηγή",
+  "המקור לא אומת",
+  "مصدر غير موثّق",
+  "Quelle nicht geprüft",
+  "Источник не проверен",
+  "Fuente no verificada",
+  "Джерело не перевірено"
+ ],
+ [
+  "Oda planı",
+  "Oda planı",
+  "Room plan",
+  "Plan des chambres",
+  "Πλάνο δωματίων",
+  "תוכנית חדרים",
+  "مخطط الغرف",
+  "Zimmerplan",
+  "План номеров",
+  "Plan de habitaciones",
+  "План номерів"
+ ],
+ [
+  "Rezervasyon",
+  "Rezervasyon",
+  "Reservation",
+  "Réservation",
+  "Κράτηση",
+  "הזמנה",
+  "حجز",
+  "Reservierung",
+  "Бронирование",
+  "Reserva",
+  "Бронювання"
+ ],
+ [
+  "Misafirler",
+  "Misafirler",
+  "Guests",
+  "Clients",
+  "Επισκέπτες",
+  "אורחים",
+  "الضيوف",
+  "Gäste",
+  "Гости",
+  "Huéspedes",
+  "Гості"
+ ],
+ [
+  "Aktif Folyolar",
+  "Aktif Folyolar",
+  "Open folios",
+  "Folios ouverts",
+  "Ανοιχτοί λογαριασμοί",
+  "חשבונות פתוחים",
+  "الحسابات المفتوحة",
+  "Offene Folios",
+  "Открытые фолио",
+  "Folios abiertos",
+  "Відкриті фоліо"
+ ],
+ [
+  "Acente Alacakları",
+  "Acente Alacakları",
+  "Agency receivables",
+  "Créances des agences",
+  "Οφειλές πρακτορείων",
+  "חובות סוכנויות",
+  "ذمم الوكالات",
+  "Agenturforderungen",
+  "Долги агентств",
+  "Cuentas por cobrar",
+  "Борги агенцій"
+ ],
+ [
+  "Rapor Merkezi",
+  "Rapor Merkezi",
+  "Report center",
+  "Centre des rapports",
+  "Κέντρο αναφορών",
+  "מרכז דוחות",
+  "مركز التقارير",
+  "Berichtszentrale",
+  "Центр отчётов",
+  "Centro de informes",
+  "Центр звітів"
+ ],
+ [
+  "Blokajlar",
+  "Blokajlar",
+  "Room blocks",
+  "Blocages",
+  "Δεσμεύσεις",
+  "חסימות חדרים",
+  "حظر الغرف",
+  "Zimmerblockierungen",
+  "Блокировки номеров",
+  "Bloqueos de habitaciones",
+  "Блокування номерів"
+ ],
+ [
+  "Demirbaşlar",
+  "Demirbaşlar",
+  "Room assets",
+  "Équipements des chambres",
+  "Εξοπλισμός δωματίων",
+  "ציוד חדרים",
+  "تجهيزات الغرف",
+  "Zimmerausstattung",
+  "Оснащение номеров",
+  "Equipamiento de habitaciones",
+  "Оснащення номерів"
+ ],
+ [
+  "Tümü",
+  "Tümü",
+  "All",
+  "Tous",
+  "Όλα",
+  "הכול",
+  "الكل",
+  "Alle",
+  "Все",
+  "Todos",
+  "Усі"
+ ],
+ [
+  "Engelli",
+  "Engelli",
+  "Blocked",
+  "Bloqué",
+  "Αποκλεισμένο",
+  "חסום",
+  "محظور",
+  "Blockiert",
+  "Заблокировано",
+  "Bloqueado",
+  "Заблоковано"
+ ],
+ [
+  "Hazır",
+  "Hazır",
+  "Ready",
+  "Prêt",
+  "Έτοιμο",
+  "מוכן",
+  "جاهز",
+  "Bereit",
+  "Готово",
+  "Listo",
+  "Готово"
+ ],
+ [
+  "Kaynak",
+  "Kaynak",
+  "Source",
+  "Source",
+  "Πηγή",
+  "מקור",
+  "المصدر",
+  "Quelle",
+  "Источник",
+  "Fuente",
+  "Джерело"
+ ],
+ [
+  "Durum",
+  "Durum",
+  "Status",
+  "Statut",
+  "Κατάσταση",
+  "מצב",
+  "الحالة",
+  "Status",
+  "Статус",
+  "Estado",
+  "Стан"
+ ],
+ [
+  "Önerilen işlem",
+  "Önerilen işlem",
+  "Suggested action",
+  "Action proposée",
+  "Προτεινόμενη ενέργεια",
+  "פעולה מוצעת",
+  "إجراء مقترح",
+  "Empfohlene Aktion",
+  "Предлагаемое действие",
+  "Acción propuesta",
+  "Пропонована дія"
+ ],
+ [
+  "Oda",
+  "Oda",
+  "Room",
+  "Chambre",
+  "Δωμάτιο",
+  "חדר",
+  "الغرفة",
+  "Zimmer",
+  "Номер",
+  "Habitación",
+  "Номер"
+ ],
+ [
+  "Oda tipi",
+  "Oda tipi",
+  "Room category",
+  "Catégorie",
+  "Κατηγορία",
+  "קטגוריה",
+  "الفئة",
+  "Zimmerkategorie",
+  "Категория",
+  "Categoría",
+  "Категорія"
+ ],
+ [
+  "Kat",
+  "Kat",
+  "Floor",
+  "Étage",
+  "Όροφος",
+  "קומה",
+  "الطابق",
+  "Etage",
+  "Этаж",
+  "Planta",
+  "Поверх"
+ ],
+ [
+  "Kapasite",
+  "Kapasite",
+  "Capacity",
+  "Capacité",
+  "Χωρητικότητα",
+  "קיבולת",
+  "السعة",
+  "Kapazität",
+  "Вместимость",
+  "Capacidad",
+  "Місткість"
+ ],
+ [
+  "Toplam oda",
+  "Toplam oda",
+  "Total rooms",
+  "Total des chambres",
+  "Σύνολο δωματίων",
+  "סך חדרים",
+  "إجمالي الغرف",
+  "Zimmer gesamt",
+  "Всего номеров",
+  "Habitaciones totales",
+  "Всього номерів"
+ ],
+ [
+  "Kirli oda",
+  "Kirli oda",
+  "Dirty rooms",
+  "Chambres sales",
+  "Βρώμικα δωμάτια",
+  "חדרים מלוכלכים",
+  "غرف غير نظيفة",
+  "Schmutzige Zimmer",
+  "Грязные номера",
+  "Habitaciones sucias",
+  "Брудні номери"
+ ],
+ [
+  "Teknik kapalı",
+  "Teknik kapalı",
+  "Out of order",
+  "Hors service",
+  "Εκτός λειτουργίας",
+  "מחוץ לשירות",
+  "خارج الخدمة",
+  "Außer Betrieb",
+  "Не работает",
+  "Fuera de servicio",
+  "Не працює"
+ ],
+ [
+  "Kat hizmetleri ↗",
+  "Kat hizmetleri ↗",
+  "Housekeeping ↗",
+  "Ménage ↗",
+  "Καθαριότητα ↗",
+  "משק בית ↗",
+  "التدبير المنزلي ↗",
+  "Housekeeping ↗",
+  "Уборка ↗",
+  "Limpieza ↗",
+  "Прибирання ↗"
+ ],
+ [
+  "Kontrole hazır",
+  "Kontrole hazır",
+  "Ready for review",
+  "Prêt à examiner",
+  "Έτοιμο για έλεγχο",
+  "מוכן לבדיקה",
+  "جاهز للمراجعة",
+  "Prüfbereit",
+  "Готово к проверке",
+  "Listo para revisión",
+  "Готово до перевірки"
+ ],
+ [
+  "Bağlı değil",
+  "Bağlı değil",
+  "Not connected",
+  "Non connecté",
+  "Χωρίς σύνδεση",
+  "לא מחובר",
+  "غير متصل",
+  "Nicht verbunden",
+  "Не подключено",
+  "No conectado",
+  "Не підключено"
+ ],
+ [
+  "Sisteme bağlantı yok",
+  "Sisteme bağlantı yok",
+  "No connection to source",
+  "Aucune connexion source",
+  "Καμία σύνδεση πηγής",
+  "אין חיבור למקור",
+  "لا اتصال بالمصدر",
+  "Keine Quellenverbindung",
+  "Нет подключения к источнику",
+  "Sin conexión a fuente",
+  "Немає зв’язку з джерелом"
+ ],
+ [
+  "Personel onayı gerekli",
+  "Personel onayı gerekli",
+  "Staff approval required",
+  "Approbation nécessaire",
+  "Απαιτείται έγκριση",
+  "נדרש אישור צוות",
+  "يلزم موافقة الموظف",
+  "Personalzulassung erforderlich",
+  "Нужно одобрение сотрудника",
+  "Se requiere aprobación",
+  "Потрібне схвалення"
+ ],
+ [
+  "Kurgusal işlem · salt okunur",
+  "Kurgusal işlem · salt okunur",
+  "Fictional operation · read only",
+  "Opération fictive · lecture seule",
+  "Εικονική λειτουργία · μόνο ανάγνωση",
+  "פעולה מדומה · לקריאה בלבד",
+  "عملية افتراضية · قراءة فقط",
+  "Fiktiver Vorgang · nur lesen",
+  "Тестовая операция · только чтение",
+  "Operación ficticia · solo lectura",
+  "Тестова операція · лише читання"
+ ],
+ [
+  "Bu demo işlem gerçekleştiremez; entegrasyon ayrı izin gerektirir",
+  "Bu demo işlem gerçekleştiremez; entegrasyon ayrı izin gerektirir",
+  "This demo cannot perform real actions; integration requires separate permission",
+  "Aucune action réelle possible ; autorisation distincte requise",
+  "Το demo δεν εκτελεί πραγματικές ενέργειες",
+  "אין פעולות אמיתיות בהדגמה",
+  "لا يمكن للعرض تنفيذ إجراءات حقيقية",
+  "Diese Demo führt keine echten Aktionen aus",
+  "Демо не выполняет реальные действия",
+  "Esta demo no realiza acciones reales",
+  "Демо не виконує реальні дії"
+ ],
+ [
+  "Daha fazla bilgi",
+  "Daha fazla bilgi",
+  "More information",
+  "Plus d’informations",
+  "Περισσότερα",
+  "מידע נוסף",
+  "مزيد من المعلومات",
+  "Mehr Informationen",
+  "Подробнее",
+  "Más información",
+  "Докладніше"
+ ]
+]);
+fullUiEnglishRows([
+ [
+  "Yeni rezervasyon",
+  "New reservation"
+ ],
+ [
+  "Düzenleyen adı / grup adı",
+  "Guest or group display name"
+ ],
+ [
+  "Giriş",
+  "Arrival"
+ ],
+ [
+  "Çıkış",
+  "Departure"
+ ],
+ [
+  "Acente",
+  "Agency"
+ ],
+ [
+  "OTA referans",
+  "OTA reference"
+ ],
+ [
+  "Pansiyon",
+  "Board plan"
+ ],
+ [
+  "Tahsilat",
+  "Payment method"
+ ],
+ [
+  "Komisyon",
+  "Commission"
+ ],
+ [
+  "Opsiyon tarihi",
+  "Option expiry"
+ ],
+ [
+  "Yetişkin",
+  "Adults"
+ ],
+ [
+  "Çocuk",
+  "Children"
+ ],
+ [
+  "Günlük fiyat",
+  "Nightly rate"
+ ],
+ [
+  "Oda ekle",
+  "Add room"
+ ],
+ [
+  "Taslak kontrolü",
+  "Review draft"
+ ],
+ [
+  "Kapat",
+  "Close"
+ ],
+ [
+  "Oda sayısı",
+  "Room count"
+ ],
+ [
+  "Rezervasyon no",
+  "Reservation number"
+ ],
+ [
+  "Misafir sayısı",
+  "Guest count"
+ ],
+ [
+  "Talep sayısı",
+  "Request count"
+ ],
+ [
+  "Para birimi",
+  "Currency"
+ ],
+ [
+  "Ödeme tipi",
+  "Payment type"
+ ],
+ [
+  "Özel talep",
+  "Special request"
+ ],
+ [
+  "Rezervasyon ön incelemesi",
+  "Reservation pre-review"
+ ],
+ [
+  "Rezervasyon detayları",
+  "Reservation details"
+ ],
+ [
+  "Yatak tercihi",
+  "Bed preference"
+ ],
+ [
+  "Konfirmasyon referansı",
+  "Confirmation reference"
+ ],
+ [
+  "Oda uygunluk ve temizlik",
+  "Room compatibility and housekeeping"
+ ],
+ [
+  "Geliş–Çıkış",
+  "Arrival–Departure"
+ ],
+ [
+  "Ödeme hareketleri",
+  "Payment transactions"
+ ],
+ [
+  "Tutar",
+  "Amount"
+ ],
+ [
+  "Açıklama",
+  "Description"
+ ],
+ [
+  "Ticari unvan",
+  "Legal company name"
+ ],
+ [
+  "Vade",
+  "Due date"
+ ],
+ [
+  "Kalan alacak",
+  "Outstanding receivable"
+ ],
+ [
+  "Ödenen",
+  "Paid"
+ ],
+ [
+  "Fatura durumu",
+  "Invoice status"
+ ],
+ [
+  "Ödeme yöntemi",
+  "Payment method"
+ ],
+ [
+  "Kredi kartı",
+  "Credit card"
+ ],
+ [
+  "Nakit",
+  "Cash"
+ ],
+ [
+  "Banka havalesi",
+  "Bank transfer"
+ ],
+ [
+  "Rapor",
+  "Report"
+ ],
+ [
+  "Filtrele",
+  "Filter"
+ ],
+ [
+  "Temizle",
+  "Clear"
+ ],
+ [
+  "Başlangıç",
+  "From"
+ ],
+ [
+  "Bitiş",
+  "To"
+ ],
+ [
+  "Folyolar",
+  "Folios"
+ ],
+ [
+  "Mizan",
+  "Trial balance"
+ ],
+ [
+  "Maliye listesi",
+  "Fiscal list"
+ ],
+ [
+  "Acenteler",
+  "Agencies"
+ ],
+ [
+  "Ön büro kontrol paneli",
+  "Front office control panel"
+ ],
+ [
+  "Toplam",
+  "Total"
+ ],
+ [
+  "Bakiye",
+  "Balance"
+ ],
+ [
+  "Hareketler",
+  "Transactions"
+ ],
+ [
+  "Detaylı gelir",
+  "Detailed revenue"
+ ],
+ [
+  "Günlük denge",
+  "Daily balance"
+ ],
+ [
+  "Oda Fiyat Kontrol",
+  "Room rate control"
+ ],
+ [
+  "Kasa",
+  "Cash register"
+ ],
+ [
+  "Oda değişimi",
+  "Room change"
+ ],
+ [
+  "Bekleyen",
+  "Pending"
+ ],
+ [
+  "Konaklayan",
+  "In house"
+ ],
+ [
+  "Çıkış yapanlar",
+  "Departed"
+ ],
+ [
+  "İptal",
+  "Cancelled"
+ ],
+ [
+  "Opsiyonel",
+  "Optional"
+ ],
+ [
+  "Onaylı",
+  "Confirmed"
+ ],
+ [
+  "Bakım",
+  "Maintenance"
+ ],
+ [
+  "Oda durumları yalnızca kurgusal örnek veridir.",
+  "Room statuses are fictional examples only."
+ ],
+ [
+  "Tüm nihai işlemler yetkili personelde",
+  "Final operations require authorized staff"
+ ],
+ [
+  "Nihai check-in değildir",
+  "Not a completed check-in"
+ ],
+ [
+  "Gerekçe",
+  "Reason"
+ ],
+ [
+  "Hata",
+  "Issue"
+ ],
+ [
+  "Kategori",
+  "Category"
+ ],
+ [
+  "İlgili rezervasyon",
+  "Related reservation"
+ ],
+ [
+  "Oda durumu",
+  "Room status"
+ ],
+ [
+  "Teknik blokaj",
+  "Technical room hold"
+ ],
+ [
+  "Rezervasyon tarihi",
+  "Reservation date"
+ ],
+ [
+  "Kayıt bulunamadı.",
+  "No records found."
+ ],
+ [
+  "Müşteri",
+  "Guest"
+ ],
+ [
+  "Müşteri ID",
+  "Guest ID"
+ ],
+ [
+  "Pasaport",
+  "Passport"
+ ],
+ [
+  "Kimlik tipi",
+  "Identity document type"
+ ],
+ [
+  "Ülke",
+  "Country"
+ ],
+ [
+  "Ad",
+  "First name"
+ ],
+ [
+  "Soyad",
+  "Surname"
+ ],
+ [
+  "Doğum tarihi",
+  "Date of birth"
+ ],
+ [
+  "Doğum yeri",
+  "Place of birth"
+ ],
+ [
+  "İkamet adresi",
+  "Residence address"
+ ],
+ [
+  "Telefon",
+  "Phone"
+ ],
+ [
+  "E-posta",
+  "Email"
+ ],
+ [
+  "Oda müsaitlik",
+  "Room availability"
+ ],
+ [
+  "Ödeme",
+  "Payment"
+ ],
+ [
+  "Folyo",
+  "Folio"
+ ],
+ [
+  "Kurgusal",
+  "Fictional"
+ ],
+ [
+  "Sıradaki güvenli adım",
+  "Next safe action"
+ ],
+ [
+  "Kaynak / bütünlük",
+  "Source / integrity"
+ ],
+ [
+  "İş akışları",
+  "Workflows"
+ ],
+ [
+  "Personel & Oturum",
+  "Staff & Session"
+ ],
+ [
+  "Personel ID",
+  "Staff ID"
+ ],
+ [
+  "Kural gerekçesi",
+  "Rule reason"
+ ],
+ [
+  "Operasyon simülasyonu",
+  "Operations simulation"
+ ],
+ [
+  "Oda çakışması",
+  "Room assignment conflict"
+ ],
+ [
+  "Ödeme / folyo uyarısı",
+  "Payment / folio alert"
+ ],
+ [
+  "Kimlik ve giriş kontrolü",
+  "Identity and arrival check"
+ ],
+ [
+  "OTA kaynak uyuşmazlığı",
+  "OTA source mismatch"
+ ],
+ [
+  "Bakım ve oda hazırlığı",
+  "Maintenance and room readiness"
+ ],
+ [
+  "Rezervasyon ve grup taslağı",
+  "Reservation and group draft"
+ ],
+ [
+  "Oda planı ve blokaj",
+  "Room plan and allocation"
+ ],
+ [
+  "Giriş hazırlığı",
+  "Arrival preflight"
+ ],
+ [
+  "Çıkış ve bakiye kontrolü",
+  "Departure and balance preflight"
+ ],
+ [
+  "Folyo ve harcama incelemesi",
+  "Folio and posting review"
+ ],
+ [
+  "Acenteler ve City Ledger",
+  "Agency receivables and city ledger"
+ ],
+ [
+  "Gün sonu ve audit",
+  "Night audit"
+ ],
+ [
+  "Kat hizmetleri ve teknik bakım",
+  "Housekeeping and technical maintenance"
+ ],
+ [
+  "Fiyat, kontenjan ve allotment",
+  "Rates and allotments"
+ ],
+ [
+  "Misafir profili ve veri koruma",
+  "Guest profile and privacy"
+ ],
+ [
+  "Fatura ve mali uyum",
+  "Invoicing and fiscal compliance"
+ ],
+ [
+  "Doluluk, bütçe ve performans",
+  "Occupancy, budget and performance"
+ ],
+ [
+  "Personel devri ve görevler",
+  "Shift handover and tasks"
+ ],
+ [
+  "PMS, OTA, KBS entegrasyon sınırı",
+  "PMS, OTA and KBS integration boundary"
+ ]
+]);
+
+</script>
+<script>
+/* Shared client-side i18n + demo navigation; no network or AI vendor requests. */
+(function setupProjectWideLanguage(){
+ const language=document.getElementById('globalLanguage');
+ const local=document.getElementById('v04Locale');
+ if(!language||!local)return;
+ const selectRole=document.getElementById('wfStaffButton');
+ selectRole?.addEventListener('click',()=>navTo('ops_staff'));
+ function updateLocale(locale){
+  if(!fullUiLocales.includes(locale))return;
+  window.localizePageMetadata(locale);
+  document.documentElement.lang=locale;
+  document.documentElement.dir=(locale==='ar'||locale==='he')?'rtl':'ltr';
+  render();
+ }
+ language.addEventListener('change',()=>updateLocale(language.value));
+ local.addEventListener('change',()=>{if(local.value!==opsState.lang&&fullUiLocales.includes(local.value)){
+   opsSyncLocale(local.value);updateLocale(local.value);
+ }});
+ document.getElementById('startShowcase')?.addEventListener('click',e=>{
+   // The legacy handler plays only the dashboard's current story. Intercept
+   // and launch the new five-scenario operator workflow instead.
+   e.preventDefault();e.stopImmediatePropagation();
+   navTo('ops_workflows');
+   wfStop();wfState.stage=0;wfState.scenario='room_block';
+   render();
+   document.getElementById('wfPlay')?.click();
+ },true);
+ window.localizePageMetadata(opsState.lang);
+ render();
+})();
+
 </script>
 </body></html>
