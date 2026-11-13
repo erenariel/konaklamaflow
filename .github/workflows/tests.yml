@@ -32,6 +32,7 @@ jobs:
           python -m konaklamaflow.experience_cli examples/fictional-hotel.json /tmp/suite-report.json
           python scripts/generate_suite_demo.py --check
           python scripts/generate_hotel_ops_demo.py --check
+          node --check demo/hotel-ops-module.js
           python scripts/stage_demo_site.py --output /tmp/demo-site
 
   browser:
