@@ -74,27 +74,16 @@ def main(argv=None):
     parser.add_argument('--screenshots', action='store_true', help='Capture desktop/mobile previews with optional Playwright')
     args = parser.parse_args(argv)
     try:
-        snapshot = json.loads((ROOT / 'examples/fictional-hotel.json').read_text(encoding='utf-8'))
-        report = json.loads((ROOT / 'examples/operations-evaluation.json').read_text(encoding='utf-8'))
-        if evaluate(snapshot) != report:
-            print('Suite report fixture is stale; regenerate it with the Python engine.', file=sys.stderr)
-            return 1
-        path = ROOT / 'demo/hotel-suite.html'
-        current = path.read_text(encoding='utf-8')
-        generated = embed(current, snapshot, report)
-        if args.check:
-            if generated != current:
-                print('Offline suite data is stale; run scripts/generate_suite_demo.py.', file=sys.stderr)
-                return 1
-        else:
-            path.write_text(generated, encoding='utf-8')
+        from scripts.generate_canonical_demo import generate
+        if args.screenshots and args.check:
+            print('--screenshots cannot be combined with --check.', file=sys.stderr)
+            return 2
+        generate(args.check)
         if args.screenshots:
-            if args.check:
-                print('--screenshots cannot be combined with read-only --check.', file=sys.stderr)
-                return 2
             capture_previews()
-        print('Suite fixture and offline viewer match the Python rule report.')
+        print('Suite and integrated demo match the canonical Python projections.')
         return 0
+
     except (ValueError, OSError, UnicodeError, TypeError):
         print('Could not verify the fictional suite fixtures or generated HTML.', file=sys.stderr)
         return 2

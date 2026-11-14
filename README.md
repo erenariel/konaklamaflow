@@ -10,6 +10,12 @@ Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional in
 
 Original illustrated concepts remain available separately: [AI hero illustration](docs/images/ai-presentation-hero.svg) and [explanation-flow illustration](docs/images/ai-explanation-flow.svg). These SVG concepts are distinct from the real application screenshots and recordings below.
 
+### Shared fictional reservation model — Issue #35 candidate
+
+The candidate's integrated dashboard, room plan, PMS views, AI scenarios, folios and 32 report options now share **one Python-validated source**, [`examples/canonical-hotel.json`](examples/canonical-hotel.json): 12 KF reservations, 18 rooms and explicit reservation/stay/guest/agency/folio links. No old KFD financial record is matched by its number or silently migrated. Only three explicitly authored fictional folios have recorded movements; the other nine reservations show `not_applicable` for finance. Missing-source reports remain unavailable. Follow a reservation from the dashboard or room plan to its exact PMS details, related folio and scoped report.
+
+Run `python scripts/generate_canonical_demo.py --check` to verify all current projections. Historical CLI/API fixtures remain separate examples. [Schema, regeneration commands and multiroom limits (TR)](docs/CANONICAL_SCHEMA_TR.md). This is a **draft-PR candidate**, not a change already published on the live site. All integrations remain disabled; translations remain drafts.
+
 ### AI review, made visible — v0.5.2 visual candidate
 
 **[Open the offline demo](demo/v04-integrated-preview.html)** · [Merged PR #31](https://github.com/erenariel/konaklamaflow/pull/31) · [Static desktop preview](docs/images/v052-overview-1440.png) · [Mobile preview](docs/images/v052-mobile.png)

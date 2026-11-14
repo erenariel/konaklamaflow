@@ -84,12 +84,13 @@ def audit(output: Path) -> dict:
     output.mkdir(parents=True, exist_ok=False)
     html = ROOT / 'demo/hotel-suite.html'
     source = html.read_text(encoding='utf-8')
-    report = json.loads((ROOT / 'examples/operations-evaluation.json').read_text())
+    report = json.loads((ROOT / 'examples/canonical-review-report.json').read_text())
     result = {
         'schema_version': 'konaklamaflow.visual-experience.v1',
         'html_sha256': digest(html),
-        'snapshot_file_sha256': digest(ROOT / 'examples/fictional-hotel.json'),
-        'report_file_sha256': digest(ROOT / 'examples/operations-evaluation.json'),
+        'canonical_file_sha256': digest(ROOT / 'examples/canonical-hotel.json'),
+        'snapshot_file_sha256': digest(ROOT / 'examples/canonical-review.json'),
+        'report_file_sha256': digest(ROOT / 'examples/canonical-review-report.json'),
         'source_commit': subprocess.check_output(
             ['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         'source_has_uncommitted_changes': bool(subprocess.check_output(

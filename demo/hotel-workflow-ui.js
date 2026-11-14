@@ -44,7 +44,7 @@ function wfRenderProfile(){
  const capabilities={reception:['room_read','booking_read','guest_safe_read','folio_safe_read','request_draft'],housekeeping:['room_read','hk_read','maintenance_read','request_draft'],finance:['folio_safe_read','ledger_read','reports_read','request_draft'],manager:['room_read','booking_read','guest_safe_read','folio_safe_read','hk_read','ledger_read','reports_read','review_requests','request_draft'],auditor:['room_read','booking_read','folio_safe_read','ledger_read','reports_read','audit_read']};
  const opts=wfOperators.map(x=>'<option value="'+x.id+'"'+(u.id===x.id?' selected':'')+'>'+x.id+' · '+x.dept+'</option>').join('');
  return '<div class="wf-grid"><section class="ops-card"><h3>'+wfT('title')+'</h3><p class="ops-notice">'+wfT('notAuth')+'</p><label>'+wfT('person')+'<select id="wfOperator">'+opts+'</select></label>'+
- '<div class="ops-grid2">'+[['ID',u.id],[wfT('login'),u.login],[wfT('role'),u.role],[wfT('session'),'SYNTHETIC_OFFLINE'],['Department',u.dept],['Tenant','SAMPLE_HOTEL_01']].map(([key,val])=>'<div><small>'+key+'</small><strong>'+val+'</strong></div>').join('')+'</div>'+
+ '<div class="ops-grid2">'+[['ID',u.id],[wfT('login'),u.login],[wfT('role'),u.role],[wfT('session'),'SYNTHETIC_OFFLINE'],['Department',u.dept],['Tenant',HOTEL_OPS_DATA.property_id]].map(([key,val])=>'<div><small>'+opsHtml(key)+'</small><strong>'+opsHtml(val)+'</strong></div>').join('')+'</div>'+
  '<h4>'+wfT('scopes')+'</h4><div class="wf-chips">'+capabilities[u.role].map(x=>'<code>'+x+'</code>').join('')+'</div>'+
  '<p class="ops-notice">'+wfT('locked')+' · MFA / RBAC / audit-log backend NOT CONNECTED</p></section>'+
  '<section class="ops-card"><h3>'+wfT('log')+'</h3><div id="wfAuditLog" aria-live="polite">'+(wfState.log.length?wfState.log.slice(-12).reverse().map((entry,i)=>'<p class="wf-event"><b>'+String(i+1)+'. </b>'+entry+'</p>').join(''):'<p>'+wfT('noLog')+'</p>')+'</div><p class="ops-note">Her işlem geçici tarayıcı belleğindedir. Gerçek kullanıcı oturumu, kalıcı audit veya yetki sağlamaz.</p></section></div>';
@@ -60,21 +60,35 @@ const wfScenarios=[
 function wfStop(){if(wfState.timer!==null)clearTimeout(wfState.timer);wfState.timer=null;wfState.playing=false;}
 window.workflowStop=wfStop;
 function wfRecord(message){wfState.log.push(message);if(wfState.log.length>25)wfState.log.shift();}
+function wfSourceCase(scenario){
+ // These are presentation categories, never rules evaluated in JavaScript.
+ // Only an already-computed Python finding may label a concrete reservation.
+ const categories={room_block:['ROOM_CONFLICT','NO_ASSIGNED_ROOM'],payment:['PAYMENT_REVIEW'],
+ identity:['IDENTITY_STAFF_REVIEW','GUEST_NOT_ARRIVED'],
+ channel:['CHANNEL_REFERENCE_MISMATCH','CHANNEL_STATUS_CONFLICT','UNMAPPED_PMS','CHANNEL_EVENT_REVIEW'],
+ maintenance:['MAINTENANCE_TASK_OPEN','HOUSEKEEPING_NOT_INSPECTED','HOUSEKEEPING_TASK_OPEN']};
+ if(typeof reportStale!=='undefined'&&reportStale)return null;
+ const row=INITIAL_EVALUATION.arrivals.find(item=>item.blockers.some(code=>(categories[scenario]||[]).includes(code)));
+ const reservationId=row?window.canonicalReservationId?.(row.id):null;
+ return reservationId&&opsRes(reservationId)?{row,reservationId}:null;
+}
 function wfStage(){
  const sc=wfScenarios.find(x=>x.id===wfState.scenario)||wfScenarios[0];
  const i=Math.max(0,Math.min(sc.steps.length-1,wfState.stage));
- return '<div class="wf-story"><div class="ops-grid2"><div><small>'+wfT('status')+'</small><strong>'+wfLocalized(sc.name)+' · '+(i+1)+'/'+sc.steps.length+'</strong></div><div><small>'+wfT('result')+'</small><strong>'+sc.why+'</strong></div></div>'+
+ const source=wfSourceCase(sc.id);
+ const refs=source?'<div class="ops-toolbar" data-workflow-reservation="'+opsHtml(source.reservationId)+'"><code dir="ltr">'+opsHtml(source.reservationId)+'</code>'+opsRecordAction('reservation',source.reservationId,opsT('reservation'))+opsRecordAction('room-plan',source.reservationId,opsC('roomPlan'))+opsRecordAction('review',source.reservationId,opsC('review'))+'</div>':'<p class="ops-note" data-workflow-source-state="not_applicable"><code>not_applicable</code> · '+opsHtml(opsC('noScope'))+'</p>';
+ return '<div class="wf-story"><div class="ops-grid2"><div><small>'+wfT('status')+'</small><strong>'+wfLocalized(sc.name)+' · '+(i+1)+'/'+sc.steps.length+'</strong></div><div><small>'+wfT('result')+'</small><strong>'+opsHtml(source?source.row.blockers.join(' · '):'not_applicable')+'</strong></div></div>'+refs+
  '<ol class="wf-steps">'+sc.steps.map((x,k)=>'<li class="'+(k===i?'wf-active':'')+'">'+wfLocalized(x)+'</li>').join('')+'</ol>'+
  '<p class="ops-notice">'+wfT('nextStep')+': '+wfLocalized(sc.next)+' · '+wfT('decision')+'</p></div>';
 }
 function wfView(pageId){
- if(pageId==='ops_staff')return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'">'+wfRenderProfile()+'</section>';
+ if(pageId==='ops_staff')return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'">'+opsNotice()+wfRenderProfile()+'</section>';
  if(pageId!=='ops_workflows')return '';
  const flow=wfDefinitions.find(f=>f.id===wfState.selected)||wfDefinitions[0];
  const options=wfDefinitions.map(x=>'<option value="'+x.id+'"'+(x.id===wfState.selected?' selected':'')+'>'+wfLocalized(x.name)+'</option>').join('');
  const allowed=wfAllowed(flow);
  const checks=flow.checks.map(c=>'<li><code dir="ltr">'+c+'</code></li>').join('');
- return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'"><div class="ops-stack">'+
+ return '<section class="ops-view" id="wfView" lang="'+opsState.lang+'" dir="'+(['ar','he'].includes(opsState.lang)?'rtl':'ltr')+'"><div class="ops-stack">'+opsNotice()+
  '<p class="ops-notice">'+wfT('demo')+' · '+wfT('notAuth')+' · '+wfT('locked')+'</p>'+
  '<div class="wf-grid"><section class="ops-card"><h3>'+wfT('workflows')+'</h3><label>'+wfT('type')+'<select id="wfFlow">'+options+'</select></label>'+
  '<div class="ops-grid2"><div><small>Workflow ID</small><strong>'+flow.id+'</strong></div><div><small>'+wfT('status')+'</small><strong>'+flow.status+'</strong></div></div>'+

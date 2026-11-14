@@ -9,8 +9,11 @@ from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[2]
 HTML=ROOT/"demo/v04-integrated-preview.html"
-SAMPLE=json.loads((ROOT/"examples/hotel-operations-fictional.json").read_text(encoding="utf-8"))
-from konaklamaflow.hotel_ops import build_operations_report
+CANONICAL=json.loads((ROOT/"examples/canonical-hotel.json").read_text(encoding="utf-8"))
+from konaklamaflow.canonical import project_operations
+from konaklamaflow.canonical_reporting import build_canonical_operations_report
+
+SAMPLE=project_operations(CANONICAL)
 
 
 class TestIntegratedHotelOperations(unittest.TestCase):
@@ -49,40 +52,75 @@ class TestIntegratedHotelOperations(unittest.TestCase):
         self.assertEqual(self.page.locator("#globalLanguage").input_value(),"tr")
 
     def test_python_generated_report_exactly_matches_browser_data(self):
+        self.assertEqual(self.page.evaluate("() => CANONICAL_DATA"),CANONICAL)
         self.assertEqual(self.page.evaluate("() => HOTEL_OPS_DATA"),SAMPLE)
-        self.assertEqual(self.page.evaluate("() => HOTEL_OPS_REPORT"),build_operations_report(SAMPLE))
+        self.assertEqual(self.page.evaluate("() => HOTEL_OPS_REPORT"),build_canonical_operations_report(CANONICAL))
         self.assertEqual(self.page.evaluate("() => Object.keys(HOTEL_OPS_REPORT.reports).length"),32)
         self.assertEqual(self.page.evaluate("() => HOTEL_OPS_REPORT.safety.guest_identity_data"),False)
 
-    def test_folios_show_revenue_postings_payments_and_agency_debt(self):
+    def test_folios_show_only_explicit_source_postings_and_agency_debt(self):
         self.nav("ops_folios")
-        self.assertIn("FOL-001",self.page.locator("#content").inner_text())
-        self.assertIn("RESTAURANT",self.page.locator("#content").inner_text())
-        self.assertIn("75,00",self.page.locator("#content").inner_text())
+        for folio in SAMPLE["folios"]:
+            clear_scope=self.page.locator('[data-op-action="clear-folio-scope"]')
+            if clear_scope.count():
+                clear_scope.first.click()
+            self.page.locator('[data-op-open="folio:'+folio['id']+'"]').click()
+            detail=self.page.locator('[data-canonical-folio="'+folio['id']+'"]')
+            self.assertEqual(detail.get_attribute("data-reservation-id"),folio["reservation_id"])
+            self.assertIn(folio["reservation_id"],detail.inner_text())
+            for posting in folio["postings"]:
+                self.assertIn(posting["kind"],detail.inner_text())
+                self.assertIn(posting["amount"].replace(".",","),detail.inner_text())
+            # This scenario has no payment records; the UI must not borrow
+            # transactions from the unrelated historical six-booking fixture.
+            self.assertEqual(folio["payments"],[])
+            self.assertNotIn("RESTAURANT",detail.inner_text())
+            self.assertNotIn("MINIBAR",detail.inner_text())
         self.nav("ops_agencies")
-        self.assertIn("Demo Booking Travel",self.page.locator("#content").inner_text())
-        self.assertNotIn("FOL-003",self.page.locator("#content").inner_text())
+        ledger=self.page.locator("#content").inner_text()
+        self.assertIn("Hotelbeds (DEMO)",ledger)
+        self.assertIn("KF1007",ledger)
+        self.assertIn("FOL-CAN-KF1007",ledger)
+        self.assertIn("127,50",ledger)
+        self.assertNotIn("FOL-CAN-KF1001",ledger)
+        self.assertNotIn("FOL-CAN-KF1004",ledger)
 
     def test_all_32_reports_can_be_selected_missing_sources_are_visible(self):
         self.nav("ops_reports")
         self.assertEqual(self.page.locator("#opsReportType option").count(),32)
+        for report_id,report in build_canonical_operations_report(CANONICAL)["reports"].items():
+            with self.subTest(report_id=report_id):
+                self.page.locator("#opsReportType").select_option(report_id)
+                self.page.locator('[data-op-action="apply-report"]').click()
+                result=self.page.locator('.ops-report-result')
+                self.assertEqual(result.get_attribute('data-report-id'),report_id)
+                self.assertEqual(result.get_attribute('data-report-source-state'),report['source_state'])
+                self.assertIn(report['status'],result.inner_text())
         self.page.locator("#opsReportType").select_option("posting_invoice")
         self.page.locator('[data-op-action="apply-report"]').click()
-        self.assertIn("RESTAURANT",self.page.locator("#content").inner_text())
+        result=self.page.locator('.ops-report-result')
+        self.assertEqual(result.get_attribute('data-report-source-state'),'synthetic_snapshot')
+        self.assertIn("ROOM",result.inner_text())
+        self.assertIn("POST-CAN-KF1001",result.inner_text())
+        self.assertNotIn("RESTAURANT",result.inner_text())
         self.page.locator("#opsReportType").select_option("trial_balance")
         self.page.locator('[data-op-action="apply-report"]').click()
         self.assertIn("yetkili muhasebe altyapısı",self.page.locator("#content").inner_text())
+        self.assertEqual(self.page.locator('.ops-report-result').get_attribute('data-report-source-state'),'missing_source')
 
     def test_new_reservation_multiroom_is_not_saved_or_confirmed(self):
+        original=self.page.evaluate("() => JSON.stringify([CANONICAL_DATA,HOTEL_OPS_DATA,HOTEL_OPS_REPORT])")
         self.nav("ops_reservations")
         self.page.locator('[data-op-action="new-reservation"]').click()
         self.assertTrue(self.page.locator("#opsDraftForm").is_visible())
         self.page.locator('[data-op-action="add-room"]').click()
         self.assertEqual(self.page.locator(".ops-room-field").count(),2)
         self.page.locator("#opsDraftForm button[type=submit]").click()
-        self.assertIn("KFD-2026-0007",self.page.locator("#content").inner_text())
+        self.assertIn("DRAFT-2026-0001",self.page.locator("#content").inner_text())
         self.assertIn("geçici taslaktır",self.page.locator("#content").inner_text())
-        self.assertEqual(self.page.evaluate("() => HOTEL_OPS_DATA.reservations.length"),6)
+        self.assertEqual(self.page.evaluate("() => HOTEL_OPS_DATA.reservations.length"),12)
+        self.assertEqual(self.page.evaluate("() => opsState.drafts[0]"),{"id":"DRAFT-2026-0001","rooms":2,"persons":4})
+        self.assertEqual(self.page.evaluate("() => JSON.stringify([CANONICAL_DATA,HOTEL_OPS_DATA,HOTEL_OPS_REPORT])"),original)
         self.assertFalse(self.page.evaluate("() => HOTEL_OPS_REPORT.safety.pms_writes"))
 
     def test_guest_fields_restricted_and_tr_country_flag_only(self):

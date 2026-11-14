@@ -259,7 +259,15 @@ def _report_rows(snapshot):
 
 def build_operations_report(source):
     """Show only derived synthetic reports; never imply fiscal-compliant mizan."""
-    x=validate_fictional_hotel(source)
+    return _assemble_operations_report(validate_fictional_hotel(source))
+
+
+def _assemble_operations_report(x):
+    """Assemble only an already validated projection; no validation is bypassed by the public API.
+
+    The canonical adapter validates its own richer schema before calling this
+    private arithmetic/row formatter. Operational conflicts remain review facts.
+    """
     bookings=x["reservations"]
     overview,postings,payments,receivables,prices=_report_rows(x)
     reports={}

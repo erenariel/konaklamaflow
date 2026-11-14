@@ -1,11 +1,11 @@
 {
   "kind": "ACTUAL_FICTIONAL_BROWSER_TOUR",
   "story_id": "twin-review",
-  "html_sha256": "07f3c8b7f49f7838d68a3a7f9067b28ae64a5e6c352c31965a7a0cc563d26831",
+  "html_sha256": "a18f4eb450b78851756e89de360334c944fe10861918d8387680b363aba06b5c",
   "snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10",
   "report_sha256": "3242b77496e011286574c1e9515d3519c020bb0f361f0df1449d96075a398013",
-  "gif_sha256": "bcae044c1f6e707523982bcdcbd59e767cd139be693e45117eb44fa1074dc37e",
-  "frames": 21,
+  "gif_sha256": "6c4bd358fc427118971ec1ef29032ff25126967e25c7709115dc995e28aaec05",
+  "frames": 16,
   "observed_steps": [
     "0",
     "1",
