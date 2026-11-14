@@ -1,11 +1,12 @@
 # KonaklamaFlow — release channels / sürüm kanalları
 
-**Snapshot: 13 November 2026.** The three version numbers below describe **different things**; none implies an operational hotel system.
+**Snapshot: 14 November 2026.** The three version numbers below describe **different things**; none implies an operational hotel system. The public homepage for the fictional demo is [erenariel.github.io/konaklamaflow](https://erenariel.github.io/konaklamaflow/). No maintainer email address is published in this repository.
 
 | Surface | Current label | Meaning |
 | --- | --- | --- |
-| Published GitHub release | [v0.1.1](https://github.com/erenariel/konaklamaflow/releases/latest) | Last public tagged package/release at this snapshot |
-| Python package metadata | `0.2.0rc1` in [pyproject.toml](../pyproject.toml) | Development release candidate; it is **not** a published stable v0.2.0 release |
+| Stable GitHub release | [v0.1.1](https://github.com/erenariel/konaklamaflow/releases/latest) | Latest non-prerelease tag |
+| Prerelease | [v0.2.0rc1](https://github.com/erenariel/konaklamaflow/releases/tag/v0.2.0rc1) | Published candidate matching [pyproject.toml](../pyproject.toml); not a stable v0.2.0 |
+| Python package metadata | `0.2.0rc1` in [pyproject.toml](../pyproject.toml) | Same candidate; it is **not** a stable v0.2.0 release |
 | Browser presentation | v0.5 fictional workbench | Offline synthetic UI concept, **not** a certified/live PMS release |
 
 **TR:** Demo için kullanılan v0.5 etiketi, yayınlanmış Python paketinin sürümünü değiştirmez. Reklam veya başvuruda yalnız yayımlanmış GitHub sürümünü "release" diye belirt. CI, uygulamanın belli testlerden geçtiğini gösterir; müşteri kullanımı, bağımsız güvenlik incelemesi veya gerçek entegrasyon kanıtı değildir.
