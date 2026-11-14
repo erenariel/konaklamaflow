@@ -2,18 +2,18 @@
   "kind": "ACTUAL_INTEGRATED_FICTIONAL_BROWSER_SHOWCASE",
   "profile": "roomplan-story",
   "source": "demo/v04-integrated-preview.html",
-  "source_commit": "e016dfd72e386ea543968da736c3702acc284b47",
+  "source_commit": "fe72d7c0c4fea22050e76481345871d03c309a4e",
   "source_has_uncommitted_changes": false,
   "browser_version": "151.0.7922.34",
   "viewport": {
     "width": 1440,
     "height": 900
   },
-  "html_sha256": "02e9ce3a716d39faa08a1fa915339e292fb8c0dd39d505c50ffd725478e09ccc",
+  "html_sha256": "642af4f17faa272f1219cffdb2131387130778bc4cb1f6fcc61731f602332062",
   "snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10",
   "report_sha256": "3242b77496e011286574c1e9515d3519c020bb0f361f0df1449d96075a398013",
-  "gif_sha256": "0e3e8acb9e9fc55b54a04e5331bf69dc7936454a23ca19e5ab97c801bd2f560d",
-  "poster_sha256": "467d5c45d35628f005348acf8fb8cfb966e9703e6d1326f159ce1a7b546c2df6",
+  "gif_sha256": "08c0bc54196c01ca91ba38e10c27ac2d1baa52fa6c5d762f9d5a1962c88bee38",
+  "poster_sha256": "3a5e1d486979de77c9df0a10f8834f716ad0765eb47f6de6dba1c27b0cb0cb67",
   "frames": 30,
   "fps": 2,
   "observed_story_steps": [
