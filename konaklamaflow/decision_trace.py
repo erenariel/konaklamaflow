@@ -118,7 +118,9 @@ def verify_trace(snapshot, report, trace, *, expected_head=None):
         task_id = event["task_id"]
         _check(type(task_id) is str and TASK.fullmatch(task_id) is not None)
         _check(task_id in tasks)
-        _check(event["kind"] in ACTIONS and event["simulated_role"] in ROLES)
+        _check(type(event["kind"]) is str and event["kind"] in ACTIONS
+               and type(event["simulated_role"]) is str
+               and event["simulated_role"] in ROLES)
         _check(event["simulated_role"] in ROLE_ACTIONS[event["kind"]])
         stamp = _at(event["simulated_at"])
         if prior_time is not None:
@@ -151,7 +153,9 @@ def append_simulated(snapshot, report, trace, *, task_id, kind, role, simulated_
     verify_trace(snapshot, report, trace)
     _, tasks = _context(snapshot, report)
     _check(type(task_id) is str and task_id in tasks)
-    _check(kind in ACTIONS and role in ROLES and role in ROLE_ACTIONS[kind])
+    _check(type(kind) is str and kind in ACTIONS
+           and type(role) is str and role in ROLES
+           and role in ROLE_ACTIONS[kind])
     new_time = _at(simulated_at)
     if trace["events"]:
         _check(new_time >= _at(trace["events"][-1]["simulated_at"]))

@@ -51,6 +51,8 @@ class DecisionTraceTests(unittest.TestCase):
         scenarios = [
             lambda x: x["events"][0].update(simulated_role="manager"),
             lambda x: x["events"][0].update(kind="payment_captured"),
+            lambda x: x["events"][0].update(kind={"malicious": True}),
+            lambda x: x["events"][0].update(simulated_role=["manager"]),
             lambda x: x["events"][0].update(reason_codes=[]),
             lambda x: x["events"][0].update(evidence_field_paths=[]),
             lambda x: x["events"][0].update(previous_hash="f" * 64),
@@ -86,6 +88,10 @@ class DecisionTraceTests(unittest.TestCase):
         with self.assertRaises(TraceError):
             append_simulated(self.source, self.report, t, task_id=task,
                              kind="approve_checkin", role="manager",
+                             simulated_at="2026-11-12T14:01:00Z")
+        with self.assertRaises(TraceError):
+            append_simulated(self.source, self.report, t, task_id=task,
+                             kind=["review_queued"], role="engine",
                              simulated_at="2026-11-12T14:01:00Z")
         with self.assertRaises(TraceError):
             append_simulated(self.source, self.report, t, task_id=task,
