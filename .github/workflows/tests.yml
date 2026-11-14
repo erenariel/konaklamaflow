@@ -35,6 +35,7 @@ jobs:
           python scripts/generate_canonical_demo.py --check
           node --check demo/canonical-navigation.js
           node --check demo/aurora-room-plan.js
+          node --check demo/aurora-timeline.js
           node --check demo/aurora-room-i18n.js
           node --check demo/hotel-ops-module.js
           node --check demo/full-ui-i18n.js
