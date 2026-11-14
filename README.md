@@ -12,7 +12,7 @@ Original illustrated concepts remain available separately: [AI hero illustration
 
 ### Aurora reservation timeline — Issue #37, second delivery (PR #42 candidate)
 
-The offline room plan now has a **source-bound reservation timeline** with 7/14/21-day ranges, date navigation, floor/category/status/channel/search filters, sticky room headers and exact reservation-to-detail navigation. The Python-validated fictional room-stays are authoritative; checkout day is excluded (`[arrival, departure)`). Cancelled and no-show bars are labeled historical states, not physical occupancy. Maintenance and technical holds remain separate. Ten-language draft labels, RTL, mobile horizontal scroll and reduced-motion preference are preserved. The candidate does not establish live availability, real AI, actual guests or PMS integration. **PR #42 is pending review**, not part of any published tagged release.
+The offline room plan now has a **source-bound reservation timeline** with 7/14/21-day ranges, date navigation, floor/category/status/channel/search filters, sticky room headers and exact reservation-to-detail navigation. The Python-validated fictional room-stays are authoritative; checkout day is excluded (`[arrival, departure)`). Cancelled and no-show bars are labeled historical states, not physical occupancy. Maintenance and technical holds remain separate. Ten-language draft labels, RTL, mobile horizontal scroll and reduced-motion preference are preserved. The candidate does not establish live availability, real AI, actual guests or PMS integration. This feature is introduced through PR #42 and is not part of any published tagged Python package release.
 
 ### Shared fictional reservation model — Issue #35 candidate
 
