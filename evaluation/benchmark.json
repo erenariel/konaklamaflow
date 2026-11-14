@@ -1,0 +1,629 @@
+{
+  "schema_version": "synthetic-benchmark.v1",
+  "benchmark_id": "SYNTHETIC_OPERATIONS_V1",
+  "synthetic": true,
+  "label_provenance": {
+    "method": "manual_rule_spec",
+    "independent_hotel_expert_review": "pending"
+  },
+  "reason_code_universe": [
+    "ALREADY_IN_HOUSE",
+    "ARRIVAL_NOT_TODAY",
+    "BEFORE_CHECKIN_TIME",
+    "CANCELLED_ASSIGNED",
+    "CHANNEL_EVENT_REVIEW",
+    "CHANNEL_REFERENCE_MISMATCH",
+    "CHANNEL_STATUS_CONFLICT",
+    "CONFLICTING_BED_REQUEST",
+    "CORE_REVIEW_REQUIRED",
+    "DEPARTURE_NOT_VERIFIED",
+    "DUPLICATE_CHANNEL_REF",
+    "DUPLICATE_PMS_REF",
+    "GUEST_NOT_ARRIVED",
+    "HISTORICAL_STAY",
+    "HOUSEKEEPING_NOT_INSPECTED",
+    "HOUSEKEEPING_TASK_OPEN",
+    "IDENTITY_STAFF_REVIEW",
+    "MAINTENANCE_TASK_OPEN",
+    "NOT_CONFIRMED",
+    "NO_ASSIGNED_ROOM",
+    "NO_SHOW_RELEASE_REVIEW",
+    "PAYMENT_REVIEW",
+    "PMS_REGISTRATION_NOT_CONFIRMED",
+    "REQUEST_AMENITY_UNAVAILABLE",
+    "ROOM_CONFLICT",
+    "ROOM_INCOMPATIBLE",
+    "SPECIAL_REQUEST_REVIEW",
+    "UNMAPPED_PMS"
+  ],
+  "cases": [
+    {
+      "id": "EVAL_DUPLICATE_OTA",
+      "category": "duplicate_ota_reference",
+      "status": "evaluated",
+      "scope": "Repeated booking-channel external reference on separate assigned rooms requires duplicate and missing mapping review.",
+      "exclusion_reason": null,
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          },
+          {
+            "id": "EVAL_ROOM_B",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "booking",
+            "external_ref": "EVAL_OTA_DUP",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          },
+          {
+            "id": "EVAL_RES_B",
+            "channel": "booking",
+            "external_ref": "EVAL_OTA_DUP",
+            "pms_ref": "EVAL_PMS_B",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_B",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [],
+        "tasks": []
+      },
+      "labels": [
+        {
+          "reservation_id": "EVAL_RES_A",
+          "expected_reason_codes": [
+            "DUPLICATE_CHANNEL_REF",
+            "UNMAPPED_PMS"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        },
+        {
+          "reservation_id": "EVAL_RES_B",
+          "expected_reason_codes": [
+            "DUPLICATE_CHANNEL_REF",
+            "UNMAPPED_PMS"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        }
+      ]
+    },
+    {
+      "id": "EVAL_ROOM_OVERLAP",
+      "category": "room_overlap",
+      "status": "evaluated",
+      "scope": "Two confirmed stays assigned to the same room on overlapping half-open intervals must both be blocked.",
+      "exclusion_reason": null,
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          },
+          {
+            "id": "EVAL_RES_B",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_B",
+            "pms_ref": "EVAL_PMS_B",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [],
+        "tasks": []
+      },
+      "labels": [
+        {
+          "reservation_id": "EVAL_RES_A",
+          "expected_reason_codes": [
+            "ROOM_CONFLICT"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        },
+        {
+          "reservation_id": "EVAL_RES_B",
+          "expected_reason_codes": [
+            "ROOM_CONFLICT"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        }
+      ]
+    },
+    {
+      "id": "EVAL_MAINTENANCE_WINDOW",
+      "category": "maintenance_overlap",
+      "status": "evaluated",
+      "scope": "A finite maintenance blackout overlapping any occupied night makes the assigned room incompatible.",
+      "exclusion_reason": null,
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": [
+              {
+                "start": "2026-11-13",
+                "end": "2026-11-15"
+              }
+            ]
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [],
+        "tasks": []
+      },
+      "labels": [
+        {
+          "reservation_id": "EVAL_RES_A",
+          "expected_reason_codes": [
+            "ROOM_INCOMPATIBLE"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        }
+      ]
+    },
+    {
+      "id": "EVAL_CANCELLED_ASSIGNED",
+      "category": "cancelled_assigned",
+      "status": "evaluated",
+      "scope": "A cancelled booking retaining a room assignment is not confirmed and needs staff cancellation review.",
+      "exclusion_reason": null,
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "cancelled",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [],
+        "tasks": []
+      },
+      "labels": [
+        {
+          "reservation_id": "EVAL_RES_A",
+          "expected_reason_codes": [
+            "CANCELLED_ASSIGNED",
+            "NOT_CONFIRMED"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        }
+      ]
+    },
+    {
+      "id": "EVAL_CHANNEL_STATUS_CONFLICT",
+      "category": "same_day_source_conflict",
+      "status": "evaluated",
+      "scope": "At the arrival-day snapshot a cancellation event contradicts the confirmed reservation; source status conflict only, not revision ordering.",
+      "exclusion_reason": null,
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [
+          {
+            "id": "EVAL_EVENT_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "status": "cancelled",
+            "reservation_id": "EVAL_RES_A"
+          }
+        ],
+        "tasks": []
+      },
+      "labels": [
+        {
+          "reservation_id": "EVAL_RES_A",
+          "expected_reason_codes": [
+            "CHANNEL_STATUS_CONFLICT"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        }
+      ]
+    },
+    {
+      "id": "EVAL_CLEAN_NEGATIVE",
+      "category": "room_overlap",
+      "status": "evaluated",
+      "scope": "One compatible assigned stay with all synthetic staff signals and no conflict is ready only for human review.",
+      "exclusion_reason": null,
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [],
+        "tasks": []
+      },
+      "labels": [
+        {
+          "reservation_id": "EVAL_RES_A",
+          "expected_reason_codes": [],
+          "expected_classification": "review_ready",
+          "human_approval_required": true
+        }
+      ]
+    },
+    {
+      "id": "EVAL_HALF_OPEN_ADJACENCY",
+      "category": "room_overlap",
+      "status": "evaluated",
+      "scope": "Checkout equals the next checkin without occupied-night overlap; the future expected arrival still requires date and arrival review.",
+      "exclusion_reason": null,
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-13",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          },
+          {
+            "id": "EVAL_RES_B",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_B",
+            "pms_ref": "EVAL_PMS_B",
+            "arrival": "2026-11-13",
+            "departure": "2026-11-15",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "expected",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [],
+        "tasks": []
+      },
+      "labels": [
+        {
+          "reservation_id": "EVAL_RES_A",
+          "expected_reason_codes": [],
+          "expected_classification": "review_ready",
+          "human_approval_required": true
+        },
+        {
+          "reservation_id": "EVAL_RES_B",
+          "expected_reason_codes": [
+            "ARRIVAL_NOT_TODAY",
+            "GUEST_NOT_ARRIVED"
+          ],
+          "expected_classification": "blocked",
+          "human_approval_required": true
+        }
+      ]
+    },
+    {
+      "id": "EVAL_REVISION_ORDER_UNSUPPORTED",
+      "category": "same_day_source_conflict",
+      "status": "unsupported",
+      "scope": "Versioned same-day amendments and reordered source revisions are not represented in the suite event schema.",
+      "exclusion_reason": "revision_history_not_supported",
+      "snapshot": null,
+      "labels": []
+    },
+    {
+      "id": "EVAL_PARTIAL_CANCEL_UNSUPPORTED",
+      "category": "split_stay_partial_cancellation",
+      "status": "unsupported",
+      "scope": "Partial cancellation of one room-stay segment with parent reservation reconciliation is not supported by the suite contract.",
+      "exclusion_reason": "split_stay_not_supported",
+      "snapshot": null,
+      "labels": []
+    },
+    {
+      "id": "EVAL_UNLABELLED_CONTROL",
+      "category": "maintenance_overlap",
+      "status": "not_evaluated",
+      "scope": "A valid synthetic snapshot deliberately lacks truth labels and must be excluded from accuracy denominators.",
+      "exclusion_reason": "unlabelled",
+      "snapshot": {
+        "schema_version": "0.3",
+        "property_id": "EVAL_SYNTHETIC",
+        "as_of": "2026-11-12",
+        "at_time": "14:01",
+        "rooms": [
+          {
+            "id": "EVAL_ROOM_A",
+            "category": "standard",
+            "capacity": 2,
+            "bed": "double",
+            "housekeeping": "inspected",
+            "floor": 1,
+            "amenities": [],
+            "maintenance": []
+          }
+        ],
+        "reservations": [
+          {
+            "id": "EVAL_RES_A",
+            "channel": "direct",
+            "external_ref": "EVAL_EXT_A",
+            "pms_ref": "EVAL_PMS_A",
+            "arrival": "2026-11-12",
+            "departure": "2026-11-14",
+            "category": "standard",
+            "persons": 2,
+            "bed_request": "none",
+            "status": "confirmed",
+            "room_id": "EVAL_ROOM_A",
+            "identity_signal": "staff_verified",
+            "payment_signal": "ready",
+            "requests": [],
+            "price_total": "0.00",
+            "currency": "TRY",
+            "arrival_state": "arrived",
+            "pms_registration": "recorded_by_authorized_staff"
+          }
+        ],
+        "channel_events": [],
+        "tasks": []
+      },
+      "labels": []
+    }
+  ]
+}

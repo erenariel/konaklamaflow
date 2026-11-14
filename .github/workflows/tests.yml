@@ -20,6 +20,20 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run tests
         run: python -m unittest discover -s tests -v
+      - name: Run offline synthetic operational benchmark
+        run: |
+          python -m konaklamaflow.evaluation evaluation/benchmark.json --json-output /tmp/synthetic-evaluation.json --markdown-output /tmp/synthetic-evaluation.md
+          cat /tmp/synthetic-evaluation.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve actual synthetic benchmark results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-evaluation-${{ matrix.python-version }}-${{ github.sha }}
+          path: |
+            /tmp/synthetic-evaluation.json
+            /tmp/synthetic-evaluation.md
+          if-no-files-found: error
+          retention-days: 14
       - name: Check commit privacy and Python syntax
         run: |
           python scripts/verify_commit_privacy.py
