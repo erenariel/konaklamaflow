@@ -1,12 +1,18 @@
 # KonaklamaFlow
 
-**Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
+Küçük ve butik oteller için gizlilik öncelikli, çevrimdışı rezervasyon ön kontrol aracı. Oda çakışması, yarınki giriş listesi ve resepsiyon kontrol kuyruğu üretir. Canlı bir otel programı, PMS, KBS veya ödeme sistemi değildir.
+
+**Kurgusal demoyu aç:** [erenariel.github.io/konaklamaflow](https://erenariel.github.io/konaklamaflow/)
+
+Privacy-first reservation reviewer for small hotels. It reads fictional or already pseudonymized JSON, then suggests checks for a human to confirm in the hotel's own system. It does not connect to a live PMS.
+
+Hotel · hospitality · front desk · reservation · Python · privacy · boutique hotel
 
 ## Gece vardiyası başlangıcı
 
-Bu depo canlı otel programı değildir. PMS, KBS, ödeme ve kimlik sistemi yoktur. Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
+Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
 
-Paket sürümü `0.2.0rc1`. `demo/v04-integrated-preview.html` ayrı bir kurgusal v0.5 çalışma ekranıdır; yayımlanmış paket sürümü değildir.
+Paket sürümü `0.2.0rc1` bir ön sürümdür: [v0.2.0rc1](https://github.com/erenariel/konaklamaflow/releases/tag/v0.2.0rc1). Kararlı etiket [v0.1.1](https://github.com/erenariel/konaklamaflow/releases/tag/v0.1.1) olarak durur. Tarayıcıdaki v0.5 ekranı kurgusal demodur.
 
 ```bash
 python -m konaklamaflow examples/demo.json --as-of 2026-11-12
