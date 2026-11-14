@@ -1,9 +1,9 @@
 {
   "kind": "ACTUAL_OFFLINE_BROWSER_SCREENSHOTS",
-  "source_commit": "652c0f537707b9392d962c10d76c86cd6a9160fb",
+  "source_commit": "7e52441c002f19a44f2be2139a24b4714689ce06",
   "source_has_uncommitted_changes": true,
   "source_files": {
-    "v04-integrated-preview.html": "b9a2bb6e6c76b84eaa43c8f0b9cdf7c79a8fd86b0e6ff9e949ea7491d076a324",
+    "v04-integrated-preview.html": "bf8611afb7f596142ab91b5ac7ed5b5223f383a6a79ad35ef0eb577dd5630f5c",
     "global-presentation-concept.html": "9ed2cde3176b8311f83095fa17b348dba6f723fa828be15949bc37a2a1e51a86",
     "viewer.html": "9a30569cbb39af9241ec75a77364cd952721f0328bb37373bbe2d0faa4ca6dae"
   },
@@ -48,7 +48,7 @@
       "locale": "en",
       "theme": "dark",
       "body_within_viewport": true,
-      "sha256": "192b483513f82c0af4077eeb1caf2e51f2b4f3efe598f4574e1c7c4436002d58"
+      "sha256": "900fb1dffdc76a3f4f016612a4923dbcffb664e5f32a6509783eedad1cefea90"
     },
     {
       "file": "v052-overview-night.png",
@@ -58,7 +58,7 @@
       "locale": "en",
       "theme": "night",
       "body_within_viewport": true,
-      "sha256": "4c69e3b2902fc20e1ad0cc682ec84857b33b26b549b0016a9f8a0db6ef1c4609"
+      "sha256": "1ce55a0ff24a4f7426d726ed16854390898c7512890fe3b5f11fd9ed9d9ac5a0"
     },
     {
       "file": "v052-overview-rtl.png",
@@ -138,7 +138,7 @@
       "locale": "ar",
       "theme": "dark",
       "body_within_viewport": true,
-      "sha256": "925ee21d4686af10da5bdca516cd0b29f98157d12d74136897849d5c022c33e7"
+      "sha256": "e502a9180cefd3a6d5068212d2547cbb69980c7150ff5e90f67921c899281af3"
     },
     {
       "file": "aurora-room-plan-night.png",
@@ -148,7 +148,7 @@
       "locale": "en",
       "theme": "night",
       "body_within_viewport": true,
-      "sha256": "d6f093c6f70a7989986ff23da1b9082c40c9bf6209e11ede38689e600e1bb7ab"
+      "sha256": "722f16b7c5c9c064582268bb3d231eaaed47391242392ca61d8418f1aceaaa83"
     }
   ],
   "fictional": true,

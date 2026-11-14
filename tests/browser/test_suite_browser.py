@@ -33,7 +33,7 @@ class TestBrowserSuite(unittest.TestCase):
         self.page.close()
     def test_visual_theme_and_presentation_do_not_change_rule_report(self):
         original=self.page.evaluate('() => JSON.stringify(INITIAL_EVALUATION)')
-        self.assertEqual(self.page.locator('#kfTheme').input_value(),'light')
+        self.assertEqual(self.page.locator('#kfTheme').input_value(),'night')
         self.page.locator('#kfTheme').select_option('dark')
         self.assertEqual(self.page.evaluate('() => document.documentElement.dataset.kfTheme'),'dark')
         self.page.locator('#kfTheme').select_option('night')

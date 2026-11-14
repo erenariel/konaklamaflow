@@ -84,6 +84,11 @@ def generate(check=False):
                 text = text.replace(css_end, css_end + '\n' + timeline_css_start + '\n' + timeline_css_end, 1)
             text = replace_block(text, timeline_css_start, timeline_css_end,
                                  (ROOT/'demo/aurora-timeline.css').read_text(encoding='utf-8'))
+        orbit_start, orbit_end = '/* BEGIN ORBIT_COMMAND_THEME */', '/* END ORBIT_COMMAND_THEME */'
+        if orbit_start not in text:
+            text = text.replace('</head>', '<style>\n' + orbit_start + '\n' + orbit_end + '\n</style>\n</head>', 1)
+        text = replace_block(text, orbit_start, orbit_end,
+                             (ROOT/'demo/orbit-command.css').read_text(encoding='utf-8'))
         outputs[path] = text
     path = ROOT/'demo/global-presentation-concept.html'
     outputs[path] = replace_block(path.read_text(encoding='utf-8'),

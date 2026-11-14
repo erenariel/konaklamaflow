@@ -70,7 +70,7 @@ class TestDemoExperience(unittest.TestCase):
     def test_visual_preferences_are_keyboard_operable_with_focus_indicator(self):
         theme = self.page.locator('#kfTheme')
         theme.focus()
-        self.page.keyboard.press('ArrowDown')
+        self.page.keyboard.press('ArrowUp')
         self.page.keyboard.press('Enter')
         self.assertEqual(theme.input_value(), 'dark')
         self.page.locator('#kfMode').press('Enter')

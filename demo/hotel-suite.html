@@ -111,6 +111,262 @@ html[data-kf-motion="off"] *,html[data-kf-motion="off"] *:before,html[data-kf-mo
 @media(max-width:768px){.kf-prefs{width:100%;border-left:0;padding-left:0}.kf-prefs select{max-width:114px}.kf-prefs button{font-size:10px}.intro{gap:12px}html[data-kf-mode="presentation"] .main{padding:0 13px 28px}}
 
 </style>
+<style>
+/* BEGIN ORBIT_COMMAND_THEME */
+/* Orbit command surface.
+   Decorative layer over the existing light / dark / night tokens.
+   Night is the default command-center look. Light stays a readable day theme.
+   No images, fonts, or network assets. */
+
+html[data-kf-theme="night"] {
+  --bg: #070b14;
+  --nav: #070b16;
+  --nav2: #10182c;
+  --white: #121a2c;
+  --surface: #182338;
+  --surface-hover: #22304a;
+  --line: #3d5674;
+  --ink: #f4f7fb;
+  --muted: #c5d4e4;
+  --blue: #8adfff;
+  --primary-bg: #7ad4ff;
+  --primary-fg: #061018;
+  --primary-hover: #b7ecff;
+  --control-border: #8eb0c8;
+  --focus: #e7f8ff;
+  --greenbg: #123f3c;
+  --success: #c8ffe4;
+  --redbg: #4a2434;
+  --danger: #ffd5dc;
+  --amberbg: #4a3a22;
+  --warning: #ffe7b8;
+  --infobg: #17304a;
+  --info: #d5ecff;
+  --shadow: 0 16px 40px rgba(0, 0, 0, .38);
+}
+
+html[data-kf-theme="dark"] {
+  --bg: #0c1422;
+  --white: #162033;
+  --surface: #1c2a40;
+  --line: #456078;
+  --blue: #8fdfff;
+  --primary-bg: #8fdfff;
+  --primary-fg: #07131c;
+}
+
+html[data-kf-theme="night"] body,
+html[data-kf-theme="dark"] body {
+  background:
+    radial-gradient(900px 420px at 12% -10%, rgba(90, 140, 255, .16), transparent 55%),
+    radial-gradient(700px 380px at 100% 0%, rgba(120, 80, 220, .14), transparent 50%),
+    var(--bg);
+}
+
+html[data-kf-theme="night"] body::before,
+html[data-kf-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(138, 223, 255, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138, 223, 255, .045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 15%, transparent 72%);
+  animation: orbitGrid 32s linear infinite;
+}
+
+html[data-kf-theme="night"] .app,
+html[data-kf-theme="dark"] .app {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-kf-theme="night"] .sidebar,
+html[data-kf-theme="dark"] .sidebar {
+  background:
+    linear-gradient(180deg, rgba(8, 12, 24, .96), rgba(12, 18, 34, .94));
+  border-inline-end: 1px solid rgba(138, 223, 255, .2);
+  box-shadow: inset -1px 0 0 rgba(138, 223, 255, .06);
+}
+
+html[data-kf-theme="night"] .nav,
+html[data-kf-theme="dark"] .nav {
+  transition: background .16s ease, color .16s ease, box-shadow .16s ease;
+}
+
+html[data-kf-theme="night"] .nav.active,
+html[data-kf-theme="dark"] .nav.active {
+  color: #f7fcff;
+  background: linear-gradient(90deg, rgba(122, 212, 255, .18), rgba(150, 120, 255, .08));
+  box-shadow: inset 3px 0 #8adfff, 0 0 18px rgba(122, 212, 255, .12);
+}
+
+html[data-kf-theme="night"] .topbar,
+html[data-kf-theme="dark"] .topbar {
+  background: rgba(10, 16, 30, .88);
+  border-bottom: 1px solid rgba(138, 223, 255, .18);
+  box-shadow: 0 1px 0 rgba(138, 223, 255, .08);
+  backdrop-filter: blur(8px);
+}
+
+html[data-kf-theme="night"] .panel,
+html[data-kf-theme="night"] .metric,
+html[data-kf-theme="night"] .module,
+html[data-kf-theme="night"] .taskcard,
+html[data-kf-theme="night"] .room,
+html[data-kf-theme="night"] .drawer,
+html[data-kf-theme="night"] .selected-reservation,
+html[data-kf-theme="dark"] .panel,
+html[data-kf-theme="dark"] .metric,
+html[data-kf-theme="dark"] .module,
+html[data-kf-theme="dark"] .taskcard,
+html[data-kf-theme="dark"] .room,
+html[data-kf-theme="dark"] .drawer,
+html[data-kf-theme="dark"] .selected-reservation {
+  background: var(--white);
+  border-color: rgba(138, 223, 255, .24);
+  box-shadow: 0 0 0 1px rgba(138, 223, 255, .05), var(--shadow);
+}
+
+html[data-kf-theme="night"] .metric,
+html[data-kf-theme="night"] .module,
+html[data-kf-theme="night"] .taskcard,
+html[data-kf-theme="night"] .room,
+html[data-kf-theme="dark"] .metric,
+html[data-kf-theme="dark"] .module,
+html[data-kf-theme="dark"] .taskcard,
+html[data-kf-theme="dark"] .room {
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+
+html[data-kf-theme="night"] .metric:hover,
+html[data-kf-theme="night"] .module:hover,
+html[data-kf-theme="night"] .taskcard:hover,
+html[data-kf-theme="night"] .room:hover,
+html[data-kf-theme="dark"] .metric:hover,
+html[data-kf-theme="dark"] .module:hover,
+html[data-kf-theme="dark"] .taskcard:hover,
+html[data-kf-theme="dark"] .room:hover {
+  border-color: rgba(138, 223, 255, .62);
+  box-shadow: 0 0 0 1px rgba(138, 223, 255, .2), 0 12px 28px rgba(40, 110, 170, .18);
+  transform: translateY(-1px);
+}
+
+html[data-kf-theme="night"] .intro h1,
+html[data-kf-theme="dark"] .intro h1 {
+  letter-spacing: -.03em;
+  text-shadow: 0 0 24px rgba(138, 223, 255, .18);
+}
+
+html[data-kf-theme="night"] .ai-command,
+html[data-kf-theme="dark"] .ai-command {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(170, 150, 255, .35);
+  box-shadow: 0 0 0 1px rgba(138, 223, 255, .12), 0 18px 40px rgba(20, 10, 40, .35);
+}
+
+html[data-kf-theme="night"] .ai-command::after,
+html[data-kf-theme="dark"] .ai-command::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .05) 48%, transparent 60%);
+  background-size: 220% 100%;
+  animation: orbitSheen 9s ease-in-out infinite;
+}
+
+html[data-kf-theme="night"] .table,
+html[data-kf-theme="dark"] .table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+html[data-kf-theme="night"] .table th,
+html[data-kf-theme="dark"] .table th {
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #d5e6f4;
+}
+
+html[data-kf-theme="night"] .table tbody tr:hover,
+html[data-kf-theme="dark"] .table tbody tr:hover {
+  background: rgba(122, 196, 255, .08);
+}
+
+html[data-kf-theme="night"] .pill,
+html[data-kf-theme="dark"] .pill,
+html[data-kf-theme="night"] .chip,
+html[data-kf-theme="dark"] .chip {
+  border: 1px solid currentColor;
+  letter-spacing: .03em;
+}
+
+html[data-kf-theme="night"] .empty,
+html[data-kf-theme="dark"] .empty {
+  border: 1px dashed rgba(138, 223, 255, .4);
+  border-radius: 12px;
+  padding: 16px 14px;
+  background: rgba(18, 28, 48, .65);
+}
+
+html[data-kf-theme="night"] :focus-visible,
+html[data-kf-theme="dark"] :focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@keyframes orbitGrid {
+  to { background-position: 56px 56px; }
+}
+
+@keyframes orbitSheen {
+  0%, 62% { background-position: 120% 0; }
+  100% { background-position: -40% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-kf-theme="night"] body::before,
+  html[data-kf-theme="dark"] body::before,
+  html[data-kf-theme="night"] .ai-command::after,
+  html[data-kf-theme="dark"] .ai-command::after,
+  html[data-kf-theme="night"] .metric,
+  html[data-kf-theme="night"] .module,
+  html[data-kf-theme="night"] .taskcard,
+  html[data-kf-theme="night"] .room,
+  html[data-kf-theme="night"] .nav,
+  html[data-kf-theme="dark"] .metric,
+  html[data-kf-theme="dark"] .module,
+  html[data-kf-theme="dark"] .taskcard,
+  html[data-kf-theme="dark"] .room,
+  html[data-kf-theme="dark"] .nav {
+    animation: none;
+    transition: none;
+  }
+  html[data-kf-theme="night"] .metric:hover,
+  html[data-kf-theme="night"] .module:hover,
+  html[data-kf-theme="night"] .taskcard:hover,
+  html[data-kf-theme="night"] .room:hover,
+  html[data-kf-theme="dark"] .metric:hover,
+  html[data-kf-theme="dark"] .module:hover,
+  html[data-kf-theme="dark"] .taskcard:hover,
+  html[data-kf-theme="dark"] .room:hover {
+    transform: none;
+  }
+}
+
+html[data-kf-motion="off"] body::before,
+html[data-kf-motion="off"] .ai-command::after {
+  animation: none;
+}
+
+/* END ORBIT_COMMAND_THEME */
+</style>
 </head>
 <body>
 <div class="app">
@@ -123,7 +379,7 @@ html[data-kf-motion="off"] *,html[data-kf-motion="off"] *:before,html[data-kf-mo
 </aside>
 <main class="main">
  <header class="topbar"><div class="crumb">Sample Boutique Hotel <span aria-hidden="true" style="padding:0 7px;color:var(--muted)">/</span> <b id="crumb">Genel Bakış</b></div><div class="top-actions"><span class="date">Perşembe, 12 Kasım 2026</span><span class="chip">● KURGUSAL DEMO</span><div class="avatar">K</div></div></header>
- <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button><div class="kf-prefs" role="group" aria-label="Görünüm tercihleri"><label for="kfTheme">Tema</label><select id="kfTheme" aria-label="Tema seçimi"><option value="light">Açık</option><option value="dark">Koyu</option><option value="night">Gece audit</option></select><button type="button" class="secondary" id="kfMode" aria-pressed="false">Sunum modu</button><button type="button" class="secondary" id="kfMotion" aria-pressed="false">Hareket: Açık</button><label class="kf-module-choice" for="kfModule">Modül</label><select class="kf-module-choice" id="kfModule" aria-label="Sunum modülü"></select></div></div></section>
+ <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button><div class="kf-prefs" role="group" aria-label="Görünüm tercihleri"><label for="kfTheme">Tema</label><select id="kfTheme" aria-label="Tema seçimi"><option value="light">Açık</option><option value="dark">Koyu</option><option value="night" selected>Gece audit</option></select><button type="button" class="secondary" id="kfMode" aria-pressed="false">Sunum modu</button><button type="button" class="secondary" id="kfMotion" aria-pressed="false">Hareket: Açık</button><label class="kf-module-choice" for="kfModule">Modül</label><select class="kf-module-choice" id="kfModule" aria-label="Sunum modülü"></select></div></div></section>
  <div id="content" role="region" aria-label="Operasyon çalışma alanı" tabindex="0"></div>
  <footer class="footer">KonaklamaFlow v0.3 konsept • Tüm rezervasyonlar kurgusaldır. Bu arayüz ticari PMS değildir. Gerçek AI veya canlı bağlantı etkin değildir.</footer>
 </main></div>
@@ -330,7 +586,7 @@ window.addEventListener('keydown',event=>{
  const systemReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
  if(!theme||!mode||!motion)return;
  let motionDisabled=false;
- root.dataset.kfTheme='light';
+ root.dataset.kfTheme='night';
  root.dataset.kfMode='operator';
  if(moduleChoice){
   for(const [id,,name] of PAGE_LIST){const option=document.createElement('option');option.value=id;option.textContent=name;moduleChoice.append(option);}
