@@ -28,6 +28,15 @@ class CanonicalGenerationTests(unittest.TestCase):
         # The check path must reject stale output, never repair it silently.
         generate(check=True)
 
+    def test_decision_evidence_ui_matches_canonical_generator(self):
+        document = (ROOT / "demo" / "v04-integrated-preview.html").read_text(encoding="utf-8")
+        javascript = (ROOT / "demo" / "decision-evidence-ui.js").read_text(encoding="utf-8").rstrip("\n")
+        stylesheet = (ROOT / "demo" / "decision-evidence-ui.css").read_text(encoding="utf-8").rstrip("\n")
+        self.assertIn("// BEGIN GENERATED_DECISION_EVIDENCE_UI", document)
+        self.assertIn("/* BEGIN GENERATED_DECISION_EVIDENCE_STYLES */", document)
+        self.assertIn(javascript, document)
+        self.assertIn(stylesheet, document)
+
     def test_review_and_operations_entry_points_have_exact_same_parent_source(self):
         for filename in ('hotel-suite.html', 'v04-integrated-preview.html'):
             with self.subTest(filename=filename):
