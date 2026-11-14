@@ -156,19 +156,25 @@ class AuroraRoomPlanTests(unittest.TestCase):
         self.assertEqual(self.page.locator('#auroraRoomSearch').input_value(), '')
 
     def test_explicit_occupied_signal_stays_occupied_when_housekeeping_is_dirty(self):
-        source = deepcopy(self.source)
-        booking = next(row for row in source['reservations'] if row['id'] == 'KF1010')
-        booking['arrival_state'] = 'checked_in'
-        next(row for row in source['rooms'] if row['id'] == '201')['housekeeping'] = 'dirty'
-        self.use_source(source)
-        card = self.page.locator('.aurora-room-card[data-room="201"]')
-        self.assertEqual(card.get_attribute('data-occupancy'), 'occupied')
-        self.assertEqual(card.get_attribute('data-housekeeping'), 'dirty')
-        states = json.loads(card.get_attribute('data-state-codes'))
-        self.assertIn('occupied', states)
-        self.assertNotIn('vacant_unverified', states)
-        self.assertTrue(card.locator('[data-axis="occupancy"]').inner_text().strip())
-        self.assertTrue(card.locator('[data-axis="housekeeping"]').inner_text().strip())
+        for cleaning, label in (('dirty', 'Kirli'), ('clean', 'Temiz'),
+                                ('in_progress', 'Temizlik sürüyor')):
+            with self.subTest(cleaning=cleaning):
+                source = deepcopy(self.source)
+                booking = next(row for row in source['reservations'] if row['id'] == 'KF1010')
+                booking['arrival_state'] = 'checked_in'
+                next(row for row in source['rooms'] if row['id'] == '201')['housekeeping'] = cleaning
+                self.use_source(source)
+                card = self.page.locator('.aurora-room-card[data-room="201"]')
+                self.assertEqual(card.get_attribute('data-occupancy'), 'occupied')
+                self.assertEqual(card.get_attribute('data-housekeeping'), cleaning)
+                states = json.loads(card.get_attribute('data-state-codes'))
+                self.assertIn('occupied', states)
+                self.assertNotIn('vacant_unverified', states)
+                self.assertIn(label, card.locator('[data-axis="housekeeping"]').inner_text())
+                card.click()
+                self.assertNotIn('Teknik kapalı', self.page.locator('#drawer').inner_text())
+                if cleaning != 'dirty':
+                    expect(self.page.locator('[data-aurora-cleaning-status="'+cleaning+'"]')).to_have_text(label)
 
     def test_representative_solid_background_text_contrast_in_three_themes(self):
         from scripts.verify_demo_experience import CONTRAST_JS

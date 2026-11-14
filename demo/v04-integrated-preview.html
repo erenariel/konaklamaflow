@@ -3570,6 +3570,12 @@ showRoom=function(id){
  auroraOriginalShowRoom(id);
  const source=auroraRoomSource(),room=source?.rooms.find(room=>room.id===id);if(!room)return;
  const drawer=document.getElementById('drawer');if(!drawer||!document.getElementById('backdrop').classList.contains('open'))return;
+ // The historical drawer classified every non-inspected/non-dirty value as
+ // technical closure. Clean/in-progress are cleaning states, not closures.
+ if(['clean','in_progress'].includes(room.housekeeping)){
+  const cleaning=drawer.querySelector(':scope > p[style]');
+  if(cleaning){cleaning.textContent=auroraRoomText(room.housekeeping);cleaning.dataset.auroraCleaningStatus=room.housekeeping;}
+ }
  const panel=document.createElement('section');panel.className='aurora-room-detail';panel.dataset.auroraRoomDetail=id;panel.setAttribute('data-i18n-skip','');
  panel.innerHTML='<strong>'+esc(auroraRoomText('sourceLabel'))+' · '+esc(auroraRoomDate(source.as_of))+'</strong>'+auroraRoomAxes(room)+'<p>'+esc(auroraRoomText(reportStale?'stale':'readOnly'))+'</p>';
  drawer.querySelector('h2')?.after(panel);
