@@ -69,19 +69,19 @@
       "id": "reordered_same_day_revisions",
       "category": "event_revision_order",
       "status": "unsupported",
-      "reason": "Snapshot schema has no source-event revision sequence or reliable ordering history."
+      "reason": "NO_EVENT_REVISION_MODEL"
     },
     {
       "id": "partial_cancellation",
       "category": "partial_cancellation",
       "status": "unsupported",
-      "reason": "Snapshot schema represents a reservation-level state, not partial cancellation events."
+      "reason": "NO_PARTIAL_CANCELLATION_MODEL"
     },
     {
       "id": "split_stay_unlabelled",
       "category": "split_stay",
       "status": "unlabelled",
-      "reason": "No independently reviewed synthetic expected decision for linked split-stay segments."
+      "reason": "SPLIT_STAY_TRUTH_UNREVIEWED"
     }
   ]
 }

@@ -24,6 +24,10 @@ MUTATIONS = frozenset({
     "none", "duplicate_reference", "room_overlap", "maintenance_open",
     "channel_status_conflict", "cancelled_without_room"
 })
+EXCLUSION_REASONS = frozenset({
+    "NO_EVENT_REVISION_MODEL", "NO_PARTIAL_CANCELLATION_MODEL",
+    "SPLIT_STAY_TRUTH_UNREVIEWED",
+})
 IDENT = re.compile(r"^[A-Za-z0-9_-]{1,50}$")
 
 
@@ -68,8 +72,7 @@ def _validated_manifest(manifest, source):
         else:
             _require(status in {"unsupported", "unlabelled"})
             _require(set(case) == {"id", "category", "status", "reason"})
-            _require(isinstance(case["reason"], str)
-                     and 8 <= len(case["reason"]) <= 300)
+            _require(case["reason"] in EXCLUSION_REASONS)
     return manifest["cases"]
 
 
@@ -77,6 +80,7 @@ def _mutation(source, mutation):
     """Limited, documented transformations of public, already-synthetic data."""
     snapshot = deepcopy(source)
     bookings = {row["id"]: row for row in snapshot["reservations"]}
+    _require({"KF1001", "KF1002", "KF1006"} <= set(bookings))
     if mutation == "duplicate_reference":
         bookings["KF1002"]["channel"] = bookings["KF1001"]["channel"]
         bookings["KF1002"]["external_ref"] = bookings["KF1001"]["external_ref"]
@@ -91,8 +95,9 @@ def _mutation(source, mutation):
             "reservation_id": "KF1001", "status": "open", "priority": "high"
         })
     elif mutation == "channel_status_conflict":
-        event = next(e for e in snapshot["channel_events"] if e["id"] == "E1001")
-        event["status"] = "cancelled"
+        events = [e for e in snapshot["channel_events"] if e["id"] == "E1001"]
+        _require(len(events) == 1)
+        events[0]["status"] = "cancelled"
     elif mutation == "cancelled_without_room":
         bookings["KF1006"]["room_id"] = None
     elif mutation != "none":
@@ -100,8 +105,9 @@ def _mutation(source, mutation):
     return snapshot
 
 
-def _prediction(report, reservation_id, reason_code):
-    """Only authoritative arrivals[ID].blockers can count as a prediction."""
+def _prediction(snapshot, report, reservation_id, reason_code):
+    """Verify the entire report against the trusted engine before scoring."""
+    _require(report == evaluate(snapshot))
     _require(isinstance(report, dict) and report.get("schema_version") == "0.3"
              and report.get("mode") == "DRY_RUN_ONLY")
     policy = report.get("approval_policy")
@@ -173,8 +179,9 @@ def run_evaluation(manifest, source, engine=evaluate):
             })
             continue
         # Evaluate each mutated snapshot independently, never reuse stale results.
-        report = engine(_mutation(source, case["mutation"]))
-        predicted = _prediction(report, case["reservation_id"], case["reason_code"])
+        snapshot = _mutation(source, case["mutation"])
+        report = engine(deepcopy(snapshot))
+        predicted = _prediction(snapshot, report, case["reservation_id"], case["reason_code"])
         expected = case["expected"]
         observations.append((expected, predicted))
         details.append({

@@ -69,16 +69,16 @@ class EvaluationTests(unittest.TestCase):
 
     def test_wrong_reservation_attribution_rejected(self):
         report = evaluate(self.source)
-        self.assertFalse(_prediction(report, "KF1010", "CANCELLED_ASSIGNED"))
+        self.assertFalse(_prediction(self.source, report, "KF1010", "CANCELLED_ASSIGNED"))
         report["arrivals"][0]["blockers"].append("CANCELLED_ASSIGNED")
-        self.assertTrue(_prediction(report, "KF1001", "CANCELLED_ASSIGNED"))
-        self.assertFalse(_prediction(report, "KF1010", "CANCELLED_ASSIGNED"))
+        with self.assertRaises(EvaluationError):
+            _prediction(self.source, report, "KF1001", "CANCELLED_ASSIGNED")
 
     def test_unknown_code_in_output_fails_closed(self):
         report = evaluate(self.source)
         report["arrivals"][0]["blockers"].append("NOT_A_REAL_REASON")
         with self.assertRaises(EvaluationError):
-            _prediction(report, "KF1001", "ROOM_CONFLICT")
+            _prediction(self.source, report, "KF1001", "ROOM_CONFLICT")
 
     def test_unknown_label_in_manifest_fails_closed(self):
         manifest = deepcopy(self.manifest)
@@ -127,8 +127,7 @@ class EvaluationTests(unittest.TestCase):
             self.assertEqual(json_path.stat().st_mode & 0o077, 0)
 
     def test_cli_must_not_overwrite_input(self):
-        with self.assertRaises(Exception) if False else self.subTest("return-code"):
-            self.assertEqual(main(["--json", str(DEFAULT_MANIFEST)]), 2)
+        self.assertEqual(main(["--json", str(DEFAULT_MANIFEST)]), 2)
 
 
 if __name__ == "__main__":
