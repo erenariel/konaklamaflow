@@ -5,6 +5,7 @@ import re
 import unittest
 
 from konaklamaflow.canonical_presentation import build_presentation
+from konaklamaflow.explainability import EVIDENCE as DECISION_EVIDENCE_FIELDS
 from scripts.generate_canonical_demo import generate
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +37,8 @@ class CanonicalGenerationTests(unittest.TestCase):
         self.assertIn("/* BEGIN GENERATED_DECISION_EVIDENCE_STYLES */", document)
         self.assertIn(javascript, document)
         self.assertIn(stylesheet, document)
+        self.assertEqual(embedded("v04-integrated-preview.html", "DECISION_EVIDENCE_FIELDS"),
+                         {code: list(fields) for code, fields in DECISION_EVIDENCE_FIELDS.items()})
 
     def test_review_and_operations_entry_points_have_exact_same_parent_source(self):
         for filename in ('hotel-suite.html', 'v04-integrated-preview.html'):

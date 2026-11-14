@@ -4066,6 +4066,7 @@ document.getElementById('resetButton').addEventListener('click',()=>{
 </script>
 <script>
 // BEGIN GENERATED_DECISION_EVIDENCE_UI
+const DECISION_EVIDENCE_FIELDS={"ALREADY_IN_HOUSE":["reservations[].status","reservations[].arrival_state"],"ARRIVAL_NOT_TODAY":["reservations[].arrival","as_of"],"BEFORE_CHECKIN_TIME":["as_of","at_time","reservations[].arrival"],"CANCELLED_ASSIGNED":["reservations[].status","reservations[].room_id"],"CHANNEL_EVENT_REVIEW":["channel_events[].status","channel_events[].reservation_id"],"CHANNEL_REFERENCE_MISMATCH":["channel_events[].channel","channel_events[].external_ref","channel_events[].reservation_id"],"CHANNEL_STATUS_CONFLICT":["channel_events[].status","reservations[].status"],"CONFLICTING_BED_REQUEST":["reservations[].bed_request","reservations[].requests"],"CORE_REVIEW_REQUIRED":["engine_report.tasks[].reasons"],"DEPARTURE_NOT_VERIFIED":["reservations[].arrival_state","reservations[].departure"],"DUPLICATE_CHANNEL_REF":["reservations[].channel","reservations[].external_ref"],"DUPLICATE_PMS_REF":["reservations[].pms_ref"],"GUEST_NOT_ARRIVED":["reservations[].arrival_state"],"HISTORICAL_STAY":["reservations[].arrival","as_of"],"HOUSEKEEPING_NOT_INSPECTED":["rooms[].housekeeping","tasks[].status"],"HOUSEKEEPING_TASK_OPEN":["tasks[].kind","tasks[].status","tasks[].room_id"],"IDENTITY_STAFF_REVIEW":["reservations[].identity_signal"],"MAINTENANCE_TASK_OPEN":["tasks[].kind","tasks[].status","tasks[].room_id"],"NOT_CONFIRMED":["reservations[].status"],"NO_ASSIGNED_ROOM":["reservations[].room_id"],"NO_SHOW_RELEASE_REVIEW":["reservations[].status","reservations[].room_id"],"PAYMENT_REVIEW":["reservations[].payment_signal"],"PMS_REGISTRATION_NOT_CONFIRMED":["reservations[].pms_registration"],"REQUEST_AMENITY_UNAVAILABLE":["reservations[].requests","rooms[].amenities"],"ROOM_CONFLICT":["reservations[].room_id","reservations[].arrival","reservations[].departure"],"ROOM_INCOMPATIBLE":["rooms[].category","rooms[].capacity","rooms[].bed","rooms[].amenities","rooms[].maintenance","reservations[].requests"],"SPECIAL_REQUEST_REVIEW":["reservations[].requests"],"UNMAPPED_PMS":["reservations[].pms_ref","channel_events[].status"]};
 /* Decision evidence trail: presentation of Python-precomputed, fictional facts.
  * It is NOT the #53 hash-chain audit log and never records staff events.
  * No fetch, writes, storage, approval, generated decisions or live AI. */
@@ -4150,9 +4151,10 @@ document.getElementById('resetButton').addEventListener('click',()=>{
     &&row.human_approval_required===true
     &&Array.isArray(codes)&&new Set(codes).size===codes.length
     &&codes.every(code=>typeof code==='string'
-      &&catalog.codes.includes(code)
-      &&Array.isArray(catalog.evidence?.[code])
-      &&catalog.evidence[code].every(field=>typeof field==='string'
+      &&Object.prototype.hasOwnProperty.call(DECISION_EVIDENCE_FIELDS,code)
+      &&Array.isArray(DECISION_EVIDENCE_FIELDS[code])
+      &&DECISION_EVIDENCE_FIELDS[code].length>0
+      &&DECISION_EVIDENCE_FIELDS[code].every(field=>typeof field==='string'
         &&/^[a-zA-Z][\w.\[\]]{0,90}$/.test(field)))
     &&Array.isArray(report.arrivals)
     &&report.arrivals.every(item=>item.human_approval_required===true)
@@ -4160,7 +4162,7 @@ document.getElementById('resetButton').addEventListener('click',()=>{
   root.dataset.sourceState=valid?'source_bound':'unverified';
   status.textContent=valid?copy[2]:copy[7];
   if(!valid)return;
-  const evidence=[...new Set(codes.flatMap(code=>catalog.evidence[code]))];
+  const evidence=[...new Set(codes.flatMap(code=>DECISION_EVIDENCE_FIELDS[code]))];
   entry(copy[3],[
    ['SHA-256: '+report.snapshot_sha256.slice(0,16)+'…',true],
    [copy[9],false]

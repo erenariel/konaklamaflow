@@ -1,7 +1,7 @@
 # Karar kanıt yolu — çevrimdışı UI (Issue #54)
 
 Bu modül `demo/v04-integrated-preview.html` dosyasındaki mevcut kurgusal
-`INITIAL_EVALUATION` Python raporunu ve `V04_CATALOG.evidence` alan yolu
+`INITIAL_EVALUATION` Python raporunu ve Python `explainability.EVIDENCE` alan yolu
 sözlüğünü kullanarak seçili rezervasyon için dört aşamayı gösterir:
 
 1. Kurgusal kaynak anlık görüntüsünün SHA-256 referansı.

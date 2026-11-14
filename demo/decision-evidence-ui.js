@@ -82,9 +82,10 @@
     &&row.human_approval_required===true
     &&Array.isArray(codes)&&new Set(codes).size===codes.length
     &&codes.every(code=>typeof code==='string'
-      &&catalog.codes.includes(code)
-      &&Array.isArray(catalog.evidence?.[code])
-      &&catalog.evidence[code].every(field=>typeof field==='string'
+      &&Object.prototype.hasOwnProperty.call(DECISION_EVIDENCE_FIELDS,code)
+      &&Array.isArray(DECISION_EVIDENCE_FIELDS[code])
+      &&DECISION_EVIDENCE_FIELDS[code].length>0
+      &&DECISION_EVIDENCE_FIELDS[code].every(field=>typeof field==='string'
         &&/^[a-zA-Z][\w.\[\]]{0,90}$/.test(field)))
     &&Array.isArray(report.arrivals)
     &&report.arrivals.every(item=>item.human_approval_required===true)
@@ -92,7 +93,7 @@
   root.dataset.sourceState=valid?'source_bound':'unverified';
   status.textContent=valid?copy[2]:copy[7];
   if(!valid)return;
-  const evidence=[...new Set(codes.flatMap(code=>catalog.evidence[code]))];
+  const evidence=[...new Set(codes.flatMap(code=>DECISION_EVIDENCE_FIELDS[code]))];
   entry(copy[3],[
    ['SHA-256: '+report.snapshot_sha256.slice(0,16)+'…',true],
    [copy[9],false]

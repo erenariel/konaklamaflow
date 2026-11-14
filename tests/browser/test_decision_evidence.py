@@ -51,7 +51,7 @@ class DecisionEvidenceBrowserTests(unittest.TestCase):
               const row=INITIAL_EVALUATION.arrivals.find(x=>x.task_id===document.getElementById('v04Booking').value);
               return {
                 codes:row.blockers,
-                fields:[...new Set(row.blockers.flatMap(code=>V04_CATALOG.evidence[code]||[]))]
+                fields:[...new Set(row.blockers.flatMap(code=>DECISION_EVIDENCE_FIELDS[code]||[]))]
               };
             }""")
             self.assertEqual(self.page.locator('[data-trace-step="rules"] .kf-decision-code').all_inner_texts()[1:],expected["codes"])
