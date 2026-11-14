@@ -1,0 +1,45 @@
+/* Aurora timeline v1 — filter and room chronology, original UI only. */
+.aurora-timeline-tools{
+ margin:0 0 14px;padding:16px;border:1px solid var(--line);
+ border-radius:16px;background:var(--white);
+ box-shadow:0 10px 25px rgba(39,49,110,.07);
+ color:var(--ink)
+}
+.aurora-timeline-heading{
+ display:flex;justify-content:space-between;align-items:center;gap:12px;
+ margin-bottom:12px;flex-wrap:wrap
+}
+.aurora-timeline-heading h2{
+ font-size:18px;letter-spacing:-.025em;margin:0;color:var(--ink)
+}
+.aurora-timeline-heading p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.aurora-timeline-range{
+ font-variant-numeric:tabular-nums;background:var(--surface);
+ border:1px solid var(--line);border-radius:100px;
+ padding:8px 12px;font-size:11px;color:var(--ink)
+}
+.aurora-timeline-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:10px;align-items:end}
+.aurora-timeline-filter{display:grid;gap:5px;min-width:0;font-size:10px;color:var(--muted);font-weight:700}
+.aurora-timeline-filter select{
+ width:100%;min-height:42px;min-width:0;padding:8px 10px;
+ border:1px solid var(--control-border);border-radius:10px;
+ background:var(--surface);color:var(--ink);font:inherit;font-size:12px
+}
+#auroraTimelineReset{min-height:42px;white-space:normal}
+.aurora-timeline-summary{font-size:11px;color:var(--muted);margin:12px 0 0}
+.aurora-timeline-tools + .rack-panel .rack-scroll{scrollbar-color:var(--control-border) transparent}
+.aurora-timeline-tools + .rack-panel .rack-header .rack-name{
+ position:sticky;inset-inline-start:0;z-index:4;background:var(--surface);
+ border-inline-end:1px solid var(--line);align-self:stretch
+}
+.aurora-timeline-tools + .rack-panel .rack-row>.rack-name{position:sticky;inset-inline-start:0;z-index:3}
+.aurora-timeline-tools + .rack-panel .rack-row .stay-bar{transition:box-shadow .18s ease}
+.aurora-timeline-tools + .rack-panel .rack-row .stay-bar[data-timeline-status="cancelled"]{opacity:.6;filter:saturate(.6)}
+.aurora-timeline-tools :is(select,button):focus-visible{
+ outline:3px solid var(--focus);outline-offset:3px
+}
+html[data-kf-motion="off"] .aurora-timeline-tools + .rack-panel .stay-bar{transition:none}
+@media (max-width:960px){.aurora-timeline-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:500px){.aurora-timeline-tools{padding:12px}.aurora-timeline-grid{gap:8px}.aurora-timeline-grid button{grid-column:1/-1}.aurora-timeline-range{max-width:100%;white-space:normal}}
+@media (max-width:360px){.aurora-timeline-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.aurora-timeline-tools *{animation:none!important;transition:none!important}}
