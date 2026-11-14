@@ -416,6 +416,16 @@ class SyntheticEvaluationCliTests(unittest.TestCase):
             self.assertNotIn("Traceback", stderr)
             self.assertNotIn(str(cycle), stderr)
 
+    def test_broken_output_symlink_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "dangling.json"
+            output.symlink_to(Path(directory) / "missing.json")
+            code, stdout, stderr = self.run_cli(FIXTURE_PATH, output, Path(directory) / "report.md")
+            self.assertEqual(code, 2)
+            self.assertEqual(stdout, "")
+            self.assertTrue(output.is_symlink())
+            self.assertNotIn("Traceback", stderr)
+
     def test_invalid_second_destination_preserves_existing_json(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "report.json"

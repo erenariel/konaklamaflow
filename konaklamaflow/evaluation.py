@@ -344,7 +344,10 @@ def main(argv=None):
             staged = []
             for target, content in ((args.json_output, encoded), (args.markdown_output, markdown)):
                 destination = Path(target)
-                if destination.exists() and not destination.is_file():
+                # Reject symlinks (including dangling/cyclic links) before
+                # preparation. Path.exists() is false for dangling links and
+                # may be false for self-referential links on Python 3.13.
+                if destination.is_symlink() or (destination.exists() and not destination.is_file()):
                     _fail()
                 directory = stack.enter_context(TemporaryDirectory(dir=destination.parent))
                 pending = Path(directory) / "report"

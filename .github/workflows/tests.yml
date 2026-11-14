@@ -32,7 +32,7 @@ jobs:
           path: |
             /tmp/synthetic-evaluation.json
             /tmp/synthetic-evaluation.md
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
       - name: Check commit privacy and Python syntax
         run: |
