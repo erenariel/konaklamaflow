@@ -1,6 +1,6 @@
 # KonaklamaFlow
 
-Küçük ve butik oteller için gizlilik öncelikli, çevrimdışı rezervasyon ön kontrol aracı. Oda çakışması, yarınki giriş listesi ve resepsiyon kontrol kuyruğu üretir. Canlı bir otel programı, PMS, KBS veya ödeme sistemi değildir.
+Gece resepsiyonunda çift rezervasyonu ve oda çakışmasını, canlı otel sistemine bağlanmadan gör. Küçük oteller için gizlilik öncelikli, çevrimdışı bir ön kontrol aracıdır. PMS, KBS veya ödeme sistemi değildir.
 
 **Kurgusal demoyu aç:** [erenariel.github.io/konaklamaflow](https://erenariel.github.io/konaklamaflow/)
 
@@ -21,7 +21,7 @@ python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12
 
 Çıktı dosyası girdi dosyasından farklı bir yol olmalıdır. Rapor yalnızca dosya sahibi tarafından okunacak şekilde yazılır. Gerçek misafir listesini veya PMS dışa aktarımını bu depoya koymayın.
 
-GitHub Pages üzerindeki demo, `main` dalına giden bir push testleri geçtikten sonra yayınlanır. Bu dal birleştirilmeden `https://erenariel.github.io/konaklamaflow/` değişmez.
+Yayındaki demo, `main` dalındaki başarılı testten sonra güncellenir.
 
 **Şu an çalışan:** kurgusal JSON ile çakışma, yarınki giriş, oda önerisi ve giriş öncesi kuyruk. **Geliştirilmekte:** çok dilli arayüz taslağı, görsel oda planı ve senaryo oynatımı. **Yok:** canlı PMS bağlantısı, KBS, ödeme, otomatik check-in.
 
