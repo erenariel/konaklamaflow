@@ -9,6 +9,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from konaklamaflow.canonical_presentation import build_presentation
+from konaklamaflow.explainability import EVIDENCE as DECISION_EVIDENCE_FIELDS
 from scripts.generate_suite_demo import embed as embed_review, safe_json
 from scripts.generate_hotel_ops_demo import embed as embed_operations
 
@@ -84,6 +85,24 @@ def generate(check=False):
                 text = text.replace(css_end, css_end + '\n' + timeline_css_start + '\n' + timeline_css_end, 1)
             text = replace_block(text, timeline_css_start, timeline_css_end,
                                  (ROOT/'demo/aurora-timeline.css').read_text(encoding='utf-8'))
+            # Offline decision-evidence display: a derived UI, not a live audit log.
+            evidence_css_start = '/* BEGIN GENERATED_DECISION_EVIDENCE_STYLES */'
+            evidence_css_end = '/* END GENERATED_DECISION_EVIDENCE_STYLES */'
+            if evidence_css_start not in text:
+                text = text.replace('</head>', '<style>\n' + evidence_css_start + '\n'
+                                    + evidence_css_end + '\n</style>\n</head>', 1)
+            text = replace_block(text, evidence_css_start, evidence_css_end,
+                                 (ROOT/'demo/decision-evidence-ui.css').read_text(encoding='utf-8').rstrip('\n'))
+            evidence_js_start = '// BEGIN GENERATED_DECISION_EVIDENCE_UI'
+            evidence_js_end = '// END GENERATED_DECISION_EVIDENCE_UI'
+            if evidence_js_start not in text:
+                text = text.replace('</body>', '<script>\n' + evidence_js_start + '\n'
+                                    + evidence_js_end + '\n</script>\n</body>', 1)
+            text = replace_block(text, evidence_js_start, evidence_js_end,
+                                 'const DECISION_EVIDENCE_FIELDS=' + safe_json({
+                                     code: list(fields) for code, fields in sorted(DECISION_EVIDENCE_FIELDS.items())
+                                 }) + ';\n'
+                                 + (ROOT/'demo/decision-evidence-ui.js').read_text(encoding='utf-8').rstrip('\n'))
         orbit_start, orbit_end = '/* BEGIN ORBIT_COMMAND_THEME */', '/* END ORBIT_COMMAND_THEME */'
         if orbit_start not in text:
             text = text.replace('</head>', '<style>\n' + orbit_start + '\n' + orbit_end + '\n</style>\n</head>', 1)
