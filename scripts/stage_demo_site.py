@@ -10,6 +10,8 @@ from pathlib import Path
 import shutil
 import sys
 
+from scripts.render_trace_view import trace_view_html
+
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_ASSETS = {
     'index.html': 'demo/v04-integrated-preview.html',
@@ -32,6 +34,7 @@ PUBLIC_ASSETS = {
     'desktop-preview.png': 'demo/desktop-preview.png',
     'mobile-preview.png': 'demo/mobile-preview.png',
 }
+GENERATED_ASSETS = {'fictional-trace.html': trace_view_html}
 
 
 def stage_site(output: Path, root: Path = ROOT) -> None:
@@ -44,6 +47,8 @@ def stage_site(output: Path, root: Path = ROOT) -> None:
     output.mkdir(parents=True)
     for destination, relative in PUBLIC_ASSETS.items():
         shutil.copyfile(root / relative, output / destination)
+    for destination, make_page in GENERATED_ASSETS.items():
+        (output / destination).write_text(make_page(root), encoding='utf-8')
     (output / '.nojekyll').write_text('', encoding='utf-8')
 
 
