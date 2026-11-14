@@ -6,7 +6,7 @@
 
 Bu depo canlı otel programı değildir. PMS, KBS, ödeme ve kimlik sistemi yoktur. Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
 
-Paket sürümü `0.2.0rc1`. `demo/v04-integrated-preview.html` ayrı bir kurgusal v0.5 çalışma ekranıdır; yayımlanmış paket sürümü değildir.
+**Sürüm rehberi (14 Kasım 2026):** Python paket adayı `0.2.0rc1`; GitHub Pages üzerinde yayımlanan **kurgusal, çevrimdışı birleşik demo v0.5.2 (Orbit Command)**. `demo/hotel-suite.html` eski v0.3 prototipidir; `operations.html` eski v0.2 kokpitidir. **Bu demo sürümleri, yayımlanmış Python paket sürümü değildir.** Örnek otelin 12 Kasım 2026 tarihi **sabit kurgusal veri tarihidir**, güncel sistem tarihi değildir.
 
 ```bash
 python -m konaklamaflow examples/demo.json --as-of 2026-11-12
@@ -15,31 +15,31 @@ python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12
 
 Çıktı dosyası girdi dosyasından farklı bir yol olmalıdır. Rapor yalnızca dosya sahibi tarafından okunacak şekilde yazılır. Gerçek misafir listesini veya PMS dışa aktarımını bu depoya koymayın.
 
-GitHub Pages üzerindeki demo, `main` dalına giden bir push testleri geçtikten sonra yayınlanır. Bu dal birleştirilmeden `https://erenariel.github.io/konaklamaflow/` değişmez.
+Canlı birleşik demo: **https://erenariel.github.io/konaklamaflow/**. GitHub Pages, `main` dalındaki başarılı testlerden sonra güncellenir; önceki sürümler için `hotel-suite.html` ve `operations.html` ayrı tarihsel bağlantılar olarak korunur.
 
-**Şu an çalışan:** kurgusal JSON ile çakışma, yarınki giriş, oda önerisi ve giriş öncesi kuyruk. **Geliştirilmekte:** çok dilli arayüz taslağı, görsel oda planı ve senaryo oynatımı. **Yok:** canlı PMS bağlantısı, KBS, ödeme, otomatik check-in.
+**Mevcut kurgusal demoda:** kaynakla eşleştirilmiş rezervasyonlar, oda planı/zaman çizelgesi, salt okunur kontrol kuyrukları ve senaryolu AI açıklama gösterimi bulunur. Orbit Command gece teması yayımdadır. **Taslak:** 10 dilde çeviriler (uzman incelemesi gerekli). **Yok:** canlı PMS/OTA/KBS/ödeme bağlantısı, gerçek AI çağrısı veya otomatik check-in.
 
-[![KonaklamaFlow v0.5.2 visual candidate: colorful AI review center, fictional room plan and human approval boundary](docs/images/ai-command-tour-poster.png)](demo/v04-integrated-preview.html)
+[![KonaklamaFlow v0.5.2 fictional demo: AI review center, fictional room plan and human approval boundary](docs/images/ai-command-tour-poster.png)](demo/v04-integrated-preview.html)
 
-**[Open KonaklamaFlow v0.5 integrated hotel demo / Birleşik otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Global 10-language guided presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html) · [Offline integrated HTML](demo/v04-integrated-preview.html) · [Original room workbench](demo/hotel-suite.html) · [Latest tagged package release](https://github.com/erenariel/konaklamaflow/releases/latest)
+**[Open KonaklamaFlow v0.5 integrated hotel demo / Birleşik otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Global 10-language guided presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html) · [Offline integrated HTML](demo/v04-integrated-preview.html) · [Legacy v0.3 room workbench](demo/hotel-suite.html) · [Latest tagged package release](https://github.com/erenariel/konaklamaflow/releases/latest)
 
-Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional integrated workbench**. The candidate contains 20 navigable sections, combining front-desk reviews, hotel operations and workflow views: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above is a screenshot of the **published v0.5.2 fictional offline demo** (merged PR #31). It is not a live hotel installation. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
+Download and open `demo/v04-integrated-preview.html` for the **published v0.5.2 fictional integrated workbench**. The demo contains 20 navigable sections, combining front-desk reviews, hotel operations and workflow views: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above is a screenshot of the **published v0.5.2 fictional offline demo** (merged PR #31). It is not a live hotel installation. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
 
 Original illustrated concepts remain available separately: [AI hero illustration](docs/images/ai-presentation-hero.svg) and [explanation-flow illustration](docs/images/ai-explanation-flow.svg). These SVG concepts are distinct from the real application screenshots and recordings below.
 
-### Aurora reservation timeline — Issue #37, second delivery (PR #42 candidate)
+### Aurora reservation timeline — Issue #37 (merged PR #42)
 
 The offline room plan now has a **source-bound reservation timeline** with 7/14/21-day ranges, date navigation, floor/category/status/channel/search filters, sticky room headers and exact reservation-to-detail navigation. The Python-validated fictional room-stays are authoritative; checkout day is excluded (`[arrival, departure)`). Cancelled and no-show bars are labeled historical states, not physical occupancy. Maintenance and technical holds remain separate. Ten-language draft labels, RTL, mobile horizontal scroll and reduced-motion preference are preserved. The candidate does not establish live availability, real AI, actual guests or PMS integration. This feature is introduced through PR #42 and is not part of any published tagged Python package release.
 
-### Shared fictional reservation model — Issue #35 candidate
+### Shared fictional reservation model — Issue #35 (merged PR #39)
 
-The candidate's integrated dashboard, room plan, PMS views, AI scenarios, folios and 32 report options now share **one Python-validated source**, [`examples/canonical-hotel.json`](examples/canonical-hotel.json): 12 KF reservations, 18 rooms and explicit reservation/stay/guest/agency/folio links. No old KFD financial record is matched by its number or silently migrated. Only three explicitly authored fictional folios have recorded movements; the other nine reservations show `not_applicable` for finance. Missing-source reports remain unavailable. Follow a reservation from the dashboard or room plan to its exact PMS details, related folio and scoped report.
+The published fictional demo's integrated dashboard, room plan, PMS views, AI scenarios, folios and 32 report options now share **one Python-validated source**, [`examples/canonical-hotel.json`](examples/canonical-hotel.json): 12 KF reservations, 18 rooms and explicit reservation/stay/guest/agency/folio links. No old KFD financial record is matched by its number or silently migrated. Only three explicitly authored fictional folios have recorded movements; the other nine reservations show `not_applicable` for finance. Missing-source reports remain unavailable. Follow a reservation from the dashboard or room plan to its exact PMS details, related folio and scoped report.
 
-Run `python scripts/generate_canonical_demo.py --check` to verify all current projections. Historical CLI/API fixtures remain separate examples. [Schema, regeneration commands and multiroom limits (TR)](docs/CANONICAL_SCHEMA_TR.md). This is a **draft-PR candidate**, not a change already published on the live site. All integrations remain disabled; translations remain drafts.
+Run `python scripts/generate_canonical_demo.py --check` to verify all current projections. Historical CLI/API fixtures remain separate examples. [Schema, regeneration commands and multiroom limits (TR)](docs/CANONICAL_SCHEMA_TR.md). This is included in the **published fictional Pages demo**; it is not a tagged Python package release. All integrations remain disabled; translations remain drafts.
 
-### AI review, made visible — v0.5.2 visual candidate
+### AI review, made visible — published fictional v0.5.2 demo
 
-**Aurora room control — first delivery, draft:** The integrated Room Plan now opens with floor-grouped graphical cards, independent housekeeping/physical-occupancy/assignment axes, operational badges, filters and canonical reservation/folio navigation. [Desktop](docs/images/aurora-room-plan-desktop.png) · [Mobile](docs/images/aurora-room-plan-mobile.png) · [Arabic RTL](docs/images/aurora-room-plan-rtl.png). The current fictional snapshot has no checked-in evidence: physical occupancy stays unverified, and an unassigned room is not called verified vacant or sellable. This work depends on draft PR #39; timeline expansion and new AI intelligence views are later deliveries under Issue #37. No live deployment is implied.
+**Aurora room control — published fictional preview:** The integrated Room Plan now opens with floor-grouped graphical cards, independent housekeeping/physical-occupancy/assignment axes, operational badges, filters and canonical reservation/folio navigation. [Desktop](docs/images/aurora-room-plan-desktop.png) · [Mobile](docs/images/aurora-room-plan-mobile.png) · [Arabic RTL](docs/images/aurora-room-plan-rtl.png). The current fictional snapshot has no checked-in evidence: physical occupancy stays unverified, and an unassigned room is not called verified vacant or sellable. The shared reservation model (merged PR #39) and timeline (merged PR #42) are visible in the offline Pages demo. No deployment to a real hotel, PMS or AI provider is implied.
 
 **[Open the offline demo](demo/v04-integrated-preview.html)** · [Merged PR #31](https://github.com/erenariel/konaklamaflow/pull/31) · [Static desktop preview](docs/images/v052-overview-1440.png) · [Mobile preview](docs/images/v052-mobile.png)
 
@@ -53,11 +53,11 @@ Motion is optional. The app respects system reduced-motion and its own motion sw
 | Room plan, housekeeping and technical hold | [roomplan-story.gif](docs/images/roomplan-story.gif) | [Poster](docs/images/roomplan-story-poster.png) |
 | Overview, source charts and progress | [overview-pulse.gif](docs/images/overview-pulse.gif) | [Poster](docs/images/overview-pulse-poster.png) |
 
-All three GIFs are captured from the running integrated HTML with `python scripts/record_demo_tour.py --showcase all`. Each has a source/report/GIF/poster hash manifest, recorded interactions, a 5 MB limit and zero external requests/browser errors. `python scripts/capture_previews.py` refreshes the actual desktop, RTL, mobile and presentation screenshots. These are synthetic demonstrations, not measured hotel adoption or real AI-provider results. The ten-language UI remains a translation draft pending human review.
+The linked GIFs are real browser recordings captured from a prior reviewed integrated-demo commit; later copy-only clarity edits may not appear in the recordings. All three were captured with `python scripts/record_demo_tour.py --showcase all`. Each has a source/report/GIF/poster hash manifest, recorded interactions, a 5 MB limit and zero external requests/browser errors. `python scripts/capture_previews.py` refreshes the actual desktop, RTL, mobile and presentation screenshots. These are synthetic demonstrations, not measured hotel adoption or real AI-provider results. The ten-language UI remains a translation draft pending human review.
 
 [![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.2.0rc1%20package%20%7C%20v0.5%20demo-yellow)](CHANGELOG.md)
 
-> **Project status (2026-11-13):** Runnable **fictional/offline v0.5 demo** with Python-validated folio/report samples and explicit staff-only reservations. This is not a certified PMS, operational hotel ledger, real AI integration, live OTA/KBS, identity processor, payment system, or tax-compliant invoicing product. The 10-language material is a translation **draft** pending native-speaker review. No real customer deployment or third-party live access is claimed.
+> **Project status (2026-11-14):** Runnable **fictional/offline v0.5 demo** with Python-validated folio/report samples and explicit staff-only reservations. This is not a certified PMS, operational hotel ledger, real AI integration, live OTA/KBS, identity processor, payment system, or tax-compliant invoicing product. The 10-language material is a translation **draft** pending native-speaker review. No real customer deployment or third-party live access is claimed.
 
 **TR:** KonaklamaFlow, küçük ve butik otellerin rezervasyon ve oda blokajı kontrollerini kurgusal veya önceden pseudonimleştirilmiş verilerle deneyebilmesi için oluşturulmuş, açık kaynaklı bir *ön kontrol / karar destek motorudur*. Herhangi bir otel sistemine kendiliğinden giriş yapmaz. **Gerçek PMS üzerinde işlem yapmaz, misafire söz vermez ve KBS bildirimi göndermez.**
 
@@ -154,9 +154,9 @@ PRs, reproducible bug reports, documentation improvements, and **synthetic** tes
 
 ## Front Desk Operations Prototype (v0.2.0rc1)
 
-This development branch adds a privacy-first **check-in readiness reviewer**, not a live check-in service. It combines pseudonymous reservation references, housekeeping and technical holds, arrival-time rules and authorized review signals. A second AI can receive an expiring **read-only** task handoff; it cannot change reservations, send messages, collect payment or submit KBS notifications.
+The older operations prototype includes a privacy-first **check-in readiness reviewer**, not a live check-in service. It combines pseudonymous reservation references, housekeeping and technical holds, arrival-time rules and authorized review signals. A second AI can receive an expiring **read-only** task handoff; it cannot change reservations, send messages, collect payment or submit KBS notifications.
 
-- [Offline operations cockpit](demo/operations.html) — fictional, browser-local viewer (will be published at `/operations.html` on Pages after review and merge).
+- [Offline operations cockpit](demo/operations.html) — fictional, browser-local viewer (historical `/operations.html` route on Pages).
 - [Operations product blueprint](docs/PRODUCT_BLUEPRINT_TR.md)
 - [Second-AI handoff protocol](docs/AI_AGENT_PROTOCOL_TR.md)
 - [Market and competitor research](docs/COMPETITIVE_RESEARCH_TR.md)
@@ -176,7 +176,7 @@ python -m unittest discover -s tests -v
 
 The suite extends the shared v0.2 reservation and readiness engine, reviewed in [PR #2](https://github.com/erenariel/konaklamaflow/pull/2) and [PR #3](https://github.com/erenariel/konaklamaflow/pull/3). **v0.3 describes the prototype schema/UI; it is not a published stable package release.** Existing reservation, operations and AI-review APIs remain available; the distribution remains a release candidate.
 
-Open [demo/hotel-suite.html](demo/hotel-suite.html) locally for ten fictional views: front desk, arrivals, OTA reconciliation, room plan, housekeeping/engineering, guest-request drafts, department tasks, reservation totals, AI review and the planned integration map. This preview has no external requests, telemetry or browser storage. No live provider, PMS, payment, identity or KBS connection is enabled. The Pages entry and this offline file use the same reviewed suite HTML.
+Open [demo/hotel-suite.html](demo/hotel-suite.html) locally for ten fictional views: front desk, arrivals, OTA reconciliation, room plan, housekeeping/engineering, guest-request drafts, department tasks, reservation totals, AI review and the planned integration map. This preview has no external requests, telemetry or browser storage. No live provider, PMS, payment, identity or KBS connection is enabled. The Pages home instead serves the current v0.5.2 fictional integrated demo; this file is the historical v0.3 prototype.
 
 ```bash
 python -m konaklamaflow.experience_cli examples/fictional-hotel.json
