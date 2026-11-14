@@ -11,6 +11,10 @@ Thank you for supporting open hospitality software!
 
 AI-generated patches are welcome if they are reviewed, tested and clearly described. Synthetic fixtures only. Please keep changes focused.
 
+### AI-assisted work and scarce Codex quota
+
+When choosing between available AI development tools, reserve Codex for narrowly scoped, difficult architecture or constraint-solving work. Routine tests, docs, PR reviews, CI triage and small changes are handled directly through the connected GitHub workflow wherever practical. Read the [TR working agreement](docs/AI_WORK_ALLOCATION_TR.md). **Issue #62** is an example of a bounded Codex task; creating an issue does not automatically start Codex. Do not merge or deploy without review.
+
 ### Operator feedback without sensitive data
 
 Hotel staff and independent testers can contribute without coding:
