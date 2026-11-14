@@ -66,6 +66,14 @@ class CanonicalNavigationTests(unittest.TestCase):
             '// END GENERATED_CANONICAL_DATA',
             'const CANONICAL_DATA=' + safe_json(bundle['canonical']) + ';\n'
             + 'const CANONICAL_LINKS=' + safe_json(bundle['canonical_links']) + ';')
+        # The room graph belongs to the same Python-validated scenario; never
+        # leave it pointing at the original fixture when testing multiroom stays.
+        graph_match = re.search(r'\bconst AURORA_ROOM_GRAPH\s*=\s*', document)
+        if graph_match is None:
+            raise AssertionError('Missing canonical room graph projection')
+        _, graph_size = json.JSONDecoder().raw_decode(document[graph_match.end():])
+        document = (document[:graph_match.end()] + safe_json(bundle['room_graph'])
+                    + document[graph_match.end() + graph_size:])
         match = re.search(r'\bconst V04_CATALOG\s*=\s*', document)
         catalog, size = json.JSONDecoder().raw_decode(document[match.end():])
         catalog['sourceSha'] = bundle['review_report']['snapshot_sha256']
