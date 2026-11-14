@@ -11,6 +11,16 @@ class DemoSiteTests(unittest.TestCase):
             site = Path(directory)/'site'
             stage_site(site)
             self.assertEqual((site/'index.html').read_bytes(),(ROOT/'demo/v04-integrated-preview.html').read_bytes())
+            overview=(site/'project-overview.html').read_text(encoding='utf-8')
+            self.assertEqual(overview,(ROOT/'demo/project-overview.html').read_text(encoding='utf-8'))
+            self.assertIn('Geliştirme durumunu açıkça ayırıyoruz',overview)
+            self.assertIn('7 / 10',overview)
+            self.assertIn('Henüz yapılmayanlar',overview)
+            self.assertIn('ai-command-tour-poster.png',overview)
+            for number in (51,53,55,58,59):
+                self.assertIn(f'pull/{number}',overview)
+            self.assertNotIn('<script',overview.lower())
+
             self.assertEqual((site/'index.html').read_bytes(),(site/'hotel-operations.html').read_bytes())
             self.assertEqual((site/'hotel-suite.html').read_bytes(),(ROOT/'demo/hotel-suite.html').read_bytes())
             self.assertEqual((site/'global-presentation.html').read_bytes(),(ROOT/'demo/global-presentation-concept.html').read_bytes())

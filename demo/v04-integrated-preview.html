@@ -865,6 +865,15 @@ html[data-kf-motion="off"] .ai-command::after {
 
 /* END ORBIT_COMMAND_THEME */
 </style>
+<style>
+/* Project overview entry is static navigation, not a control of the rule engine. */
+.kf-promo-entry{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:10px 0 18px;padding:14px 16px;border:1px solid #557987;border-radius:14px;background:linear-gradient(125deg,rgba(37,94,101,.23),rgba(97,90,156,.15));color:var(--ink)}
+.kf-promo-entry>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kf-promo-entry strong{font-size:13px}.kf-promo-entry span{color:var(--muted);font-size:12px;line-height:1.5}
+.kf-promo-entry a{display:inline-flex;align-items:center;min-height:38px;border:1px solid #549a93;border-radius:10px;padding:8px 12px;background:#1d454a;color:#d6fff1;text-decoration:none;font-size:12px;font-weight:750;max-width:100%}
+.kf-promo-entry a:focus-visible{outline:3px solid #ffda95;outline-offset:2px}
+@media(max-width:430px){.kf-promo-entry{padding:11px 12px}.kf-promo-entry a{width:100%;justify-content:center}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -878,6 +887,10 @@ html[data-kf-motion="off"] .ai-command::after {
 <main class="main">
  <header class="topbar"><div class="crumb">Sample Boutique Hotel <span aria-hidden="true" style="padding:0 7px;color:var(--muted)">/</span> <b id="crumb">Genel Bakış</b></div><div class="top-actions"><label class="ops-global-language" for="globalLanguage"><span>🌐 Dil / Language</span><select id="globalLanguage" aria-label="Dil ve görünüm dili"><option value="tr">🇹🇷 Türkçe</option><option value="en">🇬🇧 English</option><option value="fr">🇫🇷 Français</option><option value="el">🇬🇷 Ελληνικά</option><option value="he">🇮🇱 עברית</option><option value="ar">🇸🇦 العربية</option><option value="de">🇩🇪 Deutsch</option><option value="ru">🇷🇺 Русский</option><option value="es">🇪🇸 Español</option><option value="uk">🇺🇦 Українська</option></select></label><span id="fullUiTranslationMarker" class="full-ui-translation-note" aria-live="polite">Taslak çeviriler · gerçek kişisel veri yok</span><span class="date">Kurgusal veri · 12 Kasım 2026</span><span class="chip">● KURGUSAL DEMO</span><button type="button" class="avatar" id="wfStaffButton" aria-label="Personel ve oturum" title="Personel ve oturum">K</button></div></header>
  <section class="intro"><div><div class="eyebrow">YAPAY ZEKÂ DESTEKLİ OPERASYON KONSEPTİ</div><h1 id="pagetitle">Resepsiyon kontrol merkezi</h1><p class="sub" id="pagesub">Günlük hareketleri, oda hazırlığını ve kanal uyarılarını tek ekranda izle. Kurallara dayalı öneriler personel kararına yardımcı olur.</p></div><div class="toolbar"><button class="primary" id="startShowcase">AI senaryosunu keşfet</button><button class="secondary" id="resetButton">Demoyu sıfırla</button><button class="secondary" id="exportButton">Rapor indir</button><div class="kf-prefs" role="group" aria-label="Görünüm tercihleri"><label for="kfTheme">Tema</label><select id="kfTheme" aria-label="Tema seçimi"><option value="light">Açık</option><option value="dark">Koyu</option><option value="night" selected>Gece audit</option></select><button type="button" class="secondary" id="kfMode" aria-pressed="false">Sunum modu</button><button type="button" class="secondary" id="kfMotion" aria-pressed="false">Hareket: Açık</button><label class="kf-module-choice" for="kfModule">Modül</label><select class="kf-module-choice" id="kfModule" aria-label="Sunum modülü"></select></div></div></section>
+<aside class="kf-promo-entry" role="region" aria-label="Proje tanıtımı ve geliştirme açıklaması">
+  <div><strong>Yeni: KonaklamaFlow nasıl çalışır?</strong><span>Mevcut demo, sentetik test kanıtları ve henüz yayımlanmamış geliştirmeler tek sayfada.</span></div>
+  <a href="project-overview.html">Görsel proje tanıtımını aç</a>
+</aside>
   <div id="content" role="region" aria-label="Operasyon çalışma alanı" tabindex="0"></div>
 <section id="v04Global" class="v04-panel" role="region" aria-labelledby="v04Title" lang="tr" dir="ltr">
  <div class="v04-head"><div class="v04-head-text"><span class="v04-kicker" id="v04Kicker">v0.5.2 DEMO • ÇEVRİMDIŞI</span><h2 id="v04Title">Küresel karar açıklama merkezi</h2><p id="v04Sub">10 dilde önceden hesaplanmış örnek kontrol raporu · kurgusal otel</p></div><div class="v04-language"><label for="v04Locale" id="v04LocaleLabel">Dil</label><select id="v04Locale" aria-label="Review explanation language"><option value="tr">🇹🇷 Türkçe</option><option value="en">🇬🇧 English</option><option value="fr">🇫🇷 Français</option><option value="el">🇬🇷 Ελληνικά</option><option value="he">🇮🇱 עברית</option><option value="ar">🇸🇦 العربية</option><option value="de">🇩🇪 Deutsch</option><option value="ru">🇷🇺 Русский</option><option value="es">🇪🇸 Español</option><option value="uk">🇺🇦 Українська</option></select></div></div>

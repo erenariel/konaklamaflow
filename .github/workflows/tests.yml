@@ -43,6 +43,9 @@ jobs:
           node --check demo/full-ui-lexicon.js
           node --check demo/hotel-workflow-ui.js
           python scripts/stage_demo_site.py --output /tmp/demo-site
+          test -s /tmp/demo-site/project-overview.html
+          test -s /tmp/demo-site/ai-command-tour-poster.png
+
 
   browser:
     runs-on: ubuntu-latest

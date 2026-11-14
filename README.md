@@ -2,6 +2,14 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
+## Tanıtım ve geliştirme kanıtları / Project overview
+
+**[Görsel proje tanıtımı — kaynak → kural → kanıt → personel işleyişi](demo/project-overview.html)**
+
+Yayımlanmış v0.5.2 demosu ile **test edilmiş fakat henüz `main` dalına alınmamış aday geliştirmeler** ayrı gösterilir. Tanıtımda mevcut demodan gerçek bir tarayıcı ekran görüntüsü, sentetik 7/10 vaka kapsamının açık paydası, özelliklerin neden önemli olduğu ve ilgili PR bağlantıları bulunur. **Canlı Pages bağlantısı ancak bu tanıtım PR'ı birleştirildikten ve Pages güncellendikten sonra:** `https://erenariel.github.io/konaklamaflow/project-overview.html`. İlk sürüm TR odaklı ve kısa bir İngilizce özet içerir.
+
+**English:** A visual, offline-friendly project overview distinguishes the **published fictional v0.5.2 demo** from the **CI-tested but unmerged review candidates** (PRs [#51](https://github.com/erenariel/konaklamaflow/pull/51), [#53](https://github.com/erenariel/konaklamaflow/pull/53), [#55](https://github.com/erenariel/konaklamaflow/pull/55), [#58](https://github.com/erenariel/konaklamaflow/pull/58), [#59](https://github.com/erenariel/konaklamaflow/pull/59)). Synthetic benchmark results do **not** establish real-world hotel accuracy. The public-facing status is a dated snapshot, not a live PR feed.
+
 ## Gece vardiyası başlangıcı
 
 Bu depo canlı otel programı değildir. PMS, KBS, ödeme ve kimlik sistemi yoktur. Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
