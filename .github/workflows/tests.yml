@@ -20,6 +20,18 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run tests
         run: python -m unittest discover -s tests -v
+      - name: Generate and verify fictional decision trace
+        run: |
+          python -m konaklamaflow.trace_cli --output /tmp/konaklamaflow-decision-trace.json
+          python -m konaklamaflow.trace_cli --verify /tmp/konaklamaflow-decision-trace.json
+      - name: Preserve non-authorizing fictional decision trace
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-decision-trace-${{ matrix.python-version }}-${{ github.sha }}
+          path: /tmp/konaklamaflow-decision-trace.json
+          if-no-files-found: warn
+          retention-days: 14
       - name: Check commit privacy and Python syntax
         run: |
           python scripts/verify_commit_privacy.py
