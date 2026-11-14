@@ -68,11 +68,21 @@ def generate(check=False):
                 'const AURORA_ROOM_GRAPH=' + safe_json(bundle['room_graph']) + ';\n'
                 + (ROOT/'demo/aurora-room-i18n.js').read_text(encoding='utf-8') + '\n'
                 + (ROOT/'demo/aurora-room-plan.js').read_text(encoding='utf-8'))
+            timeline_start, timeline_end = '// BEGIN GENERATED_AURORA_TIMELINE_UI', '// END GENERATED_AURORA_TIMELINE_UI'
+            if timeline_start not in text:
+                text = text.replace(aurora_end, aurora_end + '\n' + timeline_start + '\n' + timeline_end, 1)
+            text = replace_block(text, timeline_start, timeline_end,
+                                 (ROOT/'demo/aurora-timeline.js').read_text(encoding='utf-8'))
             css_start, css_end = '/* BEGIN GENERATED_AURORA_ROOM_STYLES */', '/* END GENERATED_AURORA_ROOM_STYLES */'
             if css_start not in text:
                 text = text.replace('</head>', '<style>\n' + css_start + '\n' + css_end + '\n</style>\n</head>', 1)
             text = replace_block(text, css_start, css_end,
                                  (ROOT/'demo/aurora-room-plan.css').read_text(encoding='utf-8'))
+            timeline_css_start, timeline_css_end = '/* BEGIN GENERATED_AURORA_TIMELINE_STYLES */', '/* END GENERATED_AURORA_TIMELINE_STYLES */'
+            if timeline_css_start not in text:
+                text = text.replace(css_end, css_end + '\n' + timeline_css_start + '\n' + timeline_css_end, 1)
+            text = replace_block(text, timeline_css_start, timeline_css_end,
+                                 (ROOT/'demo/aurora-timeline.css').read_text(encoding='utf-8'))
         outputs[path] = text
     path = ROOT/'demo/global-presentation-concept.html'
     outputs[path] = replace_block(path.read_text(encoding='utf-8'),
