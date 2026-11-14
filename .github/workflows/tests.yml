@@ -54,6 +54,8 @@ jobs:
           node --check demo/full-ui-i18n-catalog.js
           node --check demo/full-ui-lexicon.js
           node --check demo/hotel-workflow-ui.js
+          python -m scripts.render_trace_view --output /tmp/trace-viewer.html
+          python -m scripts.render_trace_view --check /tmp/trace-viewer.html
           python scripts/stage_demo_site.py --output /tmp/demo-site
 
   browser:
