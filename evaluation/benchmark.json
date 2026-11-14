@@ -1,0 +1,87 @@
+{
+  "schema_version": "konaklamaflow.synthetic-evaluation.v1",
+  "source_fixture": "examples/fictional-hotel.json",
+  "cases": [
+    {
+      "id": "duplicate_ota_reference",
+      "category": "ota_duplicate",
+      "status": "evaluated",
+      "mutation": "duplicate_reference",
+      "reservation_id": "KF1001",
+      "reason_code": "DUPLICATE_CHANNEL_REF",
+      "expected": true
+    },
+    {
+      "id": "overbooking_room_overlap",
+      "category": "overbooking",
+      "status": "evaluated",
+      "mutation": "room_overlap",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_CONFLICT",
+      "expected": true
+    },
+    {
+      "id": "maintenance_hold_overlap",
+      "category": "maintenance_blackout",
+      "status": "evaluated",
+      "mutation": "maintenance_open",
+      "reservation_id": "KF1001",
+      "reason_code": "MAINTENANCE_TASK_OPEN",
+      "expected": true
+    },
+    {
+      "id": "cancelled_room_still_assigned",
+      "category": "cancelled_assigned",
+      "status": "evaluated",
+      "mutation": "none",
+      "reservation_id": "KF1006",
+      "reason_code": "CANCELLED_ASSIGNED",
+      "expected": true
+    },
+    {
+      "id": "same_day_channel_status_conflict",
+      "category": "channel_status_conflict",
+      "status": "evaluated",
+      "mutation": "channel_status_conflict",
+      "reservation_id": "KF1001",
+      "reason_code": "CHANNEL_STATUS_CONFLICT",
+      "expected": true
+    },
+    {
+      "id": "no_room_overlap_baseline",
+      "category": "overbooking_negative",
+      "status": "evaluated",
+      "mutation": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_CONFLICT",
+      "expected": false
+    },
+    {
+      "id": "cancelled_room_released",
+      "category": "cancelled_negative",
+      "status": "evaluated",
+      "mutation": "cancelled_without_room",
+      "reservation_id": "KF1006",
+      "reason_code": "CANCELLED_ASSIGNED",
+      "expected": false
+    },
+    {
+      "id": "reordered_same_day_revisions",
+      "category": "event_revision_order",
+      "status": "unsupported",
+      "reason": "Snapshot schema has no source-event revision sequence or reliable ordering history."
+    },
+    {
+      "id": "partial_cancellation",
+      "category": "partial_cancellation",
+      "status": "unsupported",
+      "reason": "Snapshot schema represents a reservation-level state, not partial cancellation events."
+    },
+    {
+      "id": "split_stay_unlabelled",
+      "category": "split_stay",
+      "status": "unlabelled",
+      "reason": "No independently reviewed synthetic expected decision for linked split-stay segments."
+    }
+  ]
+}
