@@ -73,6 +73,17 @@ def generate(check=False):
                 text = text.replace('</head>', '<style>\n' + css_start + '\n' + css_end + '\n</style>\n</head>', 1)
             text = replace_block(text, css_start, css_end,
                                  (ROOT/'demo/aurora-room-plan.css').read_text(encoding='utf-8'))
+            # Timeline presentation is separately versioned; source-bound to canonical data.
+            timeline_js_start, timeline_js_end = '// BEGIN GENERATED_AURORA_TIMELINE_JS', '// END GENERATED_AURORA_TIMELINE_JS'
+            if timeline_js_start not in text:
+                text = text.replace(aurora_end, aurora_end + '\n' + timeline_js_start + '\n' + timeline_js_end, 1)
+            text = replace_block(text, timeline_js_start, timeline_js_end,
+                                 (ROOT/'demo/aurora-timeline.js').read_text(encoding='utf-8'))
+            timeline_css_start, timeline_css_end = '/* BEGIN GENERATED_AURORA_TIMELINE_STYLES */', '/* END GENERATED_AURORA_TIMELINE_STYLES */'
+            if timeline_css_start not in text:
+                text = text.replace(css_end, css_end + '\n' + timeline_css_start + '\n' + timeline_css_end, 1)
+            text = replace_block(text, timeline_css_start, timeline_css_end,
+                                 (ROOT/'demo/aurora-timeline.css').read_text(encoding='utf-8'))
         outputs[path] = text
     path = ROOT/'demo/global-presentation-concept.html'
     outputs[path] = replace_block(path.read_text(encoding='utf-8'),
