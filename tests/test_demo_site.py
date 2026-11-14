@@ -2,7 +2,7 @@
 from pathlib import Path
 import tempfile
 import unittest
-from scripts.stage_demo_site import stage_site, PUBLIC_ASSETS, ROOT
+from scripts.stage_demo_site import stage_site, PUBLIC_ASSETS, GENERATED_ASSETS, ROOT
 
 
 class DemoSiteTests(unittest.TestCase):
@@ -16,7 +16,7 @@ class DemoSiteTests(unittest.TestCase):
             self.assertEqual((site/'global-presentation.html').read_bytes(),(ROOT/'demo/global-presentation-concept.html').read_bytes())
             self.assertEqual((site/'reviewer.html').read_bytes(),(ROOT/'demo/viewer.html').read_bytes())
             self.assertEqual((site/'operations.html').read_bytes(),(ROOT/'demo/operations.html').read_bytes())
-            self.assertEqual({p.name for p in site.iterdir()},set(PUBLIC_ASSETS)|{'.nojekyll'})
+            self.assertEqual({p.name for p in site.iterdir()},set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{'.nojekyll'})
             self.assertFalse((site/'.git').exists())
             self.assertFalse((site/'examples').exists())
 
