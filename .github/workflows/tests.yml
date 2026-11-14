@@ -54,6 +54,8 @@ jobs:
           node --check demo/full-ui-i18n-catalog.js
           node --check demo/full-ui-lexicon.js
           node --check demo/hotel-workflow-ui.js
+          python -m scripts.render_scorecard --output /tmp/quality-scorecard.html
+          python -m scripts.render_scorecard --check /tmp/quality-scorecard.html
           python scripts/stage_demo_site.py --output /tmp/demo-site
 
   browser:
