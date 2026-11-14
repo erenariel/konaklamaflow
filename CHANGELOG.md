@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased — Aurora timeline, Issue #37 / PR #42]
+
+- Add a canonical-data reservation calendar with 7/14/21-day date ranges, filters, mobile sticky room headings, maintenance overlays, and explicit cancelled/no-show labels. Checkout dates remain exclusive.
+- Keep AI/PMS/OTA/KBS/payment calls disabled and preserve existing room cards and human-review boundaries. Real-browser media and regression tests regenerated; the change remains an unreleased PR candidate.
+
 ## [Unreleased — Aurora graphical room plan, Issue #37 first delivery]
 
 - Extend the existing Room Plan with original floor-grouped cards, independent occupancy/housekeeping/assignment axes, operational badges and display-only filters.
