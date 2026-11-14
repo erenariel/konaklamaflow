@@ -10,6 +10,10 @@ Download and open `demo/v04-integrated-preview.html` for the **v0.5 fictional in
 
 Original illustrated concepts remain available separately: [AI hero illustration](docs/images/ai-presentation-hero.svg) and [explanation-flow illustration](docs/images/ai-explanation-flow.svg). These SVG concepts are distinct from the real application screenshots and recordings below.
 
+### Aurora reservation timeline — Issue #37, second delivery (PR #42 candidate)
+
+The offline room plan now has a **source-bound reservation timeline** with 7/14/21-day ranges, date navigation, floor/category/status/channel/search filters, sticky room headers and exact reservation-to-detail navigation. The Python-validated fictional room-stays are authoritative; checkout day is excluded (`[arrival, departure)`). Cancelled and no-show bars are labeled historical states, not physical occupancy. Maintenance and technical holds remain separate. Ten-language draft labels, RTL, mobile horizontal scroll and reduced-motion preference are preserved. The candidate does not establish live availability, real AI, actual guests or PMS integration. **PR #42 is pending review**, not part of any published tagged release.
+
 ### Shared fictional reservation model — Issue #35 candidate
 
 The candidate's integrated dashboard, room plan, PMS views, AI scenarios, folios and 32 report options now share **one Python-validated source**, [`examples/canonical-hotel.json`](examples/canonical-hotel.json): 12 KF reservations, 18 rooms and explicit reservation/stay/guest/agency/folio links. No old KFD financial record is matched by its number or silently migrated. Only three explicitly authored fictional folios have recorded movements; the other nine reservations show `not_applicable` for finance. Missing-source reports remain unavailable. Follow a reservation from the dashboard or room plan to its exact PMS details, related folio and scoped report.
