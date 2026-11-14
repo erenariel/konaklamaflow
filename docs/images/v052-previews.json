@@ -1,9 +1,9 @@
 {
   "kind": "ACTUAL_OFFLINE_BROWSER_SCREENSHOTS",
-  "source_commit": "e016dfd72e386ea543968da736c3702acc284b47",
+  "source_commit": "926387d5709a1c73e9da6caf6369ac2f9d95284c",
   "source_has_uncommitted_changes": false,
   "source_files": {
-    "v04-integrated-preview.html": "02e9ce3a716d39faa08a1fa915339e292fb8c0dd39d505c50ffd725478e09ccc",
+    "v04-integrated-preview.html": "c5dc378a9138917793a6def96e397814b2ad0f5fd68388cf47dbed84f8cc3b82",
     "global-presentation-concept.html": "ee502c240719007f58ad2069ffb114b87710f8206c28eb87b09be92f9c8ede23",
     "viewer.html": "9a30569cbb39af9241ec75a77364cd952721f0328bb37373bbe2d0faa4ca6dae"
   },
@@ -18,7 +18,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "c5aab32c4d8c4ad12255c1fe2ecb11b82687304780e2ad5f26aecce333979121"
+      "sha256": "f6605e0b6e094202ff933d55d7edb4c6ef8b39b34a606ae40ec5ecf844cd1c52"
     },
     {
       "file": "v052-overview-1440.png",
@@ -28,7 +28,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "bb19894e1254ef4cf420bbcdabeae4ef64b08900bdbc19ae1017be38ecd68dab"
+      "sha256": "0a0b651dbcfc785f48d51bfbfa9f57cca1356012a1149e51576d6cd10b0c9c96"
     },
     {
       "file": "v052-overview-1600.png",
@@ -38,7 +38,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "c490f062e12d44b285c775061c1b4b89ca21dddc9f28a4015554dfacfce56990"
+      "sha256": "1fc69d95e5555eff4e9963501303b035401ff39b387040072c1ec30e6db4a4b9"
     },
     {
       "file": "v052-overview-dark.png",
@@ -48,7 +48,7 @@
       "locale": "en",
       "theme": "dark",
       "body_within_viewport": true,
-      "sha256": "a99e1197a7ed0b2764ef24a0cf416b55fd5951facc99dac1e5cb9b9b1d0120de"
+      "sha256": "d83ac774459f1424b707188dca9bae7f2b7d91da7aec17cb5e5607db88e40a2c"
     },
     {
       "file": "v052-overview-night.png",
@@ -58,7 +58,7 @@
       "locale": "en",
       "theme": "night",
       "body_within_viewport": true,
-      "sha256": "7a8864357b4809f7a464991c84ff861fe16cd1f8cfb352a0a6c0e39abdbde747"
+      "sha256": "61f2df24c6fe54ca10db22959c8f47d40f8dd0412a456aaead8d2ebb21013562"
     },
     {
       "file": "v052-overview-rtl.png",
@@ -68,7 +68,7 @@
       "locale": "ar",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "d251559ecf7bb63aa0fa226a25bc76d0d86e66229ef0b11fc2bc313d10f0e7a7"
+      "sha256": "61d0d9246983ca0b02841f74cbc4997e631928f8393a7808fe255cf20b99eabb"
     },
     {
       "file": "v052-mobile.png",
@@ -78,7 +78,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "74dc35849c323220c034296688fc9bf8b8aa1fb49082891c72adcc548dd65391"
+      "sha256": "16477962bd6cb33b1ff5d38853c50190ac3167dceeacfe8d958358007da0f8ea"
     },
     {
       "file": "v052-global-presentation.png",
@@ -88,7 +88,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "654e4938b0b01fcc6eb6172ae35f11be797f341645a51cd7e13973f59803f4c3"
+      "sha256": "f4ca244fd7cc63185a5f5e2c98806f9d6c32c6e545ff4c90a1ddc7b1734e5c0b"
     },
     {
       "file": "demo-report.png",
@@ -98,7 +98,7 @@
       "locale": "tr",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "33c0c608e2475958f8f3dbf119b83469222ae9b4a95df7856a667ca54c03cc05"
+      "sha256": "2c340cf854be15377d6bea4fcfa33dc3a46ac44a6d6545e74c09c2733ac643f9"
     },
     {
       "file": "social-card.png",
@@ -108,7 +108,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "bca8faf659ab5ca11638b078d187d93455f7d3a56953f5159a95947732fff48c"
+      "sha256": "b8faa3636c03d0cd037802e780ba38d1ae22bb89c46ae9328962193b64c2e875"
     },
     {
       "file": "aurora-room-plan-desktop.png",
@@ -118,7 +118,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "ac8e7c706a78d4b4d9fc4bc49a501a9fe75b82e6e53c83c39079b0fdd58cf54f"
+      "sha256": "0b612e1c54760f78e57a4b365aaa82479b6e135bdf42364d7cdd45121b674f21"
     },
     {
       "file": "aurora-room-plan-mobile.png",
@@ -128,7 +128,7 @@
       "locale": "en",
       "theme": "light",
       "body_within_viewport": true,
-      "sha256": "74eaf036e3bfe4222d96c78bb0d24503d0b78ccf42ed6b2ca64d7ab130045ebd"
+      "sha256": "e9dd2605841d4f90abedbd2ae6c347e81dd6c6be506fcae8970b7dbf79e90829"
     },
     {
       "file": "aurora-room-plan-rtl.png",
@@ -138,7 +138,7 @@
       "locale": "ar",
       "theme": "dark",
       "body_within_viewport": true,
-      "sha256": "9e0cf8c7d0c57d1ad369c02064e30ab0e7aa73174757f4577a26edd0bdf75cee"
+      "sha256": "15bff9d5fa670e8606aeb9912e86155caa9139c5764d293c8d3642d23f8c3ee5"
     },
     {
       "file": "aurora-room-plan-night.png",
@@ -148,7 +148,7 @@
       "locale": "en",
       "theme": "night",
       "body_within_viewport": true,
-      "sha256": "c8320ad96dfa9e0f0aa4706192df27636c862d42a855d793dbc82c2a94380d21"
+      "sha256": "7f2982110c98e9237f6096b2caeda644d74509e786b3d8a22a66e17c4671a9fe"
     }
   ],
   "fictional": true,
