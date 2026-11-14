@@ -2,6 +2,10 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
+## AI-ready altyapı / Foundation for future AI
+
+The current Python rule engine is deterministic; the animated AI tour is **scripted, not a connected AI model**. A provider-neutral, read-only [AI explanation contract](docs/AI_READY_FOUNDATION_TR.md) has been added: minimized reason-code payloads, strict response fields, fresh-source verification, and mandatory human review. It currently makes **no model calls** and never modifies PMS, KBS, payments or guest messages. Any future Grok, Claude, OpenAI or local-model connection requires a separately approved protected environment.
+
 ## Gece vardiyası başlangıcı
 
 Bu depo canlı otel programı değildir. PMS, KBS, ödeme ve kimlik sistemi yoktur. Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
