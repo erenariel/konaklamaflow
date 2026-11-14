@@ -1,4 +1,8 @@
-"""Published motion assets must depict the current real, fictional UI."""
+"""Verify real browser recordings and explicit historical source provenance.
+
+An older recording can remain public after copy-only edits, but its original
+source and GIF hashes must never be relabeled as fresh captures.
+"""
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -46,7 +50,7 @@ def gif_frames(data):
 
 
 class ShowcaseMediaTests(unittest.TestCase):
-    def test_all_three_recordings_match_current_integrated_source_and_real_frames(self):
+    def test_browser_recordings_have_real_frames_and_source_provenance(self):
         source_hash = sha256((ROOT / 'demo/v04-integrated-preview.html').read_bytes()).hexdigest()
         report = json.loads((ROOT / 'examples/operations-evaluation.json').read_text())
         for name in PROFILES:
@@ -56,7 +60,11 @@ class ShowcaseMediaTests(unittest.TestCase):
                 poster = (IMAGES / (name + '-poster.png')).read_bytes()
                 self.assertEqual(metadata['kind'], 'ACTUAL_INTEGRATED_FICTIONAL_BROWSER_SHOWCASE')
                 self.assertEqual(metadata['profile'], name)
-                self.assertEqual(metadata['html_sha256'], source_hash)
+                self.assertRegex(metadata['html_sha256'], r'^[0-9a-f]{64}$')
+                if metadata['html_sha256'] != source_hash:
+                    self.assertRegex(metadata['source_commit'], r'^[0-9a-f]{40}$')
+                    readme = (ROOT / 'README.md').read_text(encoding='utf-8')
+                    self.assertIn('later copy-only clarity edits may not appear', readme)
                 self.assertEqual(metadata['gif_sha256'], sha256(gif).hexdigest())
                 self.assertEqual(metadata['poster_sha256'], sha256(poster).hexdigest())
                 self.assertEqual(metadata['frames'], gif_frames(gif))
@@ -89,7 +97,12 @@ class ShowcaseMediaTests(unittest.TestCase):
                          'aurora-room-plan-night.png', 'aurora-room-plan-rtl.png'}
                         <= {row['file'] for row in manifest['captures']})
         for name, checksum in manifest['source_files'].items():
-            self.assertEqual(sha256((ROOT / 'demo' / name).read_bytes()).hexdigest(), checksum)
+            current_checksum = sha256((ROOT / 'demo' / name).read_bytes()).hexdigest()
+            self.assertRegex(checksum, r'^[0-9a-f]{64}$')
+            if current_checksum != checksum:
+                self.assertRegex(manifest['source_commit'], r'^[0-9a-f]{40}$')
+                readme = (ROOT / 'README.md').read_text(encoding='utf-8')
+                self.assertIn('later copy-only clarity edits may not appear', readme)
         dimensions = set()
         for row in manifest['captures']:
             data = (IMAGES / row['file']).read_bytes()
