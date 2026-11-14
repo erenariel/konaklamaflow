@@ -32,7 +32,11 @@ async def main():
         ('v052-mobile.png', 'v04-integrated-preview.html', 390, 844, 'en', 'light'),
         ('v052-global-presentation.png', 'global-presentation-concept.html', 1440, 900, 'en', 'light'),
         ('demo-report.png', 'viewer.html', 1440, 1000, 'tr', 'light'),
-        ('social-card.png', 'v04-integrated-preview.html', 1200, 630, 'en', 'light')]
+        ('social-card.png', 'v04-integrated-preview.html', 1200, 630, 'en', 'light'),
+        ('aurora-room-plan-desktop.png', 'v04-integrated-preview.html', 1440, 1000, 'en', 'light'),
+        ('aurora-room-plan-mobile.png', 'v04-integrated-preview.html', 390, 1000, 'en', 'light'),
+        ('aurora-room-plan-rtl.png', 'v04-integrated-preview.html', 1440, 1000, 'ar', 'dark'),
+        ('aurora-room-plan-night.png', 'v04-integrated-preview.html', 1440, 1000, 'en', 'night')]
     async with async_playwright() as driver:
         options = {'headless': True}
         if os.environ.get('KONAKLAMAFLOW_CHROMIUM'):
@@ -48,6 +52,9 @@ async def main():
                     await page.locator('#globalLanguage').select_option(locale)
                     await page.locator('#kfTheme').select_option(theme)
                     await page.locator('#aiCommandCenter').wait_for(state='visible')
+                    if filename.startswith('aurora-room-plan-'):
+                        await page.locator('nav [data-nav="rooms"]').click()
+                        await page.locator('#auroraRoomPlan').wait_for(state='visible')
                 elif source == 'global-presentation-concept.html':
                     await page.locator('#locale').select_option(locale)
                 within = await page.evaluate('() => document.documentElement.scrollWidth <= innerWidth')
@@ -66,7 +73,7 @@ async def main():
             (OUTPUT / 'v052-previews.json').write_text(json.dumps(evidence, indent=2) + chr(10), encoding='utf-8')
         finally:
             await browser.close()
-    print('Captured 10 actual app screenshots; zero requests and browser errors.')
+    print(f'Captured {len(profiles)} actual app screenshots; zero requests and browser errors.')
 
 if __name__ == '__main__':
     asyncio.run(main())

@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased — Aurora graphical room plan, Issue #37 first delivery]
+
+- Extend the existing Room Plan with original floor-grouped cards, independent occupancy/housekeeping/assignment axes, operational badges and display-only filters.
+- Generate all room-card facts in Python from the canonical source; preserve half-open stay intervals, source blocks, physical holds and exact reservation/stay/folio links.
+- Preserve the existing timeline, AI Command Center, historical demos, ten-language/RTL controls and motion safeguards. No live source, allocation, check-in or payment is introduced.
+- This candidate depends on draft PR #39. Timeline expansion and AI presentation changes remain separate deliveries; no merge, release or Pages deployment is included.
+
 ## [Unreleased — shared fictional reservation model, Issue #35]
 
 - Generate the integrated dashboard, room plan, PMS views, AI stories, folios and report registry from one Python-validated fictional snapshot with explicit foreign keys.

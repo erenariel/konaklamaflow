@@ -34,6 +34,8 @@ jobs:
           python scripts/generate_hotel_ops_demo.py --check
           python scripts/generate_canonical_demo.py --check
           node --check demo/canonical-navigation.js
+          node --check demo/aurora-room-plan.js
+          node --check demo/aurora-room-i18n.js
           node --check demo/hotel-ops-module.js
           node --check demo/full-ui-i18n.js
           node --check demo/full-ui-i18n-catalog.js
@@ -82,5 +84,6 @@ jobs:
             docs/images/roomplan-story*
             docs/images/overview-pulse*
             docs/images/v052-*
+            docs/images/aurora-room-plan-*
           if-no-files-found: error
           retention-days: 14
