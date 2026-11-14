@@ -13,6 +13,7 @@ from .canonical_reporting import build_canonical_operations_report
 from .demo_stories import build_demo_stories
 from .experience_engine import evaluate
 from .reason_i18n import CODES, localize_code
+from .room_graph import build_room_graph
 
 LOCALES = ('tr', 'en', 'fr', 'el', 'he', 'ar', 'de', 'ru', 'es', 'uk')
 
@@ -80,4 +81,5 @@ def build_presentation(source):
                                for locale in LOCALES}}
     return {'canonical': canonical, 'canonical_links': links, 'review_data': review,
             'review_report': evaluation, 'stories': stories, 'operations_data': operations,
-            'operations_report': financial, 'concept': concept}
+            'operations_report': financial, 'concept': concept,
+            'room_graph': build_room_graph(canonical)}
