@@ -28,7 +28,7 @@ class ScorecardUiTests(unittest.TestCase):
         report=authoritative_report()
         mutations=[
             ("summary","evaluated",10),
-            ("metrics","precision",1.0),
+            ("metrics","precision",0.5),
             ("metrics","tp",999),
             ("cases",0,"new_case"),
         ]
