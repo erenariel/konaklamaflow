@@ -1,5 +1,6 @@
 """Interactive timeline regressions using the real offline HTML and Chromium."""
 from pathlib import Path
+import re
 import unittest
 from playwright.sync_api import sync_playwright, expect
 
@@ -23,7 +24,7 @@ class AuroraTimelineBrowserTests(unittest.TestCase):
         self.page.on('request',lambda request:self.requests.append(request.url))
         self.page.set_content(HTML)
         self.page.locator('nav [data-nav="rooms"]').click()
-        expect(self.page.locator('#auroraTimeline')).to_have_count(1) if self.page.locator('#auroraTimeline').count() else expect(self.page.locator('.aurora-timeline')).to_be_visible()
+        expect(self.page.locator('.aurora-timeline')).to_be_visible()
     def tearDown(self):
         self.page.close()
         self.assertEqual(self.errors,[])
@@ -69,7 +70,7 @@ class AuroraTimelineBrowserTests(unittest.TestCase):
         booking=link.get_attribute('data-canonical-reservation')
         self.assertTrue(booking.startswith('KF'))
         link.click()
-        expect(self.page.locator('#backdrop')).to_have_class('open')
+        expect(self.page.locator('#backdrop')).to_have_class(re.compile(r'\\bopen\\b'))
         expect(self.page.locator('#drawer')).to_contain_text(booking)
         self.assertEqual(self.page.evaluate('() => CANONICAL_DATA.folios.length'),3)
 
