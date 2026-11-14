@@ -10,9 +10,12 @@ from pathlib import Path
 import shutil
 import sys
 
-from scripts.render_trace_view import trace_view_html
+
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from scripts.render_trace_view import trace_view_html
 PUBLIC_ASSETS = {
     'index.html': 'demo/v04-integrated-preview.html',
     'hotel-operations.html': 'demo/v04-integrated-preview.html',
