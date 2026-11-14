@@ -59,3 +59,7 @@ This captures the report panel and a 1200×630 share card into `docs/images/`. I
 The suite uses the same unit and `tests/browser` discovery commands above. Browser dependencies remain optional for the Python unit suite. `scripts/generate_suite_demo.py --check` compares the fictional snapshot, generated Python evaluation and embedded HTML; run the generator without `--check` after intentionally changing the fixture or evaluator. Browser tests check report parity, stale-state rejection, downloads, offline behavior, escaping, dialog keyboard focus and responsive layouts. These checks are not a WCAG certification or a hotel-scale benchmark.
 
 `python scripts/verify_commit_privacy.py` checks this repository owner's author/committer aliases without printing email values. It does not remove GitHub caches, inspect third-party clones or replace secret/PII review. CI runs the unit suite on Python 3.11, 3.12 and 3.13, and Chromium separately.
+
+## Synthetic operational benchmark
+
+See [EVALUATION_TR.md](EVALUATION_TR.md) for the offline benchmark command, manually specified labels, scoring denominators, unsupported scenarios and CI report artifacts. These synthetic accuracy metrics are not production validation; independent hotel-expert label review remains pending.
