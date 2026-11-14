@@ -77,13 +77,17 @@ class ShowcaseMediaTests(unittest.TestCase):
         self.assertIn('play_actual_scripted_tour', tour['interactions'])
         room = json.loads((IMAGES / 'roomplan-story.json').read_text())
         self.assertTrue({'open_room_plan', 'inspect_fictional_room_303',
-                         'inspect_technical_hold', 'return_to_snapshot_week'} <= set(room['interactions']))
+                         'inspect_technical_hold', 'return_to_snapshot_week',
+                         'inspect_canonical_room_101'} <= set(room['interactions']))
 
     def test_preview_manifest_binds_all_sources_and_required_desktop_dimensions(self):
         manifest = json.loads((IMAGES / 'v052-previews.json').read_text())
         self.assertEqual(manifest['requests'], [])
         self.assertEqual(manifest['errors'], [])
         self.assertTrue(manifest['fictional'])
+        self.assertTrue({'aurora-room-plan-desktop.png', 'aurora-room-plan-mobile.png',
+                         'aurora-room-plan-night.png', 'aurora-room-plan-rtl.png'}
+                        <= {row['file'] for row in manifest['captures']})
         for name, checksum in manifest['source_files'].items():
             self.assertEqual(sha256((ROOT / 'demo' / name).read_bytes()).hexdigest(), checksum)
         dimensions = set()

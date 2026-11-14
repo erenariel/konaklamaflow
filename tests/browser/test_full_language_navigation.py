@@ -60,11 +60,12 @@ class FullLanguageSwitchTests(unittest.TestCase):
         self.page.locator('nav [data-nav="ota"]').click()
         self.assertIn('Incoming OTA events', self.page.locator('#content').inner_text())
         self.page.locator('nav [data-nav="rooms"]').click()
-        self.assertIn('Graphical room plan', self.page.locator('#content').inner_text())
+        self.assertEqual(self.page.locator('#auroraRoomTitle').inner_text(), 'Orbital room control')
         self.page.locator('#globalLanguage').select_option('de')
-        self.assertIn('Grafischer Zimmerplan', self.page.locator('#content').inner_text())
+        self.assertEqual(self.page.locator('#auroraRoomTitle').inner_text(), 'Orbitale Zimmersteuerung')
+        self.assertNotEqual(self.page.locator('#auroraRoomTitle').inner_text(), 'Orbital room control')
         self.page.locator('#globalLanguage').select_option('tr')
-        self.assertIn('Grafik oda planı', self.page.locator('#content').inner_text())
+        self.assertEqual(self.page.locator('#auroraRoomTitle').inner_text(), 'Yörünge oda kontrolü')
         self.assertEqual(self.page.locator('#pagetitle').inner_text(), 'Oda Planı')
 
     def test_all_report_options_are_translated_and_values_stay_stable(self):

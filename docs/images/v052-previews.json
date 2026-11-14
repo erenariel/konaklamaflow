@@ -1,9 +1,9 @@
 {
   "kind": "ACTUAL_OFFLINE_BROWSER_SCREENSHOTS",
-  "source_commit": "a940b4131d928d50f03c197c24e64224a8e99905",
+  "source_commit": "5c633a345bc92d72a7bbd4c86d4fc151a044df8e",
   "source_has_uncommitted_changes": false,
   "source_files": {
-    "v04-integrated-preview.html": "ffa1d693c2b577e6081c72434914735af988c65258035ddb8503a4044683e7ea",
+    "v04-integrated-preview.html": "00786399410489371a98f0e795bb866d0b56509e2ae6e21f6d025d745f93ddca",
     "global-presentation-concept.html": "ee502c240719007f58ad2069ffb114b87710f8206c28eb87b09be92f9c8ede23",
     "viewer.html": "9a30569cbb39af9241ec75a77364cd952721f0328bb37373bbe2d0faa4ca6dae"
   },
@@ -109,6 +109,46 @@
       "theme": "light",
       "body_within_viewport": true,
       "sha256": "bca8faf659ab5ca11638b078d187d93455f7d3a56953f5159a95947732fff48c"
+    },
+    {
+      "file": "aurora-room-plan-desktop.png",
+      "source": "v04-integrated-preview.html",
+      "width": 1440,
+      "height": 1000,
+      "locale": "en",
+      "theme": "light",
+      "body_within_viewport": true,
+      "sha256": "ac8e7c706a78d4b4d9fc4bc49a501a9fe75b82e6e53c83c39079b0fdd58cf54f"
+    },
+    {
+      "file": "aurora-room-plan-mobile.png",
+      "source": "v04-integrated-preview.html",
+      "width": 390,
+      "height": 1000,
+      "locale": "en",
+      "theme": "light",
+      "body_within_viewport": true,
+      "sha256": "74eaf036e3bfe4222d96c78bb0d24503d0b78ccf42ed6b2ca64d7ab130045ebd"
+    },
+    {
+      "file": "aurora-room-plan-rtl.png",
+      "source": "v04-integrated-preview.html",
+      "width": 1440,
+      "height": 1000,
+      "locale": "ar",
+      "theme": "dark",
+      "body_within_viewport": true,
+      "sha256": "9e0cf8c7d0c57d1ad369c02064e30ab0e7aa73174757f4577a26edd0bdf75cee"
+    },
+    {
+      "file": "aurora-room-plan-night.png",
+      "source": "v04-integrated-preview.html",
+      "width": 1440,
+      "height": 1000,
+      "locale": "en",
+      "theme": "night",
+      "body_within_viewport": true,
+      "sha256": "c8320ad96dfa9e0f0aa4706192df27636c862d42a855d793dbc82c2a94380d21"
     }
   ],
   "fictional": true,
