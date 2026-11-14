@@ -34,6 +34,9 @@ def build_room_graph(source):
         physical = {stay['reservation_id'] for stay in stays
                     if bookings[stay['reservation_id']]['status'] == 'in_house'
                     or bookings[stay['reservation_id']]['arrival_state'] == 'checked_in'}
+        no_show_hold = {stay['reservation_id'] for stay in stays
+                        if bookings[stay['reservation_id']]['status'] == 'no_show'
+                        and bookings[stay['reservation_id']]['arrival_state'] != 'checked_out'}
         planned = [stay for stay in stays if bookings[stay['reservation_id']]['status']
                    in {'confirmed', 'pending', 'in_house'}
                    and bookings[stay['reservation_id']]['arrival_state'] != 'checked_out']
@@ -55,6 +58,9 @@ def build_room_graph(source):
         states = set()
         if physical:
             states.add('occupied')
+        elif no_show_hold:
+            states.add('no_show_hold')
+            states.add('blocked')
         elif not active:
             states.add('vacant_unverified')
         if arrivals:
@@ -83,7 +89,7 @@ def build_room_graph(source):
                 {'dirty', 'clean', 'inspected', 'in_progress'} else 'unknown',
             'occupancy_state': 'occupied' if physical else 'unknown',
             'occupancy_source': 'synthetic_checked_in_signal' if physical else 'source_not_connected',
-            'assignment_state': 'assigned' if active else 'unassigned',
+            'assignment_state': 'assigned' if active or no_show_hold else 'unassigned',
             'state_codes': sorted(states), 'reservation_ids': sorted(parents),
             'active_reservation_ids': sorted({stay['reservation_id'] for stay in active}),
             'physical_reservation_ids': sorted(physical),

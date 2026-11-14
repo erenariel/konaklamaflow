@@ -38,6 +38,7 @@ class ExplanationCliTests(unittest.TestCase):
         self.assertEqual(main([str(self.src_path), str(self.rpt_path),
                                str(self.dest)]), 0)
         data = json.loads(self.dest.read_text(encoding="utf-8"))
+        self.assertEqual(self.dest.stat().st_mode & 0o077, 0)
         self.assertEqual(data["source_validity"], "UNVERIFIED_MINIMIZED_SNAPSHOT")
         self.assertNotIn("guest_name", self.dest.read_text())
         self.assertNotIn("passport", self.dest.read_text())
@@ -52,6 +53,15 @@ class ExplanationCliTests(unittest.TestCase):
         self.assertEqual(result, 2)
         self.assertEqual(self.dest.read_text(), "SENTINEL")
         self.assertIn("Invalid or stale", err.getvalue())
+
+    def test_output_cannot_replace_either_input(self):
+        before_source = self.src_path.read_text(encoding="utf-8")
+        before_report = self.rpt_path.read_text(encoding="utf-8")
+        with contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(main([str(self.src_path), str(self.rpt_path), str(self.src_path)]), 2)
+            self.assertEqual(main([str(self.src_path), str(self.rpt_path), str(self.rpt_path)]), 2)
+        self.assertEqual(self.src_path.read_text(encoding="utf-8"), before_source)
+        self.assertEqual(self.rpt_path.read_text(encoding="utf-8"), before_report)
 
     def test_invalid_source_content_never_echoes(self):
         self.src_path.write_text('{"guest_name":"PRIVATE_TEST","schema_version":"0.3"}')

@@ -707,7 +707,7 @@ fullUiEnglishRows([
   "New reservation"
  ],
  [
-  "Düzenleyen adı / grup adı",
+  "Kurgusal grup kodu",
   "Guest or group display name"
  ],
  [

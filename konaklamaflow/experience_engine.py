@@ -41,6 +41,7 @@ BLOCKER_CODES = {
     'REQUEST_AMENITY_UNAVAILABLE', 'CONFLICTING_BED_REQUEST', 'MAINTENANCE_TASK_OPEN',
     'HOUSEKEEPING_TASK_OPEN', 'CHANNEL_EVENT_REVIEW', 'CHANNEL_REFERENCE_MISMATCH',
     'CHANNEL_STATUS_CONFLICT', 'CORE_REVIEW_REQUIRED', 'HISTORICAL_STAY',
+    'NO_SHOW_RELEASE_REVIEW', 'PMS_REGISTRATION_NOT_CONFIRMED',
 }
 _ALLOWED_SNAPSHOT = {'schema_version', 'property_id', 'as_of', 'at_time', 'rooms',
                      'reservations', 'channel_events', 'tasks'}
@@ -48,7 +49,7 @@ _ROOM_FIELDS = {'id', 'category', 'capacity', 'bed', 'housekeeping', 'floor', 'a
 _RES_FIELDS = {'id', 'channel', 'external_ref', 'pms_ref', 'arrival', 'departure',
                'category', 'persons', 'bed_request', 'status', 'room_id',
                'identity_signal', 'payment_signal', 'requests', 'price_total',
-               'currency', 'arrival_state'}
+               'currency', 'arrival_state', 'pms_registration'}
 _EVENT_FIELDS = {'id', 'channel', 'external_ref', 'status', 'reservation_id'}
 _TASK_FIELDS = {'id', 'kind', 'room_id', 'reservation_id', 'status', 'priority'}
 _SIDE_EFFECTS = {'pms_writes': False, 'payments': False, 'kbs': False,
@@ -139,7 +140,7 @@ def validate(source):
             if _day(window['start']) >= _day(window['end']):
                 _reject('maintenance window')
     for booking in value['reservations']:
-        _dict(booking, _RES_FIELDS, 'reservation', _RES_FIELDS - {'arrival_state'})
+        _dict(booking, _RES_FIELDS, 'reservation', _RES_FIELDS - {'arrival_state', 'pms_registration'})
         bid = _id(booking.get('id'), 'reservation')
         if bid in booking_ids:
             _reject('duplicate reservation')
@@ -152,6 +153,8 @@ def validate(source):
             _enum(booking.get(key), choices, key)
         booking.setdefault('arrival_state', 'expected')
         _enum(booking['arrival_state'], {'expected', 'arrived', 'checked_in', 'checked_out'}, 'arrival state')
+        booking.setdefault('pms_registration', 'not_recorded')
+        _enum(booking['pms_registration'], {'not_recorded', 'recorded_by_authorized_staff'}, 'pms registration')
         if type(booking.get('persons')) is not int or not 1 <= booking['persons'] <= 20:
             _reject('persons')
         _id(booking.get('external_ref'), 'reference')
@@ -248,7 +251,9 @@ def _normalized(snapshot):
     reservations, arrivals = [], []
     for booking in snapshot['reservations']:
         status = booking['status']
-        core_status = 'confirmed' if status in {'confirmed', 'in_house'} else 'pending' if status == 'pending' else 'cancelled'
+        # no_show keeps the room on hold. It is not a cancellation and not a sale.
+        core_status = ('confirmed' if status in {'confirmed', 'in_house'}
+                       else 'pending' if status in {'pending', 'no_show'} else 'cancelled')
         reservations.append({'ref': booking['id'], 'source': _channel(booking['channel']),
                              'status': core_status, 'checkin': booking['arrival'], 'checkout': booking['departure'],
                              'category': booking['category'], 'room_id': booking['room_id'],
@@ -256,7 +261,8 @@ def _normalized(snapshot):
         arrivals.append({'ref': booking['id'], 'source': _channel(booking['channel']),
                          'arrival_state': 'checked_in' if status == 'in_house' or booking['arrival_state'] == 'checked_in' else 'checked_out' if status == 'checked_out' else booking['arrival_state'],
                          'identity_status': 'verified_by_authorized_staff' if booking['identity_signal'] == 'staff_verified' else 'not_checked',
-                         'registration_status': 'not_checked',
+                         'registration_status': 'confirmed_by_authorized_system'
+                         if booking.get('pms_registration') == 'recorded_by_authorized_staff' else 'not_checked',
                          'payment_review': 'review' if booking['payment_signal'] == 'review' else 'cleared',
                          'early_checkin_authorized': False})
     return {'property_id': snapshot['property_id'], 'rooms': rooms, 'reservations': reservations,
@@ -302,7 +308,15 @@ def _physically_in_house(booking):
     return booking['status'] == 'in_house' or booking['arrival_state'] == 'checked_in'
 
 
+def _no_show_hold(booking):
+    """A no-show keeps its room until staff records a release. This is not vacancy."""
+    return (booking['status'] == 'no_show' and booking.get('room_id')
+            and booking['arrival_state'] != 'checked_out')
+
+
 def _unreleased_departure(booking, today):
+    if _no_show_hold(booking):
+        return True
     active = booking['status'] in {'confirmed', 'pending', 'in_house'} or _physically_in_house(booking)
     return (active and booking['arrival'] < today and booking['departure'] <= today
             and booking['arrival_state'] != 'checked_out' and booking['status'] != 'checked_out'
@@ -325,11 +339,15 @@ def _room_plan(snapshot, normalized, room_tasks):
             booking = booking_index[core_booking.ref]
             active = core_booking.status in {'confirmed', 'pending'}
             physical = _physically_in_house(booking)
-            if active or physical:
+            no_show = _no_show_hold(booking)
+            if active or physical or no_show:
                 all_holds.add(booking['id'])
-            if (active and core_booking.stay.overlaps(day)) or physical or _unreleased_departure(booking, snapshot['as_of']):
+            if ((active and core_booking.stay.overlaps(day)) or physical or no_show
+                    or _unreleased_departure(booking, snapshot['as_of'])):
                 held.add(booking['id'])
         reasons = []
+        if any(_no_show_hold(booking_index[identifier]) for identifier in held):
+            reasons.append('NO_SHOW_HOLD')
         if held:
             reasons.append('INVENTORY_HOLD_OR_DEPARTURE_REVIEW')
         if not core_room_index[room['id']].available(day):
@@ -410,7 +428,7 @@ def evaluate(raw):
         physically_in_house = _physically_in_house(booking)
         terminal_but_occupied = physically_in_house and booking['status'] in {'cancelled', 'no_show', 'checked_out'}
         unreleased_departure = _unreleased_departure(booking, s['as_of'])
-        if booking['room_id'] and (terminal_but_occupied or unreleased_departure):
+        if booking['room_id'] and (terminal_but_occupied or unreleased_departure or _no_show_hold(booking)):
             unavailable.add(booking['room_id'])
     proposals = _proposals(s, normalized, unavailable)
     reason_map = {'room_unassigned': 'NO_ASSIGNED_ROOM', 'room_not_clean': 'HOUSEKEEPING_NOT_INSPECTED',
@@ -421,7 +439,8 @@ def evaluate(raw):
                   'payment_review_needed': 'PAYMENT_REVIEW', 'reservation_not_confirmed': 'NOT_CONFIRMED',
                   'arrival_date_not_today': 'ARRIVAL_NOT_TODAY', 'before_checkin_time': 'BEFORE_CHECKIN_TIME',
                   'guest_not_arrived': 'GUEST_NOT_ARRIVED', 'already_marked_checked_in': 'ALREADY_IN_HOUSE',
-                  'departure_not_verified': 'DEPARTURE_NOT_VERIFIED', 'past_arrival_needs_review': 'ARRIVAL_NOT_TODAY'}
+                  'departure_not_verified': 'DEPARTURE_NOT_VERIFIED', 'past_arrival_needs_review': 'ARRIVAL_NOT_TODAY',
+                  'pms_registration_not_confirmed': 'PMS_REGISTRATION_NOT_CONFIRMED'}
     rows = []
     for b in s['reservations']:
         blockers = set(event_issues[b['id']])
@@ -432,6 +451,8 @@ def evaluate(raw):
         blockers.update(reason_map.get(code, 'CORE_REVIEW_REQUIRED') for code in core_reasons)
         if b['status'] == 'cancelled' and assigned:
             blockers.add('CANCELLED_ASSIGNED')
+        if b['status'] == 'no_show':
+            blockers.add('NO_SHOW_RELEASE_REVIEW')
         if b['status'] not in {'confirmed', 'in_house'}:
             blockers.add('NOT_CONFIRMED')
         if b['status'] == 'in_house' or b['arrival_state'] == 'checked_in':

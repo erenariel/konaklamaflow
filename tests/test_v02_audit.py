@@ -23,6 +23,8 @@ def single():
     d = copy.deepcopy(DEMO)
     d['reservations'] = d['reservations'][:1]
     d['arrival_checks'] = d['arrival_checks'][:1]
+    # Isolate room rules from the demo's missing PMS-registration signal.
+    d['arrival_checks'][0]['registration_status'] = 'confirmed_by_authorized_system'
     return d
 
 
@@ -129,11 +131,20 @@ class ReadinessAuditTests(unittest.TestCase):
         d['reservations'].append(dict(d['reservations'][0], ref='CANCELLED', status='cancelled'))
         self.assertEqual(plan(d)['summary']['ready_for_review'], 1)
 
-    def test_registration_is_non_authoritative_nonblocking_precheck_signal(self):
-        r = plan()
-        self.assertFalse(r['tasks'][0]['checklist']['registration_confirmed_by_authorized_system'])
-        self.assertEqual(r['summary']['ready_for_review'], 1)
-        self.assertIn('No check-in', r['disclaimer'])
+    def test_registration_is_separate_from_readiness_and_kbs(self):
+        raw = copy.deepcopy(DEMO)
+        raw['reservations'] = raw['reservations'][:1]
+        raw['arrival_checks'] = raw['arrival_checks'][:1]
+        blocked = plan(raw)
+        self.assertFalse(blocked['tasks'][0]['checklist']['registration_confirmed_by_authorized_system'])
+        self.assertEqual(blocked['tasks'][0]['state'], 'BLOCKED_FOR_HUMAN_REVIEW')
+        self.assertIn('pms_registration_not_confirmed', blocked['tasks'][0]['reasons'])
+        self.assertIn('KBS', blocked['disclaimer'])
+        self.assertIn('PMS registration', blocked['disclaimer'])
+        ready = plan()
+        self.assertTrue(ready['tasks'][0]['checklist']['registration_confirmed_by_authorized_system'])
+        self.assertEqual(ready['summary']['ready_for_review'], 1)
+        self.assertNotIn('pms_registration_not_confirmed', ready['tasks'][0]['reasons'])
 
     def test_evaluation_time_changes_task_reference(self):
         self.assertNotEqual(plan(at='10:00')['tasks'][0]['task_id'], plan(at='14:01')['tasks'][0]['task_id'])
@@ -262,6 +273,8 @@ class OpsCliAuditTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             source=Path(directory)/'input.json';target=Path(directory)/'report.json'
             source.write_text(json.dumps(single()))
+            self.assertEqual(main([str(source),'--as-of','2026-11-12','--at-time','14:01','--output',str(source)]),2)
+            self.assertIn('"reservations"', source.read_text())
             self.assertEqual(main([str(source),'--as-of','2026-11-12','--at-time','14:01','--output',str(target)]),0)
             self.assertEqual(json.loads(target.read_text()),plan())
             self.assertEqual(target.stat().st_mode & 0o077,0)

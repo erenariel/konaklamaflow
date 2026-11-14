@@ -61,7 +61,9 @@ class ReviewProvenanceBrowserTests(unittest.TestCase):
                     self.page.locator("#v04Locale").select_option(lang)
                     self.assertEqual(self.page.locator("#v04Global").get_attribute("dir"),
                                      "rtl" if lang in ("ar", "he") else "ltr")
-                    self.assertEqual(self.page.locator("#v04Reasons code").count(), 3)
+                    self.assertEqual(self.page.locator("#v04Reasons code").count(),
+                                     self.page.evaluate("""() => INITIAL_EVALUATION.arrivals.find(
+                                         r=>r.task_id===document.getElementById('v04Booking').value).blockers.length"""))
                     self.assertGreaterEqual(self.page.locator("#v04Evidence code").count(), 2)
                     self.assertIn("v0.5.2", self.page.locator("#v04Kicker").inner_text())
                     self.assertIn("Pyodide", self.page.locator("#v04RuntimeNote").inner_text())

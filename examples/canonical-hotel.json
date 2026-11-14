@@ -899,7 +899,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1002",
@@ -932,7 +933,8 @@
       "payment_type": "city_ledger",
       "commission_type": "net",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1003",
@@ -965,7 +967,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1004",
@@ -998,7 +1001,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1005",
@@ -1033,7 +1037,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1006",
@@ -1066,7 +1071,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1007",
@@ -1100,7 +1106,8 @@
       "payment_type": "city_ledger",
       "commission_type": "net",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1008",
@@ -1129,7 +1136,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1009",
@@ -1162,7 +1170,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "recorded_by_authorized_staff"
     },
     {
       "id": "KF1010",
@@ -1195,7 +1204,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "recorded_by_authorized_staff"
     },
     {
       "id": "KF1011",
@@ -1228,7 +1238,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     },
     {
       "id": "KF1012",
@@ -1261,7 +1272,8 @@
       "payment_type": "self_payment",
       "commission_type": "none",
       "group_name": null,
-      "option_expiry": null
+      "option_expiry": null,
+      "pms_registration": "not_recorded"
     }
   ],
   "room_stays": [

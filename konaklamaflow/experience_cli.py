@@ -6,7 +6,7 @@ import sys
 
 from .core import InputError
 from .experience_engine import evaluate, SnapshotError
-from .ops_cli import _unique_object, _write_report
+from .io_safety import MAX_INPUT_BYTES, read_limited_json, write_owner_report
 
 
 def main(argv=None):
@@ -15,14 +15,10 @@ def main(argv=None):
         print('usage: python -m konaklamaflow.experience_cli snapshot.json [report.json]', file=sys.stderr)
         return 2
     try:
-        with open(args[0], 'rb') as stream:
-            payload = stream.read(2_000_001)
-        if len(payload) > 2_000_000:
-            raise SnapshotError('Snapshot exceeds limit')
-        source = json.loads(payload.decode('utf-8'), object_pairs_hook=_unique_object)
+        source = read_limited_json(args[0], MAX_INPUT_BYTES)
         output = json.dumps(evaluate(source), indent=2, ensure_ascii=False, allow_nan=False) + '\n'
         if len(args) == 2:
-            _write_report(args[1], output)
+            write_owner_report(args[1], output, args[0])
         else:
             print(output, end='')
     except (SnapshotError, InputError, ValueError, TypeError, OSError, UnicodeError, RecursionError):

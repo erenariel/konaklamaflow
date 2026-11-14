@@ -186,6 +186,10 @@ def plan_operations(data: Any, as_of: str, at_time: str = "14:00") -> dict[str, 
             reasons.append("identity_needs_authorized_verification")
         if status["payment_review"] == "review":
             reasons.append("payment_review_needed")
+        # PMS registration is a record in the authorized hotel system.
+        # It does not file a KBS notification and does not complete check-in.
+        if status["registration_status"] != "confirmed_by_authorized_system":
+            reasons.append("pms_registration_not_confirmed")
         if r.status != "confirmed":
             reasons.append("reservation_not_confirmed")
         if r.stay.start != asof_day:

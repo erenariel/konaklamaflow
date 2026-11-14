@@ -4,7 +4,7 @@
   "property_id": "SAMPLE_HOTEL_01",
   "as_of": "2026-11-12",
   "at_time": "14:01",
-  "snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10",
+  "snapshot_sha256": "767ce20c6a54271a08910f657db411158282eabeac035fcae095b3da1c228d6f",
   "summary": {
     "reservations": 12,
     "rooms": 18,
@@ -21,15 +21,18 @@
       "room_id": "101",
       "status": "blocked",
       "blockers": [
+        "PMS_REGISTRATION_NOT_CONFIRMED",
         "SPECIAL_REQUEST_REVIEW"
       ],
-      "core_reasons": [],
+      "core_reasons": [
+        "pms_registration_not_confirmed"
+      ],
       "notes": [
         "Özel talepler yetkili personel tarafından doğrulanmalıdır."
       ],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "bcb08f52f20adba66af39300",
+      "task_id": "1f925362ed4f770e2b1f8c2e",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -49,17 +52,19 @@
       "blockers": [
         "CORE_REVIEW_REQUIRED",
         "IDENTITY_STAFF_REVIEW",
-        "NO_ASSIGNED_ROOM"
+        "NO_ASSIGNED_ROOM",
+        "PMS_REGISTRATION_NOT_CONFIRMED"
       ],
       "core_reasons": [
         "room_unassigned",
         "NO_SAFE_ROOM_PROPOSAL",
-        "identity_needs_authorized_verification"
+        "identity_needs_authorized_verification",
+        "pms_registration_not_confirmed"
       ],
       "notes": [],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "b8532e08272a3eba431e421d",
+      "task_id": "9ce0fb0a1db54360b7c7155a",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -79,18 +84,20 @@
       "blockers": [
         "HOUSEKEEPING_NOT_INSPECTED",
         "HOUSEKEEPING_TASK_OPEN",
+        "PMS_REGISTRATION_NOT_CONFIRMED",
         "SPECIAL_REQUEST_REVIEW"
       ],
       "core_reasons": [
         "room_not_clean",
-        "room_not_inspected"
+        "room_not_inspected",
+        "pms_registration_not_confirmed"
       ],
       "notes": [
         "Özel talepler yetkili personel tarafından doğrulanmalıdır."
       ],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "5f751a28966b64c7eaf58bda",
+      "task_id": "06383eb1594fe83d3136cb70",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -108,15 +115,17 @@
       "room_id": "104",
       "status": "blocked",
       "blockers": [
-        "PAYMENT_REVIEW"
+        "PAYMENT_REVIEW",
+        "PMS_REGISTRATION_NOT_CONFIRMED"
       ],
       "core_reasons": [
-        "payment_review_needed"
+        "payment_review_needed",
+        "pms_registration_not_confirmed"
       ],
       "notes": [],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "a90d687ad551f78c30f3f855",
+      "task_id": "b1387ecc8620f073018e2206",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -137,10 +146,12 @@
         "ARRIVAL_NOT_TODAY",
         "GUEST_NOT_ARRIVED",
         "IDENTITY_STAFF_REVIEW",
+        "PMS_REGISTRATION_NOT_CONFIRMED",
         "SPECIAL_REQUEST_REVIEW"
       ],
       "core_reasons": [
         "identity_needs_authorized_verification",
+        "pms_registration_not_confirmed",
         "arrival_date_not_today",
         "guest_not_arrived"
       ],
@@ -150,7 +161,7 @@
       ],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "543ce19d61c2f287af3ee75c",
+      "task_id": "bc09e0a628f1755fe3f304e9",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -176,7 +187,7 @@
       "notes": [],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "60c3bd75ca148fd9c4bf88c9",
+      "task_id": "1553f11315d2912a36833928",
       "checklist": {
         "pms_match": false,
         "reservation_confirmed": false,
@@ -194,15 +205,18 @@
       "room_id": "304",
       "status": "blocked",
       "blockers": [
+        "PMS_REGISTRATION_NOT_CONFIRMED",
         "SPECIAL_REQUEST_REVIEW"
       ],
-      "core_reasons": [],
+      "core_reasons": [
+        "pms_registration_not_confirmed"
+      ],
       "notes": [
         "Özel talepler yetkili personel tarafından doğrulanmalıdır."
       ],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "bc88392164bfce3c3a622880",
+      "task_id": "94b481054187276dec5c85b7",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -222,18 +236,20 @@
       "blockers": [
         "CHANNEL_EVENT_REVIEW",
         "IDENTITY_STAFF_REVIEW",
+        "PMS_REGISTRATION_NOT_CONFIRMED",
         "SPECIAL_REQUEST_REVIEW",
         "UNMAPPED_PMS"
       ],
       "core_reasons": [
-        "identity_needs_authorized_verification"
+        "identity_needs_authorized_verification",
+        "pms_registration_not_confirmed"
       ],
       "notes": [
         "Özel talepler yetkili personel tarafından doğrulanmalıdır."
       ],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "ce4b0d99f4bbcf06b8226bbf",
+      "task_id": "99496ad150e8af2989f61d54",
       "checklist": {
         "pms_match": false,
         "reservation_confirmed": true,
@@ -255,7 +271,7 @@
       "notes": [],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "3996ca26e7377d2e0efa4302",
+      "task_id": "4dfd306dc154a06072716f49",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -277,7 +293,7 @@
       "notes": [],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "b89fa900533a47911beca6e6",
+      "task_id": "6e95f064b193743ff4af2f87",
       "checklist": {
         "pms_match": true,
         "reservation_confirmed": true,
@@ -298,10 +314,12 @@
         "ARRIVAL_NOT_TODAY",
         "GUEST_NOT_ARRIVED",
         "IDENTITY_STAFF_REVIEW",
+        "PMS_REGISTRATION_NOT_CONFIRMED",
         "UNMAPPED_PMS"
       ],
       "core_reasons": [
         "identity_needs_authorized_verification",
+        "pms_registration_not_confirmed",
         "arrival_date_not_today",
         "guest_not_arrived"
       ],
@@ -310,7 +328,7 @@
       ],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "c32bc72b419a12d3ede8aacf",
+      "task_id": "9dd1ebc70efe4e83ea76e24f",
       "checklist": {
         "pms_match": false,
         "reservation_confirmed": true,
@@ -328,16 +346,19 @@
       "room_id": "403",
       "status": "blocked",
       "blockers": [
+        "PMS_REGISTRATION_NOT_CONFIRMED",
         "SPECIAL_REQUEST_REVIEW",
         "UNMAPPED_PMS"
       ],
-      "core_reasons": [],
+      "core_reasons": [
+        "pms_registration_not_confirmed"
+      ],
       "notes": [
         "Özel talepler yetkili personel tarafından doğrulanmalıdır."
       ],
       "suggested_room": null,
       "human_approval_required": true,
-      "task_id": "4eed6587da114b416972f9d0",
+      "task_id": "faaa39dac94be5fd716c7503",
       "checklist": {
         "pms_match": false,
         "reservation_confirmed": true,
@@ -651,20 +672,20 @@
     "property_id": "SAMPLE_HOTEL_01",
     "as_of": "2026-11-12",
     "at_time": "14:01",
-    "snapshot_sha256": "17ddfb5427b248b3471a9ae9ce7a88cbced599f5d81d9346643d37e830fd35c3",
+    "snapshot_sha256": "a2a36fcccea1c97d32cf1b7647906432fbfdadafbac6cc4e167ea0a47b12f449",
     "checkin_policy": {
       "checkin_time": "14:00",
       "checkout_time": "12:00"
     },
     "summary": {
       "arrivals_total": 11,
-      "ready_for_review": 5,
-      "blocked": 6,
+      "ready_for_review": 2,
+      "blocked": 9,
       "already_checked_in_requires_review": 0
     },
     "tasks": [
       {
-        "task_id": "210aaa5b4fbd414e9ca164ec",
+        "task_id": "048c790e4b5b045bb1f7ac22",
         "reservation_ref": "KF1009",
         "source": "agency",
         "room_id": "B01",
@@ -678,13 +699,13 @@
           "identity_reviewed_by_authorized_staff": true,
           "payment_review_complete": true,
           "room_clean_and_inspected": true,
-          "registration_confirmed_by_authorized_system": false
+          "registration_confirmed_by_authorized_system": true
         },
         "reasons": [],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "4b75b253029e361724bf5ebf",
+        "task_id": "3b60927a221ef4237679d2ae",
         "reservation_ref": "KF1001",
         "source": "booking",
         "room_id": "101",
@@ -693,18 +714,20 @@
           "checkin": "2026-11-12",
           "checkout": "2026-11-15"
         },
-        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
         "checklist": {
           "identity_reviewed_by_authorized_staff": true,
           "payment_review_complete": true,
           "room_clean_and_inspected": true,
           "registration_confirmed_by_authorized_system": false
         },
-        "reasons": [],
+        "reasons": [
+          "pms_registration_not_confirmed"
+        ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "d677e665ec7a7a3e3ed0b18c",
+        "task_id": "6c2024004e85d1356b9a6f55",
         "reservation_ref": "KF1008",
         "source": "booking",
         "room_id": "301",
@@ -721,12 +744,13 @@
           "registration_confirmed_by_authorized_system": false
         },
         "reasons": [
-          "identity_needs_authorized_verification"
+          "identity_needs_authorized_verification",
+          "pms_registration_not_confirmed"
         ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "ed6f1f693080a14d981801b3",
+        "task_id": "217eeb78cfbf56689ce2e305",
         "reservation_ref": "KF1004",
         "source": "direct",
         "room_id": "104",
@@ -743,12 +767,13 @@
           "registration_confirmed_by_authorized_system": false
         },
         "reasons": [
-          "payment_review_needed"
+          "payment_review_needed",
+          "pms_registration_not_confirmed"
         ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "ac4d28ac1ae1dbb52e080724",
+        "task_id": "66cc1fd5b262a7185a86a379",
         "reservation_ref": "KF1010",
         "source": "direct",
         "room_id": "201",
@@ -762,13 +787,13 @@
           "identity_reviewed_by_authorized_staff": true,
           "payment_review_complete": true,
           "room_clean_and_inspected": true,
-          "registration_confirmed_by_authorized_system": false
+          "registration_confirmed_by_authorized_system": true
         },
         "reasons": [],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "b17f172bd03a5fc34d8d61f6",
+        "task_id": "0d72d019cdf40ecc995d9aef",
         "reservation_ref": "KF1002",
         "source": "expedia",
         "room_id": null,
@@ -787,12 +812,13 @@
         "reasons": [
           "room_unassigned",
           "NO_SAFE_ROOM_PROPOSAL",
-          "identity_needs_authorized_verification"
+          "identity_needs_authorized_verification",
+          "pms_registration_not_confirmed"
         ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "61455c2a1dc16bb05b5be24d",
+        "task_id": "99abb6a497ab90551232a56b",
         "reservation_ref": "KF1007",
         "source": "hotelbeds",
         "room_id": "304",
@@ -801,18 +827,20 @@
           "checkin": "2026-11-12",
           "checkout": "2026-11-16"
         },
-        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
         "checklist": {
           "identity_reviewed_by_authorized_staff": true,
           "payment_review_complete": true,
           "room_clean_and_inspected": true,
           "registration_confirmed_by_authorized_system": false
         },
-        "reasons": [],
+        "reasons": [
+          "pms_registration_not_confirmed"
+        ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "2c92fe76a0e0f30ca0d06589",
+        "task_id": "462281f18e8ddbab26cebc1f",
         "reservation_ref": "KF1003",
         "source": "trip",
         "room_id": "303",
@@ -830,12 +858,13 @@
         },
         "reasons": [
           "room_not_clean",
-          "room_not_inspected"
+          "room_not_inspected",
+          "pms_registration_not_confirmed"
         ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "6a33930a44ac1db165f7602f",
+        "task_id": "dce3c72d38d3367dc4f5687d",
         "reservation_ref": "KF1012",
         "source": "trip",
         "room_id": "403",
@@ -844,18 +873,20 @@
           "checkin": "2026-11-12",
           "checkout": "2026-11-15"
         },
-        "state": "READY_FOR_HUMAN_CHECKIN_REVIEW",
+        "state": "BLOCKED_FOR_HUMAN_REVIEW",
         "checklist": {
           "identity_reviewed_by_authorized_staff": true,
           "payment_review_complete": true,
           "room_clean_and_inspected": true,
           "registration_confirmed_by_authorized_system": false
         },
-        "reasons": [],
+        "reasons": [
+          "pms_registration_not_confirmed"
+        ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "1e974b8009ad5e286146b641",
+        "task_id": "7c806d451961f0be7c643fdd",
         "reservation_ref": "KF1005",
         "source": "booking",
         "room_id": "404",
@@ -873,13 +904,14 @@
         },
         "reasons": [
           "identity_needs_authorized_verification",
+          "pms_registration_not_confirmed",
           "arrival_date_not_today",
           "guest_not_arrived"
         ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       },
       {
-        "task_id": "cf4e6d9a87a42c63f440bd83",
+        "task_id": "6f97c47e5de68b04e53dd2b3",
         "reservation_ref": "KF1011",
         "source": "booking",
         "room_id": "302",
@@ -897,13 +929,14 @@
         },
         "reasons": [
           "identity_needs_authorized_verification",
+          "pms_registration_not_confirmed",
           "arrival_date_not_today",
           "guest_not_arrived"
         ],
         "required_action": "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
       }
     ],
-    "disclaimer": "No check-in, payment, room assignment, guest notification or government registration has been executed. Identity and registration signals are unverified demo inputs unless provided by an authorized trusted system."
+    "disclaimer": "Operational readiness, PMS registration and KBS notification are separate checks. No check-in, payment, room assignment, guest message or KBS notification has been executed. A ready state is only a staff pre-review of this snapshot. PMS registration is an external authorized-system signal and is not a KBS filing."
   },
   "approval_policy": {
     "pms_writes": false,

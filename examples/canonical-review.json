@@ -212,6 +212,7 @@
       "room_id": "101",
       "identity_signal": "staff_verified",
       "payment_signal": "ready",
+      "pms_registration": "not_recorded",
       "requests": [
         "quiet"
       ],
@@ -233,6 +234,7 @@
       "room_id": null,
       "identity_signal": "pending_staff",
       "payment_signal": "agency_ledger",
+      "pms_registration": "not_recorded",
       "requests": [
         "twin"
       ],
@@ -254,6 +256,7 @@
       "room_id": "303",
       "identity_signal": "staff_verified",
       "payment_signal": "ready",
+      "pms_registration": "not_recorded",
       "requests": [
         "balcony"
       ],
@@ -275,6 +278,7 @@
       "room_id": "104",
       "identity_signal": "staff_verified",
       "payment_signal": "review",
+      "pms_registration": "not_recorded",
       "requests": [],
       "price_total": "99.00",
       "currency": "EUR",
@@ -294,6 +298,7 @@
       "room_id": "404",
       "identity_signal": "pending_staff",
       "payment_signal": "ready",
+      "pms_registration": "not_recorded",
       "requests": [
         "cot"
       ],
@@ -315,6 +320,7 @@
       "room_id": "102",
       "identity_signal": "pending_staff",
       "payment_signal": "review",
+      "pms_registration": "not_recorded",
       "requests": [],
       "price_total": "190.00",
       "currency": "EUR",
@@ -334,6 +340,7 @@
       "room_id": "304",
       "identity_signal": "staff_verified",
       "payment_signal": "agency_ledger",
+      "pms_registration": "not_recorded",
       "requests": [
         "extra-pillow"
       ],
@@ -355,6 +362,7 @@
       "room_id": "301",
       "identity_signal": "pending_staff",
       "payment_signal": "ready",
+      "pms_registration": "not_recorded",
       "requests": [
         "cityview"
       ],
@@ -376,6 +384,7 @@
       "room_id": "B01",
       "identity_signal": "staff_verified",
       "payment_signal": "ready",
+      "pms_registration": "recorded_by_authorized_staff",
       "requests": [],
       "price_total": "110.00",
       "currency": "EUR",
@@ -395,6 +404,7 @@
       "room_id": "201",
       "identity_signal": "staff_verified",
       "payment_signal": "ready",
+      "pms_registration": "recorded_by_authorized_staff",
       "requests": [],
       "price_total": "89.00",
       "currency": "EUR",
@@ -414,6 +424,7 @@
       "room_id": "302",
       "identity_signal": "pending_staff",
       "payment_signal": "ready",
+      "pms_registration": "not_recorded",
       "requests": [
         "twin"
       ],
@@ -435,6 +446,7 @@
       "room_id": "403",
       "identity_signal": "staff_verified",
       "payment_signal": "ready",
+      "pms_registration": "not_recorded",
       "requests": [
         "upper-floor"
       ],

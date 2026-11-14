@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased — night-desk safety]
+
+- Refuse report paths that resolve to an input file on every command, and write reports as owner-read-only files.
+- Reject duplicate JSON keys and use one 2 MB input ceiling. Room and reservation lists share the 500 / 5,000 prototype cap.
+- A reservation is not shown ready for check-in while PMS registration is unconfirmed. PMS registration, operational readiness and KBS notification stay separate; this tool still does not file KBS.
+- A no-show room stays held until staff release and is not proposed to another reservation.
+
 ## [Unreleased — Aurora timeline, Issue #37 / PR #42]
 
 - Add a canonical-data reservation calendar with 7/14/21-day date ranges, filters, mobile sticky room headings, maintenance overlays, and explicit cancelled/no-show labels. Checkout dates remain exclusive.

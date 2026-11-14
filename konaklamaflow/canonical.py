@@ -138,7 +138,8 @@ def _review_projection(source):
             'category':stay['category'],'persons':stay['adults']+stay['children'],
             'bed_request':stay['bed_request'],'status':booking['status'],
             'room_id':stay['room_id'],'identity_signal':booking['identity_signal'],
-            'payment_signal':booking['payment_signal'],'requests':deepcopy(stay['requests']),
+            'payment_signal':booking['payment_signal'],'pms_registration':booking['pms_registration'],
+            'requests':deepcopy(stay['requests']),
             'price_total':stay['quote_total'],'currency':booking['currency'],
             'arrival_state':booking['arrival_state'],
         })
@@ -226,12 +227,13 @@ def validate_canonical(source):
             if guest['preferred_language'] not in {'tr','en','fr','el','he','ar','de','ru','es','uk'}:_bad()
             if guest['title'] not in {'unspecified','mr','ms','mrs','dr'} or guest['gender'] not in {'unspecified','male','female','other'}:_bad()
         for booking in bookings.values():
-            _object(booking,{'id','display_name','agency_id','source_ref','pms_ref','status','arrival_state','identity_signal','payment_signal','currency','room_stay_ids','guest_ids','board','payment_type','commission_type','group_name','option_expiry'})
+            _object(booking,{'id','display_name','agency_id','source_ref','pms_ref','status','arrival_state','identity_signal','payment_signal','currency','room_stay_ids','guest_ids','board','payment_type','commission_type','group_name','option_expiry','pms_registration'})
             if booking['agency_id'] not in agencies or booking['status'] not in BOOKING_STATES or booking['currency'] not in _CURRENCIES:_bad()
             if not isinstance(booking['display_name'],str) or not booking['display_name'].startswith('ÖRNEK'):_bad()
             _text(booking['display_name']);_source_ref(booking['source_ref'],value['property_id'])
             if booking['pms_ref'] is not None:_source_ref(booking['pms_ref'],value['property_id'],True)
             if booking['arrival_state'] not in {'expected','arrived','checked_in','checked_out'} or booking['identity_signal'] not in {'pending_staff','staff_verified','not_required_for_demo'} or booking['payment_signal'] not in {'review','ready','agency_ledger'}:_bad()
+            if booking['pms_registration'] not in {'not_recorded','recorded_by_authorized_staff'}:_bad()
             _refs(booking['room_stay_ids'],stays,12);_refs(booking['guest_ids'],guests,240)
             if not booking['room_stay_ids']:_bad()
             if booking['board'] not in {'BB','HB','RO','FB'} or booking['payment_type'] not in {'city_ledger','self_payment'} or booking['commission_type'] not in {'net','commission','none'}:_bad()

@@ -18,7 +18,8 @@ def booking(bid='A', **changes):
     b = dict(id=bid, channel='direct', external_ref='EXT_' + bid, pms_ref='PMS_' + bid,
              arrival='2026-11-12', departure='2026-11-14', category='standard', persons=2,
              bed_request='none', status='confirmed', room_id='R1', identity_signal='staff_verified',
-             payment_signal='ready', requests=[], price_total='100.00', currency='TRY', arrival_state='arrived')
+             payment_signal='ready', pms_registration='recorded_by_authorized_staff',
+             requests=[], price_total='100.00', currency='TRY', arrival_state='arrived')
     b.update(changes)
     return b
 
@@ -124,6 +125,29 @@ class SuiteSafetyTests(unittest.TestCase):
                 self.assertIn('ALREADY_IN_HOUSE',row(s,'OLD')['blockers'])
                 s['reservations'][0]['room_id']=None
                 self.assertIsNone(row(s)['suggested_room'])
+
+    def test_no_show_room_is_not_proposed_without_staff_release(self):
+        s = snapshot()
+        s['reservations'] = [booking('NEW', room_id=None),
+                             booking('OLD', status='no_show', arrival_state='expected')]
+        report = evaluate(s)
+        self.assertIsNone(row(s, 'NEW')['suggested_room'])
+        self.assertIn('NO_SHOW_RELEASE_REVIEW', row(s, 'OLD')['blockers'])
+        plan = next(room for room in report['room_plan'] if room['id'] == 'R1')
+        self.assertEqual(plan['availability'], 'BLOCKED_FOR_REVIEW')
+        self.assertIn('NO_SHOW_HOLD', plan['reason_codes'])
+        self.assertNotIn('REQUIRES_LIVE_REVALIDATION', plan['availability'])
+
+    def test_missing_pms_registration_is_not_operational_approval_or_kbs(self):
+        s = snapshot()
+        del s['reservations'][0]['pms_registration']
+        blocked = row(s)
+        self.assertIn('PMS_REGISTRATION_NOT_CONFIRMED', blocked['blockers'])
+        self.assertEqual(blocked['status'], 'blocked')
+        self.assertFalse(evaluate(s)['approval_policy']['kbs'])
+        self.assertFalse(evaluate(s)['approval_policy']['pms_writes'])
+        s['reservations'][0]['pms_registration'] = 'recorded_by_authorized_staff'
+        self.assertEqual(row(s)['status'], 'review_ready')
 
     def test_same_day_departure_requires_release_evidence_for_new_proposal(self):
         s=snapshot();s['reservations'].append(booking('OLD',arrival='2026-11-10',departure='2026-11-12',arrival_state='expected'))
@@ -246,6 +270,8 @@ class SuiteCliSafetyTests(unittest.TestCase):
     def test_valid_output_matches_engine_and_has_private_permissions(self):
         with tempfile.TemporaryDirectory() as directory:
             source=Path(directory)/'input.json';target=Path(directory)/'report.json';source.write_text(json.dumps(snapshot()))
+            self.assertEqual(main([str(source),str(source)]),2)
+            self.assertIn('"reservations"', source.read_text())
             self.assertEqual(main([str(source),str(target)]),0)
             self.assertEqual(json.loads(target.read_text()),evaluate(snapshot()))
             if os.name!='nt':self.assertEqual(target.stat().st_mode&0o077,0)

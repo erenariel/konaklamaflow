@@ -9,15 +9,14 @@ import json
 import sys
 
 from .explainability import ExplanationError, build_explanations
-from .ops_cli import _unique_object, _write_report
+from .io_safety import MAX_INPUT_BYTES, read_limited_json, write_owner_report
 
 
 def _read(path: str, limit: int):
-    with open(path, "rb") as stream:
-        payload = stream.read(limit + 1)
-    if len(payload) > limit:
-        raise ExplanationError("Input too large")
-    return json.loads(payload.decode("utf-8"), object_pairs_hook=_unique_object)
+    try:
+        return read_limited_json(path, limit)
+    except Exception as error:
+        raise ExplanationError("Input too large") from error
 
 
 def main(argv=None):
@@ -27,12 +26,12 @@ def main(argv=None):
               file=sys.stderr)
         return 2
     try:
-        source = _read(args[0], 2_000_000)
-        report = _read(args[1], 15_000_000)
+        source = _read(args[0], MAX_INPUT_BYTES)
+        report = _read(args[1], MAX_INPUT_BYTES)
         output = json.dumps(build_explanations(source, report), ensure_ascii=False,
                             sort_keys=True, indent=2, allow_nan=False) + "\n"
         if len(args) == 3:
-            _write_report(args[2], output)
+            write_owner_report(args[2], output, args[0], args[1])
         else:
             print(output, end="")
     except (ExplanationError, TypeError, ValueError, KeyError, OSError,

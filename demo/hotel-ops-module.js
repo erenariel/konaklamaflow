@@ -151,7 +151,7 @@ function opsBookingForm(){
  '<label>Çocuk<input type="number" name="children'+i+'" min="0" max="12" value="0" required></label>'+
  '<label>Günlük fiyat<input type="text" value="Yalnız yetkili PMS / tarife kaynağı" disabled></label></fieldset>').join('');
  const fields=[
- ['Düzenleyen adı / grup adı','<input name="draftLabel" type="text" maxlength="70" placeholder="ÖRNEK GRUP" autocomplete="off">'],
+ ['Kurgusal grup kodu','<input name="draftLabel" type="text" maxlength="70" placeholder="ÖRNEK GRUP" autocomplete="off">'],
  ['Giriş','<input name="checkin" type="date" required value="'+opsHtml(opsDateOffset(1))+'">'],
  ['Çıkış','<input name="checkout" type="date" required value="'+opsHtml(opsDateOffset(4))+'">'],
  ['Acente',opsSelect('draftAgency',agencies,'DIRECT')],

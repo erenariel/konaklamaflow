@@ -45,6 +45,8 @@ EVIDENCE = {
     "CHANNEL_STATUS_CONFLICT": ("channel_events[].status", "reservations[].status"),
     "CORE_REVIEW_REQUIRED": ("engine_report.tasks[].reasons",),
     "HISTORICAL_STAY": ("reservations[].arrival", "as_of"),
+    "NO_SHOW_RELEASE_REVIEW": ("reservations[].status", "reservations[].room_id"),
+    "PMS_REGISTRATION_NOT_CONFIRMED": ("reservations[].pms_registration",),
 }
 # Unknown reason codes must never be silently explained as an authoritative fact.
 UNMAPPED_CODES = BLOCKER_CODES - set(EVIDENCE)
@@ -78,6 +80,8 @@ REASON_ACTIONS = {
     "CHANNEL_STATUS_CONFLICT": "reconcile_channel_status_with_staff",
     "CORE_REVIEW_REQUIRED": "inspect_core_engine_diagnostics",
     "HISTORICAL_STAY": "review_historical_arrival",
+    "NO_SHOW_RELEASE_REVIEW": "hold_no_show_room_until_staff_releases_it",
+    "PMS_REGISTRATION_NOT_CONFIRMED": "review_pms_registration_separately_from_kbs",
 }
 if set(REASON_ACTIONS) != set(EVIDENCE):
     raise RuntimeError("Explanation action coverage mismatch")

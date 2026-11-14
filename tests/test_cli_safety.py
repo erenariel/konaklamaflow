@@ -37,6 +37,7 @@ class CliFileSafetyTests(unittest.TestCase):
             self.assertEqual((status, error, printed), (0, "", ""))
             self.assertEqual(source.read_bytes(), before)
             self.assertEqual(json.loads(output.read_text(encoding="utf-8"))["mode"], "DRY_RUN_ONLY")
+            self.assertEqual(output.stat().st_mode & 0o077, 0)
 
     def test_input_path_cannot_be_overwritten(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -73,7 +74,8 @@ class CliFileSafetyTests(unittest.TestCase):
             with patch("konaklamaflow.cli.MAX_INPUT_BYTES", 64):
                 status, error, stdout = self.run_cli(str(source), "--as-of", "2026-11-12")
             self.assertEqual(status, 2)
-            self.assertIn("32 MiB safety limit", error)
+            self.assertIn("safety limit", error)
+            self.assertNotIn("32 MiB", error)
             self.assertNotIn(str(source), error)
             self.assertEqual(stdout, "")
 
@@ -81,7 +83,7 @@ class CliFileSafetyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             source = Path(folder) / "private-synthetic-source.json"
             source.write_text("{}", encoding="utf-8")
-            with patch("konaklamaflow.cli.json.loads", side_effect=RecursionError("nested JSON")):
+            with patch("konaklamaflow.io_safety.json.loads", side_effect=RecursionError("nested JSON")):
                 status, error, stdout = self.run_cli(str(source), "--as-of", "2026-11-12")
             self.assertEqual(status, 2)
             self.assertIn("unable to read JSON", error)
@@ -97,6 +99,16 @@ class CliFileSafetyTests(unittest.TestCase):
             self.assertEqual(status, 2)
             self.assertIn("unable to read JSON", error)
             self.assertNotIn(str(source), error)
+            self.assertEqual(stdout, "")
+
+    def test_duplicate_json_keys_are_rejected_without_echo(self):
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / "private-synthetic-source.json"
+            source.write_text('{"property_id":"A","property_id":"SECRET_DUP"}', encoding="utf-8")
+            status, error, stdout = self.run_cli(str(source), "--as-of", "2026-11-12")
+            self.assertEqual(status, 2)
+            self.assertIn("Duplicate JSON fields", error)
+            self.assertNotIn("SECRET_DUP", error)
             self.assertEqual(stdout, "")
 
 

@@ -18,12 +18,14 @@ class OperationsTests(unittest.TestCase):
     def test_demo_readiness_counts(self):
         report = run()
         self.assertEqual(report['mode'], 'DRY_RUN_ONLY')
-        self.assertEqual(report['summary']['ready_for_review'], 1)
-        self.assertEqual(report['summary']['blocked'], 3)
-        ready = [t for t in report['tasks'] if t['state'] == 'READY_FOR_HUMAN_CHECKIN_REVIEW']
-        self.assertEqual(ready[0]['reservation_ref'], 'DEMO_A01')
-        self.assertFalse(ready[0]['checklist']['registration_confirmed_by_authorized_system'])
-        self.assertEqual(ready[0]['required_action'], 'MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY')
+        self.assertEqual(report['summary']['ready_for_review'], 0)
+        self.assertEqual(report['summary']['blocked'], 4)
+        pending = next(t for t in report['tasks'] if t['reservation_ref'] == 'DEMO_A01')
+        self.assertEqual(pending['state'], 'BLOCKED_FOR_HUMAN_REVIEW')
+        self.assertIn('pms_registration_not_confirmed', pending['reasons'])
+        self.assertFalse(pending['checklist']['registration_confirmed_by_authorized_system'])
+        self.assertEqual(pending['required_action'], 'MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY')
+        self.assertIn('KBS', report['disclaimer'])
 
     def test_dirty_room_blocks(self):
         self.assertIn('room_not_clean', next(t for t in run()['tasks'] if t['reservation_ref']=='DEMO_A03')['reasons'])

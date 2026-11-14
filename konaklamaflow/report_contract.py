@@ -18,6 +18,7 @@ REASONS = {
     "identity_needs_authorized_verification", "payment_review_needed",
     "reservation_not_confirmed", "arrival_date_not_today", "before_checkin_time",
     "guest_not_arrived", "already_marked_checked_in", "past_arrival_needs_review",
+    "pms_registration_not_confirmed",
     "DUPLICATE_SOURCE_REF", "UNKNOWN_CATEGORY", "BASE_PRICE_MISMATCH", "UNKNOWN_ROOM",
     "CATEGORY_MISMATCH", "ROOM_OUT_OF_SERVICE", "TWIN_NOT_GUARANTEED", "ROOM_OVERLAP",
     "NO_SAFE_ROOM_PROPOSAL", "CANCELLED_HOLD_REVIEW",
@@ -25,8 +26,12 @@ REASONS = {
 CHECKS = {"identity_reviewed_by_authorized_staff", "payment_review_complete",
           "room_clean_and_inspected", "registration_confirmed_by_authorized_system"}
 SUMMARY = {"arrivals_total", "ready_for_review", "blocked", "already_checked_in_requires_review"}
-DISCLAIMER = ("No check-in, payment, room assignment, guest notification or government registration has been executed. "
-              "Identity and registration signals are unverified demo inputs unless provided by an authorized trusted system.")
+DISCLAIMER = (
+    "Operational readiness, PMS registration and KBS notification are separate checks. "
+    "No check-in, payment, room assignment, guest message or KBS notification has been executed. "
+    "A ready state is only a staff pre-review of this snapshot. "
+    "PMS registration is an external authorized-system signal and is not a KBS filing."
+)
 ACTION = "MANUAL_APPROVAL_IN_AUTHORIZED_PMS_ONLY"
 
 
@@ -93,7 +98,7 @@ def validate_report(report: Any) -> None:
         if ready:
             if reasons or task["room_id"] is None or task["stay"]["checkin"] != report["as_of"]:
                 _reject()
-            if not all(task["checklist"][k] for k in CHECKS - {"registration_confirmed_by_authorized_system"}):
+            if not all(task["checklist"][k] for k in CHECKS):
                 _reject()
         elif not reasons:
             _reject()

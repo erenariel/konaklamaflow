@@ -2,6 +2,23 @@
 
 **Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
 
+## Gece vardiyası başlangıcı
+
+Bu depo canlı otel programı değildir. PMS, KBS, ödeme ve kimlik sistemi yoktur. Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
+
+Paket sürümü `0.2.0rc1`. `demo/v04-integrated-preview.html` ayrı bir kurgusal v0.5 çalışma ekranıdır; yayımlanmış paket sürümü değildir.
+
+```bash
+python -m konaklamaflow examples/demo.json --as-of 2026-11-12
+python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12 --at-time 14:01
+```
+
+Çıktı dosyası girdi dosyasından farklı bir yol olmalıdır. Rapor yalnızca dosya sahibi tarafından okunacak şekilde yazılır. Gerçek misafir listesini veya PMS dışa aktarımını bu depoya koymayın.
+
+GitHub Pages üzerindeki demo, `main` dalına giden bir push testleri geçtikten sonra yayınlanır. Bu dal birleştirilmeden `https://erenariel.github.io/konaklamaflow/` değişmez.
+
+**Şu an çalışan:** kurgusal JSON ile çakışma, yarınki giriş, oda önerisi ve giriş öncesi kuyruk. **Geliştirilmekte:** çok dilli arayüz taslağı, görsel oda planı ve senaryo oynatımı. **Yok:** canlı PMS bağlantısı, KBS, ödeme, otomatik check-in.
+
 [![KonaklamaFlow v0.5.2 visual candidate: colorful AI review center, fictional room plan and human approval boundary](docs/images/ai-command-tour-poster.png)](demo/v04-integrated-preview.html)
 
 **[Open KonaklamaFlow v0.5 integrated hotel demo / Birleşik otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Global 10-language guided presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html) · [Offline integrated HTML](demo/v04-integrated-preview.html) · [Original room workbench](demo/hotel-suite.html) · [Latest tagged package release](https://github.com/erenariel/konaklamaflow/releases/latest)
@@ -38,7 +55,7 @@ Motion is optional. The app respects system reduced-motion and its own motion sw
 
 All three GIFs are captured from the running integrated HTML with `python scripts/record_demo_tour.py --showcase all`. Each has a source/report/GIF/poster hash manifest, recorded interactions, a 5 MB limit and zero external requests/browser errors. `python scripts/capture_previews.py` refreshes the actual desktop, RTL, mobile and presentation screenshots. These are synthetic demonstrations, not measured hotel adoption or real AI-provider results. The ten-language UI remains a translation draft pending human review.
 
-[![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.1.1%20prototype-yellow)](CHANGELOG.md)
+[![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.2.0rc1%20package%20%7C%20v0.5%20demo-yellow)](CHANGELOG.md)
 
 > **Project status (2026-11-13):** Runnable **fictional/offline v0.5 demo** with Python-validated folio/report samples and explicit staff-only reservations. This is not a certified PMS, operational hotel ledger, real AI integration, live OTA/KBS, identity processor, payment system, or tax-compliant invoicing product. The 10-language material is a translation **draft** pending native-speaker review. No real customer deployment or third-party live access is claimed.
 

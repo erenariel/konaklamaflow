@@ -139,8 +139,10 @@ class RoomGraphTests(unittest.TestCase):
         room = self.shown()
         self.assertEqual(room['active_reservation_ids'], [])
         self.assertEqual(room['arrivals'], [])
-        self.assertEqual(room['held_reservation_ids'], [])
+        self.assertEqual(room['held_reservation_ids'], ['KF1010'])
         self.assertEqual(room['occupancy_state'], 'unknown')
+        self.assertIn('no_show_hold', room['state_codes'])
+        self.assertNotIn('occupied', room['state_codes'])
 
     def test_explicit_block_dates_are_half_open_and_keep_original_housekeeping(self):
         block = {'id': 'BLOCK-TEST-201', 'room_id': '201', 'start': '2026-11-12',

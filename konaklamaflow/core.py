@@ -119,7 +119,8 @@ def parse_input(data: Any) -> tuple[str, list[Room], list[Reservation]]:
     raw_rooms, raw_reservations = body.get("rooms"), body.get("reservations")
     if not isinstance(raw_rooms, list) or not isinstance(raw_reservations, list):
         raise InputError("rooms and reservations must be lists")
-    if len(raw_rooms) > 10000 or len(raw_reservations) > 100000:
+    from .io_safety import MAX_RESERVATIONS, MAX_ROOMS
+    if len(raw_rooms) > MAX_ROOMS or len(raw_reservations) > MAX_RESERVATIONS:
         raise InputError("input exceeds prototype capacity limit")
     rooms = []
     room_ids = set()

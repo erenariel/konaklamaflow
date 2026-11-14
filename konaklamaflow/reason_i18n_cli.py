@@ -11,16 +11,15 @@ from __future__ import annotations
 import json
 import sys
 
-from .ops_cli import _unique_object, _write_report
+from .io_safety import MAX_INPUT_BYTES, read_limited_json, write_owner_report
 from .reason_i18n import LocalizationError, localized_pre_review
 
 
 def _read(path: str, size_limit: int):
-    with open(path, "rb") as stream:
-        payload = stream.read(size_limit + 1)
-    if len(payload) > size_limit:
-        raise LocalizationError("Input too large")
-    return json.loads(payload.decode("utf-8"), object_pairs_hook=_unique_object)
+    try:
+        return read_limited_json(path, size_limit)
+    except Exception as error:
+        raise LocalizationError("Input too large") from error
 
 
 def main(argv=None):
@@ -30,13 +29,13 @@ def main(argv=None):
               file=sys.stderr)
         return 2
     try:
-        source = _read(args[0], 2_000_000)
-        report = _read(args[1], 15_000_000)
+        source = _read(args[0], MAX_INPUT_BYTES)
+        report = _read(args[1], MAX_INPUT_BYTES)
         translated = localized_pre_review(source, report, args[2])
         output = json.dumps(translated, ensure_ascii=False, sort_keys=True,
                             indent=2, allow_nan=False) + "\n"
         if len(args) == 4:
-            _write_report(args[3], output)
+            write_owner_report(args[3], output, args[0], args[1])
         else:
             print(output, end="")
         return 0

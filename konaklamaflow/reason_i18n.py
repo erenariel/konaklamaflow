@@ -22,6 +22,7 @@ CODES = (
     "MAINTENANCE_TASK_OPEN", "HOUSEKEEPING_TASK_OPEN",
     "CHANNEL_EVENT_REVIEW", "CHANNEL_REFERENCE_MISMATCH",
     "CHANNEL_STATUS_CONFLICT", "CORE_REVIEW_REQUIRED", "HISTORICAL_STAY",
+    "NO_SHOW_RELEASE_REVIEW", "PMS_REGISTRATION_NOT_CONFIRMED",
 )
 if set(CODES) != BLOCKER_CODES or len(CODES) != len(set(CODES)):
     raise RuntimeError("Translation catalog must track all engine blocker codes")
@@ -100,6 +101,8 @@ _REASONS = {
 "Channel and reservation statuses conflict",
 "Additional review required by core rules",
 "Historical stay requires staff review",
+"No-show room stays held until staff releases it",
+"PMS registration is not confirmed; this is not a KBS notification",
 ),
 "tr": (
 "İptal edilen rezervasyona hâlâ oda atanmış",
@@ -128,6 +131,8 @@ _REASONS = {
 "Kanal ve rezervasyon durumları çelişiyor",
 "Temel kurallar ek inceleme gerektiriyor",
 "Geçmiş tarihli konaklama inceleme gerektiriyor",
+"No-show odası personel bırakmadan yeniden önerilmez",
+"PMS kaydı onaylı değil; bu bir KBS bildirimi değildir",
 ),
 "fr": (
 "Une chambre reste attribuée à une réservation annulée",
@@ -156,6 +161,8 @@ _REASONS = {
 "Statuts du canal et de la réservation contradictoires",
 "Examen supplémentaire exigé par les règles centrales",
 "Séjour historique à faire vérifier par le personnel",
+"La chambre no-show reste retenue jusqu'à validation du personnel",
+"L'enregistrement PMS n'est pas confirmé ; ce n'est pas une notification KBS",
 ),
 "el": (
 "Η ακυρωμένη κράτηση εξακολουθεί να έχει δωμάτιο",
@@ -184,6 +191,8 @@ _REASONS = {
 "Οι καταστάσεις καναλιού και κράτησης διαφέρουν",
 "Οι βασικοί κανόνες απαιτούν επιπλέον έλεγχο",
 "Η παλαιότερη διαμονή χρειάζεται έλεγχο προσωπικού",
+"Το δωμάτιο no-show παραμένει δεσμευμένο έως την έγκριση προσωπικού",
+"Η καταχώριση PMS δεν έχει επιβεβαιωθεί· δεν είναι δήλωση KBS",
 ),
 "he": (
 "להזמנה שבוטלה עדיין משויך חדר",
@@ -212,6 +221,8 @@ _REASONS = {
 "מצבי הערוץ וההזמנה סותרים",
 "הכללים המרכזיים דורשים בדיקה נוספת",
 "שהייה מתאריך עבר דורשת בדיקת צוות",
+"חדר no-show נשאר תפוס עד שחרור על ידי הצוות",
+"רישום PMS לא אושר; זו אינה הודעת KBS",
 ),
 "ar": (
 "لا تزال غرفة مخصصة لحجز ملغى",
@@ -240,6 +251,8 @@ _REASONS = {
 "حالة القناة تتعارض مع حالة الحجز",
 "تتطلب القواعد الأساسية مراجعة إضافية",
 "الإقامة السابقة تتطلب مراجعة الموظفين",
+"غرفة عدم الحضور تبقى محجوزة حتى يحررها الموظف",
+"تسجيل PMS غير مؤكد؛ هذا ليس بلاغ KBS",
 ),
 "de": (
 "Stornierter Buchung ist noch ein Zimmer zugewiesen",
@@ -268,6 +281,8 @@ _REASONS = {
 "Kanal- und Buchungsstatus widersprechen sich",
 "Kernregeln erfordern zusätzliche Prüfung",
 "Früherer Aufenthalt muss geprüft werden",
+"No-show-Zimmer bleibt gesperrt, bis das Personal es freigibt",
+"PMS-Registrierung ist nicht bestätigt; das ist keine KBS-Meldung",
 ),
 "ru": (
 "За отменённым бронированием всё ещё закреплён номер",
@@ -296,6 +311,8 @@ _REASONS = {
 "Статусы канала и бронирования противоречат друг другу",
 "Основные правила требуют дополнительной проверки",
 "Предыдущий период проживания требует проверки",
+"Номер no-show остаётся занятым, пока сотрудник его не освободит",
+"Запись PMS не подтверждена; это не уведомление KBS",
 ),
 "es": (
 "Una reserva cancelada aún tiene una habitación asignada",
@@ -324,6 +341,8 @@ _REASONS = {
 "Los estados del canal y la reserva son contradictorios",
 "Las reglas centrales requieren revisión adicional",
 "La estancia anterior requiere revisión del personal",
+"La habitación no-show sigue retenida hasta que el personal la libere",
+"El registro PMS no está confirmado; no es una notificación KBS",
 ),
 "uk": (
 "За скасованим бронюванням досі закріплений номер",
@@ -352,6 +371,8 @@ _REASONS = {
 "Стани каналу та бронювання суперечать один одному",
 "Основні правила потребують додаткової перевірки",
 "Попереднє проживання потребує перевірки",
+"Номер no-show лишається зайнятим, доки працівник його не звільнить",
+"Запис PMS не підтверджено; це не повідомлення KBS",
 ),
 }
 SUPPORTED = tuple(_REASONS)

@@ -360,7 +360,8 @@
       "requests": [],
       "price_total": "110.00",
       "currency": "EUR",
-      "arrival_state": "arrived"
+      "arrival_state": "arrived",
+      "pms_registration": "recorded_by_authorized_staff"
     },
     {
       "id": "KF1010",
@@ -379,7 +380,8 @@
       "requests": [],
       "price_total": "89.00",
       "currency": "EUR",
-      "arrival_state": "arrived"
+      "arrival_state": "arrived",
+      "pms_registration": "recorded_by_authorized_staff"
     },
     {
       "id": "KF1011",

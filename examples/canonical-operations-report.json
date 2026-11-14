@@ -164,7 +164,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -198,7 +198,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "recorded_folio_postings_only_not_earned_revenue",
       "coverage": {
         "reservation_ids": [
@@ -269,7 +269,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "recorded_folio_postings_only_not_earned_revenue",
       "coverage": {
         "reservation_ids": [
@@ -361,7 +361,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -397,7 +397,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "recorded_folio_movements_on_business_date_not_cash_reconciliation",
       "coverage": {
         "reservation_ids": [
@@ -427,7 +427,7 @@
       "missing_sources": [
         "accounting"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -497,7 +497,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -531,7 +531,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -561,7 +561,7 @@
       "missing_sources": [
         "fiscal"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -971,7 +971,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -1233,7 +1233,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_nightly_rates_only_not_inferred_from_quote",
       "coverage": {
         "reservation_ids": [
@@ -1268,7 +1268,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "recorded_folio_postings_only_not_earned_revenue",
       "coverage": {
         "reservation_ids": [
@@ -1313,7 +1313,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "recorded_folio_postings_only_not_earned_revenue",
       "coverage": {
         "reservation_ids": [
@@ -1349,7 +1349,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "recorded_folio_postings_only_not_earned_revenue",
       "coverage": {
         "reservation_ids": [
@@ -1379,7 +1379,7 @@
       "missing_sources": [
         "immutable_checkin_audit"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1408,7 +1408,7 @@
       "missing_sources": [
         "linen_usage"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1437,7 +1437,7 @@
       "missing_sources": [
         "budget"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1683,7 +1683,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "review_engine_hold_signals_not_verified_physical_occupancy",
       "coverage": {
         "reservation_ids": [
@@ -1712,7 +1712,7 @@
       "missing_sources": [
         "system_logs"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1739,7 +1739,7 @@
       "rows": [],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -1769,7 +1769,7 @@
       "missing_sources": [
         "mail_permissions"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1798,7 +1798,7 @@
       "missing_sources": [
         "safe_ledger"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1825,7 +1825,7 @@
       "rows": [],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -1896,7 +1896,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "recorded_folio_postings_only_not_a_fiscal_invoice",
       "coverage": {
         "reservation_ids": [
@@ -1926,7 +1926,7 @@
       "missing_sources": [
         "fiscal_invoices"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1955,7 +1955,7 @@
       "missing_sources": [
         "expense_ledger"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -1984,7 +1984,7 @@
       "missing_sources": [
         "revenue_management_inputs"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -2343,7 +2343,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "review_engine_hold_signals_not_verified_physical_occupancy",
       "coverage": {
         "reservation_ids": [
@@ -2392,7 +2392,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -2422,7 +2422,7 @@
       "missing_sources": [
         "fx_rates"
       ],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [],
@@ -3272,7 +3272,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -3678,7 +3678,7 @@
       ],
       "source_state": "synthetic_snapshot",
       "missing_sources": [],
-      "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+      "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
       "scope": "explicit_canonical_source_only",
       "coverage": {
         "reservation_ids": [
@@ -3709,7 +3709,7 @@
     "live_exchange_rates": false,
     "human_approval_required": true
   },
-  "canonical_sha256": "99b91f7581bdcb421eb49f17e0f57093c6049155c79f9180c00c5ddde0e44fd8",
+  "canonical_sha256": "f68df3d892df95c1640b6cc984d32a6905eadc8d194f5cde030600ab22e29384",
   "source_state": "synthetic_snapshot",
   "scenario_id": "CANONICAL_REVIEW_DEMO_V1",
   "reservation_links": {
@@ -3901,5 +3901,5 @@
     "payments": "source_not_connected",
     "kbs": "source_not_connected"
   },
-  "review_snapshot_sha256": "ac3201db2eb14e70b90c66890a09ef7159e673f4a744d4d436532da7c7eabf10"
+  "review_snapshot_sha256": "767ce20c6a54271a08910f657db411158282eabeac035fcae095b3da1c228d6f"
 }

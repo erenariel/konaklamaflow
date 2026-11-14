@@ -22,7 +22,7 @@ class TenLanguageReviewTests(unittest.TestCase):
     def test_all_26_reason_codes_have_nonempty_translations_for_ten_locales(self):
         self.assertEqual(set(SUPPORTED), EXPECTED)
         self.assertEqual(set(CODES), BLOCKER_CODES)
-        self.assertEqual(len(CODES), 26)
+        self.assertEqual(len(CODES), 28)
         for language in SUPPORTED:
             for code in CODES:
                 with self.subTest(locale=language, reason=code):

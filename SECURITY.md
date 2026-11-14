@@ -14,4 +14,4 @@
 
 ## Supported versions
 
-Only the newest tagged release, once published, will be maintained. The latest published release is **v0.1.1**; there is **no formal security SLA**. Production suitability has not been established.
+The source package version in this repository is **0.2.0rc1**. The offline HTML workbench is a separate fictional demo and is not that package release. The latest tagged release, once published, is the maintained release line; there is **no formal security SLA**. Production suitability has not been established. Do not treat the v0.5 demo as a connection to a hotel PMS.

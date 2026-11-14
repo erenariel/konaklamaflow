@@ -50,13 +50,14 @@ class OperationsBrowserCase(unittest.TestCase):
 class OperationsCockpitTests(OperationsBrowserCase):
     def test_summary_and_visibility(self):
         self.assertEqual(self.page.locator('#metricAll').inner_text(), '4')
-        self.assertEqual(self.page.locator('#metricReady').inner_text(), '1')
-        self.assertEqual(self.page.locator('#metricBlocked').inner_text(), '3')
+        self.assertEqual(self.page.locator('#metricReady').inner_text(), '0')
+        self.assertEqual(self.page.locator('#metricBlocked').inner_text(), '4')
+        self.assertIn('PMS kaydı', self.page.locator('body').inner_text())
         self.assertEqual(self.page.locator('.r').count(), 4)
 
     def test_filter_and_search(self):
         self.page.locator('[data-filter=ready]').click()
-        self.assertEqual(self.page.locator('.r').count(), 1)
+        self.assertEqual(self.page.locator('.r').count(), 0)
         self.page.locator('[data-filter=all]').click()
         self.page.locator('#search').fill('DEMO_A03')
         self.assertEqual(self.page.locator('.r').count(), 1)
@@ -70,7 +71,7 @@ class OperationsCockpitTests(OperationsBrowserCase):
         other = dict(SAMPLE)
         other['property_id'] = 'TEST_HOTEL_02'
         other['tasks'] = other['tasks'][:2]
-        other['summary'] = dict(arrivals_total=2, ready_for_review=1, blocked=1, already_checked_in_requires_review=0)
+        other['summary'] = dict(arrivals_total=2, ready_for_review=0, blocked=2, already_checked_in_requires_review=0)
         self.page.locator('#file').set_input_files({'name':'report.json','mimeType':'application/json','buffer':json.dumps(other).encode()})
         self.assertEqual(self.page.locator('#metricProperty').inner_text(), 'TEST_HOTEL_02')
         self.assertEqual(self.page.locator('#metricAll').inner_text(), '2')
@@ -142,7 +143,8 @@ class OperationsImportAuditTests(OperationsBrowserCase):
 
     def test_filters_search_details_and_reset_remain_consistent(self):
         self.page.locator('[data-filter=blocked]').click()
-        self.assertNotEqual(self.page.locator('#selectedRef').inner_text(),'DEMO_A01')
+        self.assertEqual(self.page.locator('#selectedRef').inner_text(),'DEMO_A01')
+        self.assertIn('PMS kaydı', self.page.locator('#reasons').inner_text())
         self.page.locator('#search').fill('MISSING')
         self.assertEqual(self.page.locator('#selectedRef').inner_text(),'—')
         self.assertEqual(self.page.locator('#checks').inner_text(),'')
@@ -153,7 +155,7 @@ class OperationsImportAuditTests(OperationsBrowserCase):
 
     def test_existing_checkin_has_distinct_filter(self):
         r=copy.deepcopy(SAMPLE);r['tasks'][0]['state']='REVIEW_EXISTING_CHECKIN';r['tasks'][0]['reasons']=['already_marked_checked_in']
-        r['summary'].update(ready_for_review=0,already_checked_in_requires_review=1)
+        r['summary'].update(ready_for_review=0, blocked=3, already_checked_in_requires_review=1)
         self.upload(r)
         self.page.locator('[data-filter=existing]').click()
         self.assertEqual(self.page.locator('.r').count(),1)

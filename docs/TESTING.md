@@ -7,7 +7,7 @@ python -m unittest discover -s tests -v
 python -m konaklamaflow examples/demo.json --as-of 2026-11-12 --output report.json
 ```
 
-The suite currently has 23 tests covering room overlaps, adjacent stays, maintenance, cancelled holds, bed requests, duplicate references, price consistency, deterministic output, and input validation. The local `report.json` is ignored by Git; never commit private operational reports.
+Run the discovery command above and read the final `Ran N tests` line. The historical note of 23 tests is obsolete. Coverage includes room overlaps, file clobber protection, duplicate JSON keys, PMS-registration blocking, no-show holds, and input validation. The local `report.json` is ignored by Git; never commit private operational reports.
 
 ## Check the fictional demo
 
