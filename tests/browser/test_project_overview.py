@@ -61,7 +61,7 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
 
     def test_responsive_and_navigation_are_accessible(self):
         page = self.page
-        self.assertEqual(page.locator('nav.links a').count(), 8)
+        self.assertEqual(page.locator('nav.links a').count(), 9)
         for width in (320, 375, 390, 768, 1366):
             page.set_viewport_size({"width": width, "height": 900})
             with self.subTest(width=width):
@@ -104,6 +104,13 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
             "(image) => image.currentSrc.endsWith('vision-ai-command-core-poster.jpg')"))
         self.assertEqual(page.locator("picture source").count(), 6)
 
+    def test_privacy_campaign_link_is_prominent_and_is_not_misrepresented(self):
+        page = self.page
+        self.assertEqual(page.locator('nav.links a[href="privacy-campaign.html"]').count(), 1)
+        self.assertEqual(page.locator('a.cta[href="privacy-campaign.html"]').count(), 1)
+        self.assertIn("Konsept; gerçek otel şifrelemesi",page.locator("main").inner_text())
+        self.assertTrue((self.site/"privacy-campaign.html").is_file())
+
     def test_synthetic_encryption_research_is_clearly_not_a_live_vault(self):
         page = self.page
         section = page.locator('#sifreli-kasa')
@@ -140,10 +147,11 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
         link = page.locator(".kf-promo-entry a")
-        self.assertEqual(link.count(), 3)
+        self.assertEqual(link.count(), 4)
         self.assertEqual(link.first.get_attribute("href"), "project-overview.html")
         self.assertEqual(link.nth(1).get_attribute("href"), "project-overview.html#otel-degerlendirmesi")
-        self.assertEqual(link.nth(2).get_attribute("href"), "privacy-vault-lab.html")
+        self.assertEqual(link.nth(2).get_attribute("href"), "privacy-campaign.html")
+        self.assertEqual(link.nth(3).get_attribute("href"), "privacy-vault-lab.html")
         self.assertTrue(link.nth(1).is_visible())
 
 
