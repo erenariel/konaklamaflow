@@ -75,10 +75,13 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
     def test_existing_demo_has_discoverable_overview_entry(self):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
-        link = page.locator(".kf-promo-entry a")
+        link = page.locator('.kf-promo-entry a[href="project-overview.html"]')
         self.assertEqual(link.count(), 1)
-        self.assertEqual(link.get_attribute("href"), "project-overview.html")
         self.assertTrue(link.is_visible())
+        download = page.locator('.kf-promo-entry a[href="konaklamaflow-offline-evaluation.zip"]')
+        self.assertEqual(download.count(), 1)
+        self.assertTrue(download.is_visible())
+        self.assertTrue((self.site / "konaklamaflow-offline-evaluation.zip").is_file())
 
 
 if __name__ == "__main__":
