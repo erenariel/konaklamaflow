@@ -148,6 +148,32 @@ class FunctionalControlContractTests(unittest.TestCase):
         self.assertNotIn(code, self.page.locator("#content").inner_text())
         self.assertEqual(self.page.evaluate("() => JSON.stringify(HOTEL_OPS_DATA)"), original)
 
+    def test_draft_ids_stay_unique_after_deletion_and_reset_clears_ui(self):
+        self.nav("ops_reservations")
+        self.page.locator('[data-op-action="new-reservation"]').click()
+        self.page.locator("#opsDraftForm button[type=submit]").click()
+        self.page.locator('[data-op-action="close-form"]').click()
+        first = self.page.evaluate("() => opsState.drafts[0].id")
+
+        self.page.locator('[data-op-action="new-reservation"]').click()
+        self.page.locator("#opsDraftForm button[type=submit]").click()
+        self.page.locator('[data-op-action="close-form"]').click()
+        second = self.page.evaluate("() => opsState.drafts[1].id")
+        self.assertNotEqual(first, second)
+
+        self.page.locator('[data-op-action="delete-draft"][data-draft-id="'+first+'"]').click()
+        self.page.locator('[data-op-action="new-reservation"]').click()
+        self.page.locator("#opsDraftForm button[type=submit]").click()
+        self.page.locator('[data-op-action="close-form"]').click()
+        ids = self.page.evaluate("() => opsState.drafts.map(d => d.id)")
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertIn(second, ids)
+
+        self.page.locator("#resetButton").click()
+        self.assertEqual(self.page.evaluate("() => opsState.drafts.length"), 0)
+        self.assertEqual(self.page.evaluate("() => opsState.nextDraftSequence"), 1)
+        self.assertNotIn("Kurgusal rezervasyon taslakları", self.page.locator("#content").inner_text())
+
     def test_adding_room_does_not_erase_edited_form_fields(self):
         self.nav("ops_reservations")
         self.page.locator('[data-op-action="new-reservation"]').click()

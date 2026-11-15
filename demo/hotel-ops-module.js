@@ -7,7 +7,7 @@
 const opsState={
   lang:'tr',selectedReport:'active_folios',selectedFolio:null,
   selectedReservation:null,selectedGuest:null,folioReservation:'',reportReservation:'',
-  reportFrom:'',reportTo:'',reportAgency:'',formOpen:false,roomCount:1,drafts:[],
+  reportFrom:'',reportTo:'',reportAgency:'',formOpen:false,roomCount:1,drafts:[],nextDraftSequence:1,
   formMessage:'',country:'TR',guestTab:'identity'
 };
 const opsDict={
@@ -475,7 +475,7 @@ function opsSyncLocale(lang){
      feedback.textContent=reason;
      return;
    }
-   const num=opsState.drafts.length+1;
+   const num=opsState.nextDraftSequence++;
    const id='DRAFT-'+a.slice(0,4)+'-'+String(num).padStart(4,'0');
    // Only non-personal summary persists in this browser tab's RAM.
    opsState.drafts.push({id,rooms:opsState.roomCount,persons:total});
@@ -484,7 +484,8 @@ function opsSyncLocale(lang){
  });
  const originalReset=document.getElementById('resetButton');
  originalReset?.addEventListener('click',()=>{opsState.drafts=[];opsState.formOpen=false;opsState.roomCount=1;
- opsState.formMessage='';opsState.selectedReservation=null;opsState.selectedFolio=null;opsState.selectedGuest=null;
- opsState.folioReservation='';opsState.reportReservation='';opsState.reportFrom='';opsState.reportTo='';opsState.reportAgency='';});
+ opsState.nextDraftSequence=1;opsState.formMessage='';opsState.selectedReservation=null;opsState.selectedFolio=null;opsState.selectedGuest=null;
+ opsState.folioReservation='';opsState.reportReservation='';opsState.reportFrom='';opsState.reportTo='';opsState.reportAgency='';
+ render();});
  opsSyncLocale('tr');
 })();
