@@ -76,7 +76,7 @@ class PrivacyCampaignBrowserTests(unittest.TestCase):
                     "() => document.documentElement.scrollWidth > window.innerWidth"
                 ))
         page.locator('a[href="#akış"]').click()
-        self.assertEqual(page.evaluate("location.hash"), "#akış")
+        self.assertEqual(page.evaluate("decodeURIComponent(location.hash)"), "#akış")
 
     def test_reduced_motion_uses_still_images(self):
         page = self.page
