@@ -16,6 +16,10 @@
 | **İşletme belgesi** | Tarih, işletme bağlamı, imza ve kaşe görüntüsü içeren kaynak form; **orijinal taramalar gizli tutulur**. |
 | **Teknik kanıtlar** | GitHub üzerinde birleştirilmiş kaynak kod, otomatik testler ve demo yayın iş akışı; bunlar operatör gözleminden **ayrı kanıtlardır**. |
 
+**[İmzalı ve kaşeli gerçek formun gizlenmiş taramasını incele / View the redacted signed & stamped review (PDF)](docs/evidence/KonaklamaFlow_Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf)** · **[Türkçe–İngilizce gizlilik ve kanıt açıklaması / Disclosure notice](docs/PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md)**
+
+**Kanıtın kapsamı:** Değerlendirici, kurgusal çevrimdışı demoyu otel ortamında incelediğini **beyan eder**; mekân veya kurumsal yetki bağımsız doğrulanmış değildir. Dört senaryoya ilişkin yazılı gözlem, yalnızca rezervasyon çakışmasına işaretlenmiş **Pass**, diğer üç senaryoda boş sonuç kutuları vardır. Bu belge bağımsız sertifika, kamu kurumu onayı veya gerçek PMS pilotu değildir. Kaşe başlığı ve inceleme sonuçları görünür, imza örnekleri ve hassas kaşe ayrıntıları gizlidir.
+
 **[Değerlendirmenin İngilizce, kişisel verilerden arındırılmış kaydını oku / Read the English evidence record](docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md)** · [Otomatik testler / CI](https://github.com/erenariel/konaklamaflow/actions) · [Açık kaynak katkı rehberi / Contributing](CONTRIBUTING.md)
 
 **English — evaluation significance:** On 15 November 2026 a property-affiliated front-office reviewer submitted a **dated, signed and company-stamped first-party assessment** of the fictional offline prototype. The paper report records a checked **Pass** for reservation conflict and written operator observations on room planning, manual authorization and incomplete translations. Three other scenario result boxes remain unselected. This documents domain-informed feedback, **not independently verified hotel approval, production use, third-party certification, or measured real-world adoption**.

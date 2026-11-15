@@ -2,6 +2,16 @@
 
 > **Evidence classification:** First-party / project-maintainer-affiliated operator feedback, **self-reported**. This is **not** an independent hotel audit, certification, verified pilot, production deployment, external endorsement, or proof of actual PMS connectivity.
 
+## Primary source made publicly inspectable — privacy-redacted scans
+
+**[Inspect the real, signed and property-stamped paper worksheet (public redacted PDF, 5 pages)](evidence/KonaklamaFlow_Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf)** · [Bilingual disclosure and privacy rationale / Türkçe ve İngilizce açıklama](PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md)
+
+The released PDF includes two bilingual introductory pages and **three photographic scans of the submitted handwritten pages**. The actual stamp impression's **“ASMALI”** heading remains visible, while signature specimens and stamp contact/address/tax details have been permanently masked at the pixel level. Written findings, the unchecked declaration boxes, three unselected individual scenario results, and the original **DRAFT** status remain unaltered. The original unredacted scans are not published.
+
+**Reported setting:** The project-affiliated reviewer states that the fictional offline demo was assessed **in a hotel environment**. This on-premises claim is the reviewer's self-report; the submission does not independently prove a site visit, an official authorization, a live hotel software integration, or external attestation. The operator worksheet is credible primary evidence of **what the reviewer wrote and signed**, not independent proof of all facts written on it.
+
+**Public PDF SHA-256:** `921ad8886a6351ea67b81b26c9a1ae11cdfb4c8cf09464a8f640a417ef6a2d3a`. Hashes allow byte-comparison only; they do not authenticate organizational authority.
+
 ## Evidence summary — why this review matters
 
 This record combines **an attributable business-context operator worksheet** with a **separate, reproducible GitHub engineering trail**. The reviewer self-identifies as an authorized front-office representative at a named hotel and submitted a dated, personally signed assessment bearing a property-stamp impression. The paper form is a meaningful **documented first-party hospitality operations review** of the fictional demo, more specific than an informal comment or an unsupported claim of product-market fit. It does not by itself establish an independent corporate endorsement.
