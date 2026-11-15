@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; connect-src 'none'; form-action 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; object-src 'none'; frame-src 'none'">
+<meta name="description" content="KonaklamaFlow synthetic-only, browser-local encryption lab. Not a deployed zero-access hotel system.">
+<title>KonaklamaFlow | Zero-Access Vault Lab (fictional-only)</title>
+<style>
+:root{color-scheme:dark;--bg:#080e1b;--pane:#142238;--text:#e7f7ff;--muted:#b4cbd9;--line:#44617a;--teal:#74f2e2;--amber:#ffdd9d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 75% 0,#193e50,transparent 55%),var(--bg);font:15px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+main{max-width:1050px;margin:0 auto;padding:38px 20px 75px}h1{font-size:clamp(29px,4.5vw,48px);line-height:1.13;margin:14px 0}h1 em{font-style:normal;color:var(--teal)}
+h2{font-size:20px;margin:0 0 12px}p{margin:8px 0 15px}a{color:var(--teal)}a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.brand{font-size:14px;font-weight:800;color:var(--teal);text-decoration:none}
+.pill{font-size:12px;color:var(--amber);border:1px solid #927e53;border-radius:30px;padding:7px 12px;font-weight:700}
+.warning{border-left:4px solid var(--amber);padding:14px 18px;background:#302a29;border-radius:10px;color:#fff0d8;margin:23px 0}
+.lead{max-width:780px;color:var(--muted);font-size:17px}.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+.flow>div{border:1px solid var(--line);padding:14px;border-radius:13px;background:#0e1b2c;text-align:center}.flow b{display:block;color:var(--teal)}.flow span{font-size:12px;color:var(--muted)}
+.card{background:linear-gradient(155deg,#16293f,#101b2e);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:18px;box-shadow:0 17px 50px #0004}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.small{font-size:13px;color:var(--muted)}
+pre,textarea{display:block;width:100%;border:1px solid #57718b;border-radius:10px;background:#091323;color:#bafce9;padding:14px;line-height:1.5;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
+pre{min-height:143px}textarea{height:214px;resize:vertical}label{font-weight:750;display:block;margin-bottom:8px}
+input{width:100%;border-radius:10px;background:#091323;border:1px solid #7394a1;color:white;padding:13px 14px;font-size:15px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}button{background:var(--teal);color:#092133;border:1px solid var(--teal);padding:11px 17px;border-radius:9px;font-size:14px;font-weight:800;cursor:pointer}button.secondary{background:transparent;color:var(--teal)}button:disabled{opacity:.45;cursor:not-allowed}
+#status{min-height:30px;color:var(--amber);font-weight:700}#revealed{color:#fff}.foot{font-size:12px;color:var(--muted);margin-top:27px}
+@media(max-width:700px){main{padding:20px 13px 55px}.grid,.flow{grid-template-columns:1fr}.card{padding:16px}button{flex:1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+ <header class="header"><a class="brand" href="project-overview.html">◈ KONAKLAMAFLOW · RETURN TO PROJECT</a><span class="pill">RESEARCH LAB · SYNTHETIC DATA ONLY</span></header>
+ <h1>Zero-Access <em>Hotel Vault</em></h1>
+ <p class="lead">A client-side cryptography experiment for a future guest-privacy architecture. <strong>Şifreli misafir kasası fikrinin yalnızca kurgusal verilerle çalışan, tarayıcı içi teknik denemesi.</strong></p>
+ <div class="warning"><strong>NOT A PRODUCTION SECURITY FEATURE / GERÇEK GÜVENLİK ÜRÜNÜ DEĞİL.</strong> This page has no backend, no hotel records, no accounts, no recovery and no reviewed E2EE deployment. It does not establish that the developer cannot read a real hotel's data. <strong>Never enter personal information, actual passports, passwords used elsewhere, or payment data.</strong></div>
+ <div class="flow" aria-label="Conceptual flow"><div><b>01 · DEVICE</b><span>Fake guest record is encrypted locally</span></div><div><b>02 · CIPHERTEXT</b><span>Only encrypted JSON is displayed; no upload</span></div><div><b>03 · AUTHORIZED UNLOCK</b><span>A correct lab passphrase unlocks the synthetic record</span></div></div>
+ <div class="grid">
+  <section class="card" aria-labelledby="sample-heading"><h2 id="sample-heading">Sample input · Kurgusal kayıt</h2><p class="small">Fixed invented record for demonstration. No editable guest fields or real PMS access.</p><pre id="sample" aria-label="Fixed fictional input record"></pre><p class="small">AES-256-GCM · fresh per-vault key · PBKDF2-HMAC-SHA-256 600,000 rounds · random salt and nonces · authenticated IDs</p></section>
+  <section class="card" aria-labelledby="passphrase-heading"><h2 id="passphrase-heading">Local key / Yerel anahtar</h2><label for="passphrase">Temporary lab passphrase (minimum 12 characters)</label><input id="passphrase" type="password" minlength="12" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="Use an invented, unique lab-only phrase">
+   <div class="actions"><button id="encrypt" type="button">🔒 Encrypt sample</button><button class="secondary" id="decrypt" type="button">🔓 Decrypt</button><button class="secondary" id="lock" type="button">Lock view</button><button class="secondary" id="clear" type="button">Clear all</button></div>
+   <p id="status" role="status" aria-live="polite">Only a fictional fixed record is available.</p>
+   <p class="small">Your passphrase and keys are not intentionally sent or stored. Browser memory, extensions and the integrity of the delivered page remain part of the threat model.</p>
+  </section>
+ </div>
+ <section class="card" aria-labelledby="encrypted-heading"><h2 id="encrypted-heading">Encrypted envelope / Şifreli paket</h2><label for="envelope">Inspectable ciphertext JSON (you may alter it to test tamper rejection)</label><textarea id="envelope" spellcheck="false" aria-describedby="envelope-note" placeholder="Press Encrypt sample. Encrypted JSON will appear here."></textarea><p id="envelope-note" class="small">Contains only ciphertext, salt, nonces and opaque demo identifiers. Export/import and recovery are deliberately not supported.</p></section>
+ <section class="card" aria-labelledby="revealed-heading"><h2 id="revealed-heading">Local decrypted result / Yerel açılmış kayıt</h2><pre id="revealed" aria-live="polite">LOCKED · No decrypted record in this view.</pre></section>
+ <p class="foot">Conceptual architecture and strict limitations: <a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/ZERO_ACCESS_HOTEL_VAULT_TR_EN.md">Hotel Vault security RFC (TR/EN)</a>. Independent review and real per-tenant key controls are mandatory before any deployment. This page is a cryptographic experiment, not Proton software or an affiliated product.</p>
+</main>
+<script>
+"use strict";
+(() => {
+  const SAMPLE = Object.freeze({
+    hotel: "FICTIONAL_HOTEL_ONLY",
+    reservation: "DEMO_RES_001",
+    guest: "SYNTHETIC_GUEST_001",
+    passport: "NOT_A_REAL_DOCUMENT",
+    note: "Illustrative note — no person is associated with this record."
+  });
+  const SCHEMA = "kf-vault-lab-v1";
+  const HOTEL = SAMPLE.hotel;
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder("utf-8", {fatal: true});
+  const byId = (id) => document.getElementById(id);
+  const status = (message) => { byId("status").textContent = message; };
+  const bytes = (n) => crypto.getRandomValues(new Uint8Array(n));
+  const b64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
+  function unb64(value, expectedLength) {
+    if (typeof value !== "string" || value.length > 12000 ||
+        !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(value)) {
+      throw new Error("Invalid encoding");
+    }
+    const raw = atob(value);
+    if (expectedLength !== null && raw.length !== expectedLength) throw new Error("Invalid length");
+    return Uint8Array.from(raw, (character) => character.charCodeAt(0));
+  }
+  const id = () => Array.from(bytes(16), b => b.toString(16).padStart(2,"0")).join("");
+  const wrapAAD = (e) => encoder.encode("KFLAB:v1:wrap:" + e.hotel_id + ":" + e.vault_id);
+  const recordAAD = (e) => encoder.encode("KFLAB:v1:data:" + e.hotel_id + ":" + e.vault_id + ":" + e.record_id);
+  const validId = (s) => typeof s === "string" && /^[0-9a-f]{32}$/.test(s);
+  async function passphraseKey(passphrase, salt, iterations) {
+    const passBytes = encoder.encode(passphrase);
+    try {
+      const key = await crypto.subtle.importKey("raw", passBytes, "PBKDF2", false, ["deriveKey"]);
+      return await crypto.subtle.deriveKey(
+        {name:"PBKDF2",salt: salt,iterations: iterations,hash:"SHA-256"},
+        key,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+    } finally {
+      passBytes.fill(0);
+    }
+  }
+  function validate(e) {
+    if (!e || typeof e !== "object" || Array.isArray(e) ||
+        Object.keys(e).sort().join("|") !==
+         ["ciphertext","data_nonce","hotel_id","kdf_iterations","kdf_salt","record_id","schema","vault_id","wrap_nonce","wrapped_dek"].sort().join("|") ||
+        e.schema !== SCHEMA || e.hotel_id !== HOTEL || e.record_id !== SAMPLE.reservation ||
+        !validId(e.vault_id) || e.kdf_iterations !== 600000) {
+      throw new Error("Invalid envelope metadata");
+    }
+    const fields = {kdf_salt:16,wrap_nonce:12,data_nonce:12,wrapped_dek:48,ciphertext:null};
+    const decoded = {};
+    for (const [key,length] of Object.entries(fields)) decoded[key] = unb64(e[key],length);
+    if (decoded.ciphertext.length < 16 || decoded.ciphertext.length > 12000) throw new Error("Invalid ciphertext length");
+    return decoded;
+  }
+  function wipeView() {
+    byId("revealed").textContent = "LOCKED · No decrypted record in this view.";
+    byId("passphrase").value = "";
+  }
+  async function encrypt() {
+    const pass = byId("passphrase").value;
+    if (pass.length < 12) {status("Enter a unique lab-only passphrase of at least 12 characters.");return;}
+    if (!globalThis.isSecureContext || !crypto.subtle) {status("Web Crypto requires an HTTPS or localhost secure context.");return;}
+    status("Encrypting synthetic sample locally…");
+    const envelope = {
+      schema:SCHEMA, hotel_id:HOTEL, record_id:SAMPLE.reservation, vault_id:id(), 
+      kdf_iterations:600000,kdf_salt:b64(bytes(16)),wrap_nonce:b64(bytes(12)),
+      data_nonce:b64(bytes(12)),wrapped_dek:"",ciphertext:""
+    };
+    try {
+      const kek = await passphraseKey(pass,unb64(envelope.kdf_salt,16),600000);
+      const dek = await crypto.subtle.generateKey({name:"AES-GCM",length:256},true,["encrypt","decrypt"]);
+      const rawDEK = await crypto.subtle.exportKey("raw",dek);
+      try {
+        envelope.wrapped_dek = b64(await crypto.subtle.encrypt(
+          {name:"AES-GCM",iv:unb64(envelope.wrap_nonce,12),additionalData:wrapAAD(envelope)},kek,rawDEK));
+      } finally {new Uint8Array(rawDEK).fill(0);}
+      envelope.ciphertext = b64(await crypto.subtle.encrypt(
+        {name:"AES-GCM",iv:unb64(envelope.data_nonce,12),additionalData:recordAAD(envelope)},
+        dek,encoder.encode(JSON.stringify(SAMPLE))));
+      byId("envelope").value = JSON.stringify(envelope,null,2);
+      wipeView();
+      status("Encrypted locally. No application upload or persistence; re-enter the lab passphrase to decrypt.");
+    } catch {
+      wipeView();byId("envelope").value = "";
+      status("Encryption failed. No envelope was retained.");
+    }
+  }
+  async function decrypt() {
+    const pass = byId("passphrase").value;
+    if (pass.length < 12) {status("Enter the lab passphrase used to encrypt this example.");return;}
+    wipeView();
+    // Keep a copy of the input only for this immediate operation.
+    try {
+      const source = byId("envelope").value;
+      if (source.length > 16000 || !source.trim()) throw new Error("Input too long or empty");
+      const envelope = JSON.parse(source);
+      const parts = validate(envelope);
+      const kek = await passphraseKey(pass,parts.kdf_salt,envelope.kdf_iterations);
+      const rawDEK = await crypto.subtle.decrypt(
+        {name:"AES-GCM",iv:parts.wrap_nonce,additionalData:wrapAAD(envelope)},kek,parts.wrapped_dek);
+      let dek;
+      try {dek = await crypto.subtle.importKey("raw",rawDEK,{name:"AES-GCM"},false,["decrypt"]);}
+      finally {new Uint8Array(rawDEK).fill(0);}
+      const plaintext = await crypto.subtle.decrypt(
+        {name:"AES-GCM",iv:parts.data_nonce,additionalData:recordAAD(envelope)},dek,parts.ciphertext);
+      const restored = JSON.parse(decoder.decode(plaintext));
+      // Display only the exact fixed synthetic record; never arbitrary attacker-supplied values.
+      if (JSON.stringify(restored) !== JSON.stringify(SAMPLE)) throw new Error("Unexpected content");
+      byId("revealed").textContent = JSON.stringify(restored,null,2);
+      status("Local decryption succeeded. Only the fixed fictional record is displayed.");
+    } catch {status("Unlock rejected: wrong passphrase, corrupted ciphertext, or invalid metadata.");}
+  }
+  byId("sample").textContent = JSON.stringify(SAMPLE,null,2);
+  byId("encrypt").addEventListener("click",encrypt);
+  byId("decrypt").addEventListener("click",decrypt);
+  byId("lock").addEventListener("click",() => {wipeView();status("Locked this browser view; ciphertext remains until cleared.");});
+  byId("clear").addEventListener("click",() => {
+    wipeView();byId("envelope").value = "";status("Cleared the ephemeral lab envelope.");
+  });
+  if (!globalThis.isSecureContext || !globalThis.crypto?.subtle) {
+    byId("encrypt").disabled = true;byId("decrypt").disabled = true;
+    status("Unavailable in this origin. Open the published HTTPS page or localhost to use Web Crypto.");
+  }
+})();
+</script>
+</body>
+</html>
