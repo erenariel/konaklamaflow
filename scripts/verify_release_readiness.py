@@ -168,8 +168,16 @@ def verify_staged_site(site: Path, root: Path = ROOT):
     overview = (site / "project-overview.html").read_text(encoding="utf-8")
     link_info = verify_overview_content(overview, present)
     home = (site / "index.html").read_text(encoding="utf-8")
-    for name in EXPECTED_INTERNAL_PAGES - {"index.html"}:
+    # Research-only pages are still preserved in staged assets, but the
+    # program demo navigation must highlight product workflows, not future
+    # vault/campaign concepts.
+    for name in ("project-overview.html", "synthetic-scorecard.html",
+                 "fictional-trace.html"):
         _require(f'href="{name}"' in home, "Integrated demo missing navigation link")
+    for value in ("project-overview.html#otel-degerlendirmesi",
+                  "KonaklamaFlow_Operator_Review", "İmzalı ve kaşeli otel",
+                  'href="privacy-campaign.html"', 'href="privacy-vault-lab.html"'):
+        _require(value not in home, "Product demo must not promote operator proof or future vault research")
     _require("BEGIN GENERATED_DECISION_EVIDENCE_UI" in home,
              "Source-bound evidence panel missing")
     return {"staged_files": len(expected), **link_info}
