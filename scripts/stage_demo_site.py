@@ -11,9 +11,15 @@ import shutil
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.render_scorecard import scorecard_html
+from scripts.render_trace_view import trace_view_html
 PUBLIC_ASSETS = {
     'index.html': 'demo/v04-integrated-preview.html',
     'hotel-operations.html': 'demo/v04-integrated-preview.html',
+    'project-overview.html': 'demo/project-overview.html',
     'v04-integrated-preview.html': 'demo/v04-integrated-preview.html',
     'global-presentation.html': 'demo/global-presentation-concept.html',
     'hotel-suite.html': 'demo/hotel-suite.html',
@@ -33,6 +39,12 @@ PUBLIC_ASSETS = {
     'mobile-preview.png': 'demo/mobile-preview.png',
 }
 
+# Build only offline, source-verified fictional pages. No private output is copied.
+GENERATED_ASSETS = {
+    'synthetic-scorecard.html': scorecard_html,
+    'fictional-trace.html': trace_view_html,
+}
+
 
 def stage_site(output: Path, root: Path = ROOT) -> None:
     if output.exists() or output.is_symlink():
@@ -44,6 +56,8 @@ def stage_site(output: Path, root: Path = ROOT) -> None:
     output.mkdir(parents=True)
     for destination, relative in PUBLIC_ASSETS.items():
         shutil.copyfile(root / relative, output / destination)
+    for destination, render in GENERATED_ASSETS.items():
+        (output / destination).write_text(render(root), encoding='utf-8')
     (output / '.nojekyll').write_text('', encoding='utf-8')
 
 

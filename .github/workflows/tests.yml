@@ -20,6 +20,25 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run tests
         run: python -m unittest discover -s tests -v
+      - name: Generate offline truth-labeled benchmark evidence
+        run: |
+          python -m konaklamaflow.evaluation --json /tmp/konaklamaflow-eval.json --markdown /tmp/konaklamaflow-eval.md
+          cat /tmp/konaklamaflow-eval.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Generate and verify fictional decision trace
+        run: |
+          python -m konaklamaflow.trace_cli --output /tmp/konaklamaflow-trace.json
+          python -m konaklamaflow.trace_cli --verify /tmp/konaklamaflow-trace.json
+      - name: Retain offline synthetic verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integrated-offline-evidence-${{ matrix.python-version }}-${{ github.sha }}
+          path: |
+            /tmp/konaklamaflow-eval.json
+            /tmp/konaklamaflow-eval.md
+            /tmp/konaklamaflow-trace.json
+          if-no-files-found: warn
+          retention-days: 14
       - name: Check commit privacy and Python syntax
         run: |
           python scripts/verify_commit_privacy.py
@@ -42,7 +61,18 @@ jobs:
           node --check demo/full-ui-i18n-catalog.js
           node --check demo/full-ui-lexicon.js
           node --check demo/hotel-workflow-ui.js
+          node --check demo/decision-evidence-ui.js
+          python -m scripts.render_scorecard --output /tmp/konaklamaflow-scorecard.html
+          python -m scripts.render_scorecard --check /tmp/konaklamaflow-scorecard.html
+          python -m scripts.render_trace_view --output /tmp/konaklamaflow-trace-view.html
+          python -m scripts.render_trace_view --check /tmp/konaklamaflow-trace-view.html
           python scripts/stage_demo_site.py --output /tmp/demo-site
+          test -s /tmp/demo-site/synthetic-scorecard.html
+          test -s /tmp/demo-site/fictional-trace.html
+          test -s /tmp/demo-site/project-overview.html
+          test -s /tmp/demo-site/ai-command-tour-poster.png
+          python -m scripts.verify_release_readiness --site /tmp/demo-site
+
 
   browser:
     runs-on: ubuntu-latest
