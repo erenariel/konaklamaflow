@@ -36,6 +36,10 @@ davranışları kapsam içindedir.
   rezervasyon ekranında görünüyor; kullanıcı bu taslakları silebiliyor
   veya tüm demo durumunu sıfırlayabiliyor. Bu liste gerçek rezervasyon
   değil ve canonical/PMS verisini değiştirmiyor.
+- "Oda ekle" artık formu baştan çizmek yerine yalnız yeni oda alanını
+  ekliyor; yazılmış tarihler, taslak etiketi ve mevcut seçenekler
+  kaybolmuyor. Hatalı tarih kontrolü de girilmiş değerleri silmeden
+  uyarı veriyor.
 - `tests/browser/test_functional_control_contract.py`, **20 modüle**
   gerçekten navigasyon yapıp içerik oluşmasını, etkin düğmelerin
   işlem adresi taşımasını, blokaj bilgisinin açılmasını ve temel

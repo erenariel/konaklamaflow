@@ -148,6 +148,37 @@ class FunctionalControlContractTests(unittest.TestCase):
         self.assertNotIn(code, self.page.locator("#content").inner_text())
         self.assertEqual(self.page.evaluate("() => JSON.stringify(HOTEL_OPS_DATA)"), original)
 
+    def test_adding_room_does_not_erase_edited_form_fields(self):
+        self.nav("ops_reservations")
+        self.page.locator('[data-op-action="new-reservation"]').click()
+        form = self.page.locator("#opsDraftForm")
+        form.locator('[name="draftLabel"]').fill("EXAMPLE GROUP")
+        form.locator('[name="checkin"]').fill("2026-11-20")
+        form.locator('[name="checkout"]').fill("2026-11-24")
+        self.page.locator('[data-op-action="add-room"]').click()
+        self.assertEqual(self.page.locator(".ops-room-field").count(), 2)
+        self.assertEqual(form.locator('[name="draftLabel"]').input_value(), "EXAMPLE GROUP")
+        self.assertEqual(form.locator('[name="checkin"]').input_value(), "2026-11-20")
+        self.assertEqual(form.locator('[name="checkout"]').input_value(), "2026-11-24")
+        self.assertEqual(self.page.evaluate("() => opsState.roomCount"), 2)
+        self.assertEqual(form.locator('[name="adults1"]').input_value(), "2")
+        self.assertEqual(form.locator('[name="children1"]').input_value(), "0")
+        # Opening the already-open form must not erase edits.
+        self.page.locator('[data-op-action="new-reservation"]').click()
+        self.assertEqual(form.locator('[name="draftLabel"]').input_value(), "EXAMPLE GROUP")
+
+    def test_invalid_draft_dates_show_reason_without_erasing_inputs(self):
+        self.nav("ops_reservations")
+        self.page.locator('[data-op-action="new-reservation"]').click()
+        form = self.page.locator("#opsDraftForm")
+        form.locator('[name="checkin"]').fill("2026-11-24")
+        form.locator('[name="checkout"]').fill("2026-11-20")
+        form.locator('button[type="submit"]').click()
+        self.assertIn("Tarihler geçerli olmalı", form.inner_text())
+        self.assertEqual(form.locator('[name="checkin"]').input_value(), "2026-11-24")
+        self.assertEqual(form.locator('[name="checkout"]').input_value(), "2026-11-20")
+        self.assertEqual(self.page.evaluate("() => opsState.drafts.length"), 0)
+
     def test_navigation_and_source_are_immutable_under_demo_ui_changes(self):
         source_before = self.page.evaluate("""() => JSON.stringify([
             INITIAL_EVALUATION, CANONICAL_DATA, HOTEL_OPS_REPORT

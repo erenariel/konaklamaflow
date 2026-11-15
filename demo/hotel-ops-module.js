@@ -385,8 +385,11 @@ function opsSyncLocale(lang){
      return;
    }
    if(!action)return;
-   if(action==='new-reservation'){opsState.formOpen=true;opsState.formMessage='';render()}
-   else if(action==='close-form'){opsState.formOpen=false;render()}
+   if(action==='new-reservation'){
+     if(opsState.formOpen){document.getElementById('opsDraftForm')?.scrollIntoView({block:'nearest'});return;}
+     opsState.formOpen=true;opsState.roomCount=1;opsState.formMessage='';render();
+   }
+   else if(action==='close-form'){opsState.formOpen=false;opsState.roomCount=1;opsState.formMessage='';render()}
    else if(action==='delete-draft'){
      const id=event.target.closest('[data-op-action]')?.dataset.draftId;
      if(!id||!opsState.drafts.some(d=>d.id===id))return;
@@ -394,7 +397,30 @@ function opsSyncLocale(lang){
      opsState.formMessage='';
      render();
    }
-   else if(action==='add-room'){if(opsState.roomCount<12){opsState.roomCount++;render()}}
+   else if(action==='add-room'){
+     if(opsState.roomCount>=12){
+       if(typeof notify==='function')notify('Demo formunda en fazla 12 oda ekleyebilirsin.');
+       return;
+     }
+     // Append a new fictional room field in-place. Re-rendering the entire
+     // form here discarded the user's entered dates, agency and room counts.
+     const form=document.getElementById('opsDraftForm');
+     const stack=form?.querySelector('.ops-room-stack');
+     const original=stack?.querySelector('fieldset.ops-room-field');
+     if(!stack||!original)return;
+     const next=opsState.roomCount;
+     const field=original.cloneNode(true);
+     const legend=field.querySelector('legend');
+     if(legend)legend.textContent=opsT('room')+' '+(next+1);
+     const category=field.querySelector('select[id^="draftRoom"]');
+     if(category){category.id='draftRoom'+next;category.value='standard';}
+     const adults=field.querySelector('input[name^="adults"]');
+     if(adults){adults.name='adults'+next;adults.value='2';}
+     const children=field.querySelector('input[name^="children"]');
+     if(children){children.name='children'+next;children.value='0';}
+     stack.append(field);
+     opsState.roomCount++;
+   }
    else if(action==='clear-folio-scope'){opsState.folioReservation='';opsState.selectedFolio=null;render()}
    else if(action==='apply-report'){
      opsState.selectedReport=document.getElementById('opsReportType').value;
@@ -435,7 +461,20 @@ function opsSyncLocale(lang){
         reason='Kişi sayısı seçilen oda kategorisinin örnek kapasitesine uygun değil.';
       }
    }
-   if(reason){opsState.formMessage=reason;render();return;}
+   if(reason){
+     // Preserve the completed form and show the validation reason in place.
+     opsState.formMessage=reason;
+     let feedback=form.querySelector('[data-ops-form-result]');
+     if(!feedback){
+       feedback=document.createElement('div');
+       feedback.dataset.opsFormResult='error';
+       feedback.className='ops-message';
+       feedback.setAttribute('role','status');
+       form.append(feedback);
+     }
+     feedback.textContent=reason;
+     return;
+   }
    const num=opsState.drafts.length+1;
    const id='DRAFT-'+a.slice(0,4)+'-'+String(num).padStart(4,'0');
    // Only non-personal summary persists in this browser tab's RAM.
