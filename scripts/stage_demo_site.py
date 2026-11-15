@@ -9,6 +9,7 @@ import argparse
 from pathlib import Path
 import shutil
 import sys
+from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -46,6 +47,72 @@ GENERATED_ASSETS = {
 }
 
 
+
+DOWNLOAD_BUNDLE = 'konaklamaflow-offline-evaluation.zip'
+OPERATOR_FEEDBACK_TEMPLATE = """# KonaklamaFlow — çevrimdışı operatör değerlendirmesi / offline operator test
+
+Bu paket yalnızca kurgusal otel verileri içerir. Gerçek PMS, OTA, KBS, ödeme
+sistemleri veya canlı bir yapay zekâ modeline bağlanmaz. index.html dosyasını
+bir tarayıcıda aç; internet bağlantısı gerekli değildir.
+
+Dikkat: Bu formu doldurmak gerçek bir denetimin yerini tutmaz. Gözlem
+yapılmadan 'denetlendi', 'bağımsız test edildi' veya 'otelde kullanıldı' yazma.
+
+Değerlendiren: [gerçek ad veya onaylı anonim rol]
+İlişki: [proje sahibi / projeye katılmamış otel çalışanı / diğer]
+Test tarihi ve saati: [gerçek tarih]
+Ortam ve tarayıcı: [gerçek cihaz/tarayıcı]
+İncelenen sürüm: [GitHub commit veya paket sürümü]
+Test durumu: YAPILMADI (gözlem tamamlanınca değiştir)
+
+Senaryo 1 — Rezervasyon çakışması:
+Beklenen: kurgusal rezervasyon ve dayanağı gösterilsin.
+Gözlenen: [yalnızca gerçekten görülen]
+Sonuç: [geçti / geçmedi / denenmedi]
+
+Senaryo 2 — Oda planı ve oda blokajları:
+Beklenen: teklif edilen oda ile fiilen doğrulanmış doluluk ayrışsın.
+Gözlenen: [yalnızca gerçekten görülen]
+Sonuç: [geçti / geçmedi / denenmedi]
+
+Senaryo 3 — Vardiya devri ve personel onayı:
+Beklenen: otomatik karar yerine doğrulama ihtiyacı görülsün.
+Gözlenen: [yalnızca gerçekten görülen]
+Sonuç: [geçti / geçmedi / denenmedi]
+
+Senaryo 4 — Dil ve erişilebilirlik:
+Beklenen: dil geçişi çalışsın; eksik çeviriler not edilsin.
+Gözlenen: [yalnızca gerçekten görülen]
+Sonuç: [geçti / geçmedi / denenmedi]
+
+En önemli gerçek bulgu / gelişim önerisi: [doldur]
+Kanıt: [kişisel bilgi içermeyen isteğe bağlı ekran görüntüsü veya issue]
+Yayın izni: [verildi / verilmedi / sorulmadı]
+
+Bağımsız değerlendirme yalnızca projeyi geliştirmemiş bir katılımcının
+gerçekten yaptığı test için kullanılabilir. Proje sahibinin testi,
+birinci taraf / maintainer self-assessment olarak kaydedilmelidir.
+
+Never upload real guest/employee identifiers, PMS exports, credentials,
+private rates, passport details, hotel logs or payment records.
+"""
+
+
+def write_offline_evaluation_bundle(output: Path) -> None:
+    """Build a deterministic, allowlisted ZIP from staged fictional public assets."""
+    members = sorted(set(PUBLIC_ASSETS) | set(GENERATED_ASSETS))
+    with ZipFile(output / DOWNLOAD_BUNDLE, 'w', compression=ZIP_DEFLATED) as archive:
+        for filename in members:
+            info = ZipInfo(filename, date_time=(2026, 11, 15, 0, 0, 0))
+            info.compress_type = ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
+            archive.writestr(info, (output / filename).read_bytes())
+        info = ZipInfo('OPERATOR_FEEDBACK_TEMPLATE.md', date_time=(2026, 11, 15, 0, 0, 0))
+        info.compress_type = ZIP_DEFLATED
+        info.external_attr = 0o644 << 16
+        archive.writestr(info, OPERATOR_FEEDBACK_TEMPLATE.encode('utf-8'))
+
+
 def stage_site(output: Path, root: Path = ROOT) -> None:
     if output.exists() or output.is_symlink():
         raise ValueError('Output already exists')
@@ -59,6 +126,7 @@ def stage_site(output: Path, root: Path = ROOT) -> None:
     for destination, render in GENERATED_ASSETS.items():
         (output / destination).write_text(render(root), encoding='utf-8')
     (output / '.nojekyll').write_text('', encoding='utf-8')
+    write_offline_evaluation_bundle(output)
 
 
 def main(argv=None):
