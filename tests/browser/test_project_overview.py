@@ -79,9 +79,12 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         self.assertEqual(recordings.locator(".showcase-card").count(), 3)
         self.assertEqual(vision.locator(".showcase-card.vision").count(), 3)
         self.assertIn("gerçek tarayıcı ekran kayıtlarıdır", recordings.inner_text())
-        self.assertIn("Concept art only", vision.inner_text())
-        self.assertIn("not implemented product features", vision.inner_text())
-        self.assertIn("bilinci kanıtı değildir", vision.inner_text())
+        self.assertIn("Product Experience", vision.inner_text())
+        self.assertIn("Interface concepts only", vision.inner_text())
+        self.assertIn("not current product functionality", vision.inner_text())
+        self.assertIn("arayüz tasarımını", vision.inner_text())
+        self.assertNotIn("machine consciousness", vision.inner_text())
+        self.assertNotIn("bilim kurgu", vision.inner_text())
         for section in (recordings, vision):
             for img in section.locator(".showcase-media img").all():
                 self.assertTrue(img.get_attribute("alt"))
