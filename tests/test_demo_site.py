@@ -21,6 +21,9 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('id="vizyon"', overview)
             self.assertIn('id="sifreli-kasa"', overview)
             self.assertIn('href="privacy-campaign.html"', overview)
+            for name in ("privacy-promise.gif", "privacy-promise-poster.jpg", "authorized-device.gif", "authorized-device-poster.jpg", "zero-access-flow.gif", "zero-access-flow-poster.jpg", "future-certification.gif", "future-certification-poster.jpg"):
+                self.assertIn(name, PUBLIC_ASSETS)
+                self.assertTrue((site/name).is_file(), f"Missing campaign media: {name}")
             campaign=(site/'privacy-campaign.html').read_text(encoding='utf-8')
             self.assertIn('NOT', campaign.upper())
             self.assertIn('Şu anda canlı şifreli otel sistemi değil',campaign)

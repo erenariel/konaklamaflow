@@ -65,6 +65,9 @@ class PrivacyCampaignBrowserTests(unittest.TestCase):
             )
             self.assertTrue(image.evaluate("(img) => img.currentSrc.startsWith('file:')"))
         self.assertEqual(self.page.locator(".card img").count(), 3)
+        self.assertEqual(self.page.locator(".hero-art img").get_attribute("src"), "privacy-promise.gif")
+        for filename in ("privacy-promise.gif", "authorized-device.gif", "zero-access-flow.gif", "future-certification.gif"):
+            self.assertIn(filename, self.page.content())
 
     def test_accessibility_and_mobile_no_overflow(self):
         page = self.page
@@ -88,7 +91,7 @@ class PrivacyCampaignBrowserTests(unittest.TestCase):
             arg=image.element_handle(),
         )
         self.assertTrue(image.evaluate(
-            "(img) => img.currentSrc.endsWith('vision-ai-command-core-poster.jpg')"
+            "(img) => img.currentSrc.endsWith('authorized-device-poster.jpg')"
         ))
 
 

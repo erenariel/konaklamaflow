@@ -46,6 +46,11 @@ These are **real browser recordings of an earlier fictional offline demo** (not 
 
 ## 🔐 Privacy First — Zero-Access Vision (concept)
 
+[![KonaklamaFlow privacy-first hotel vault future concept — fictional, not deployed](docs/images/privacy-promise.gif)](https://erenariel.github.io/konaklamaflow/privacy-campaign.html)
+
+*Özgün hareketli konsept · Bilimkurgu tanıtımı; mevcut otel güvenlik sertifikası veya canlı şifreli PMS değildir.*
+
+
 **[Explore the privacy campaign / Gizlilik vizyonu tanıtımını aç](https://erenariel.github.io/konaklamaflow/privacy-campaign.html)** · [Animated schematic: authorized device → encrypted record → hotel staff authorization](https://erenariel.github.io/konaklamaflow/privacy-campaign.html#akış)
 
 Our ambition is to build client-held-key protection for sensitive guest records: **a software vendor should not automatically possess guest decryption keys.** Today this is a research proposal with a **synthetic browser-only crypto lab**, **not** an audited, certified, or live encrypted hotel PMS. Future certification artwork is explicitly a concept, not an issued credential. No unique-in-the-world or absolute data-breach claims are made.

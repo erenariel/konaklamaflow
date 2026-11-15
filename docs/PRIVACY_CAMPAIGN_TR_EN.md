@@ -7,7 +7,7 @@
 - **Main concept:** *Gizliliğinizi görüyoruz. Verilerinizi görmemeyi hedefliyoruz.* / **We recognize your privacy; our goal is not to see your guest data.**
 - **Design goal:** Authorized hotel client encrypts sensitive guest data locally → remote service receives a ciphertext envelope → hotel-controlled authorized device decrypts locally → human authorization remains mandatory for operational actions.
 - **Current evidence:** An isolated synthetic-only browser AES-256-GCM encryption laboratory, executable source code, standard cryptography APIs and reproducible tests. Its design is defined in [the Zero-Access Vault RFC](ZERO_ACCESS_HOTEL_VAULT_TR_EN.md).
-- **Current marketing medium:** [static offline privacy campaign page](../demo/privacy-campaign.html), with three existing *clearly labeled science-fiction concept GIFs* and a responsive CSS-animated five-step encryption flow. It does not track visits, connect to external sites or access guest records.
+- **Current marketing medium:** [static offline privacy campaign page](../demo/privacy-campaign.html), with **four original privacy-specific concept GIFs** (one campaign hero and three explanatory scenes), plus reduced-motion posters and a responsive CSS-animated five-step encryption flow. It does not track visits, connect to external sites or access guest records.
 - **Separate, unrelated operator evidence:** [signed-and-stamped first-party review](OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md) evaluated the previous fictional hotel-operations demo, **not** the new encryption lab or the future architecture.
 
 ## Claims matrix / İddia sınırları
@@ -53,3 +53,16 @@
 - [Public campaign after deployment](https://erenariel.github.io/konaklamaflow/privacy-campaign.html)
 - [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)
 - [NIST key-management guidance](https://csrc.nist.gov/Projects/Key-Management/Key-Management-Guidelines)
+
+## New campaign media / Özgün kampanya animasyonları
+
+All four GIFs are **generated illustrative metaphors, not recordings of working encryption software**. Certified Privacy remains a hypothetical program; no certificate has been issued.
+
+| Concept | GIF | Still image |
+| --- | --- | --- |
+| privacy promise | [GIF](images/privacy-promise.gif) | [Poster](images/privacy-promise-poster.jpg) |
+| authorized device | [GIF](images/authorized-device.gif) | [Poster](images/authorized-device-poster.jpg) |
+| zero access flow | [GIF](images/zero-access-flow.gif) | [Poster](images/zero-access-flow-poster.jpg) |
+| future certification | [GIF](images/future-certification.gif) | [Poster](images/future-certification-poster.jpg) |
+
+The campaign and README disclose the limits in Turkish and English. The images do **not** demonstrate production cryptography or independently certified security.
