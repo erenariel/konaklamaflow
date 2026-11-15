@@ -61,7 +61,7 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
 
     def test_responsive_and_navigation_are_accessible(self):
         page = self.page
-        self.assertEqual(page.locator('nav.links a').count(), 4)
+        self.assertEqual(page.locator('nav.links a').count(), 6)
         for width in (320, 375, 390, 768, 1366):
             page.set_viewport_size({"width": width, "height": 900})
             with self.subTest(width=width):
@@ -71,6 +71,38 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
                 self.assertTrue(page.locator(".feature").first.is_visible())
         page.locator('a[href="#nasil"]').click()
         self.assertEqual(page.evaluate("location.hash"), "#nasil")
+
+    def test_product_recordings_and_future_vision_remain_distinct(self):
+        page = self.page
+        recordings = page.locator("#gercek-gif")
+        vision = page.locator("#vizyon")
+        self.assertEqual(recordings.locator(".showcase-card").count(), 3)
+        self.assertEqual(vision.locator(".showcase-card.vision").count(), 3)
+        self.assertIn("gerçek tarayıcı ekran kayıtlarıdır", recordings.inner_text())
+        self.assertIn("Concept art only", vision.inner_text())
+        self.assertIn("not implemented product features", vision.inner_text())
+        self.assertIn("bilinci kanıtı değildir", vision.inner_text())
+        for section in (recordings, vision):
+            for img in section.locator(".showcase-media img").all():
+                self.assertTrue(img.get_attribute("alt"))
+                img.scroll_into_view_if_needed()
+                page.wait_for_function(
+                    "(image) => image.complete && image.naturalWidth > 0",
+                    arg=img.element_handle())
+                self.assertTrue(img.evaluate("(image) => image.currentSrc.startsWith('file:')"))
+
+    def test_reduced_motion_uses_still_posters(self):
+        page = self.page
+        page.emulate_media(reduced_motion="reduce")
+        vision = page.locator("#vizyon")
+        img = vision.locator("picture img").first
+        img.scroll_into_view_if_needed()
+        page.wait_for_function(
+            "(image) => image.complete && image.naturalWidth > 0",
+            arg=img.element_handle())
+        self.assertTrue(img.evaluate(
+            "(image) => image.currentSrc.endsWith('vision-ai-command-core-poster.jpg')"))
+        self.assertEqual(page.locator("picture source").count(), 6)
 
     def test_first_party_hotel_evaluation_is_visible_and_properly_scoped(self):
         page = self.page
