@@ -10,8 +10,10 @@ from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 import sys
 from urllib.parse import urlsplit
+from zipfile import BadZipFile, ZipFile
 
-from scripts.stage_demo_site import ROOT, PUBLIC_ASSETS, GENERATED_ASSETS
+from scripts.stage_demo_site import (ROOT, PUBLIC_ASSETS, GENERATED_ASSETS,
+                                    DOWNLOAD_BUNDLE, OPERATOR_FEEDBACK_TEMPLATE)
 
 EXPECTED_INTERNAL_PAGES = frozenset({
     "index.html", "project-overview.html", "synthetic-scorecard.html",
@@ -96,8 +98,8 @@ def verify_overview_content(html: str, staged_files):
     _require("connect-src 'none'" in html, "Network-restricted CSP missing")
     parser = _OverviewLinks()
     parser.feed(html)
-    _require({"index.html"} <= parser.internal,
-             "Published demo not linked from overview")
+    _require({"index.html", DOWNLOAD_BUNDLE} <= parser.internal,
+             "Published demo and offline evaluation download must be linked from overview")
     _require("ai-command-tour-poster.png" in parser.local_images,
              "Historical demo screenshot missing")
     _require((parser.internal | parser.local_images) <= set(staged_files),
@@ -114,7 +116,7 @@ def verify_staged_site(site: Path, root: Path = ROOT):
     site = Path(site)
     root = Path(root)
     _require(site.is_dir() and not site.is_symlink(), "Staging directory absent or unsafe")
-    expected = set(PUBLIC_ASSETS) | set(GENERATED_ASSETS) | {".nojekyll"}
+    expected = set(PUBLIC_ASSETS) | set(GENERATED_ASSETS) | {".nojekyll", DOWNLOAD_BUNDLE}
     present = {path.name for path in site.iterdir()}
     _require(present == expected, "Unexpected, private or missing staged assets")
     for name in expected:
@@ -135,6 +137,18 @@ def verify_staged_site(site: Path, root: Path = ROOT):
         )
     _require((site / ".nojekyll").read_bytes() == b"",
              "Unexpected Pages metadata")
+    # The downloadable evaluation bundle contains only audited, fictional staged assets.
+    expected_zip_members = set(PUBLIC_ASSETS) | set(GENERATED_ASSETS) | {"OPERATOR_FEEDBACK_TEMPLATE.md"}
+    with ZipFile(site / DOWNLOAD_BUNDLE, "r") as archive:
+        _require(set(archive.namelist()) == expected_zip_members,
+                 "Offline evaluation archive has unexpected or missing files")
+        _require(archive.testzip() is None, "Corrupted offline evaluation archive")
+        for name in expected_zip_members - {"OPERATOR_FEEDBACK_TEMPLATE.md"}:
+            _require(archive.read(name) == (site / name).read_bytes(),
+                     "Archived demo asset is different from reviewed staged asset")
+        _require(archive.read("OPERATOR_FEEDBACK_TEMPLATE.md") ==
+                 OPERATOR_FEEDBACK_TEMPLATE.encode("utf-8"),
+                 "Offline operator feedback template was modified")
     overview = (site / "project-overview.html").read_text(encoding="utf-8")
     link_info = verify_overview_content(overview, present)
     home = (site / "index.html").read_text(encoding="utf-8")
@@ -152,7 +166,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         result = verify_staged_site(args.site)
-    except (ReleaseReadinessError, OSError, UnicodeError, ValueError):
+    except (ReleaseReadinessError, OSError, UnicodeError, ValueError, BadZipFile):
         print("Offline release candidate preflight failed", file=sys.stderr)
         return 2
     print(f"Offline fictional release preflight passed: {result['staged_files']} staged files")
