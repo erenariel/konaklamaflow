@@ -73,6 +73,9 @@ class OperationsCockpitTests(OperationsBrowserCase):
         other['tasks'] = other['tasks'][:2]
         other['summary'] = dict(arrivals_total=2, ready_for_review=0, blocked=2, already_checked_in_requires_review=0)
         self.page.locator('#file').set_input_files({'name':'report.json','mimeType':'application/json','buffer':json.dumps(other).encode()})
+        # The HTML File.text() handler is asynchronous: wait for the imported
+        # report to become authoritative before asserting its rendered values.
+        self.page.wait_for_function("() => document.getElementById('metricProperty').textContent === 'TEST_HOTEL_02'")
         self.assertEqual(self.page.locator('#metricProperty').inner_text(), 'TEST_HOTEL_02')
         self.assertEqual(self.page.locator('#metricAll').inner_text(), '2')
         self.page.locator('#reset').click()
