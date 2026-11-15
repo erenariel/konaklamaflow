@@ -140,7 +140,14 @@ function opsReservations(){
  opsTr(['<code dir="ltr">'+opsHtml(part.room_stay_id||'—')+'</code>',opsHtml(part.room_id||'ATANMADI'),opsHtml(part.category),opsHtml(part.adults),opsHtml(part.children),
  (part.nightly_rates||[]).length?part.nightly_rates.map(n=>opsHtml(n.date)+' '+opsMoney(n.amount,selected.currency)).join('<div class="ops-divider"></div>'):'<code>missing_source</code>'])))+
  opsLinkedRecords(selected)+'</div>'):'';
- return '<div class="ops-stack">'+opsNotice()+view+detail+(opsState.formOpen?opsBookingForm():'')+'</div>';
+ const draftList=opsState.drafts.length?opsCard('Kurgusal rezervasyon taslakları · bu oturum',
+  '<p class="ops-note">Bunlar yalnızca tarayıcıdaki geçici taslaklardır. PMS, kanal, tahsilat, oda tahsisi veya gerçek konaklama oluşturulmadı.</p>'+
+  opsTable(['Taslak kodu','Oda sayısı','Kişi sayısı','İşlem'],opsState.drafts.map(d=>opsTr([
+   '<code dir="ltr">'+opsHtml(d.id)+'</code>',
+   opsHtml(d.rooms),opsHtml(d.persons),
+   '<button type="button" class="mini" data-op-action="delete-draft" data-draft-id="'+opsHtml(d.id)+'">Taslağı sil</button>'
+  ])))):'';
+ return '<div class="ops-stack">'+opsNotice()+view+draftList+detail+(opsState.formOpen?opsBookingForm():'')+'</div>';
 }
 function opsBookingForm(){
  const agencies=HOTEL_OPS_DATA.agencies.map(a=>[a.id,a.name]);
@@ -380,6 +387,13 @@ function opsSyncLocale(lang){
    if(!action)return;
    if(action==='new-reservation'){opsState.formOpen=true;opsState.formMessage='';render()}
    else if(action==='close-form'){opsState.formOpen=false;render()}
+   else if(action==='delete-draft'){
+     const id=event.target.closest('[data-op-action]')?.dataset.draftId;
+     if(!id||!opsState.drafts.some(d=>d.id===id))return;
+     opsState.drafts=opsState.drafts.filter(d=>d.id!==id);
+     opsState.formMessage='';
+     render();
+   }
    else if(action==='add-room'){if(opsState.roomCount<12){opsState.roomCount++;render()}}
    else if(action==='clear-folio-scope'){opsState.folioReservation='';opsState.selectedFolio=null;render()}
    else if(action==='apply-report'){

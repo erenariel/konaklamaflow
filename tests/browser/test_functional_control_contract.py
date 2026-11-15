@@ -131,6 +131,23 @@ class FunctionalControlContractTests(unittest.TestCase):
         self.page.locator("#wfNext").click()
         self.assertNotEqual(self.page.evaluate("() => wfState.stage"), before)
 
+    def test_new_booking_draft_remains_visible_and_can_be_removed(self):
+        self.nav("ops_reservations")
+        original = self.page.evaluate("() => JSON.stringify(HOTEL_OPS_DATA)")
+        self.page.locator('[data-op-action="new-reservation"]').click()
+        self.page.locator("#opsDraftForm button[type=submit]").click()
+        code = self.page.evaluate("() => opsState.drafts[0]?.id")
+        self.assertTrue(code.startswith("DRAFT-"))
+        self.page.locator('[data-op-action="close-form"]').click()
+        tray = self.page.locator("#content")
+        self.assertIn("Kurgusal rezervasyon taslakları", tray.inner_text())
+        self.assertIn(code, tray.inner_text())
+        self.assertEqual(self.page.evaluate("() => HOTEL_OPS_DATA.reservations.length"), 12)
+        self.page.locator('[data-op-action="delete-draft"][data-draft-id="'+code+'"]').click()
+        self.assertEqual(self.page.evaluate("() => opsState.drafts.length"), 0)
+        self.assertNotIn(code, self.page.locator("#content").inner_text())
+        self.assertEqual(self.page.evaluate("() => JSON.stringify(HOTEL_OPS_DATA)"), original)
+
     def test_navigation_and_source_are_immutable_under_demo_ui_changes(self):
         source_before = self.page.evaluate("""() => JSON.stringify([
             INITIAL_EVALUATION, CANONICAL_DATA, HOTEL_OPS_REPORT

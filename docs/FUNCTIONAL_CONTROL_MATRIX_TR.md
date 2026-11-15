@@ -32,6 +32,10 @@ davranışları kapsam içindedir.
 - Kat hizmetlerinde **devre dışı duran "Teknik blokaj" düğmesi** artık
   ilgili kurgusal oda detayını açarak bakım/oda durumunu açıklıyor;
   bloke bir odayı serbest bırakmıyor veya oda durumunu değiştirmiyor.
+- Rezervasyon taslakları artık form kapatıldıktan sonra aynı oturumun
+  rezervasyon ekranında görünüyor; kullanıcı bu taslakları silebiliyor
+  veya tüm demo durumunu sıfırlayabiliyor. Bu liste gerçek rezervasyon
+  değil ve canonical/PMS verisini değiştirmiyor.
 - `tests/browser/test_functional_control_contract.py`, **20 modüle**
   gerçekten navigasyon yapıp içerik oluşmasını, etkin düğmelerin
   işlem adresi taşımasını, blokaj bilgisinin açılmasını ve temel
