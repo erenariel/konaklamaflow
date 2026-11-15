@@ -140,9 +140,10 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
         link = page.locator(".kf-promo-entry a")
-        self.assertEqual(link.count(), 2)
+        self.assertEqual(link.count(), 3)
         self.assertEqual(link.first.get_attribute("href"), "project-overview.html")
         self.assertEqual(link.nth(1).get_attribute("href"), "project-overview.html#otel-degerlendirmesi")
+        self.assertEqual(link.nth(2).get_attribute("href"), "privacy-vault-lab.html")
         self.assertTrue(link.nth(1).is_visible())
 
 
