@@ -12,6 +12,8 @@ Hotel · hospitality · front desk · reservation · Python · privacy · boutiq
 
 Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
 
+Bakımcı, 15 Kasım 2026 gece vardiyasında kurgusal demoyu kendi işinde denedi. Otel sistemine bağlanmadı ve misafir kaydı bu depoya konmadı. Bu, bağımsız bir otel pilotu değildir. Ayrıntı: [bakım kanıtı](docs/OSS_MAINTAINER_EVIDENCE_TR_EN.md).
+
 Paket sürümü `0.2.0rc1` bir ön sürümdür: [v0.2.0rc1](https://github.com/erenariel/konaklamaflow/releases/tag/v0.2.0rc1). Kararlı etiket [v0.1.1](https://github.com/erenariel/konaklamaflow/releases/tag/v0.1.1) olarak durur. Tarayıcıdaki v0.5 ekranı kurgusal demodur.
 
 ```bash

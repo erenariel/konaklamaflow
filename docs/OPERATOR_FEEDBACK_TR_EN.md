@@ -27,3 +27,7 @@ Real guest names, personal identifiers, passports, hotel account IDs, private in
 ## What feedback is not / Ne anlama gelmez?
 
 A completed test of the demo is not permission to access an operational hotel system, and a self-reported opinion is not evidence that the product is deployed. Independent uptake/pilot studies will only be reported after actual consent and verifiable review.
+
+## Recorded maintainer trial / Kayıtlı bakımcı denemesi
+
+On 15 November 2026 the maintainer tried the fictional demo during their own hotel night shift. No live PMS connection was used and no guest data was added here. The note is in [OSS_MAINTAINER_EVIDENCE_TR_EN.md](OSS_MAINTAINER_EVIDENCE_TR_EN.md). Another staff member can still file a separate fictional-data issue. That would be an independent report. This one is not.
