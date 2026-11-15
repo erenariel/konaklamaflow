@@ -72,6 +72,22 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page.locator('a[href="#nasil"]').click()
         self.assertEqual(page.evaluate("location.hash"), "#nasil")
 
+    def test_first_party_hotel_evaluation_is_visible_and_properly_scoped(self):
+        page = self.page
+        page.locator('a[href="#otel-degerlendirmesi"]').click()
+        self.assertEqual(page.evaluate("location.hash"), "#otel-degerlendirmesi")
+        review = page.locator("#otel-degerlendirmesi")
+        self.assertTrue(review.is_visible())
+        body = review.inner_text()
+        self.assertIn("imzalı ve kaşeli", body)
+        self.assertIn("birinci taraf", body)
+        self.assertIn("Pass", body)
+        self.assertIn("işaretlenmemiş", body)
+        self.assertIn("bağımsız denetim", body)
+        self.assertIn("maintainer-affiliated", body)
+        self.assertGreaterEqual(review.locator(
+            'a[href*="OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md"]').count(), 1)
+
     def test_existing_demo_has_discoverable_overview_entry(self):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
