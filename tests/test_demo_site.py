@@ -13,14 +13,14 @@ class DemoSiteTests(unittest.TestCase):
             self.assertEqual((site/'index.html').read_bytes(),(ROOT/'demo/v04-integrated-preview.html').read_bytes())
             overview=(site/'project-overview.html').read_text(encoding='utf-8')
             self.assertEqual(overview,(ROOT/'demo/project-overview.html').read_text(encoding='utf-8'))
-            self.assertIn('Geliştirme durumunu açıkça ayırıyoruz',overview)
-            self.assertIn('7 / 10',overview)
+            self.assertIn('Demo kapsamı:',overview)
+            self.assertIn('id="senaryolar"',overview)
             self.assertIn('Henüz yapılmayanlar',overview)
             self.assertIn('ai-command-tour-poster.png',overview)
             self.assertIn('id="gercek-gif"', overview)
-            self.assertIn('id="vizyon"', overview)
-            self.assertIn('id="sifreli-kasa"', overview)
-            self.assertIn('href="privacy-campaign.html"', overview)
+            self.assertIn('id="moduller"', overview)
+            self.assertNotIn('id="sifreli-kasa"', overview)
+            self.assertNotIn('href="privacy-campaign.html"', overview)
             for name in ("privacy-promise.gif", "privacy-promise-poster.jpg", "authorized-device.gif", "authorized-device-poster.jpg", "zero-access-flow.gif", "zero-access-flow-poster.jpg", "future-certification.gif", "future-certification-poster.jpg"):
                 self.assertIn(name, PUBLIC_ASSETS)
                 self.assertTrue((site/name).is_file(), f"Missing campaign media: {name}")
@@ -29,7 +29,7 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('Şu anda canlı şifreli otel sistemi değil',campaign)
             self.assertIn('connect-src \'none\'',campaign)
             self.assertIn('Bugün herhangi bir otele KonaklamaFlow güvenlik sertifikası verilmedi',campaign)
-            self.assertIn('href="privacy-vault-lab.html"',overview)
+            self.assertNotIn('href="privacy-vault-lab.html"',overview)
             vault=(site/'privacy-vault-lab.html').read_text(encoding='utf-8')
             self.assertIn("NOT A PRODUCTION SECURITY FEATURE",vault)
             self.assertIn("connect-src 'none'",vault)
@@ -37,16 +37,19 @@ class DemoSiteTests(unittest.TestCase):
             self.assertNotIn('localStorage',vault)
             self.assertNotIn('sessionStorage',vault)
             self.assertIn('FICTIONAL_HOTEL_ONLY',vault)
-            self.assertIn('Interface concepts only — not current product functionality.', overview)
-            for name in ('ai-command-tour.gif', 'roomplan-story.gif', 'overview-pulse.gif',
-                         'vision-ai-command-core.gif', 'vision-smart-room-grid.gif',
-                         'vision-executive-intelligence.gif',
-                         'vision-ai-command-core-poster.jpg', 'vision-smart-room-grid-poster.jpg',
-                         'vision-executive-intelligence-poster.jpg'):
+            self.assertNotIn('id="vizyon"', overview)
+            # Real recordings remain visible; unrelated research assets may
+            # still be staged, but they must not be promoted by overview.
+            for name in ('ai-command-tour.gif', 'roomplan-story.gif',
+                         'overview-pulse.gif'):
                 self.assertIn(name, overview)
-                self.assertTrue((site / name).is_file(), f'Staged showcase asset missing: {name}')
-            for number in (51,53,55,58,59):
-                self.assertIn(f'pull/{number}',overview)
+                self.assertTrue((site / name).is_file(), f'Staged demo recording missing: {name}')
+            for forbidden in ('otel-degerlendirmesi', 'OPERATOR_FIRST_PARTY_REVIEW',
+                              'KonaklamaFlow_Operator_Review', 'imzalı ve kaşeli',
+                              'PR #', 'privacy-campaign.html', 'privacy-vault-lab.html'):
+                self.assertNotIn(forbidden, overview)
+            self.assertIn('id="senaryolar"', overview)
+            self.assertIn('id="moduller"', overview)
             self.assertNotIn('<script',overview.lower())
 
             self.assertEqual((site/'index.html').read_bytes(),(site/'hotel-operations.html').read_bytes())
@@ -64,6 +67,9 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('href="synthetic-scorecard.html"', index)
             self.assertIn('href="fictional-trace.html"', index)
             self.assertIn('href="project-overview.html"', index)
+            self.assertIn('href="project-overview.html#senaryolar"', index)
+            self.assertNotIn('project-overview.html#otel-degerlendirmesi', index)
+            self.assertNotIn('İmzalı ve kaşeli otel değerlendirmesi', index)
             self.assertFalse((site/'.git').exists())
             self.assertFalse((site/'examples').exists())
 

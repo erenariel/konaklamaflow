@@ -20,18 +20,29 @@ EXPECTED_INTERNAL_PAGES = frozenset({
     "privacy-campaign.html",
 })
 _REQUIRED_OVERVIEW_COPY = (
-    "Geliştirme durumunu açıkça ayırıyoruz:",
-    "birleşik sürüm adayında",
-    "7 / 10",
-    "PR #65",
-    "PR #67",
-    "Gerçek otel",
+    "Demo kapsamı:",
+    'id="gercek-gif"',
+    'id="senaryolar"',
+    'id="moduller"',
+    "Rezervasyon incelemesi",
+    "Çakışma ve kanal uyuşmazlığı",
+    "Bakım ve temizlik blokajı",
+    "Henüz yapılmayanlar",
     "English summary",
-    "Product Experience · Interface Design",
-    "Zero-Access Hotel Vault",
-    "Gizlilik kampanyası",
-    "Interface concepts only — not current product functionality.",
     "gerçek tarayıcı ekran kayıtlarıdır",
+)
+_FORBIDDEN_PUBLIC_PROOF = (
+    "otel-degerlendirmesi",
+    "KonaklamaFlow_Operator_Review",
+    "OPERATOR_FIRST_PARTY_REVIEW",
+    "PUBLIC_EVIDENCE_DISCLOSURE",
+    "İmzalı ve kaşeli",
+    "company-stamped",
+    "PR #",
+    'id="vizyon"',
+    'id="sifreli-kasa"',
+    'href="privacy-campaign.html"',
+    'href="privacy-vault-lab.html"',
 )
 _STALE_COPY = (
     "henüz ana sürüme birleştirilmediler",
@@ -107,6 +118,8 @@ def verify_overview_content(html: str, staged_files):
         _require(phrase in html, "Overview release description incomplete")
     for phrase in _STALE_COPY:
         _require(phrase not in html, "Outdated PR/deployment claim")
+    for phrase in _FORBIDDEN_PUBLIC_PROOF:
+        _require(phrase not in html, "Overview must show workflows, not signed proof or future concepts")
     _require("<script" not in html.lower(), "Active script in overview")
     _require("connect-src 'none'" in html, "Network-restricted CSP missing")
     parser = _OverviewLinks()
@@ -115,12 +128,6 @@ def verify_overview_content(html: str, staged_files):
              "Published demo not linked from overview")
     _require("ai-command-tour-poster.png" in parser.local_images,
              "Historical demo screenshot missing")
-    for name in ("vision-ai-command-core.gif", "vision-smart-room-grid.gif",
-                 "vision-executive-intelligence.gif"):
-        _require(name in parser.local_images, "Vision concept GIF missing")
-    for name in ("vision-ai-command-core-poster.jpg", "vision-smart-room-grid-poster.jpg",
-                 "vision-executive-intelligence-poster.jpg"):
-        _require(name in parser.local_images, "Reduced-motion vision poster missing")
     for name in ("ai-command-tour.gif", "roomplan-story.gif", "overview-pulse.gif"):
         _require(name in parser.local_images, "Real-demo GIF missing")
     _require((parser.internal | parser.local_images) <= set(staged_files),
@@ -161,8 +168,16 @@ def verify_staged_site(site: Path, root: Path = ROOT):
     overview = (site / "project-overview.html").read_text(encoding="utf-8")
     link_info = verify_overview_content(overview, present)
     home = (site / "index.html").read_text(encoding="utf-8")
-    for name in EXPECTED_INTERNAL_PAGES - {"index.html"}:
+    # Research-only pages are still preserved in staged assets, but the
+    # program demo navigation must highlight product workflows, not future
+    # vault/campaign concepts.
+    for name in ("project-overview.html", "synthetic-scorecard.html",
+                 "fictional-trace.html"):
         _require(f'href="{name}"' in home, "Integrated demo missing navigation link")
+    for value in ("project-overview.html#otel-degerlendirmesi",
+                  "KonaklamaFlow_Operator_Review", "İmzalı ve kaşeli otel",
+                  'href="privacy-campaign.html"', 'href="privacy-vault-lab.html"'):
+        _require(value not in home, "Product demo must not promote operator proof or future vault research")
     _require("BEGIN GENERATED_DECISION_EVIDENCE_UI" in home,
              "Source-bound evidence panel missing")
     return {"staged_files": len(expected), **link_info}

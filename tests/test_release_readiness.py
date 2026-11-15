@@ -74,6 +74,10 @@ class ReleaseReadinessTests(unittest.TestCase):
             with self.assertRaises(ReleaseReadinessError):
                 verify_overview_content(
                     overview + "henüz ana sürüme birleştirilmediler", staged)
+            # A staged promo must not re-introduce the signed hotel review PDF.
+            with self.assertRaises(ReleaseReadinessError):
+                verify_overview_content(
+                    overview + '<a href="docs/evidence/Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf">İmzalı ve kaşeli</a>', staged)
             with self.assertRaises(ReleaseReadinessError):
                 verify_overview_content(
                     overview.replace("ai-command-tour-poster.png",
