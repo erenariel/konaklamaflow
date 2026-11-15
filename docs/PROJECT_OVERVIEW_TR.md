@@ -7,24 +7,26 @@ Bu belge `demo/project-overview.html` tanıtım sayfasının içerik sınırlar�
 - **Yayımlanmış v0.5.2**: Birleşik çevrimdışı operasyon demosu, 18 odalı
   kurgusal kaynak, oda planı, önceden hesaplanmış kural açıklamaları.
 - **Gerçek ekran görüntüsü**: `docs/images/ai-command-tour-poster.png`,
-  yayınlanan v0.5.2 deneyimine aittir. Henüz yayımlanmamış PR ekranları gibi
-  gösterilmez.
+  tarihsel olarak yayınlanan v0.5.2 deneyimine aittir. Entegre
+  modüllerin görüntüsü gibi gösterilmez.
 - **Kavramsal akış şeması**: Kaynak → kural motoru → kanıt alanları → insan sınırı.
   Bunun bir UX şeması olduğu, canlı bir iş akışından alınmadığı belirtilir.
 - **Sentetik ölçüm**: PR #51'deki yedi etiket/10 vaka kapsamının paydaları açık;
   5 TP, 2 TN, 0 FP, 0 FN yalnız değerlendirilen sentetik etiketler içindir.
   Gerçek otel doğruluğu veya bağımsız doğrulama değildir.
-- **İnceleme adayları**: PR #51, #53, #55, #58, #59 için ayrı kartlar.
-  Kodu/testi bulunan fakat `main` dalına alınmamış durumdadırlar.
+- **Sürüm adayı kaynakları**: PR #51, #53, #55, #58, #59 ve Python-only
+  #65 için ayrı kartlar, birleşik #67 bağlantısı. Kodun GitHub Pages
+  üzerinde yayınlandığını iddia etmez.
 - **TR + EN**: Türkçe detay, kısa İngilizce özet. Tam çeviri yapılmış izlenimi
   verilmez.
 
 ## Güncelleme düzeni
 
-Bu sayfa **14 Kasım 2026 tarihli bir durum özeti** sunar; GitHub API'sine bağlanıp
-PR durumlarını canlı okumaz. Yeni bir PR birleştirildiğinde veya canlı demo
-değiştiğinde, bu metni ve README'yi gözden geçirip güncellemek gerekir.
-Yayımlanmış/kurgusal/incelemede ayrımı korunmalıdır.
+Bu sayfa **sürüm adayı ile canlı dağıtımı ayıran kalıcı bir açıklama**
+sunar; GitHub API'sine bağlanıp PR durumlarını canlı okumaz. PR bağlantıları
+kaynak kodu ve test geçmişini gösterir. Canlı siteye hangi commit'in
+dağıtıldığını GitHub Actions/Pages üzerinden doğrulamak gerekir.
+Kurgusal/gerçek ve önerilen/onaylanan ayrımı daima korunur.
 
 Sayfa `scripts/stage_demo_site.py` ile kontrollü dağıtım klasörüne
 `project-overview.html` olarak kopyalanır. Bu işlem kendi başına Pages'e

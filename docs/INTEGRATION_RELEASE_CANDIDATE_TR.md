@@ -49,15 +49,20 @@ python -m unittest discover -s tests -v
 python -m unittest discover -s tests/browser -v
 python scripts/generate_canonical_demo.py --check
 python scripts/stage_demo_site.py --output /tmp/integrated-kf-release
+python -m scripts.verify_release_readiness --site /tmp/integrated-kf-release
 ```
 
 Başarı kriteri: 3 Python sürümü, Chromium, üreticinin `--check`
 kontrolleri, offline artefaktların bir arada oluşması ve repo kaynakları,
 özel loglar ile `.git` klasörünün yayın dizininde bulunmaması.
 
-**Yayımdan önce ayrıca:** `demo/project-overview.html` ve README'deki
-14 Kasım 2026 tarihli PR durum özeti, gerçek merge ve Pages yayın durumuna
-göre yeniden yazılmalı; şu anki statik sayfa tarihli bir fotoğraftır.
+**Yayın açıklamaları:** `demo/project-overview.html` ve README metinleri
+artık bir sürüm adayı ile canlı dağıtım arasındaki farkı zamana dayanıklı
+biçimde anlatır. Görsel tarihsel v0.5.2 demo ekranına aittir; PR durumları
+statik sayfada canlı takip edilmez. `scripts.verify_release_readiness`
+sunulan tüm dosyaları ve bağlantıları yayından önce denetler.
+Canlı Pages deploy tamamlandıktan sonra gerçek ağ üzerinden smoke test
+yapmak gerekir (ayrıntı: `docs/RELEASE_GATE_TR.md`).
 
 Bu sürüm **gerçek PMS/KBS/OTA/ödeme sistemi, canlı AI çağrısı, gerçek
 personel onayı, otomatik check-in veya değiştirilemez audit** içermez.

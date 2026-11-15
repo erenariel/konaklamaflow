@@ -45,18 +45,18 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         self.assertEqual(page.locator("h1").count(), 1)
         self.assertEqual(page.locator(".flow-step").count(), 4)
         self.assertEqual(page.locator(".metric").count(), 4)
-        self.assertEqual(page.locator(".feature").count(), 5)
+        self.assertEqual(page.locator(".feature").count(), 6)
         self.assertTrue(page.locator(".hero-visual img").evaluate(
             "(img) => img.complete && img.naturalWidth > 0"))
         body = page.locator("main").inner_text()
-        self.assertIn("Yayımlanmış v0.5.2 demoyu keşfet", body)
-        self.assertIn("henüz ana sürüme birleştirilmediler", body)
+        self.assertIn("Kurgusal otel demosunu keşfet", body)
+        self.assertIn("birleşik sürüm adayında", body)
         self.assertIn("Gerçek otel", body)
         self.assertIn("7 / 10", body)
         self.assertIn("English summary", body)
         hrefs = page.locator(".feature a").evaluate_all(
             "(elements) => elements.map(element => element.href)")
-        for pr in (51, 53, 55, 58, 59):
+        for pr in (51, 53, 55, 58, 59, 65):
             self.assertTrue(any(url.endswith("/pull/" + str(pr)) for url in hrefs))
 
     def test_responsive_and_navigation_are_accessible(self):

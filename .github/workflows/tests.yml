@@ -71,6 +71,7 @@ jobs:
           test -s /tmp/demo-site/fictional-trace.html
           test -s /tmp/demo-site/project-overview.html
           test -s /tmp/demo-site/ai-command-tour-poster.png
+          python -m scripts.verify_release_readiness --site /tmp/demo-site
 
 
   browser:
