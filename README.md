@@ -29,6 +29,16 @@
 | **Operational views / İş akışları** | Navigable front-office, reservation, room, folio and report-style **demonstrations**; individual controls may still be prototypes |
 | **Synthetic checks / Kurgusal testler** | Reproducible project-authored benchmark and fictional decision trace with explicit limits, not measured real-hotel accuracy |
 
+### Animated Product Showcase / Gerçek demo GIF'leri
+
+These are **actual browser recordings of an earlier verified fictional offline demo**, **not** AI-generated depictions of currently operating integrations. / Önceki kurgusal demodan alınan gerçek tarayıcı kayıtlarıdır.
+
+| AI review & evidence | Room plan & housekeeping | Operations overview |
+| :---: | :---: | :---: |
+| [![Fictional AI review screen recording](docs/images/ai-command-tour.gif)](docs/images/ai-command-tour.gif) | [![Fictional room plan screen recording](docs/images/roomplan-story.gif)](docs/images/roomplan-story.gif) | [![Fictional operations overview screen recording](docs/images/overview-pulse.gif)](docs/images/overview-pulse.gif) |
+
+**[Explore the cinematic Vision Showcase / Bilimkurgu konsept GIF'leri](https://erenariel.github.io/konaklamaflow/project-overview.html#vision)** — original AI-generated **future concept art**, deliberately separated from the real browser recordings and not evidence of autonomous AI, live PMS integration or implemented features. [Concept provenance](docs/VISION_SHOWCASE_TR_EN.md).
+
 **Browser-recording provenance:** The showcase GIFs and screenshots were captured from an earlier verified offline demo snapshot; **later copy-only clarity edits may not appear** in those recordings. They are real browser recordings of fictional data, not evidence of a live hotel integration. [Original recording and source-manifest details](PROJECT_DETAILS_2026-11-15.md).
 
 The current integrated demo is source-validated, offline and privacy-restricted. Multilingual strings are **drafts**, not professionally verified translations. See [technical details and historical feature notes](PROJECT_DETAILS_2026-11-15.md) and [current limitations](docs/LIMITATIONS.md).
