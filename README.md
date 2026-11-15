@@ -44,6 +44,10 @@ These are **real browser recordings of an earlier fictional offline demo** (not 
 
 ✨ **[Explore the cinematic Future Intelligence vision — three original science-fiction animated concepts](https://erenariel.github.io/konaklamaflow/project-overview.html#vizyon)** · [GIF provenance and clear concept labels](docs/VISION_SHOWCASE_TR_EN.md).
 
+## Zero-Access Hotel Vault — privacy architecture research 🔐
+
+A future **Proton-inspired, client-held-key encryption model** is under design for sensitive hotel guest records. A standalone [**synthetic-only browser encryption lab**](https://erenariel.github.io/konaklamaflow/privacy-vault-lab.html) demonstrates locally encrypted and decrypted **fake data** using standard Web Crypto AES-GCM; it has **no backend, real users, staff key-sharing, recovery or live PMS connection**. It is **not an audited zero-knowledge hotel product** and cannot establish that a future vendor can never see plaintext. [Technical threat model and development gates (TR/EN)](docs/ZERO_ACCESS_HOTEL_VAULT_TR_EN.md).
+
 ## Hotel-operator evidence / İmzalı ve kaşeli değerlendirme
 
 On **15 November 2026**, a reviewer affiliated with this project and identifying as an **Asmalı Hotel front-office representative** submitted a **dated, signed and property-stamped first-party operator worksheet** about the fictional offline demo. The reviewer reports evaluating it in a hotel setting; this location and authority have **not been independently authenticated**.
