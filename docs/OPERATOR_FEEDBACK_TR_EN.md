@@ -2,6 +2,12 @@
 
 We welcome practical feedback from hotel reception, housekeeping and finance staff **without uploading actual records**. Türkçe ya da İngilizce geri bildirim kabul edilir.
 
+## İndirilebilir çevrimdışı değerlendirme paketi / Downloadable offline evaluation kit
+
+Yayımlandıktan sonra [kurgusal operatör test paketini indir](https://erenariel.github.io/konaklamaflow/konaklamaflow-offline-evaluation.zip), ZIP dosyasını çıkar ve `index.html` dosyasını aç. Paketteki `OPERATOR_FEEDBACK_TEMPLATE.md` **boştur** ve test tamamlanana kadar 'YAPILMADI' durumundadır. Gerçek bir çalışanın gözlemleri olmadan doldurulmuş gibi gösterilmez. Kaynak dosyaların ana dala birleşmesi ve GitHub Pages dağıtımı tamamlanmadan bağlantı erişilebilir olmayabilir.
+
+**English:** Once deployed, download the allowlisted fictional ZIP, unzip and open `index.html`. Fill in `OPERATOR_FEEDBACK_TEMPLATE.md` **only after performing each scenario**. A maintainer's self-review is first-party; an independent review requires observations from a person who did not develop the project. This does not connect to live PMS, OTA, KBS, payments or real guest records.
+
 ## Five-minute offline evaluation / Beş dakikalık değerlendirme
 
 1. Open the [public fictional demo](https://erenariel.github.io/konaklamaflow/) or download the [standalone HTML](../demo/v04-integrated-preview.html). Use only the preloaded example records.
