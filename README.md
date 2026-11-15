@@ -1,229 +1,77 @@
-# KonaklamaFlow
+# KonaklamaFlow 🏨
 
-**Privacy-first, open-source reservation operations reviewer for small hotels in Türkiye and beyond.**
+**Privacy-first, MIT-licensed hotel reservation and operations review prototype for small hotels.**  
+**Küçük oteller için gizlilik öncelikli, açık kaynak rezervasyon ve operasyon inceleme prototipi.**
 
-## Tanıtım ve geliştirme kanıtları / Project overview
+[![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python package](https://img.shields.io/badge/Python-0.2.0rc1%20candidate-orange)](pyproject.toml)
+[![Offline demo](https://img.shields.io/badge/demo-v0.5.x%20fictional-blue)](https://erenariel.github.io/konaklamaflow/)
 
-**[Görsel proje tanıtımı — kaynak → kural → kanıt → personel işleyişi](demo/project-overview.html)**
+## Try it / Demoyu aç
 
-### İmzalı ve kaşeli işletme değerlendirmesi / Documented hotel-operator review
+- **[Interactive fictional hotel demo / Çalışan kurgusal demo](https://erenariel.github.io/konaklamaflow/)**
+- **[Visual project overview / Proje tanıtımı](https://erenariel.github.io/konaklamaflow/project-overview.html)**
+- [Integrated offline HTML](demo/v04-integrated-preview.html) · [Global multilingual presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html)
+- [Releases](https://github.com/erenariel/konaklamaflow/releases) · [Open issues](https://github.com/erenariel/konaklamaflow/issues) · [Pull requests](https://github.com/erenariel/konaklamaflow/pulls)
 
-**15 Kasım 2026 — Asmalı Hotel ön büro bağlamı (değerlendiricinin beyanı).** KonaklamaFlow'un kurgusal çevrimdışı demosuna ilişkin **tarihli, imzalı ve işletme kaşesi bulunan üç sayfalık bir operatör değerlendirme formu** özel olarak sunuldu. Bu, yalnızca bir geliştirme iddiası değil, yazılı gözlemler içeren **birinci taraf / proje geliştiricisiyle ilişkili operasyonel geri bildirim kaydıdır**. Kaşenin, imzanın ve değerlendiricinin kurumsal yetkisinin bağımsız doğrulaması yapılmamıştır.
+> **Scope / Kapsam:** This is an **offline, fictional-data prototype**, not a deployed hotel PMS. It has **no live PMS/OTA/KBS/payment integration, no automatic check-in and no live AI-provider call**. Python rules precompute deterministic review evidence for the static browser demo. Staff authorization remains separate. **Do not enter real guest records or hotel credentials.**
+>
+> **Bu bir canlı otel otomasyonu değildir.** Arayüz kurgusal örneklerle rezervasyon inceleme ve personel karar sınırlarını gösterir.
 
-| Kanıt türü / Evidence | Doğrulanabilen kapsam / Supported scope |
+## What does it do? / Ne işe yarar?
+
+| Module / Modül | Function / İşlev |
 | --- | --- |
-| **Operatör değerlendirmesi** | Rezervasyon çakışması senaryosu **Pass** işaretli; oda planı, vardiya devri ve dil kullanılabilirliği hakkında yazılı gözlemler var, fakat bu üç senaryonun sonuç kutuları boş. |
-| **İşletme belgesi** | Tarih, işletme bağlamı, imza ve kaşe görüntüsü içeren kaynak form; **orijinal taramalar gizli tutulur**. |
-| **Teknik kanıtlar** | GitHub üzerinde birleştirilmiş kaynak kod, otomatik testler ve demo yayın iş akışı; bunlar operatör gözleminden **ayrı kanıtlardır**. |
+| **Reservation review / Rezervasyon kontrolü** | Displays source-linked fictional bookings, potential conflicts and deterministic reason codes instead of unsubstantiated AI decisions |
+| **Room plan / Oda planı** | Distinguishes proposed room assignments, maintenance holds, housekeeping and **unverified physical occupancy** |
+| **Human review / Personel incelemesi** | Explains **source → rule → evidence field → required staff action** without approving arrivals or changing an actual PMS |
+| **Operational views / İş akışları** | Navigable front-office, reservation, room, folio and report-style **demonstrations**; individual controls may still be prototypes |
+| **Synthetic checks / Kurgusal testler** | Reproducible project-authored benchmark and fictional decision trace with explicit limits, not measured real-hotel accuracy |
 
-**[İmzalı ve kaşeli gerçek formun gizlenmiş taramasını incele / View the redacted signed & stamped review (PDF)](docs/evidence/KonaklamaFlow_Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf)** · **[Türkçe–İngilizce gizlilik ve kanıt açıklaması / Disclosure notice](docs/PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md)**
+**Browser-recording provenance:** The showcase GIFs and screenshots were captured from an earlier verified offline demo snapshot; **later copy-only clarity edits may not appear** in those recordings. They are real browser recordings of fictional data, not evidence of a live hotel integration. [Original recording and source-manifest details](PROJECT_DETAILS_2026-11-15.md).
 
-**Kanıtın kapsamı:** Değerlendirici, kurgusal çevrimdışı demoyu otel ortamında incelediğini **beyan eder**; mekân veya kurumsal yetki bağımsız doğrulanmış değildir. Dört senaryoya ilişkin yazılı gözlem, yalnızca rezervasyon çakışmasına işaretlenmiş **Pass**, diğer üç senaryoda boş sonuç kutuları vardır. Bu belge bağımsız sertifika, kamu kurumu onayı veya gerçek PMS pilotu değildir. Kaşe başlığı ve inceleme sonuçları görünür, imza örnekleri ve hassas kaşe ayrıntıları gizlidir.
+The current integrated demo is source-validated, offline and privacy-restricted. Multilingual strings are **drafts**, not professionally verified translations. See [technical details and historical feature notes](PROJECT_DETAILS_2026-11-15.md) and [current limitations](docs/LIMITATIONS.md).
 
-**[Değerlendirmenin İngilizce, kişisel verilerden arındırılmış kaydını oku / Read the English evidence record](docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md)** · [Otomatik testler / CI](https://github.com/erenariel/konaklamaflow/actions) · [Açık kaynak katkı rehberi / Contributing](CONTRIBUTING.md)
+## Hotel-operator evidence / İmzalı ve kaşeli değerlendirme
 
-**English — evaluation significance:** On 15 November 2026 a property-affiliated front-office reviewer submitted a **dated, signed and company-stamped first-party assessment** of the fictional offline prototype. The paper report records a checked **Pass** for reservation conflict and written operator observations on room planning, manual authorization and incomplete translations. Three other scenario result boxes remain unselected. This documents domain-informed feedback, **not independently verified hotel approval, production use, third-party certification, or measured real-world adoption**.
+On **15 November 2026**, a reviewer affiliated with this project and identifying as an **Asmalı Hotel front-office representative** submitted a **dated, signed and property-stamped first-party operator worksheet** about the fictional offline demo. The reviewer reports evaluating it in a hotel setting; this location and authority have **not been independently authenticated**.
 
-Birleşik çevrimdışı sürüm adayı (PR [#67](https://github.com/erenariel/konaklamaflow/pull/67)), kurgusal demo ile sentetik benchmark/karar geçmişi ve kanıt panelini aynı inceleme paketinde toplar. Tanıtımda önceki v0.5.2 demosuna ait gerçek ekran görüntüsü, 7/10 proje etiketli vaka kapsamı, sınırlamalar ve kaynak PR bağlantıları yer alır. **Bu PR'ın açılması canlı yayına alma işlemi değildir.** Pages bağlantısı ancak `main` birleştirmesi, başarılı dağıtım ve yayın doğrulamasından sonra kullanılabilir: `https://erenariel.github.io/konaklamaflow/project-overview.html`. TR anlatım ve kısa EN özet içerir.
+**Four topics have handwritten observations; only the reservation-conflict scenario is explicitly checked “Pass”.** Room plan, night-shift handover and language/usability have written feedback but their result boxes are **unmarked**. Incomplete translations were noted. The original form still says **DRAFT / NOT YET CONFIRMED** and its declaration checkboxes remain unmarked.
 
-**English:** A visual offline project overview explains the **integrated release candidate** without claiming it is deployed; the historic v0.5.2 screenshot is shown separately from the new features. Source and test history includes [#51](https://github.com/erenariel/konaklamaflow/pull/51), [#53](https://github.com/erenariel/konaklamaflow/pull/53), [#55](https://github.com/erenariel/konaklamaflow/pull/55), [#58](https://github.com/erenariel/konaklamaflow/pull/58), [#59](https://github.com/erenariel/konaklamaflow/pull/59), along with the bounded Python-only allocation solver [#65](https://github.com/erenariel/konaklamaflow/pull/65). Synthetic benchmark results do **not** establish real-world hotel accuracy. Source PR links are not a live deployment-status feed.
+- **[Inspect the actual privacy-redacted paper scans (EN/TR PDF)](docs/evidence/KonaklamaFlow_Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf)**
+- [English operator evidence summary](docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md) · [Bilingual privacy/legal disclosure](docs/PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md) · [Consolidated evidence PR #76](https://github.com/erenariel/konaklamaflow/pull/76)
 
-## Gece vardiyası başlangıcı
+**Evidence status:** Documented, signed and stamped **first-party, maintainer-affiliated self-assessment**, **not** independent hotel certification, government approval, live hotel-system testing, or proof of customer adoption. Original signature specimens and private stamp details are not publicly uploaded.
 
-Bu depo canlı otel programı değildir. PMS, KBS, ödeme ve kimlik sistemi yoktur. Ekrandaki “hazır” ifadesi yalnızca bu anlık görüntüdeki operasyonel ön incelemedir. PMS kaydı ve KBS bildirimi ayrı işlerdir; ikisini de bu araç yapmaz.
+## Run locally / Yerel kullanım
 
-**Önceki sürüm rehberi (14 Kasım 2026 tarihli kayıt):** Python paket adayı `0.2.0rc1`; GitHub Pages üzerinde yayımlanan **kurgusal, çevrimdışı birleşik demo v0.5.2 (Orbit Command)**. `demo/hotel-suite.html` eski v0.3 prototipidir; `operations.html` eski v0.2 kokpitidir. **Bu demo sürümleri, yayımlanmış Python paket sürümü değildir.** Örnek otelin 12 Kasım 2026 tarihi **sabit kurgusal veri tarihidir**, güncel sistem tarihi değildir.
+**Requirements:** Python 3.11+; offline synthetic fixtures only.
 
 ```bash
+git clone https://github.com/erenariel/konaklamaflow.git
+cd konaklamaflow
+python -m pip install .
 python -m konaklamaflow examples/demo.json --as-of 2026-11-12
 python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12 --at-time 14:01
 ```
 
-Çıktı dosyası girdi dosyasından farklı bir yol olmalıdır. Rapor yalnızca dosya sahibi tarafından okunacak şekilde yazılır. Gerçek misafir listesini veya PMS dışa aktarımını bu depoya koymayın.
+To inspect the standalone demo without Python, open [`demo/v04-integrated-preview.html`](demo/v04-integrated-preview.html). CLI inputs and reports must not contain personal data; write reports to a different file than the input.
 
-Canlı birleşik demo: **https://erenariel.github.io/konaklamaflow/**. GitHub Pages, `main` dalındaki başarılı testlerden sonra güncellenir; önceki sürümler için `hotel-suite.html` ve `operations.html` ayrı tarihsel bağlantılar olarak korunur.
+## Engineering evidence / Teknik testler
 
-**Mevcut kurgusal demoda:** kaynakla eşleştirilmiş rezervasyonlar, oda planı/zaman çizelgesi, salt okunur kontrol kuyrukları ve senaryolu AI açıklama gösterimi bulunur. Orbit Command gece teması yayımdadır. **Taslak:** 10 dilde çeviriler (uzman incelemesi gerekli). **Yok:** canlı PMS/OTA/KBS/ödeme bağlantısı, gerçek AI çağrısı veya otomatik check-in.
+- [GitHub Actions — automated tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml): Python 3.11–3.13 unit tests and Chromium browser checks.
+- [Main-run CI evidence (15 Nov 2026)](https://github.com/erenariel/konaklamaflow/actions/runs/43682701510) · [Successful demo workflow](https://github.com/erenariel/konaklamaflow/actions/runs/43682944588)
+- [Merged integrated offline preview PR #67](https://github.com/erenariel/konaklamaflow/pull/67)
+- [Synthetic benchmark PR #51](https://github.com/erenariel/konaklamaflow/pull/51) and [scorecard PR #58](https://github.com/erenariel/konaklamaflow/pull/58): **7/10** project-authored cases were evaluated; this is **not** a real-world accuracy percentage.
+- [Architecture/limits](docs/LIMITATIONS.md) · [Release gate](docs/RELEASE_GATE_TR.md) · [Security policy](SECURITY.md)
 
-[![KonaklamaFlow v0.5.2 fictional demo: AI review center, fictional room plan and human approval boundary](docs/images/ai-command-tour-poster.png)](demo/v04-integrated-preview.html)
+## Releases, contributions and roadmap / Sürümler ve katkı
 
-**[Open KonaklamaFlow fictional integrated demo / Birleşik otel demosunu aç](https://erenariel.github.io/konaklamaflow/)** · [Global 10-language guided presentation](https://erenariel.github.io/konaklamaflow/global-presentation.html) · [Offline integrated HTML](demo/v04-integrated-preview.html) · [Legacy v0.3 room workbench](demo/hotel-suite.html) · [Latest tagged package release](https://github.com/erenariel/konaklamaflow/releases/latest)
+**Version tracks are separate:** the browser **v0.5.x fictional demo** is not the same release as the Python distribution in [`pyproject.toml`](pyproject.toml), currently **`0.2.0rc1`**. A demo tag or GitHub Release does **not** imply a corresponding PyPI package was published. [Release strategy and metrics](docs/RELEASE_STRATEGY_TR_EN.md).
 
-Download and open `demo/v04-integrated-preview.html` for the **fictional integrated offline workbench in this repository revision**. The demo contains 20 navigable sections, combining front-desk reviews, hotel operations and workflow views: fictional guests, reservations and multiroom drafts, folios, agency City Ledger, 32 report options, room blocks, room assets, and FX/invoicing limits. The **language selector is in the top bar**, with ten-language review explanations (not yet comprehensive app-wide translations). A separate [global guided presentation](demo/global-presentation-concept.html) demonstrates 90-second / 3-minute / 7-minute stories and RTL Arabic/Hebrew. The image above is a screenshot of the **published v0.5.2 fictional offline demo** (merged PR #31). It is not a live hotel installation. Historical viewers remain at `reviewer.html`, `operations.html` and `hotel-suite.html`.
+The immediate roadmap includes stronger interactive coverage, source-bound operator feedback, offline distribution, translation review and **future, separately authorized** integration design. See [Issues](https://github.com/erenariel/konaklamaflow/issues) and [Changelog](CHANGELOG.md). Do not infer feature completion from an open pull request.
 
-Original illustrated concepts remain available separately: [AI hero illustration](docs/images/ai-presentation-hero.svg) and [explanation-flow illustration](docs/images/ai-explanation-flow.svg). These SVG concepts are distinct from the real application screenshots and recordings below.
+Contributions and feedback are welcome: [CONTRIBUTING.md](CONTRIBUTING.md) · [Fictional-only operator feedback guide](docs/OPERATOR_FEEDBACK_TR_EN.md). Please never include real guest names, passports, hotel system exports, credentials or operational secrets.
 
-### Aurora reservation timeline — Issue #37 (merged PR #42)
-
-The offline room plan now has a **source-bound reservation timeline** with 7/14/21-day ranges, date navigation, floor/category/status/channel/search filters, sticky room headers and exact reservation-to-detail navigation. The Python-validated fictional room-stays are authoritative; checkout day is excluded (`[arrival, departure)`). Cancelled and no-show bars are labeled historical states, not physical occupancy. Maintenance and technical holds remain separate. Ten-language draft labels, RTL, mobile horizontal scroll and reduced-motion preference are preserved. The candidate does not establish live availability, real AI, actual guests or PMS integration. This feature is introduced through PR #42 and is not part of any published tagged Python package release.
-
-### Shared fictional reservation model — Issue #35 (merged PR #39)
-
-The published fictional demo's integrated dashboard, room plan, PMS views, AI scenarios, folios and 32 report options now share **one Python-validated source**, [`examples/canonical-hotel.json`](examples/canonical-hotel.json): 12 KF reservations, 18 rooms and explicit reservation/stay/guest/agency/folio links. No old KFD financial record is matched by its number or silently migrated. Only three explicitly authored fictional folios have recorded movements; the other nine reservations show `not_applicable` for finance. Missing-source reports remain unavailable. Follow a reservation from the dashboard or room plan to its exact PMS details, related folio and scoped report.
-
-Run `python scripts/generate_canonical_demo.py --check` to verify all current projections. Historical CLI/API fixtures remain separate examples. [Schema, regeneration commands and multiroom limits (TR)](docs/CANONICAL_SCHEMA_TR.md). This is included in the **published fictional Pages demo**; it is not a tagged Python package release. All integrations remain disabled; translations remain drafts.
-
-### AI review, made visible — published fictional v0.5.2 demo
-
-**Aurora room control — published fictional preview:** The integrated Room Plan now opens with floor-grouped graphical cards, independent housekeeping/physical-occupancy/assignment axes, operational badges, filters and canonical reservation/folio navigation. [Desktop](docs/images/aurora-room-plan-desktop.png) · [Mobile](docs/images/aurora-room-plan-mobile.png) · [Arabic RTL](docs/images/aurora-room-plan-rtl.png). The current fictional snapshot has no checked-in evidence: physical occupancy stays unverified, and an unassigned room is not called verified vacant or sellable. The shared reservation model (merged PR #39) and timeline (merged PR #42) are visible in the offline Pages demo. No deployment to a real hotel, PMS or AI provider is implied.
-
-**[Open the offline demo](demo/v04-integrated-preview.html)** · [Merged PR #31](https://github.com/erenariel/konaklamaflow/pull/31) · [Static desktop preview](docs/images/v052-overview-1440.png) · [Mobile preview](docs/images/v052-mobile.png)
-
-**Execution boundary:** The Python rule engine runs during fixture/report generation, before the standalone HTML is published. Its deterministic report is embedded in the demo, which displays and switches between scenarios using JavaScript. There is **no Pyodide, live Python execution in the browser, live AI call, or PMS integration**. The review panel opens on a preloaded fictional example with multiple rule reasons. The visual story illustrates Source → precomputed Python rules → scripted explanatory text → staff review. The colorful command center highlights the current evidence, corresponding fictional rooms and the next human boundary. Gradients, restrained motion, snapshot charts and a status ticker make the flow visible; they do not connect a model, approve an arrival or create new operating results. Room counts stay bound to the same fictional snapshot. The chart shows sample assignments, not verified physical occupancy, revenue or a forecast.
-
-Motion is optional. The app respects system reduced-motion and its own motion switch. Static posters are shown first here; open an animation when desired:
-
-| Actual application recording | Motion preview | Static alternative |
-| --- | --- | --- |
-| AI evidence and human handoff | [ai-command-tour.gif](docs/images/ai-command-tour.gif) | [Poster](docs/images/ai-command-tour-poster.png) |
-| Room plan, housekeeping and technical hold | [roomplan-story.gif](docs/images/roomplan-story.gif) | [Poster](docs/images/roomplan-story-poster.png) |
-| Overview, source charts and progress | [overview-pulse.gif](docs/images/overview-pulse.gif) | [Poster](docs/images/overview-pulse-poster.png) |
-
-The linked GIFs are real browser recordings captured from a prior reviewed integrated-demo commit; later copy-only clarity edits may not appear in the recordings. All three were captured with `python scripts/record_demo_tour.py --showcase all`. Each has a source/report/GIF/poster hash manifest, recorded interactions, a 5 MB limit and zero external requests/browser errors. `python scripts/capture_previews.py` refreshes the actual desktop, RTL, mobile and presentation screenshots. These are synthetic demonstrations, not measured hotel adoption or real AI-provider results. The ten-language UI remains a translation draft pending human review.
-
-[![Tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Status](https://img.shields.io/badge/status-v0.2.0rc1%20package%20%7C%20v0.5%20demo-yellow)](CHANGELOG.md)
-
-> **Project status (2026-11-14):** Runnable **fictional/offline v0.5 demo** with Python-validated folio/report samples and explicit staff-only reservations. This is not a certified PMS, operational hotel ledger, real AI integration, live OTA/KBS, identity processor, payment system, or tax-compliant invoicing product. The 10-language material is a translation **draft** pending native-speaker review. No real customer deployment or third-party live access is claimed.
-
-**TR:** KonaklamaFlow, küçük ve butik otellerin rezervasyon ve oda blokajı kontrollerini kurgusal veya önceden pseudonimleştirilmiş verilerle deneyebilmesi için oluşturulmuş, açık kaynaklı bir *ön kontrol / karar destek motorudur*. Herhangi bir otel sistemine kendiliğinden giriş yapmaz. **Gerçek PMS üzerinde işlem yapmaz, misafire söz vermez ve KBS bildirimi göndermez.**
-
-**EN:** A deterministic, provider-neutral dry-run reviewer: ingest pseudonymized reservations and room availability, inspect possible conflicts, suggest safe room choices, and print a next-day arrival checklist. Every proposed action needs a human decision in the authorized property-management system.
-
-## Maintained open source / Açık kaynak bakım ve katılım
-
-**TR:** GitHub'da herkes kaynak kodu, testleri ve kurgusal demoyu inceleyebilir. Otel operasyonu deneyimini paylaşmak isteyenler, **gerçek misafir bilgileri veya PMS çıktısı göndermeden** [kurgusal operatör testlerini](docs/OPERATOR_FEEDBACK_TR_EN.md) uygulayıp [geri bildirim issue'su](https://github.com/erenariel/konaklamaflow/issues/new/choose) açabilir.
-
-**EN:** Inspect the code, reproduce an offline test case, and open an issue using synthetic data only. [Operator feedback guide](docs/OPERATOR_FEEDBACK_TR_EN.md) · [Contributor guide](CONTRIBUTING.md) · [Release channels](docs/RELEASE_CHANNELS_TR_EN.md) · [Public maintenance evidence and gaps](docs/OSS_MAINTAINER_EVIDENCE_TR_EN.md).
-
-Current adoption, independently verified pilots, third-party review and production usage have **not** been established. A passing CI badge is not a claim of real-world validation.
-
-## Problems we are solving / Ne işe yarıyor?
-
-- **Overbooking / duplicate booking review:** overlapping confirmed room assignments, repeated OTA references, incompatible categories.
-- **Tomorrow's arrival briefing:** generate a simple queue for front-desk and housekeeping teams.
-- **Room block recommendations:** match sold category and bed requirement against real available inventory, avoiding maintenance periods and overlapping bookings. These are proposals **only**.
-- **Cancellation review:** cancelled bookings with a previously held room are highlighted for manual verification; never auto-remove a booking.
-- **Base price consistency:** identify mismatches between a given nightly base price and provided base total, without inventing tax or commission rules.
-- **Privacy by default:** do not accept guest names, phone numbers, passports, identity numbers, email addresses, payment cards or access tokens in the input schema.
-
-## Quick start (Python 3.11+)
-
-No external runtime libraries, no account, no network calls:
-
-```bash
-# from the cloned project root
-python -m konaklamaflow examples/demo.json --as-of 2026-11-12 --output report.json
-python -m unittest discover -s tests -v
-```
-
-Install locally if desired:
-
-```bash
-python -m pip install -e .
-konaklamaflow examples/demo.json --as-of 2026-11-12
-```
-
-The demo has **five fictional rooms and five fictional reservations**. The initial report finds one proposed room, one inventory conflict, a cancellation hold to review, and a base-price mismatch. All amounts, room references and dates in the sample are fictional.
-
-### Output (sample)
-
-```json
-{
-  "mode": "DRY_RUN_ONLY",
-  "summary": {
-    "rooms": 5,
-    "reservations": 5,
-    "critical_alerts": 1,
-    "review_alerts": 2,
-    "room_proposals": 1,
-    "tomorrow_arrivals": 3
-  }
-}
-```
-
-This abbreviated example only displays a subset of the complete report fields. The full sample output is under `examples/demo-report.json`.
-
-## Offline visual viewer / Görsel panel
-
-![KonaklamaFlow offline report viewer showing five fictional reservations, three alerts, and one advisory room proposal](docs/images/demo-report.png)
-
-*Fictional demonstration data only. Room proposals require human review.*
-
-Open `demo/viewer.html` directly in your browser to explore the **fictional** report. The viewer offers a mobile-friendly presentation, Turkish issue explanations, critical-first ordering, and filters for critical and review alerts. Original report details remain available under **Rapor ayrıntısı**. It supports schema 1.0 dry-run reports up to 3 MB; malformed files leave the last valid report on screen. Errors are shown inline, the file picker supports keyboard input, and **Kurgusal örneğe dön** resets the demo. For your own pseudonymized results, select the generated `report.json` file with **Rapor JSON yükle**. The viewer contains no CDNs, telemetry, report uploads, storage or external JavaScript; it only renders the local file you select. **This is a report viewer, not a browser-based PMS.**
-
-## Security, real-world use, limitations
-
-- The demo intentionally contains no credentials, customer identity data or any hotel identifiers. **Do not copy real PMS exports into a public repository, CI logs, issue comments or sample files.**
-- Real integration requires vendor authorization, written property authorization, an API agreement where appropriate, security review, documented consent/legal basis, and a protected runtime. Import normalization and PII minimization must happen *before* this engine.
-- KBS (police accommodation notifications), official registries, tax/financial records, accounting and regulatory obligations are **out of scope**. No field substitution, KBS workarounds, credential harvesting, login automation or guest identity handling is implemented.
-- Property-specific rules (room upgrades, twin requests, cancellation holds, local taxes) must be reviewed by the operator. No output should be treated as a final booking decision.
-- There is no telemetry, AI provider API call, database or scheduler in the review engine. The optional hosted demo loads its static page from GitHub Pages; selected report files are processed locally in the browser. Download the viewer for fully offline use.
-
-See [Security](SECURITY.md), [Input Specification](docs/INPUT_SPEC.md), [Architecture](docs/ARCHITECTURE.md), and [Known Limitations](docs/LIMITATIONS.md).
-
-## Roadmap — practical, measurable milestones
-
-1. **Current prototype:** validated pseudonymized JSON, deterministic rules, engine/browser regression tests, CLI, and fictional demonstrations. Candidate branch capabilities are described below.
-2. **v0.2:** opt-in local dashboard, import adapter specification, immutable audit format, more test scenarios for split stays and mixed capacity.
-3. **v0.3:** community-driven integrations *only* for vendor-supported APIs, with sandbox test suites and explicit approval; multi-property namespace isolation.
-4. **v1.0 goal:** stable schema, upgrade policies, security review, opt-in pilot documentation, observability and maintainer governance. We do **not** claim these features exist today.
-
-Read the [maintenance roadmap](docs/MAINTAINER_PLAN.md), [testing guide](docs/TESTING.md) and [issue templates](.github/ISSUE_TEMPLATE).
-
-## Contributing / Katkı
-
-PRs, reproducible bug reports, documentation improvements, and **synthetic** test fixtures are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Never include real guest data in an issue.
-
-## License and provenance
-
-[MIT](LICENSE). Initially developed with AI assistance under human project direction; tests and claims must be reviewed before publishing. This project is independent and unaffiliated with any specific PMS, channel manager, hotel brand, OTA, government service or AI platform. It was inspired by real-world hospitality operation challenges, not by exporting proprietary systems or customer records.
-
-## Front Desk Operations Prototype (v0.2.0rc1)
-
-The older operations prototype includes a privacy-first **check-in readiness reviewer**, not a live check-in service. It combines pseudonymous reservation references, housekeeping and technical holds, arrival-time rules and authorized review signals. A second AI can receive an expiring **read-only** task handoff; it cannot change reservations, send messages, collect payment or submit KBS notifications.
-
-- [Offline operations cockpit](demo/operations.html) — fictional, browser-local viewer (historical `/operations.html` route on Pages).
-- [Operations product blueprint](docs/PRODUCT_BLUEPRINT_TR.md)
-- [Second-AI handoff protocol](docs/AI_AGENT_PROTOCOL_TR.md)
-- [Market and competitor research](docs/COMPETITIVE_RESEARCH_TR.md)
-- [Go-to-market strategy](docs/MARKETING_GO_TO_MARKET_TR.md)
-- [Release quality gates](docs/RELEASE_QUALITY_CHECKLIST_TR.md)
-
-Run locally:
-
-```bash
-python -m konaklamaflow.ops_cli examples/operations-demo.json --as-of 2026-11-12 --at-time 14:01 --output ops-report.json
-python -m unittest discover -s tests -v
-```
-
-**Limitations:** no real PMS integration, no customer identity data, no official registration, no automatic hotel check-in. AI can make mistakes; every critical decision requires fresh authoritative verification and a human operator.
-
-## Hotel operations suite — v0.3 prototype
-
-The suite extends the shared v0.2 reservation and readiness engine, reviewed in [PR #2](https://github.com/erenariel/konaklamaflow/pull/2) and [PR #3](https://github.com/erenariel/konaklamaflow/pull/3). **v0.3 describes the prototype schema/UI; it is not a published stable package release.** Existing reservation, operations and AI-review APIs remain available; the distribution remains a release candidate.
-
-Open [demo/hotel-suite.html](demo/hotel-suite.html) locally for ten fictional views: front desk, arrivals, OTA reconciliation, room plan, housekeeping/engineering, guest-request drafts, department tasks, reservation totals, AI review and the planned integration map. This preview has no external requests, telemetry or browser storage. No live provider, PMS, payment, identity or KBS connection is enabled. The Pages home instead serves the current v0.5.2 fictional integrated demo; this file is the historical v0.3 prototype.
-
-```bash
-python -m konaklamaflow.experience_cli examples/fictional-hotel.json
-python scripts/generate_suite_demo.py --check
-python -m unittest discover -s tests -v
-# With the optional browser extra and Playwright Chromium installed:
-python -m unittest discover -s tests/browser -v
-```
-
-The workbench starts with a seven-day reservation timeline and an interactive AI review rail. Choose a scenario, then play, pause, step or replay: twin-room scarcity, housekeeping blockers, unmatched OTA data, or a successful **human pre-review**. Every explanation is generated from the same evaluated fictional snapshot. The tour is a scripted visualization of the intended AI integration; it does not call a model, change room assignments or approve check-in. Reduced-motion users can step manually.
-
-The [tour guide](docs/DEMO_SHOWCASE_TR.md) explains the controls and [recording script](scripts/record_demo_tour.py) reproduces the actual GIF without using vendor screenshots or private data. The suite is configured as the Pages entry; the older viewers keep separate URLs.
-
-The suite adapts its schema to the existing v0.2 rule engine. Capacity, bed/amenity requests, channel references, task holds and currency-separated reservation totals extend those common checks. The browser renders the Python-generated report; any local housekeeping/task/event simulation invalidates readiness and export until reset. It does not recalculate an independent check-in decision in JavaScript.
-
-Booking.com, Expedia, Trip.com/Ctrip and channel-manager labels describe **synthetic source reconciliation**, not connected accounts. Amounts use decimal strings; reservation totals are not daily revenue, cash receipts or a reconciled folio. The two-assistant contract exposes only opaque, expiring review references and rechecks the current trusted snapshot. Hashes and TTL do not authenticate an operator or authorize an action. Durable audit, RBAC/MFA, operation idempotency and human approval in a real PMS remain future architecture.
-
-Read the [schema and trust contract](docs/V03_SCHEMA_TR.md), [integration record](docs/V03_INTEGRATION_REPORT_TR.md), [official-source research](docs/RESEARCH_MATRIX_TR.md), [threat model](docs/GUVENLIK_TEHDIT_MODELI_TR.md) and [phased roadmap](docs/GELISTIRME_YOL_HARITASI_TR.md). The supplied [integration instructions](docs/CODEX_INTEGRATION_TR.md) are preserved. No adoption, time-saving, vendor partnership or production-performance result is claimed.
-
-### v0.5.1 — language switching and workflow reference (draft)
-
-The top-bar language selector updates the 20-module navigation, headings and shared actions in TR/EN/FR/EL/HE/AR/DE/RU/ES/UK. Some specialist strings fall back to English until native-language review. Desktop sidebar navigation scrolls to all modules; on mobile the module row scrolls horizontally. “Explore AI scenarios” opens a fictional five-case sequential hotel workflow simulation. There are separate staff-ID/role and vendor-neutral workflow panels. [Public vendor research and delivery limits](docs/PMS_PUBLIC_GUIDES_AND_WORKFLOWS_V051_TR.md).
-
-No connection to ElektraWeb, Sistem Otel, Sedna or real identities/payment/KBS/fiscal software is implied. All real execution remains disabled.
+**Historical comprehensive README:** [Full technical/project detail snapshot (15 Nov 2026)](PROJECT_DETAILS_2026-11-15.md). All existing detailed explanations remain available there.
