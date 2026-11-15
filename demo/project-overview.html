@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="KonaklamaFlow: kurgusal, çevrimdışı otel operasyonları; açıklanabilir kararlar, sentetik doğruluk raporu, karar geçmişi ve açık kaynak kod kanıtları.">
+<meta name="description" content="KonaklamaFlow çevrimdışı demosu: rezervasyon çakışmaları, oda planı, OTA kontrolleri ve personel inceleme akışlarını kurgusal verilerle keşfet.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; connect-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'none'; font-src 'none'; form-action 'none'; object-src 'none';">
-<title>KonaklamaFlow | Ürün Tanıtımı ve Geliştirme Kanıtları</title>
+<title>KonaklamaFlow | Otel Operasyonları Ürün Demosu</title>
 <style>
 :root{color-scheme:dark;--bg:#0b1122;--deep:#101b34;--card:#172641;--line:#354861;--muted:#b5c8df;--ink:#f0f6ff;--mint:#a1f4d5;--blue:#abc7ff;--yellow:#f5d69a;--radius:19px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 0%,#23445d 0,transparent 40%),var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -53,15 +53,15 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
 <div class="page">
 <header class="topbar">
  <a class="brand" href="index.html" aria-label="KonaklamaFlow ana demoya dön"><span class="brandmark">K</span> KonaklamaFlow</a>
- <nav class="links" aria-label="Sayfa bölümleri"><a href="#otel-degerlendirmesi">📄 İmzalı otel değerlendirmesi</a><a href="#gercek-gif">Gerçek demo GIF’leri</a><a href="#vizyon">Arayüz tasarımı</a><a href="#sifreli-kasa">🔐 Şifreli kasa</a><a href="privacy-campaign.html">Gizlilik kampanyası</a><a href="#nasil">Nasıl çalışır?</a><a href="#kanit">Ölçülebilir kanıtlar</a><a href="#gelistirme">Geliştirmeler</a><a href="#sinirlar">Sınırlar</a></nav>
+ <nav class="links" aria-label="Sayfa bölümleri"><a href="#gercek-gif">Çalışan demo ekranları</a><a href="#senaryolar">Örnek senaryolar</a><a href="#nasil">Nasıl çalışır?</a><a href="#moduller">Program modülleri</a><a href="#sinirlar">Sınırlar</a></nav>
 </header>
 <main>
 <section class="hero" aria-labelledby="heroTitle">
  <div>
   <div class="eyebrow">Açık kaynak · Kurgusal otel operasyonları</div>
   <h1 id="heroTitle">Rezervasyon kararları <em>açıklanabilir</em> olmalı.</h1>
-  <p class="lead">KonaklamaFlow, butik otellerin rezervasyon ve oda kontrolü süreçlerini kurgusal verilerle gösteren gizlilik öncelikli bir karar destek prototipidir. Amacımız yalnızca bir uyarı üretmek değil, <strong>uyarının nedenini göstermek ve ölçülebilir hâle getirmek.</strong></p>
-  <div class="actions"><a class="cta" href="privacy-campaign.html">🔐 Gizlilik vizyonu / Privacy First</a><a class="cta" href="index.html">Kurgusal otel demosunu keşfet</a><a class="cta ghost" href="#otel-degerlendirmesi">İmzalı otel değerlendirmesi</a><a class="cta ghost" href="https://github.com/erenariel/konaklamaflow">GitHub kaynak kodu</a></div>
+  <p class="lead">KonaklamaFlow, rezervasyon çakışması kontrolünü, oda planını ve ön büro inceleme akışlarını <strong>kurgusal verilerle çalışan çevrimdışı bir demo</strong> içinde gösterir. Rezervasyonu seç, uyarının gerekçesini gör ve personelin hangi kontrolü yapacağını incele.</p>
+  <div class="actions"><a class="cta" href="index.html">Çalışan demoyu aç</a><a class="cta ghost" href="#senaryolar">Örnek senaryoları gör</a><a class="cta ghost" href="#moduller">Program modülleri</a></div>
   <div class="chips"><span class="chip">18 kurgusal oda</span><span class="chip">10 dilde taslak açıklamalar</span><span class="chip">Çevrimdışı gösterim</span></div>
  </div>
  <figure class="hero-visual">
@@ -69,25 +69,7 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
   <figcaption class="visual-caption">Bu gerçek tarayıcı ekran görüntüsü önceki kurgusal v0.5.2 demosundan alınmıştır. Yeni modüllerin ekran görüntüsü değildir.</figcaption>
  </figure>
 </section>
-<div class="notice"><strong>Geliştirme durumunu açıkça ayırıyoruz:</strong> Bu çevrimdışı sürüm adayı, kurgusal otel demosunu, kaynakla bağlı karar kanıt yolunu ve sentetik doğruluk/geçmiş sayfalarını <strong>bir arada</strong> sunar. Kodun bir PR içinde bulunması GitHub Pages’te yayımlandığı anlamına gelmez. Hangi sürümün canlı olduğunu <a href="https://github.com/erenariel/konaklamaflow/actions">GitHub yayın geçmişinden</a> kontrol edebilirsin; gerçek PMS veya personel onayı bağlantısı yoktur.</div>
-<section id="otel-degerlendirmesi" class="section" aria-labelledby="hotelReviewTitle">
-  <span class="kicker">İşletme bağlamında değerlendirme · 15 Kasım 2026</span>
-  <h2 id="hotelReviewTitle">Tarihli, imzalı ve kaşeli otel operatörü değerlendirmesi</h2>
-  <p class="section-intro">Asmalı Hotel ön büro bağlamında görev yaptığını belirten, aynı zamanda proje geliştiricisiyle ilişkili bir değerlendirici, <strong>kurgusal çevrimdışı demo hakkında üç sayfalık, imzalı ve işletme kaşesi görüntüsü bulunan bir geri bildirim formu</strong> sundu. Bu kayıt, alan uzmanlığına dayalı <strong>birinci taraf (first-party) operasyonel geri bildirim</strong> niteliğindedir. Sansürsüz imza örnekleri ve kaşenin özel iletişim/vergi bilgileri güvenlik amacıyla herkese açık depoya yüklenmedi; gerçek belgenin gizlenmiş taraması aşağıda yayımlanmıştır.</p>
-  <div class="split">
-    <article class="info">
-      <h3>✅ Somut olarak belgelenenler</h3>
-      <p>Rezervasyon çakışması senaryosu <strong>Pass</strong> işaretli. Oda planı, vardiya devri ve dil kullanılabilirliğine ilişkin yazılı gözlemler var; ancak bu üç senaryonun sonuç kutuları işaretlenmemiş. Eksik uzmanlık çevirileri ve canlı PMS bağlantısının bulunmaması kaydedilmiş.</p>
-      <a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/evidence/KonaklamaFlow_Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf">İmzalı ve kaşeli gerçek formu incele (sansürlü PDF)</a> · <a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md">İngilizce kanıt kaydı</a>
-    </article>
-    <article class="info">
-      <h3>🔍 Kanıt sınırı ve teknik iz</h3>
-      <p>Değerlendirici kurgusal demoyu <strong>otel ortamında değerlendirdiğini beyan etmiştir</strong>; konum ve kurumsal yetki ayrıca bağımsız doğrulanmamıştır. Bu, <strong>bağımsız denetim veya üçüncü taraf sertifikasyon değildir</strong>; imza, kaşe ve kurumsal yetki haricen doğrulanmamıştır. Gerçek PMS/OTA/KBS kullanımı, üretim güvenilirliği ya da ölçülmüş müşteri benimsemesi iddiası yoktur. Kod ve otomatik test kayıtları operatör formundan ayrı incelenebilir.</p>
-      <a href="https://github.com/erenariel/konaklamaflow/actions">GitHub Actions teknik testleri</a> · <a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md">TR/EN gizlilik ve doğrulama açıklaması</a>
-    </article>
-  </div>
-  <div class="explanation"><strong>English evidence note:</strong> The project has a <strong>documented, dated, signed and company-stamped first-party hotel front-office operator assessment</strong> of its fictional offline prototype. One scenario has an explicitly checked Pass; three additional scenarios contain written observations without selected outcomes. The review is maintainer-affiliated, not independently verified hotel certification, live PMS testing or proven adoption. <a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md">Read the full sanitized evidence record</a>.</div>
-</section>
+<div class="notice"><strong>Demo kapsamı:</strong> Bu sayfa gerçek PMS veya OTA bağlantısı olmayan, kurgusal otel kayıtlarıyla çalışan çevrimdışı programı tanıtır. Öneriler insan kontrolüne tabidir; otomatik check-in, ödeme veya KBS bildirimi yapılmaz. <a href="index.html">Programı açıp ekranları incele.</a></div>
 <section id="gercek-gif" class="section" aria-labelledby="recordingsTitle">
  <span class="kicker">Recorded product demos · Gerçek tarayıcı kayıtları</span>
  <h2 id="recordingsTitle">Ürün çalışırken nasıl görünüyor?</h2>
@@ -108,69 +90,39 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
  </div>
  <p class="showcase-note">Gerçek arayüz kaydı ≠ gerçek otel verisi. GIF’lerdeki kayıtlar kurgusal örneklerdir; bazı sonradan yapılan metin değişiklikleri görünmeyebilir.</p>
 </section>
-<section id="vizyon" class="section" aria-labelledby="visionTitle">
- <span class="kicker">Product Experience · Interface Design</span>
- <h2 id="visionTitle">Hotel Operations, Designed for Clarity.</h2>
- <p class="section-intro"><strong>KonaklamaFlow'un arayüz tasarım yönü:</strong> Rezervasyon incelemesini, oda operasyonlarını ve personel kararlarını tek bir anlaşılır çalışma deneyiminde buluşturmak. Aşağıdaki üç hareketli tasarım çalışması ürün yol haritamızı görselleştiriyor; mevcut uygulamanın ekran kaydı değil.</p>
- <div class="showcase-grid">
-  <article class="showcase-card vision">
-   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-ai-command-core-poster.jpg"><img src="vision-ai-command-core.gif" alt="Ürün arayüzü tasarım konsepti: merkezî rezervasyon değerlendirme alanı, kaynak simgeleri ve insan onayı adımları" width="576" height="288" loading="lazy" decoding="async"></picture></div>
-   <div class="showcase-copy"><span class="showcase-kind">Interface design / Arayüz konsepti</span><h3>Decision Review Workspace</h3><p>Rezervasyon kaynaklarını, karar gerekçelerini ve personel onayını aynı inceleme ekranında buluşturmayı hedefleyen tasarım.</p><a href="vision-ai-command-core.gif">Animasyonu görüntüle / View design</a></div>
-  </article>
-  <article class="showcase-card vision">
-   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-smart-room-grid-poster.jpg"><img src="vision-smart-room-grid.gif" alt="Ürün arayüzü tasarım konsepti: oda durumlarını ve bakım blokajlarını gösteren ışıklı oda planı" width="576" height="288" loading="lazy" decoding="async"></picture></div>
-   <div class="showcase-copy"><span class="showcase-kind">Interface design / Arayüz konsepti</span><h3>Room Operations Grid</h3><p>Oda durumu, housekeeping ve bakım blokajlarını tek bakışta yorumlamaya yönelik arayüz tasarımı.</p><a href="vision-smart-room-grid.gif">Animasyonu görüntüle / View design</a></div>
-  </article>
-  <article class="showcase-card vision">
-   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-executive-intelligence-poster.jpg"><img src="vision-executive-intelligence.gif" alt="Ürün arayüzü tasarım konsepti: otel operasyonlarının ve vardiya önceliklerinin özetlendiği yönetim görünümü" width="576" height="288" loading="lazy" decoding="async"></picture></div>
-   <div class="showcase-copy"><span class="showcase-kind">Interface design / Arayüz konsepti</span><h3>Operations Intelligence Overview</h3><p>Operasyon göstergelerini, vardiya önceliklerini ve inceleme gerektiren durumları anlaşılır özetlerle sunmayı hedefleyen tasarım.</p><a href="vision-executive-intelligence.gif">Animasyonu görüntüle / View design</a></div>
-  </article>
- </div>
- <p class="showcase-note"><strong>TR:</strong> Bunlar KonaklamaFlow'un uzun vadeli arayüz tasarımını anlatan özgün animasyonlardır; güncel demoda çalışan özelliklerin kaydı değildir. <strong>EN:</strong> Interface concepts only — not current product functionality. Reduced-motion visitors receive still images.</p>
-</section>
-<section id="sifreli-kasa" class="section" aria-labelledby="vaultTitle">
- <span class="kicker">Zero-Access Hotel Vault · Security research</span>
- <h2 id="vaultTitle">Misafir verisini yalnızca yetkili cihaz açabilsin.</h2>
- <p class="section-intro"><strong>Proton'daki anahtarları kullanıcıda tutma yaklaşımından esinlenen geliştirme fikri:</strong> Hassas kimlik ve pasaport alanları, gelecekte yetkili otel cihazlarında şifrelenebilir; yazılım sağlayıcısının sunucu hesabı tek başına çözme anahtarına sahip olmaz. <strong>Bu henüz gerçek otel sistemine entegre edilmiş veya bağımsız güvenlik denetiminden geçmiş bir özellik değildir.</strong></p>
- <div class="split"><div class="info"><h3>🔐 Browser-only Encryption Lab</h3><p>Yalnızca önceden tanımlanmış <strong>kurgusal kayıt</strong> ile çalışan yerel Web Crypto AES-GCM deneyini aç. Şifreli JSON, yanlış parola ve değiştirilmiş veri reddini test et; gerçek misafir bilgisi girme.</p><p><a href="privacy-vault-lab.html">Open synthetic-only vault lab / Şifreli kasayı dene</a></p></div><div class="info"><h3>Security boundaries / Güvenlik sınırları</h3><p>Henüz personel anahtar paylaşımı, sunucu senkronizasyonu, veri kurtarma, OTA/KBS entegrasyonu veya denetlenmiş zero-access dağıtımı bulunmuyor. <strong>Future design, not deployed end-to-end encryption.</strong></p><p><a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/ZERO_ACCESS_HOTEL_VAULT_TR_EN.md">Read architecture and threat model (TR/EN)</a></p></div></div>
-</section>
 <section id="nasil" class="section" aria-labelledby="flowTitle">
- <span class="kicker">Çalışma akışı · Konsept çizimi</span>
+ <span class="kicker">Rezervasyon kontrol akışı</span>
  <h2 id="flowTitle">Bir rezervasyon incelenirken ne olur?</h2>
  <p class="section-intro">Bu dört adım, çevrimdışı kurgusal demoda ve birleşik sürüm adayında kullanılan yaklaşımın <strong>kavramsal şemasıdır</strong>. Tarayıcıdaki simülasyon gerçek PMS'ye yazmaz; insan yerine onay vermez.</p>
  <ol class="visual-flow">
   <li class="flow-step"><span class="flow-num">01</span><h3>Kurgusal kaynak</h3><p>Rezervasyon, oda ve kanal sinyalleri Python tarafından doğrulanan örnek veri kümesinden gelir.</p></li>
   <li class="flow-step"><span class="flow-num">02</span><h3>Kural motoru</h3><p>Çakışma, eksik eşleşme, bakım veya iptal durumu için deterministik gerekçe kodları üretir.</p></li>
-  <li class="flow-step"><span class="flow-num">03</span><h3>Kanıt ve açıklama</h3><p>Karara yol açan neden kodları ve güvenli veri alanı adları gösterilir. Gerçek kimlik değerleri sunulmaz.</p></li>
+  <li class="flow-step"><span class="flow-num">03</span><h3>Gerekçe ve açıklama</h3><p>Karara yol açan neden kodları ve güvenli veri alanı adları gösterilir. Gerçek kimlik değerleri sunulmaz.</p></li>
   <li class="flow-step"><span class="flow-num">04</span><h3>İnsan sınırı</h3><p>Yetkili personel gerçek sisteminde ayrıca kontrol eder. Bu prototip check-in, tahsilat veya KBS bildirimi yapmaz.</p></li>
  </ol>
 </section>
-<section id="kanit" class="section" aria-labelledby="metricsTitle">
- <span class="kicker">Test verileri · PR #51 ve #58</span>
- <h2 id="metricsTitle">Tahmin değil, sınırları açık bir test sonucu</h2>
- <p class="section-intro">Aşağıdaki sayılar Python değerlendirme modülünün <strong>proje içinde hazırlanmış sentetik etiketlerinden</strong> gelir. Gerçek otel sahası veya bağımsız uzman değerlendirmesi değildir. Kapsam dışı vakalar başarıya eklenmez.</p>
- <div class="metrics">
-  <div class="metric"><strong>10</strong><span>Tanımlı senaryo</span><small>Önceden belirlenmiş kurgusal değerlendirme kümesi</small></div>
-  <div class="metric"><strong>7 / 10</strong><span>Ölçülen vaka</span><small>Kapsam: %70; kalan üç vaka ayrı raporlanıyor</small></div>
-  <div class="metric"><strong>5 / 2</strong><span>TP / TN</span><small>Beş pozitif, iki negatif eşleşen etiket</small></div>
-  <div class="metric"><strong>0 / 0</strong><span>FP / FN</span><small>Yalnız ölçülen yedi etiket üzerinde; genellenemez</small></div>
- </div>
- <div class="explanation"><strong>Neyi ölçmüyoruz?</strong> Gerçek otel başarı oranını, personelin kararı değiştirme sıklığını, canlı sistem gecikmesini veya üretim ortamındaki hata olasılığını. İki senaryo desteklenmiyor; bir senaryo bağımsız etiketli değil. <a href="https://github.com/erenariel/konaklamaflow/pull/51">Ölçüm kodu ve testleri</a> · <a href="https://github.com/erenariel/konaklamaflow/pull/58">Görsel scorecard kodu</a>.</div>
+<section id="senaryolar" class="section" aria-labelledby="scenariosTitle">
+  <span class="kicker">Kurgusal rezervasyon örnekleri</span>
+  <h2 id="scenariosTitle">Program hangi durumları gösteriyor?</h2>
+  <p class="section-intro">Bu örnekler gerçek otel kayıtları değildir. Amaç, günlük ön büro kararlarında hangi kontrollerin gerektiğini görmektir.</p>
+  <div class="features">
+    <article class="feature"><span class="status">Yatak tipi kontrolü</span><h3>İki ayrı yatak talebi</h3><p>Oda önerisinin yatak tipine uygun olup olmadığını incele; kesinleşmemiş twin talebinin personel tarafından kontrol edilmesi gerekir.</p><a href="index.html">Rezervasyon ekranını aç</a></article>
+    <article class="feature"><span class="status">Rezervasyon kontrolü</span><h3>Çakışma ve kanal uyuşmazlığı</h3><p>Birden fazla kaynağın aynı oda, tarih veya referans üzerinde oluşturduğu uyarıları ve ilgili gerekçe kodlarını incele.</p><a href="index.html">Uyarı ekranlarını aç</a></article>
+    <article class="feature"><span class="status">Oda operasyonu</span><h3>Bakım ve temizlik blokajı</h3><p>Bakımda, kontrol bekleyen veya fiziksel doluluğu doğrulanmamış odaların neden ayrıca incelendiğini gör.</p><a href="index.html">Oda planını aç</a></article>
+  </div>
 </section>
-
-<section id="gelistirme" class="section" aria-labelledby="featuresTitle">
- <span class="kicker">Birleştirilmiş sürüm adayı · Kaynak kod kanıtları</span>
- <h2 id="featuresTitle">Yeni modüller, ayrı ayrı incelenebilir</h2>
- <p class="section-intro">Aşağıdaki PR bağlantıları modüllerin kaynak kodunu ve test geçmişini gösterir. Modüller <a href="https://github.com/erenariel/konaklamaflow/pull/67">birleşik sürüm adayında (#67)</a> bir araya getirilmiştir; PR veya test başarısı tek başına canlı GitHub Pages yayını anlamına gelmez. Güncel yayın sürümünü GitHub üzerinden doğrulayabilirsin.</p>
+<section id="moduller" class="section" aria-labelledby="featuresTitle">
+ <span class="kicker">Kurgusal çevrimdışı demo · Güncel ürün deneyimi</span>
+ <h2 id="featuresTitle">Program ekranlarını keşfet</h2>
+ <p class="section-intro">Bu bölüm sertifika, değerlendirme formu veya geliştirme sayısı yerine, demoda gezilebilen iş akışlarını tanıtır. Bazı kontroller yalnızca prototip davranışı sergiler.</p>
  <div class="features">
-  <article class="feature"><span class="status">PR #51 · Kaynak kodu</span><h3>Sentetik doğruluk ölçümü</h3><p>Uyarıların beklenen etiketlerle karşılaştırılması; TP, FP, TN, FN, precision, recall ve ölçüm kapsamı. Desteklenmeyen senaryolar açıkça ayrılır.</p><a href="https://github.com/erenariel/konaklamaflow/pull/51">Kod ve testleri incele</a></article>
-  <article class="feature"><span class="status">PR #53 · Kaynak kodu</span><h3>Hash bağlantılı kurgusal karar izi</h3><p>Örnek inceleme adımlarının gerekçe ve kanıt yollarına bağlanması. Hash zinciri değişiklikleri sınar; bağımsız güven kökü olmadığından değiştirilemez kayıt garantisi vermez.</p><a href="https://github.com/erenariel/konaklamaflow/pull/53">Karar izi altyapısını incele</a></article>
-  <article class="feature"><span class="status">PR #55 · Kaynak kodu</span><h3>Görsel karar kanıt yolu</h3><p>Kaynak → gerekçe → kanıt alanı → insan sınırı adımlarını rezervasyona göre gösterir. Kaynak raporu eskirse veya uyuşmazsa panel güvenli biçimde kapanır.</p><a href="https://github.com/erenariel/konaklamaflow/pull/55">Arayüz ve tarayıcı testlerini incele</a></article>
-  <article class="feature"><span class="status">PR #58 · #51 ile birlikte</span><h3>Görsel doğruluk raporu</h3><p>Sentetik benchmark sonuçlarını okunabilir grafik ve tablolarla açıklar; oranlar Python test motorundan türetilir, elle tahmin edilmez.</p><a href="https://github.com/erenariel/konaklamaflow/pull/58">Rapor arayüzünü incele</a></article>
-  <article class="feature"><span class="status">PR #59 · #53 ile birlikte</span><h3>Kurgusal karar geçmişi ekranı</h3><p>Hash ile bağlantılı üç simüle edilmiş olayı görsel bir zaman akışında gösterir. Bunlar gerçek personel işlemleri veya doğrulanmış onaylar değildir.</p><a href="https://github.com/erenariel/konaklamaflow/pull/59">Geçmiş görünümünü incele</a></article>
-  <article class="feature"><span class="status">PR #65 · Bağımsız Python modülü</span><h3>Sınırlı oda tahsis önerisi</h3><p>En fazla dört kurgusal konaklama için kategori, kapasite, yatak ve bakım kısıtlarını birlikte değerlendirir. Yalnızca personel incelemesine sunulan öneriler üretir; <strong>demo ekranına veya gerçek PMS'ye bağlı değildir.</strong></p><a href="https://github.com/erenariel/konaklamaflow/pull/65">Oda tahsis kodunu ve testlerini incele</a></article>
+  <article class="feature"><span class="status">Rezervasyonlar</span><h3>Rezervasyon incelemesi</h3><p>Geliş ve çıkış tarihleri, durumlar, oda tipi talepleri ve çakışma uyarıları.</p><a href="index.html">Demoda incele</a></article>
+  <article class="feature"><span class="status">Oda planı</span><h3>Müsaitlik ve blokajlar</h3><p>Oda planı, bakım durumu, housekeeping ve önerilen tahsis sınırları.</p><a href="index.html">Oda planını gör</a></article>
+  <article class="feature"><span class="status">Kanal kontrolü</span><h3>OTA ve kaynak uyuşmazlığı</h3><p>Booking, Expedia ve diğer kurgusal kanal sinyallerindeki inceleme gerektiren durumlar.</p><a href="index.html">Kanal ekranını gör</a></article>
+  <article class="feature"><span class="status">Karar açıklamaları</span><h3>Neden bu uyarı verildi?</h3><p>Uyarının kaynak alanı, kural gerekçesi ve personelin incelemesi gereken sonraki adım.</p><a href="index.html">Açıklamaları gör</a></article>
+  <article class="feature"><span class="status">Ön büro</span><h3>Gelişler ve vardiya görünümü</h3><p>Günlük gelişler, hazırlanması gereken odalar ve insan kontrolü gerektiren kayıtlar.</p><a href="index.html">Operasyon ekranını aç</a></article>
+  <article class="feature"><span class="status">Raporlar</span><h3>Folyo ve özet ekranları</h3><p>Kurgusal finansal ve operasyonel verilerle çalışan örnek rapor görünümü; gerçek tahsilat yoktur.</p><a href="index.html">Rapor ekranlarını aç</a></article>
  </div>
- <div class="track"><strong>Birleşik geliştirme ve yayın ayrı adımlardır.</strong><p>Bağımlı geliştirmeler <a href="https://github.com/erenariel/konaklamaflow/pull/67">PR #67</a> içinde uyumlu hâle getirildi. Alternatif doğruluk modeli <a href="https://github.com/erenariel/konaklamaflow/pull/64">PR #64</a>, farklı rapor şeması kullandığı için bu sürüme dahil edilmedi. Sürüm adayını görmek veya PR durumunu okumak, canlı sisteme yetki vermez.</p></div>
 </section>
 <section id="sinirlar" class="section" aria-labelledby="limitsTitle">
  <span class="kicker">Güvenlik, şeffaflık ve açık kaynak</span>
@@ -179,9 +131,9 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
   <article class="info"><h3>✅ Şu anda gösterilebilenler</h3><p>18 odalı kurgusal bir örnek, kaynakla eşleştirilmiş rezervasyonlar, oda planı ve zaman çizelgesi, önceden hesaplanmış kural açıklamaları, personel inceleme sınırı ve 10 dilde taslak arayüz açıklamaları.</p><a href="index.html">Yayımlanmış demoya git</a></article>
   <article class="info"><h3>🔒 Henüz yapılmayanlar</h3><p>Gerçek misafir kimliği işleme, PMS/OTA/KBS entegrasyonu, canlı AI sağlayıcısı çağrısı, ödeme alma, otomatik check-in, bağımsız denetim, sertifikalı otel kullanımı veya gerçek personel onayı.</p><a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/LIMITATIONS.md">Teknik sınırları incele</a></article>
  </div>
- <div class="info" style="margin-top:16px"><h3>English summary</h3><p>KonaklamaFlow is an open-source, privacy-first <strong>fictional offline hospitality operations prototype</strong>. This integrated release candidate combines a precomputed reservation review, source-bound evidence display, synthetic benchmark scorecard and fictional decision history. These are not proof of live deployment, real staff actions or independently verified hotel accuracy: 7/10 project-authored cases are evaluated. The bounded room allocation proposal solver is Python-only and is not connected to the UI. No live PMS, OTA, KBS, AI provider or payments are connected.</p></div>
+ <div class="info" style="margin-top:16px"><h3>English summary</h3><p>KonaklamaFlow is an open-source, fictional offline hotel operations demo. Explore reservation conflict checks, room availability, OTA mismatches and staff-facing review steps. Room proposals are advisory. The prototype has no live PMS, OTA, KBS, AI provider or payment connection, and does not perform real check-in.</p></div>
 </section>
 </main>
-<footer class="footer">KonaklamaFlow · MIT açık kaynak · <a href="https://github.com/erenariel/konaklamaflow">GitHub</a> · PR bağlantıları tarihçe ve kaynak kodudur; canlı yayın durumunu GitHub Actions üzerinden kontrol et. Gerçek kişi veya otel kaydı kullanılmaz.</footer>
+<footer class="footer">KonaklamaFlow · MIT açık kaynak · <a href="https://github.com/erenariel/konaklamaflow">Kaynak kodu</a> · Yalnızca kurgusal verilerle çevrimdışı gösterim; gerçek kişi veya otel kaydı kullanılmaz.</footer>
 </div>
 </body></html>
