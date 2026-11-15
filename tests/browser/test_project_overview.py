@@ -79,9 +79,13 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         self.assertEqual(recordings.locator(".showcase-card").count(), 3)
         self.assertEqual(vision.locator(".showcase-card.vision").count(), 3)
         self.assertIn("gerçek tarayıcı ekran kayıtlarıdır", recordings.inner_text())
-        self.assertIn("Concept art only", vision.inner_text())
-        self.assertIn("not implemented product features", vision.inner_text())
-        self.assertIn("bilinci kanıtı değildir", vision.inner_text())
+        # CSS text-transform:uppercase follows Turkish locale; inspect source text for stable copy.
+        self.assertIn("Product Experience", vision.locator(".kicker").text_content())
+        self.assertIn("Interface concepts only", vision.inner_text())
+        self.assertIn("not current product functionality", vision.inner_text())
+        self.assertIn("arayüz tasarımını", vision.inner_text())
+        self.assertNotIn("machine consciousness", vision.inner_text())
+        self.assertNotIn("bilim kurgu", vision.inner_text())
         for section in (recordings, vision):
             for img in section.locator(".showcase-media img").all():
                 self.assertTrue(img.get_attribute("alt"))
@@ -108,7 +112,8 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page = self.page
         self.assertEqual(page.locator('nav.links a[href="privacy-campaign.html"]').count(), 1)
         self.assertEqual(page.locator('a.cta[href="privacy-campaign.html"]').count(), 1)
-        self.assertIn("Konsept; gerçek otel şifrelemesi",page.locator("main").inner_text())
+        self.assertIn("Future design, not deployed end-to-end encryption",
+                      page.locator("#sifreli-kasa").inner_text())
         self.assertTrue((self.site/"privacy-campaign.html").is_file())
 
     def test_synthetic_encryption_research_is_clearly_not_a_live_vault(self):

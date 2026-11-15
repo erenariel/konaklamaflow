@@ -27,10 +27,10 @@ _REQUIRED_OVERVIEW_COPY = (
     "PR #67",
     "Gerçek otel",
     "English summary",
-    "Future Intelligence Vision",
+    "Product Experience · Interface Design",
     "Zero-Access Hotel Vault",
     "Gizlilik kampanyası",
-    "Concept art only",
+    "Interface concepts only — not current product functionality.",
     "gerçek tarayıcı ekran kayıtlarıdır",
 )
 _STALE_COPY = (

@@ -37,7 +37,7 @@ class DemoSiteTests(unittest.TestCase):
             self.assertNotIn('localStorage',vault)
             self.assertNotIn('sessionStorage',vault)
             self.assertIn('FICTIONAL_HOTEL_ONLY',vault)
-            self.assertIn('Concept art only', overview)
+            self.assertIn('Interface concepts only — not current product functionality.', overview)
             for name in ('ai-command-tour.gif', 'roomplan-story.gif', 'overview-pulse.gif',
                          'vision-ai-command-core.gif', 'vision-smart-room-grid.gif',
                          'vision-executive-intelligence.gif',
