@@ -1,0 +1,17 @@
+/* Offline source-bound decision evidence display; no interactive approval UI. */
+.kf-decision-evidence{border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:14px;padding:16px;margin:14px 0;min-width:0}
+.kf-decision-evidence-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.kf-decision-evidence-head h3{font-size:15px;margin:0 0 4px;color:var(--ink)}
+.kf-decision-evidence-head p{font-size:11px;line-height:1.6;color:var(--muted);margin:0;max-width:48rem}
+#kfDecisionEvidenceStatus{font-size:11px;line-height:1.5;color:var(--muted);margin:10px 0 12px}
+.kf-decision-evidence-path{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;min-width:0}
+.kf-decision-evidence-step{position:relative;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 12px;overflow-wrap:anywhere}
+.kf-decision-evidence-step:not(:last-child)::after{content:'›';position:absolute;inset-inline-end:-9px;top:38%;font-size:17px;color:var(--muted);z-index:1}
+.kf-decision-step-title{display:block;font-size:11px;font-weight:750;margin-block-end:9px}
+.kf-decision-step-values{display:flex;align-items:flex-start;flex-wrap:wrap;gap:5px}
+.kf-decision-code{font-size:10px;display:inline-block;max-width:100%;padding:3px 5px;border-radius:5px;background:var(--white);color:var(--ink);border:1px solid var(--line);overflow-wrap:anywhere;white-space:normal;text-align:start;unicode-bidi:isolate}
+.kf-decision-text{font-size:10px;color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.kf-decision-evidence[data-source-state="unverified"] .kf-decision-evidence-path{display:none}
+.kf-decision-evidence[data-source-state="unverified"] #kfDecisionEvidenceStatus{color:var(--muted);font-weight:700}
+@media(max-width:760px){.kf-decision-evidence-path{grid-template-columns:repeat(2,minmax(0,1fr))}.kf-decision-evidence-step:not(:last-child)::after{display:none}}
+@media(max-width:390px){.kf-decision-evidence{padding:11px}.kf-decision-evidence-path{grid-template-columns:minmax(0,1fr)}.kf-decision-evidence-step{padding:9px 10px}}

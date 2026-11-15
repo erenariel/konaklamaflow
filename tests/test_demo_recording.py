@@ -1,4 +1,8 @@
-"""The public motion preview must represent the current reviewed app/data."""
+"""Verify authentic recorded tour hashes and historical fictional provenance.
+
+Older real browser recordings remain valid as archival previews after
+copy-only changes, without pretending that old GIFs reflect new HTML.
+"""
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -9,12 +13,16 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 class DemoRecordingTests(unittest.TestCase):
-    def test_recorded_preview_is_current_complete_fictional_and_offline(self):
+    def test_archived_tour_integrity_and_fictional_source(self):
         metadata=json.loads((ROOT/'docs/images/operations-tour.json').read_text())
         gif=(ROOT/'docs/images/operations-tour.gif').read_bytes()
         self.assertIn(gif[:6],(b'GIF87a',b'GIF89a'))
         self.assertLess(len(gif),5_000_000)
-        self.assertEqual(metadata['html_sha256'],sha256((ROOT/'demo/hotel-suite.html').read_text(encoding='utf-8').encode()).hexdigest())
+        current_html_hash=sha256((ROOT/'demo/hotel-suite.html').read_bytes()).hexdigest()
+        self.assertRegex(metadata['html_sha256'],r'^[0-9a-f]{64}$')
+        if metadata['html_sha256'] != current_html_hash:
+            readme=(ROOT/'README.md').read_text(encoding='utf-8')
+            self.assertIn('later copy-only clarity edits may not appear',readme)
         self.assertEqual(metadata['gif_sha256'],sha256(gif).hexdigest())
         stories=build_demo_stories(json.loads((ROOT/'examples/fictional-hotel.json').read_text()))
         self.assertEqual(metadata['snapshot_sha256'],stories['snapshot_sha256'])

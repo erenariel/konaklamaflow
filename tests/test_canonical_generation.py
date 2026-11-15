@@ -5,6 +5,7 @@ import re
 import unittest
 
 from konaklamaflow.canonical_presentation import build_presentation
+from konaklamaflow.explainability import EVIDENCE as DECISION_EVIDENCE_FIELDS
 from scripts.generate_canonical_demo import generate
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,17 @@ class CanonicalGenerationTests(unittest.TestCase):
     def test_generated_artifacts_are_current_without_mutation(self):
         # The check path must reject stale output, never repair it silently.
         generate(check=True)
+
+    def test_decision_evidence_ui_matches_canonical_generator(self):
+        document = (ROOT / "demo" / "v04-integrated-preview.html").read_text(encoding="utf-8")
+        javascript = (ROOT / "demo" / "decision-evidence-ui.js").read_text(encoding="utf-8").rstrip("\n")
+        stylesheet = (ROOT / "demo" / "decision-evidence-ui.css").read_text(encoding="utf-8").rstrip("\n")
+        self.assertIn("// BEGIN GENERATED_DECISION_EVIDENCE_UI", document)
+        self.assertIn("/* BEGIN GENERATED_DECISION_EVIDENCE_STYLES */", document)
+        self.assertIn(javascript, document)
+        self.assertIn(stylesheet, document)
+        self.assertEqual(embedded("v04-integrated-preview.html", "DECISION_EVIDENCE_FIELDS"),
+                         {code: list(fields) for code, fields in DECISION_EVIDENCE_FIELDS.items()})
 
     def test_review_and_operations_entry_points_have_exact_same_parent_source(self):
         for filename in ('hotel-suite.html', 'v04-integrated-preview.html'):
