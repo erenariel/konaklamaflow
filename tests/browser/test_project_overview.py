@@ -1,6 +1,7 @@
-"""Showcase must distinguish the published demo from unmerged PR candidates.
+"""Browser checks for a product-first fictional hotel demo overview.
 
-All visual assets are local and explicitly staged; there is no fetch or JS.
+The public demo demonstrates software workflows, not stamped operator reviews,
+public certifications or decorative unreleased features.
 """
 from pathlib import Path
 import tempfile
@@ -40,124 +41,82 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         self.page.close()
         self.temp.cleanup()
 
-    def test_visual_and_copy_are_grounded_in_shipped_and_candidate_status(self):
+    def test_overview_leads_with_product_scenarios_and_modules(self):
         page = self.page
         self.assertEqual(page.locator("h1").count(), 1)
         self.assertEqual(page.locator(".flow-step").count(), 4)
-        self.assertEqual(page.locator(".metric").count(), 4)
-        self.assertEqual(page.locator(".feature").count(), 6)
+        self.assertEqual(page.locator("#senaryolar .feature").count(), 3)
+        self.assertEqual(page.locator("#moduller .feature").count(), 6)
+        self.assertEqual(page.locator(".metric").count(), 0)
+        self.assertEqual(page.locator('nav.links a').count(), 5)
         self.assertTrue(page.locator(".hero-visual img").evaluate(
             "(img) => img.complete && img.naturalWidth > 0"))
         body = page.locator("main").inner_text()
-        self.assertIn("Kurgusal otel demosunu keşfet", body)
-        self.assertIn("birleşik sürüm adayında", body)
-        self.assertIn("Gerçek otel", body)
-        self.assertIn("7 / 10", body)
-        self.assertIn("English summary", body)
-        hrefs = page.locator(".feature a").evaluate_all(
-            "(elements) => elements.map(element => element.href)")
-        for pr in (51, 53, 55, 58, 59, 65):
-            self.assertTrue(any(url.endswith("/pull/" + str(pr)) for url in hrefs))
+        for phrase in ("Çalışan demoyu aç", "İki ayrı yatak talebi",
+                       "Çakışma ve kanal uyuşmazlığı", "Bakım ve temizlik blokajı",
+                       "Rezervasyon incelemesi", "Oda planı", "English summary"):
+            self.assertIn(phrase, body)
+        self.assertIn("Kurgusal", body)
 
-    def test_responsive_and_navigation_are_accessible(self):
+    def test_no_signed_operator_pdf_proof_or_future_concept_promotion(self):
         page = self.page
-        self.assertEqual(page.locator('nav.links a').count(), 9)
+        html = page.content()
+        for forbidden in ("otel-degerlendirmesi", "KonaklamaFlow_Operator_Review",
+                          "OPERATOR_FIRST_PARTY_REVIEW", "PUBLIC_EVIDENCE_DISCLOSURE",
+                          "kaşeli otel", "company-stamped", "Asmalı Hotel",
+                          'id="vizyon"', 'id="sifreli-kasa"',
+                          'href="privacy-campaign.html"',
+                          'href="privacy-vault-lab.html"', "PR #"):
+            self.assertNotIn(forbidden, html)
+        self.assertEqual(page.locator('a[href$=".pdf"]').count(), 0)
+        self.assertGreaterEqual(page.locator('a[href="index.html"]').count(), 4)
+
+    def test_responsive_navigation_and_accessible_product_links(self):
+        page = self.page
         for width in (320, 375, 390, 768, 1366):
             page.set_viewport_size({"width": width, "height": 900})
             with self.subTest(width=width):
                 self.assertTrue(page.evaluate(
                     "() => document.documentElement.scrollWidth <= window.innerWidth"))
                 self.assertTrue(page.locator("h1").is_visible())
-                self.assertTrue(page.locator(".feature").first.is_visible())
-        page.locator('a[href="#nasil"]').click()
-        self.assertEqual(page.evaluate("location.hash"), "#nasil")
+                self.assertTrue(page.locator("#moduller .feature").first.is_visible())
+        for anchor in ("#senaryolar", "#nasil", "#moduller"):
+            page.locator('nav.links a[href="' + anchor + '"]').click()
+            self.assertEqual(page.evaluate("location.hash"), anchor)
 
-    def test_product_recordings_and_future_vision_remain_distinct(self):
+    def test_actual_browser_recordings_are_kept_as_product_demonstrations(self):
         page = self.page
         recordings = page.locator("#gercek-gif")
-        vision = page.locator("#vizyon")
         self.assertEqual(recordings.locator(".showcase-card").count(), 3)
-        self.assertEqual(vision.locator(".showcase-card.vision").count(), 3)
         self.assertIn("gerçek tarayıcı ekran kayıtlarıdır", recordings.inner_text())
-        # CSS text-transform:uppercase follows Turkish locale; inspect source text for stable copy.
-        self.assertIn("Product Experience", vision.locator(".kicker").text_content())
-        self.assertIn("Interface concepts only", vision.inner_text())
-        self.assertIn("not current product functionality", vision.inner_text())
-        self.assertIn("arayüz tasarımını", vision.inner_text())
-        self.assertNotIn("machine consciousness", vision.inner_text())
-        self.assertNotIn("bilim kurgu", vision.inner_text())
-        for section in (recordings, vision):
-            for img in section.locator(".showcase-media img").all():
-                self.assertTrue(img.get_attribute("alt"))
-                img.scroll_into_view_if_needed()
-                page.wait_for_function(
-                    "(image) => image.complete && image.naturalWidth > 0",
-                    arg=img.element_handle())
-                self.assertTrue(img.evaluate("(image) => image.currentSrc.startsWith('file:')"))
+        for img in recordings.locator(".showcase-media img").all():
+            self.assertTrue(img.get_attribute("alt"))
+            img.scroll_into_view_if_needed()
+            page.wait_for_function(
+                "(image) => image.complete && image.naturalWidth > 0",
+                arg=img.element_handle())
+            self.assertTrue(img.evaluate("(image) => image.currentSrc.startsWith('file:')"))
 
-    def test_reduced_motion_uses_still_posters(self):
+    def test_reduced_motion_uses_real_demo_still_poster(self):
         page = self.page
         page.emulate_media(reduced_motion="reduce")
-        vision = page.locator("#vizyon")
-        img = vision.locator("picture img").first
+        img = page.locator("#gercek-gif picture img").first
         img.scroll_into_view_if_needed()
         page.wait_for_function(
             "(image) => image.complete && image.naturalWidth > 0",
             arg=img.element_handle())
         self.assertTrue(img.evaluate(
-            "(image) => image.currentSrc.endsWith('vision-ai-command-core-poster.jpg')"))
-        self.assertEqual(page.locator("picture source").count(), 6)
+            "(image) => image.currentSrc.endsWith('ai-command-tour-poster.png')"))
 
-    def test_privacy_campaign_link_is_prominent_and_is_not_misrepresented(self):
-        page = self.page
-        self.assertEqual(page.locator('nav.links a[href="privacy-campaign.html"]').count(), 1)
-        self.assertEqual(page.locator('a.cta[href="privacy-campaign.html"]').count(), 1)
-        self.assertIn("Future design, not deployed end-to-end encryption",
-                      page.locator("#sifreli-kasa").inner_text())
-        self.assertTrue((self.site/"privacy-campaign.html").is_file())
-
-    def test_synthetic_encryption_research_is_clearly_not_a_live_vault(self):
-        page = self.page
-        section = page.locator('#sifreli-kasa')
-        self.assertEqual(section.count(), 1)
-        self.assertIn('kurgusal kayıt', section.inner_text())
-        self.assertIn('Future design, not deployed end-to-end encryption', section.inner_text())
-        self.assertEqual(section.locator('a[href="privacy-vault-lab.html"]').count(), 1)
-        self.assertIn('ZERO_ACCESS_HOTEL_VAULT_TR_EN.md', section.inner_html())
-
-    def test_first_party_hotel_evaluation_is_visible_and_properly_scoped(self):
-        page = self.page
-        page.locator('nav.links a[href="#otel-degerlendirmesi"]').click()
-        self.assertEqual(page.evaluate("location.hash"), "#otel-degerlendirmesi")
-        review = page.locator("#otel-degerlendirmesi")
-        self.assertTrue(review.is_visible())
-        # The signed evaluation is surfaced before the decorative GIF galleries.
-        self.assertTrue(page.evaluate("() => document.querySelector('#otel-degerlendirmesi').compareDocumentPosition(document.querySelector('#gercek-gif')) & Node.DOCUMENT_POSITION_FOLLOWING"))
-        body = review.inner_text()
-        self.assertIn("imzalı ve kaşeli", body)
-        self.assertIn("birinci taraf", body)
-        self.assertIn("Pass", body)
-        self.assertIn("işaretlenmemiş", body)
-        self.assertIn("bağımsız denetim", body)
-        self.assertIn("maintainer-affiliated", body)
-        self.assertGreaterEqual(review.locator(
-            'a[href*="OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md"]').count(), 1)
-        self.assertGreaterEqual(review.locator(
-            'a[href*="Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf"]').count(), 1)
-        self.assertGreaterEqual(review.locator(
-            'a[href*="PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md"]').count(), 1)
-        self.assertIn("otel ortamında değerlendirdiğini beyan", body)
-
-    def test_existing_demo_has_discoverable_overview_entry(self):
+    def test_integrated_demo_links_only_to_workflow_overview(self):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
-        link = page.locator(".kf-promo-entry a")
-        self.assertEqual(link.count(), 4)
-        self.assertEqual(link.first.get_attribute("href"), "project-overview.html")
-        self.assertEqual(link.nth(1).get_attribute("href"), "project-overview.html#otel-degerlendirmesi")
-        self.assertEqual(link.nth(2).get_attribute("href"), "privacy-campaign.html")
-        self.assertEqual(link.nth(3).get_attribute("href"), "privacy-vault-lab.html")
-        self.assertTrue(link.nth(1).is_visible())
+        links = page.locator(".kf-promo-entry a")
+        self.assertEqual(links.count(), 2)
+        self.assertEqual(links.first.get_attribute("href"), "project-overview.html")
+        self.assertEqual(links.nth(1).get_attribute("href"), "project-overview.html#senaryolar")
+        self.assertNotIn("imzalı ve kaşeli", page.locator(".kf-promo-entry").inner_text().lower())
+        self.assertNotIn("privacy-campaign.html", page.locator(".kf-promo-entry").inner_html())
 
 
 if __name__ == "__main__":
