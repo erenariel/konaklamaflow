@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 
 from scripts.render_scorecard import scorecard_html
 from scripts.render_trace_view import trace_view_html
+from scripts.render_allocation_lab import allocation_lab_html
 PUBLIC_ASSETS = {
     'index.html': 'demo/v04-integrated-preview.html',
     'hotel-operations.html': 'demo/v04-integrated-preview.html',
@@ -43,6 +44,7 @@ PUBLIC_ASSETS = {
 GENERATED_ASSETS = {
     'synthetic-scorecard.html': scorecard_html,
     'fictional-trace.html': trace_view_html,
+    'allocation-lab.html': allocation_lab_html,
 }
 
 

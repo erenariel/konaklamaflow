@@ -11,7 +11,7 @@ from scripts.render_trace_view import trusted_trace
 class IntegratedReleaseCandidateTests(unittest.TestCase):
     def test_source_verified_pages_are_staged_and_linked(self):
         self.assertEqual(set(GENERATED_ASSETS), {
-            "synthetic-scorecard.html", "fictional-trace.html"
+            "synthetic-scorecard.html", "fictional-trace.html", "allocation-lab.html"
         })
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/"site"
@@ -20,7 +20,7 @@ class IntegratedReleaseCandidateTests(unittest.TestCase):
                              set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{".nojekyll"})
             index=(path/"index.html").read_text(encoding="utf-8")
             for link in ("synthetic-scorecard.html", "fictional-trace.html",
-                         "project-overview.html", "BEGIN GENERATED_DECISION_EVIDENCE_UI"):
+                         "project-overview.html", "allocation-lab.html", "BEGIN GENERATED_DECISION_EVIDENCE_UI"):
                 self.assertIn(link,index)
             scorecard=(path/"synthetic-scorecard.html").read_text(encoding="utf-8")
             trace=(path/"fictional-trace.html").read_text(encoding="utf-8")

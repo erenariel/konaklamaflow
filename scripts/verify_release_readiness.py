@@ -15,7 +15,7 @@ from scripts.stage_demo_site import ROOT, PUBLIC_ASSETS, GENERATED_ASSETS
 
 EXPECTED_INTERNAL_PAGES = frozenset({
     "index.html", "project-overview.html", "synthetic-scorecard.html",
-    "fictional-trace.html",
+    "fictional-trace.html", "allocation-lab.html",
 })
 _REQUIRED_OVERVIEW_COPY = (
     "Geliştirme durumunu açıkça ayırıyoruz:",
