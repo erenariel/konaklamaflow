@@ -36,6 +36,10 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('href="synthetic-scorecard.html"', index)
             self.assertIn('href="fictional-trace.html"', index)
             self.assertIn('href="project-overview.html"', index)
+            self.assertIn('href="allocation-lab.html"', index)
+            allocation = (site/'allocation-lab.html').read_text(encoding='utf-8')
+            self.assertIn("Akıllı", allocation)
+            self.assertIn("ALLOCATION_SCENARIOS", allocation)
             self.assertFalse((site/'.git').exists())
             self.assertFalse((site/'examples').exists())
 

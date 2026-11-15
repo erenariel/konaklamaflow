@@ -62,13 +62,17 @@ jobs:
           node --check demo/full-ui-lexicon.js
           node --check demo/hotel-workflow-ui.js
           node --check demo/decision-evidence-ui.js
+          node --check demo/allocation-lab.js
           python -m scripts.render_scorecard --output /tmp/konaklamaflow-scorecard.html
           python -m scripts.render_scorecard --check /tmp/konaklamaflow-scorecard.html
           python -m scripts.render_trace_view --output /tmp/konaklamaflow-trace-view.html
           python -m scripts.render_trace_view --check /tmp/konaklamaflow-trace-view.html
+          python -m scripts.render_allocation_lab --output /tmp/konaklamaflow-allocation-lab.html
+          python -m scripts.render_allocation_lab --check /tmp/konaklamaflow-allocation-lab.html
           python scripts/stage_demo_site.py --output /tmp/demo-site
           test -s /tmp/demo-site/synthetic-scorecard.html
           test -s /tmp/demo-site/fictional-trace.html
+          test -s /tmp/demo-site/allocation-lab.html
           test -s /tmp/demo-site/project-overview.html
           test -s /tmp/demo-site/ai-command-tour-poster.png
           python -m scripts.verify_release_readiness --site /tmp/demo-site
