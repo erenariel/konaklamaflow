@@ -17,6 +17,22 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('7 / 10',overview)
             self.assertIn('Henüz yapılmayanlar',overview)
             self.assertIn('ai-command-tour-poster.png',overview)
+            self.assertIn('id="vision"', overview)
+            self.assertIn('id="real-gifs"', overview)
+            for name in (
+                'vision-ai-command-core.gif', 'vision-smart-room-grid.gif',
+                'vision-executive-intelligence.gif',
+                'vision-ai-command-core-poster.jpg', 'vision-smart-room-grid-poster.jpg',
+                'vision-executive-intelligence-poster.jpg',
+                'ai-command-tour.gif', 'roomplan-story.gif', 'overview-pulse.gif',
+            ):
+                self.assertIn(name, overview)
+                self.assertEqual((site / name).read_bytes(),
+                                 (ROOT / PUBLIC_ASSETS[name]).read_bytes())
+            self.assertIn('prefers-reduced-motion: reduce', overview)
+            self.assertIn('Conceptual Vision', overview)
+            self.assertIn('Recorded fictional demo', overview)
+
             for number in (51,53,55,58,59):
                 self.assertIn(f'pull/{number}',overview)
             self.assertNotIn('<script',overview.lower())
