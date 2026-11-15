@@ -25,6 +25,9 @@ _REQUIRED_OVERVIEW_COPY = (
     "PR #67",
     "Gerçek otel",
     "English summary",
+    "Future Intelligence Vision",
+    "Concept art only",
+    "gerçek tarayıcı ekran kayıtlarıdır",
 )
 _STALE_COPY = (
     "henüz ana sürüme birleştirilmediler",
@@ -52,9 +55,10 @@ class _OverviewLinks(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
-        if tag not in ("a", "img"):
+        if tag not in ("a", "img", "source"):
             return
-        value = attributes.get("href" if tag == "a" else "src", "")
+        value = attributes.get(
+            "href" if tag == "a" else "src" if tag == "img" else "srcset", "")
         _require(type(value) is str and value != "", "Overview link/image missing URL")
         url = urlsplit(value)
         if url.scheme or url.netloc:
@@ -81,6 +85,13 @@ class _OverviewLinks(HTMLParser):
                 "Overview image missing alt text",
             )
             self.local_images.add(url.path)
+        elif tag == "source":
+            # Accept only a single local still poster for reduced-motion mode.
+            _require(attributes.get("media") == "(prefers-reduced-motion: reduce)",
+                     "Unexpected picture source media")
+            _require(url.path.endswith((".png", ".jpg")),
+                     "Reduced-motion source must be a local still image")
+            self.local_images.add(url.path)
         else:
             self.internal.add(url.path)
 
@@ -100,6 +111,14 @@ def verify_overview_content(html: str, staged_files):
              "Published demo not linked from overview")
     _require("ai-command-tour-poster.png" in parser.local_images,
              "Historical demo screenshot missing")
+    for name in ("vision-ai-command-core.gif", "vision-smart-room-grid.gif",
+                 "vision-executive-intelligence.gif"):
+        _require(name in parser.local_images, "Vision concept GIF missing")
+    for name in ("vision-ai-command-core-poster.jpg", "vision-smart-room-grid-poster.jpg",
+                 "vision-executive-intelligence-poster.jpg"):
+        _require(name in parser.local_images, "Reduced-motion vision poster missing")
+    for name in ("ai-command-tour.gif", "roomplan-story.gif", "overview-pulse.gif"):
+        _require(name in parser.local_images, "Real-demo GIF missing")
     _require((parser.internal | parser.local_images) <= set(staged_files),
              "Broken local overview reference")
     _require(EXPECTED_INTERNAL_PAGES <= set(staged_files),

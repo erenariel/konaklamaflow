@@ -29,6 +29,18 @@ h1 em{font-style:normal;color:var(--mint)}.lead{color:#d3e0ef;font-size:clamp(15
 .features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.feature{border:1px solid #405671;border-radius:18px;background:var(--card);padding:22px;min-width:0}.feature .status{display:inline-flex;font-size:11px;border:1px solid #d0ac73;border-radius:100px;color:var(--yellow);padding:3px 10px;font-weight:750}.feature h3{font-size:19px;margin:13px 0 7px}.feature p{color:var(--muted);margin:0 0 13px}.feature a{font-weight:700;font-size:13px}.feature:last-child{grid-column:1/-1}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:17px}.info{border:1px solid var(--line);border-radius:17px;padding:22px;background:#131f37}.info h3{margin:0 0 10px;font-size:18px}.info p{color:var(--muted);margin:0}.info a{display:inline-block;margin-top:14px}
 .track{border:1px solid #61758b;border-radius:13px;background:#20283a;margin:24px 0;padding:16px 18px}.track strong{color:#ffdfa4}.track p{margin:7px 0 0;color:#ebdfc8;font-size:13px}
+.showcase-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 12px}
+.showcase-card{min-width:0;overflow:hidden;border-radius:19px;background:linear-gradient(155deg,#172a43,#0d182b);border:1px solid #526c85;box-shadow:0 20px 44px #050d1a70}
+.showcase-card.vision{background:linear-gradient(158deg,#163249,#101a30 67%,#221a32);border-color:#6ca5b6;box-shadow:0 20px 52px #00c2c520}
+.showcase-media,.showcase-media picture{display:block;min-width:0}
+.showcase-media img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;background:#060f1c;border-bottom:1px solid #526c85}
+.showcase-copy{padding:18px 18px 20px}.showcase-copy h3{margin:7px 0 7px;font-size:18px;line-height:1.25}
+.showcase-copy p{margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.6}
+.showcase-copy a{font-size:13px;font-weight:750}.showcase-kind{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mint);font-weight:850}
+.showcase-card.vision .showcase-kind{color:var(--yellow)}
+.showcase-note{font-size:12px;color:#e6d6b4;border-left:3px solid var(--yellow);padding:7px 12px;background:#252337;border-radius:6px}
+@media(max-width:930px){.showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.showcase-grid{grid-template-columns:1fr}.showcase-copy{padding:16px}}
 .footer{border-top:1px solid var(--line);color:var(--muted);margin-top:44px;padding-top:26px;font-size:12px}
 code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
 @media(max-width:930px){.hero{grid-template-columns:1fr;gap:27px;padding-top:42px}.hero-visual img{max-height:470px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow-step:after{display:none}}
@@ -41,7 +53,7 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
 <div class="page">
 <header class="topbar">
  <a class="brand" href="index.html" aria-label="KonaklamaFlow ana demoya dön"><span class="brandmark">K</span> KonaklamaFlow</a>
- <nav class="links" aria-label="Sayfa bölümleri"><a href="#nasil">Nasıl çalışır?</a><a href="#kanit">Ölçülebilir kanıtlar</a><a href="#gelistirme">Geliştirmeler</a><a href="#sinirlar">Sınırlar</a></nav>
+ <nav class="links" aria-label="Sayfa bölümleri"><a href="#gercek-gif">Gerçek demo GIF’leri</a><a href="#vizyon">AI vizyonu</a><a href="#nasil">Nasıl çalışır?</a><a href="#kanit">Ölçülebilir kanıtlar</a><a href="#gelistirme">Geliştirmeler</a><a href="#sinirlar">Sınırlar</a></nav>
 </header>
 <main>
 <section class="hero" aria-labelledby="heroTitle">
@@ -58,6 +70,46 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
  </figure>
 </section>
 <div class="notice"><strong>Geliştirme durumunu açıkça ayırıyoruz:</strong> Bu çevrimdışı sürüm adayı, kurgusal otel demosunu, kaynakla bağlı karar kanıt yolunu ve sentetik doğruluk/geçmiş sayfalarını <strong>bir arada</strong> sunar. Kodun bir PR içinde bulunması GitHub Pages’te yayımlandığı anlamına gelmez. Hangi sürümün canlı olduğunu <a href="https://github.com/erenariel/konaklamaflow/actions">GitHub yayın geçmişinden</a> kontrol edebilirsin; gerçek PMS veya personel onayı bağlantısı yoktur.</div>
+<section id="gercek-gif" class="section" aria-labelledby="recordingsTitle">
+ <span class="kicker">Recorded product demos · Gerçek tarayıcı kayıtları</span>
+ <h2 id="recordingsTitle">Ürün çalışırken nasıl görünüyor?</h2>
+ <p class="section-intro">Aşağıdaki üç GIF, kurgusal çevrimdışı KonaklamaFlow demosunun <strong>gerçek tarayıcı ekran kayıtlarıdır</strong>. Geçmişteki bir demo commit'inden kaydedildikleri için son metin ve özellik güncellemelerinin tamamını göstermeyebilirler. Canlı PMS/OTA/KBS bağlantısı veya çalışan yapay zekâ sağlayıcısı iddiası içermezler.</p>
+ <div class="showcase-grid">
+  <article class="showcase-card">
+   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="ai-command-tour-poster.png"><img src="ai-command-tour.gif" alt="Gerçek çevrimdışı demo kaydı: rezervasyon inceleme ekranındaki kurgusal AI karar açıklamaları ve personel gözden geçirme adımları." width="720" height="450" loading="lazy" decoding="async"></picture></div>
+   <div class="showcase-copy"><span class="showcase-kind">Browser-recorded / Gerçek demo</span><h3>AI Review Workflow</h3><p>Kaynak, kural gerekçesi, kanıt alanları ve insan denetimi arasındaki açıklanabilir inceleme akışı.</p><a href="ai-command-tour.gif">GIF’i aç / Open GIF</a></div>
+  </article>
+  <article class="showcase-card">
+   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="roomplan-story-poster.png"><img src="roomplan-story.gif" alt="Gerçek çevrimdışı oda planı ekran kaydı: kurgusal oda durumları, housekeeping ve bakım blokajları." width="720" height="450" loading="lazy" decoding="async"></picture></div>
+   <div class="showcase-copy"><span class="showcase-kind">Browser-recorded / Gerçek demo</span><h3>Room Plan &amp; Housekeeping</h3><p>Oda planı, servis ve bakım sınırlarını gösteren kurgusal otel operasyonları ekranları.</p><a href="roomplan-story.gif">GIF’i aç / Open GIF</a></div>
+  </article>
+  <article class="showcase-card">
+   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="overview-pulse-poster.png"><img src="overview-pulse.gif" alt="Gerçek çevrimdışı demo kaydı: rezervasyon ve operasyon genel görünümünün kurgusal göstergeleri." width="720" height="450" loading="lazy" decoding="async"></picture></div>
+   <div class="showcase-copy"><span class="showcase-kind">Browser-recorded / Gerçek demo</span><h3>Operations Overview</h3><p>Kurgusal rezervasyon kaynaklarını ve işletme göstergelerini bir arada gösteren kontrol görünümü.</p><a href="overview-pulse.gif">GIF’i aç / Open GIF</a></div>
+  </article>
+ </div>
+ <p class="showcase-note">Gerçek arayüz kaydı ≠ gerçek otel verisi. GIF’lerdeki kayıtlar kurgusal örneklerdir; bazı sonradan yapılan metin değişiklikleri görünmeyebilir.</p>
+</section>
+<section id="vizyon" class="section" aria-labelledby="visionTitle">
+ <span class="kicker">Future Intelligence Vision · Original concept animation</span>
+ <h2 id="visionTitle">Hotel Operations, Reimagined.</h2>
+ <p class="section-intro"><strong>Bilim kurgu ve geleceğe yönelik tasarım vizyonu:</strong> Holografik kontrol merkezi, nöral ağ metaforları ve sinematik otel sistemleri. Bu animasyonlar özgün yaratıcı konseptlerdir; gerçek ürün ekran görüntüsü, bugünkü yetenek veya yapay zekâ bilinci kanıtı değildir. <strong>Concept art only — not implemented product features.</strong></p>
+ <div class="showcase-grid">
+  <article class="showcase-card vision">
+   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-ai-command-core-poster.jpg"><img src="vision-ai-command-core.gif" alt="Özgün bilimkurgu konsept animasyonu: holografik kristal nöral çekirdek, rezervasyon ve onay simgeleri; gerçek ürün arayüzü değil." width="576" height="288" loading="lazy" decoding="async"></picture></div>
+   <div class="showcase-copy"><span class="showcase-kind">Future concept / Henüz ürün özelliği değil</span><h3>AI Command Core</h3><p>Bir nöral komuta çekirdeği metaforu: açıklanabilir sinyallerin insan onayı sınırında buluştuğu gelecek tasarımı.</p><a href="vision-ai-command-core.gif">Concept GIF / Konsept GIF</a></div>
+  </article>
+  <article class="showcase-card vision">
+   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-smart-room-grid-poster.jpg"><img src="vision-smart-room-grid.gif" alt="Özgün bilimkurgu konsepti: holografik otel operasyon kontrol alanı, odaları simgeleyen ışıklı ağ; gerçek oda takibi değil." width="576" height="288" loading="lazy" decoding="async"></picture></div>
+   <div class="showcase-copy"><span class="showcase-kind">Future concept / Henüz ürün özelliği değil</span><h3>Smart Room Grid</h3><p>Oda durumları ve insan inceleme noktalarının ışıklı veri akışlarıyla gösterildiği fütüristik oda haritası hayali.</p><a href="vision-smart-room-grid.gif">Concept GIF / Konsept GIF</a></div>
+  </article>
+  <article class="showcase-card vision">
+   <div class="showcase-media"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-executive-intelligence-poster.jpg"><img src="vision-executive-intelligence.gif" alt="Özgün sinematik bilimkurgu konsepti: yapay göz ve ışıklı veri ağı üzerinden holografik otel gösterimi; bilinçli gerçek bir AI sistemi değil." width="576" height="288" loading="lazy" decoding="async"></picture></div>
+   <div class="showcase-copy"><span class="showcase-kind">Future concept / Henüz ürün özelliği değil</span><h3>Executive Vision Reel</h3><p>Gelecekteki otel zekâsını ve robotik hassasiyeti simgeleyen sinematik, holografik vizyon.</p><a href="vision-executive-intelligence.gif">Concept GIF / Konsept GIF</a></div>
+  </article>
+ </div>
+ <p class="showcase-note"><strong>English disclosure:</strong> These three AI-generated science-fiction loops are original design concepts, not browser recordings, production integrations, autonomous AI operations, or evidence of machine consciousness. Reduced-motion visitors receive still posters.</p>
+</section>
 <section id="nasil" class="section" aria-labelledby="flowTitle">
  <span class="kicker">Çalışma akışı · Konsept çizimi</span>
  <h2 id="flowTitle">Bir rezervasyon incelenirken ne olur?</h2>
@@ -84,7 +136,7 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
 <section id="otel-degerlendirmesi" class="section" aria-labelledby="hotelReviewTitle">
   <span class="kicker">İşletme bağlamında değerlendirme · 15 Kasım 2026</span>
   <h2 id="hotelReviewTitle">Tarihli, imzalı ve kaşeli otel operatörü değerlendirmesi</h2>
-  <p class="section-intro">Asmalı Hotel ön büro bağlamında görev yaptığını belirten, aynı zamanda proje geliştiricisiyle ilişkili bir değerlendirici, <strong>kurgusal çevrimdışı demo hakkında üç sayfalık, imzalı ve işletme kaşesi görüntüsü bulunan bir geri bildirim formu</strong> sundu. Bu kayıt, alan uzmanlığına dayalı <strong>birinci taraf (first-party) operasyonel geri bildirim</strong> niteliğindedir. Belgenin imza/kaşe görselleri ve kişisel bilgiler güvenlik amacıyla herkese açık depoya yüklenmedi.</p>
+  <p class="section-intro">Asmalı Hotel ön büro bağlamında görev yaptığını belirten, aynı zamanda proje geliştiricisiyle ilişkili bir değerlendirici, <strong>kurgusal çevrimdışı demo hakkında üç sayfalık, imzalı ve işletme kaşesi görüntüsü bulunan bir geri bildirim formu</strong> sundu. Bu kayıt, alan uzmanlığına dayalı <strong>birinci taraf (first-party) operasyonel geri bildirim</strong> niteliğindedir. Sansürsüz imza örnekleri ve kaşenin özel iletişim/vergi bilgileri güvenlik amacıyla herkese açık depoya yüklenmedi; gerçek belgenin gizlenmiş taraması aşağıda yayımlanmıştır.</p>
   <div class="split">
     <article class="info">
       <h3>✅ Somut olarak belgelenenler</h3>

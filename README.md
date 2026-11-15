@@ -33,6 +33,17 @@
 
 The current integrated demo is source-validated, offline and privacy-restricted. Multilingual strings are **drafts**, not professionally verified translations. See [technical details and historical feature notes](PROJECT_DETAILS_2026-11-15.md) and [current limitations](docs/LIMITATIONS.md).
 
+## Animated product showcase / Hareketli ürün tanıtımı
+
+These are **real browser recordings of an earlier fictional offline demo** (not live hotel operations). **Bunlar gerçek demo ekran kayıtlarıdır; canlı otel bağlantısını veya yeni eklenen her özelliği göstermez.**
+
+| AI review / AI inceleme | Room plan / Oda planı | Operations / Operasyon |
+| :---: | :---: | :---: |
+| [![Real recorded AI decision review](docs/images/ai-command-tour.gif)](docs/images/ai-command-tour.gif) | [![Real recorded fictional room-plan interactions](docs/images/roomplan-story.gif)](docs/images/roomplan-story.gif) | [![Real recorded hotel operations overview](docs/images/overview-pulse.gif)](docs/images/overview-pulse.gif) |
+| Source-bound review demo | Housekeeping and room status demo | Offline analytics demo |
+
+✨ **[Explore the cinematic Future Intelligence vision — three original science-fiction animated concepts](https://erenariel.github.io/konaklamaflow/project-overview.html#vizyon)** · [GIF provenance and clear concept labels](docs/VISION_SHOWCASE_TR_EN.md).
+
 ## Hotel-operator evidence / İmzalı ve kaşeli değerlendirme
 
 On **15 November 2026**, a reviewer affiliated with this project and identifying as an **Asmalı Hotel front-office representative** submitted a **dated, signed and property-stamped first-party operator worksheet** about the fictional offline demo. The reviewer reports evaluating it in a hotel setting; this location and authority have **not been independently authenticated**.
