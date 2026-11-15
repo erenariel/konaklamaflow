@@ -44,6 +44,12 @@ These are **real browser recordings of an earlier fictional offline demo** (not 
 
 ✨ **[Explore the cinematic Future Intelligence vision — three original science-fiction animated concepts](https://erenariel.github.io/konaklamaflow/project-overview.html#vizyon)** · [GIF provenance and clear concept labels](docs/VISION_SHOWCASE_TR_EN.md).
 
+## 🔐 Privacy First — Zero-Access Vision (concept)
+
+**[Explore the privacy campaign / Gizlilik vizyonu tanıtımını aç](https://erenariel.github.io/konaklamaflow/privacy-campaign.html)** · [Animated schematic: authorized device → encrypted record → hotel staff authorization](https://erenariel.github.io/konaklamaflow/privacy-campaign.html#akış)
+
+Our ambition is to build client-held-key protection for sensitive guest records: **a software vendor should not automatically possess guest decryption keys.** Today this is a research proposal with a **synthetic browser-only crypto lab**, **not** an audited, certified, or live encrypted hotel PMS. Future certification artwork is explicitly a concept, not an issued credential. No unique-in-the-world or absolute data-breach claims are made.
+
 ## Zero-Access Hotel Vault — privacy architecture research 🔐
 
 A future **Proton-inspired, client-held-key encryption model** is under design for sensitive hotel guest records. A standalone [**synthetic-only browser encryption lab**](https://erenariel.github.io/konaklamaflow/privacy-vault-lab.html) demonstrates locally encrypted and decrypted **fake data** using standard Web Crypto AES-GCM; it has **no backend, real users, staff key-sharing, recovery or live PMS connection**. It is **not an audited zero-knowledge hotel product** and cannot establish that a future vendor can never see plaintext. [Technical threat model and development gates (TR/EN)](docs/ZERO_ACCESS_HOTEL_VAULT_TR_EN.md).
