@@ -27,7 +27,7 @@ _REQUIRED_OVERVIEW_COPY = (
     "Gerçek otel",
     "English summary",
     "Future Intelligence Vision",
-    "Zero-Access Vault Lab",
+    "Zero-Access Hotel Vault",
     "Concept art only",
     "gerçek tarayıcı ekran kayıtlarıdır",
 )
