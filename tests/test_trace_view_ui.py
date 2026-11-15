@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 from scripts.render_trace_view import trusted_trace, render_trace_view, trace_view_html, main
-from scripts.stage_demo_site import GENERATED_ASSETS, PUBLIC_ASSETS, stage_site
+from scripts.stage_demo_site import GENERATED_ASSETS, PUBLIC_ASSETS, DOWNLOAD_BUNDLE, stage_site
 
 
 class TraceViewUiTests(unittest.TestCase):
@@ -52,7 +52,7 @@ class TraceViewUiTests(unittest.TestCase):
             stage_site(stage)
             self.assertEqual((stage/"fictional-trace.html").read_text(),trace_view_html())
             self.assertEqual({p.name for p in stage.iterdir()},
-                             set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{".nojekyll"})
+                             set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{".nojekyll", DOWNLOAD_BUNDLE})
 
 
 if __name__=="__main__":
