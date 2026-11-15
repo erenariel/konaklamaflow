@@ -81,6 +81,49 @@ class PrivacyCampaignBrowserTests(unittest.TestCase):
         page.locator('a[href="#akış"]').click()
         self.assertEqual(page.evaluate("decodeURIComponent(location.hash)"), "#akış")
 
+    def test_five_step_flow_labels_and_all_four_media_pairs_are_public(self):
+        page = self.page
+        expected_labels = [
+            "Kimlik verisi",
+            "Cihazda şifrele",
+            "Sunucuda şifreli kayıt",
+            "Yetkili cihazda aç",
+            "İnsan onayı",
+        ]
+        actual_labels = page.locator("#akış .flow li strong").all_inner_texts()
+        self.assertEqual(actual_labels, expected_labels)
+        visual_assets = (
+            ("privacy-promise.gif", "privacy-promise-poster.jpg"),
+            ("authorized-device.gif", "authorized-device-poster.jpg"),
+            ("zero-access-flow.gif", "zero-access-flow-poster.jpg"),
+            ("future-certification.gif", "future-certification-poster.jpg"),
+        )
+        images = page.locator("picture img")
+        sources = page.locator("picture source")
+        self.assertEqual(images.count(), 4)
+        self.assertEqual(sources.count(), 4)
+        for gif, poster in visual_assets:
+            with self.subTest(gif=gif):
+                img = page.locator(f'picture img[src="{gif}"]')
+                self.assertEqual(img.count(), 1)
+                self.assertEqual(
+                    img.locator("xpath=..").locator("source").get_attribute("srcset"),
+                    poster)
+                img.scroll_into_view_if_needed()
+                page.wait_for_function("(img) => img.complete && img.naturalWidth > 0",
+                                       arg=img.element_handle())
+                self.assertTrue(img.get_attribute("alt"))
+
+        page.emulate_media(reduced_motion="reduce")
+        for gif, poster in visual_assets:
+            with self.subTest(poster=poster):
+                image = page.locator(f'picture img[src="{gif}"]')
+                image.scroll_into_view_if_needed()
+                page.wait_for_function("(img) => img.complete && img.naturalWidth > 0",
+                                       arg=image.element_handle())
+                self.assertTrue(image.evaluate(
+                    "(img) => img.currentSrc.endsWith(" + repr(poster) + ")"))
+
     def test_reduced_motion_uses_still_images(self):
         page = self.page
         page.emulate_media(reduced_motion="reduce")
