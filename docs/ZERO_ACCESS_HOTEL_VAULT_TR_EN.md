@@ -63,6 +63,12 @@ Hotel staff device: verify role and key -> LOCAL decryption -> purpose-bound dis
 - Nonce reuse with the same AES-GCM key would be dangerous: this lab uses new independent keys/nonces per encryption. Before production, formally review record-key rotation, key/version migration, nonce generation, error behavior and AAD canonicalization.
 - The test demonstrates **browser crypto correctness under an isolated fictional scenario**; no independent security validation is implied.
 
+### Phase 1.2 — asynchronous UI state safety / Asenkron kilit güvenliği
+
+The synthetic lab uses a monotonic operation token: starting an operation, selecting **Lock/Clear**, or editing the passphrase/ciphertext invalidates all previous pending UI writes. When a delayed native Web Crypto call completes after an invalidation, its result is **not permitted to re-display** the plaintext record, re-populate a cleared envelope or replace the last user-facing Lock/Clear status. Browser regressions pause key derivation and check Lock, Clear, ciphertext edits and cancellation of an in-flight encryption.
+
+**Scope warning / Kapsam:** This is a **browser display-state race fix**, not a cryptographic proof, true cancellation of native Web Crypto operations, reliable memory wiping, or a production key-custody guarantee. An authorized user, compromised browser or malicious script update could still obtain displayed data. Real hotels' identity documents remain strictly outside this prototype.
+
 ## 5. Acceptance gates before any marketing claim
 
 - [ ] Independent crypto/threat-model review; no proprietary/homegrown algorithms or unsafe key reuse
