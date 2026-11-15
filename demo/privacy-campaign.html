@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="KonaklamaFlow Zero-Access Hotel Vault: future client-held-key privacy architecture and synthetic-only cryptography demonstration. Not deployed or certified.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; connect-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'none'; font-src 'none'; object-src 'none'; frame-src 'none'; form-action 'none'">
+<title>KonaklamaFlow | Gizliliğinizin Geleceği — Konsept Vizyon</title>
+<style>
+:root{color-scheme:dark;--bg:#060d1b;--bg2:#12233b;--ink:#edf8ff;--muted:#c0d3e7;--cyan:#91fff2;--violet:#caacff;--border:#46627c;--gold:#ffdfa4}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(circle at 75% 6%,#1c4360,transparent 34%),radial-gradient(circle at 20% 22%,#332052,transparent 34%),var(--bg);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--cyan);text-underline-offset:3px}a:hover{color:white}a:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+main,.topbar{width:min(1120px,100% - 36px);margin:auto}.topbar{display:flex;justify-content:space-between;gap:13px;flex-wrap:wrap;align-items:center;padding:22px 0;border-bottom:1px solid var(--border)}.topbar .brand{font-weight:900;color:#fff;text-decoration:none;letter-spacing:-.02em;font-size:18px}.topbar nav{display:flex;flex-wrap:wrap;gap:12px;font-size:13px}
+.hero{min-height:465px;display:grid;grid-template-columns:1fr minmax(290px,.82fr);align-items:center;gap:26px;padding:59px 0}.eyebrow{color:var(--cyan);font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}h1{font-size:clamp(38px,5.7vw,69px);letter-spacing:-.055em;line-height:1.05;margin:17px 0 24px}h1 em{color:var(--cyan);font-style:normal}h2{font-size:clamp(24px,3.3vw,38px);letter-spacing:-.035em;line-height:1.14;margin:12px 0 18px}h3{font-size:18px;margin:8px 0}.lead{font-size:clamp(16px,1.7vw,19px);color:#d0e5f0;max-width:710px}.pill{display:inline-block;font-size:11px;font-weight:800;color:#261526;background:var(--gold);padding:7px 12px;border-radius:30px;text-transform:uppercase;letter-spacing:.06em}
+.hero-art{position:relative;border-radius:24px;background:linear-gradient(160deg,#243257,#0c1225 65%,#2f1f45);border:1px solid #73b9c4;overflow:hidden;box-shadow:0 24px 80px #00b7c21e,0 0 80px #7b37ff12;aspect-ratio:16/13;display:flex;justify-content:center;align-items:center}
+.hero-art:before{content:"";position:absolute;inset:-40%;border:3px solid #3fffe33a;border-radius:50%;animation:rotate 18s linear infinite}.hero-art:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 24px,#8ccfff0b 25px 26px);pointer-events:none}.hero-art img{width:100%;height:100%;object-fit:cover;max-width:100%}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin:23px 0}.cta{display:inline-flex;align-items:center;justify-content:center;background:var(--cyan);color:#08233b;text-decoration:none;border:1px solid var(--cyan);border-radius:11px;padding:12px 17px;font-weight:850}.cta.secondary{background:transparent;color:var(--cyan)}
+.notice{padding:16px 18px;background:#2e2537;border-left:4px solid var(--gold);border-radius:9px;color:#fceace;margin:7px 0 32px}.notice strong{color:#fff}
+.section{padding:43px 0 23px;border-top:1px solid #344964}.description{color:var(--muted);max-width:850px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px;margin:22px 0}
+.card{border-radius:18px;background:linear-gradient(160deg,#182c46,#0c172a);border:1px solid var(--border);overflow:hidden;box-shadow:0 20px 40px #0003}.card img{display:block;width:100%;height:210px;object-fit:cover;object-position:center;background:#081b2d;border-bottom:1px solid #577182}.card .body{padding:17px 19px 21px}.card small{color:var(--cyan);font-weight:850;text-transform:uppercase;letter-spacing:.08em}.card p{color:var(--muted);font-size:13px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px;list-style:none;margin:24px 0;padding:0}.flow li{position:relative;min-width:0;background:linear-gradient(180deg,#112c44,#0c1729);border:1px solid #4d8795;border-radius:16px;padding:17px 12px;text-align:center;box-shadow:0 0 24px #18d8ec14;animation:glow 6s ease-in-out infinite}.flow li:nth-child(2){animation-delay:1s}.flow li:nth-child(3){animation-delay:2s}.flow li:nth-child(4){animation-delay:3s}.flow li:nth-child(5){animation-delay:4s}.flow li:not(:last-child):after{content:"➜";position:absolute;right:-16px;top:40%;z-index:2;color:var(--cyan);font-size:18px;text-shadow:0 0 12px var(--cyan)}.flow .symbol{display:block;font-size:31px;margin-bottom:10px}.flow strong{display:block;font-size:13px;line-height:1.4}.flow span{display:block;color:var(--muted);font-size:11px;margin-top:7px}
+.boundaries{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.info{background:#101e32;border:1px solid var(--border);border-radius:14px;padding:18px}.info p{color:var(--muted);margin:5px 0}.cert{display:grid;grid-template-columns:100px 1fr;align-items:center;gap:22px;padding:24px;background:linear-gradient(135deg,#251c43,#102a3c);border:1px solid #9a85c2;border-radius:19px}.seal{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;border:2px dashed var(--gold);background:#0a2b47;color:var(--cyan);font-size:29px;animation:glow 5s ease-in-out infinite}.cert p{margin:5px 0;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:28px 0 50px;color:var(--muted);font-size:12px}
+@keyframes glow{0%,100%{box-shadow:0 0 18px #1fffff10;border-color:#4d8795}45%{box-shadow:0 0 25px #35ffe04f;border-color:#a0fff2}}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@media(max-width:850px){.hero{grid-template-columns:1fr;min-height:0;padding:36px 0}.hero-art{aspect-ratio:16/9;max-height:355px}.grid{grid-template-columns:1fr 1fr}.flow{grid-template-columns:repeat(3,minmax(0,1fr))}.flow li:after{display:none}}
+@media(max-width:580px){main,.topbar{width:calc(100% - 26px)}.grid,.boundaries{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr;gap:10px}.card img{height:220px}.cert{grid-template-columns:1fr}.cta{width:100%}}
+@media(max-width:360px){.flow{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <a class="brand" href="index.html">◈ KonaklamaFlow</a>
+ <nav aria-label="Sayfa bölümleri"><a href="#akış">Şifreleme vizyonu</a><a href="#sinirlar">Gerçek durum</a><a href="#gelecek">Gelecekte sertifika</a><a href="project-overview.html#otel-degerlendirmesi">Otel değerlendirmesi</a></nav>
+</header>
+<main>
+<section class="hero" aria-labelledby="campaignHeading">
+ <div>
+  <span class="pill">CONCEPT VISION / GELİŞTİRME HEDEFİ</span>
+  <p class="eyebrow">PRIVACY-FIRST HOSPITALITY · SINCE 2026</p>
+  <h1 id="campaignHeading">Gizliliğinizi <em>görüyoruz.</em><br>Verilerinizi görmemeyi hedefliyoruz.</h1>
+  <p class="lead"><strong>Hedefimiz:</strong> Misafir kimlikleri gibi hassas veriler yetkili otel cihazında şifrelensin; yazılım sağlayıcısının sunucusu yalnızca şifreli içerik saklasın. <strong>Yetki misafirin verisini korumaya, anahtar kontrolü ise otele ait olsun.</strong></p>
+  <div class="ctas"><a class="cta" href="privacy-vault-lab.html">🔐 Kurgusal şifreleme deneyini aç</a><a class="cta secondary" href="project-overview.html#otel-degerlendirmesi">📄 Otel operatörü değerlendirmesi</a></div>
+ </div>
+ <figure class="hero-art"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-ai-command-core-poster.jpg"><img src="vision-ai-command-core.gif" alt="Gelecekteki mahremiyet mimarisini simgeleyen, bilimkurgu tarzında holografik korumalı otel komuta çekirdeği; gerçek ürün ekran kaydı değildir." width="576" height="476" decoding="async"></picture></figure>
+</section>
+<div class="notice"><strong>Şu anda canlı şifreli otel sistemi değil:</strong> Bu sayfa bir ürün vizyonu ve pazarlama konseptidir. KonaklamaFlow’un mevcut kasası yalnızca kurgusal verilerle çalışan tarayıcı içi AES-GCM laboratuvarıdır. Şirket sahibinin gerçek misafir kayıtlarına erişemediğini, sistemin E2EE sertifikalı olduğunu veya tüm veri sızıntılarını engellediğini <strong>iddia etmiyoruz.</strong></div>
+<section id="akış" class="section" aria-labelledby="flowHeading">
+ <p class="eyebrow">AUTHORIZED DEVICE · AUTHORIZED ACCESS</p>
+ <h2 id="flowHeading">Yetkili Cihaz. Yetkili Erişim.</h2>
+ <p class="description">Önerilen mimari veri akışını adım adım gör: Şifreleme ve çözme işlemleri kullanıcının güvenilir cihazında yapılır, sunucu açık kimlik bilgisi yerine şifreli zarf saklar. Bu akış <strong>gelecekteki üretim mimarisi için tasarımdır; mevcut otel demosuna entegre değildir.</strong></p>
+ <ol class="flow" aria-label="Gelecek şifreleme mimarisi adımları">
+  <li><span class="symbol">🪪</span><strong>Kimlik verisi</strong><span>Yetkili personel cihazında başlar</span></li>
+  <li><span class="symbol">🔐</span><strong>Cihazda şifrele</strong><span>Rastgele kayıt anahtarı ve doğrulamalı şifreleme</span></li>
+  <li><span class="symbol">☁️</span><strong>Sunucuda şifreli kayıt</strong><span>Yalnızca şifreli veri ve sınırlandırılmış metadata</span></li>
+  <li><span class="symbol">💻</span><strong>Yetkili cihazda aç</strong><span>Otelin kontrol ettiği doğrulanmış anahtar</span></li>
+  <li><span class="symbol">✅</span><strong>İnsan onayı</strong><span>İşleme göre belgelenmiş yetki ve sorumluluk</span></li>
+ </ol>
+</section>
+<section class="section" aria-labelledby="visualHeading">
+ <p class="eyebrow">CINEMATIC VISION · ANIMATED CONCEPTS</p>
+ <h2 id="visualHeading">Geleceğin gizlilik odaklı ön bürosu</h2>
+ <p class="description">Aşağıdaki özgün bilimkurgu GIF’leri çalışan şifreleme ürününün videosu <strong>değil</strong>, KonaklamaFlow’un hedeflediği tasarım yönünü anlatan hareketli konseptlerdir.</p>
+ <div class="grid">
+  <article class="card"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-ai-command-core-poster.jpg"><img src="vision-ai-command-core.gif" width="576" height="476" loading="lazy" alt="Kurgusal AI komuta çekirdeği ve korunan veri ağını gösteren sanatsal animasyon"></picture><div class="body"><small>Concept 01</small><h3>Veri Koruma Çekirdeği</h3><p>Kimlik alanlarını ayrı bir şifreli kasada tutma ve veriyi işleme amacına göre sınırlandırma vizyonu.</p></div></article>
+  <article class="card"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-smart-room-grid-poster.jpg"><img src="vision-smart-room-grid.gif" width="576" height="476" loading="lazy" alt="Geleceğe yönelik otel oda kontrol ağı ve holografik erişim metaforu"></picture><div class="body"><small>Concept 02</small><h3>Yetki Sınırları</h3><p>Her odanın ve kaydın erişimi ayrı değerlendirilsin; personel yalnızca izinli kayıtları görsün.</p></div></article>
+  <article class="card"><picture><source media="(prefers-reduced-motion: reduce)" srcset="vision-executive-intelligence-poster.jpg"><img src="vision-executive-intelligence.gif" width="576" height="476" loading="lazy" alt="Bilimkurgu tarzında holografik otel zekâsını temsil eden gelecek konsept animasyonu"></picture><div class="body"><small>Concept 03</small><h3>Denetlenebilir Güven</h3><p>İnsan onayı, açık kaynak kod ve bağımsız güvenlik incelemeleri üzerine kurulacak güven modeli.</p></div></article>
+ </div>
+</section>
+<section id="sinirlar" class="section" aria-labelledby="limitsHeading">
+ <p class="eyebrow">EVIDENCE FIRST · NO FALSE SECURITY CLAIMS</p><h2 id="limitsHeading">Bugün gerçekten ne var?</h2>
+ <div class="boundaries">
+ <div class="info"><h3>✅ Kurgusal AES-GCM laboratuvarı</h3><p>Tarayıcı içinde kurgusal örnek şifreleme, yanlış parola ve veri değişikliği reddi. Kod ve otomatik testler GitHub'da incelenebilir.</p><p><a href="privacy-vault-lab.html">Laboratuvarı aç</a></p></div>
+ <div class="info"><h3>🛠️ Üretim güvenliği henüz yok</h3><p>Gerçek personele anahtar dağıtımı, erişim iptali, güvenli kurtarma, harici OTA/KBS bağlantıları, bağımsız kriptografik denetim ve canlı pilot tamamlanmadı.</p><p><a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/ZERO_ACCESS_HOTEL_VAULT_TR_EN.md">Tehdit modeli ve geliştirme şartları (TR/EN)</a></p></div>
+ </div>
+ <p class="description">Ayrıca <strong>OTA, yasal kimlik bildirimi ve KBS</strong> gibi süreçler gerekli kişisel verinin yetkili bir uçta açılmasını gerektirebilir. Şifreleme KVKK veya GDPR uyumluluğunu tek başına garanti etmez. Otelde yapılan tarihli ve imzalı birinci taraf değerlendirme mevcut kurgusal demo hakkındadır; bu yeni kasayı test etmiş değildir.</p>
+</section>
+<section id="gelecek" class="section" aria-labelledby="futureHeading">
+ <p class="eyebrow">FUTURE TRUST PROGRAM · NOT A CERTIFICATION</p><h2 id="futureHeading">KonaklamaFlow Certified Privacy — gelecek programı fikri</h2>
+ <div class="cert"><div class="seal" aria-hidden="true">◇</div><div><h3>Güveni bir vaat değil, doğrulanabilir bir standart yapalım.</h3><p>Bağımsız denetim, gerçek otel pilotu, anahtar yönetimi testleri ve devamlı kontrol programı tamamlanırsa ileride oteller için doğrulanabilir bir güven programı geliştirilebilir. <strong>Bugün herhangi bir otele KonaklamaFlow güvenlik sertifikası verilmedi.</strong></p></div></div>
+</section>
+<section class="section"><p class="eyebrow">ENGLISH SUMMARY</p><h2>Privacy is the product vision — not yet a production guarantee.</h2><p class="description">KonaklamaFlow is exploring a Proton-inspired, independent **client-held-key, zero-access architecture** for future hotel guest records. Its current browser Web Crypto lab uses synthetic data only. The service is not a deployed encrypted hotel PMS, is not certified, and has not undergone independent security validation. Future hotel security claims would require audited architecture, working role-key lifecycle, lawful reporting integrations and real pilot evidence. This project is not affiliated with Proton.</p></section>
+<footer>KonaklamaFlow · MIT open source · <a href="project-overview.html">Ürün tanıtımı</a> · <a href="privacy-vault-lab.html">Şifreleme deneyi</a> · <a href="index.html">Otel demosu</a> · Konsept materyalleri gerçek özellik veya resmî sertifika değildir.</footer>
+</main>
+</body>
+</html>
