@@ -35,6 +35,12 @@ PUBLIC_ASSETS = {
     'ai-command-tour-poster.png': 'docs/images/ai-command-tour-poster.png',
     'roomplan-story-poster.png': 'docs/images/roomplan-story-poster.png',
     'overview-pulse-poster.png': 'docs/images/overview-pulse-poster.png',
+    'vision-ai-command-core.gif': 'docs/images/vision-ai-command-core.gif',
+    'vision-ai-command-core-poster.jpg': 'docs/images/vision-ai-command-core-poster.jpg',
+    'vision-smart-room-grid.gif': 'docs/images/vision-smart-room-grid.gif',
+    'vision-smart-room-grid-poster.jpg': 'docs/images/vision-smart-room-grid-poster.jpg',
+    'vision-executive-intelligence.gif': 'docs/images/vision-executive-intelligence.gif',
+    'vision-executive-intelligence-poster.jpg': 'docs/images/vision-executive-intelligence-poster.jpg',
     'desktop-preview.png': 'demo/desktop-preview.png',
     'mobile-preview.png': 'demo/mobile-preview.png',
 }
