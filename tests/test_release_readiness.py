@@ -23,6 +23,13 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertGreaterEqual(result["local_images"], 1)
             self.assertEqual(main(["--site", str(stage)]), 0)
 
+    def test_pages_deployment_invokes_same_preflight(self):
+        root = Path(__file__).resolve().parents[1]
+        workflow = (root / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
+        self.assertIn("python -m scripts.verify_release_readiness --site _site", workflow)
+        self.assertIn("workflow_run", workflow)
+        self.assertIn("branches: [main]", workflow)
+
     def test_private_or_unexpected_staged_file_rejected(self):
         with tempfile.TemporaryDirectory() as folder:
             stage = Path(folder) / "stage"

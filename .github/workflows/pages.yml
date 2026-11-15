@@ -31,6 +31,8 @@ jobs:
           persist-credentials: false
       - name: Stage fictional demo only
         run: python scripts/stage_demo_site.py --output _site
+      - name: Verify offline release asset allowlist before deployment
+        run: python -m scripts.verify_release_readiness --site _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

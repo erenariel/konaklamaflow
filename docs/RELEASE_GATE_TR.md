@@ -25,10 +25,15 @@ için son doğrulama rehberidir. **Bu dosyadaki komutlar yayına alma yapmaz.**
    ve #58'in rapor uyumu korunur. #65 yalnız bağımsız Python öneri modülüdür;
    otel/demoya canlı bağlantı eklenmedi.
 6. PR'ı birleştirme kararı proje sahibi tarafından ayrıca verilir.
-   Başarılı test, Pages'in güncellendiği anlamına gelmez.
+   Başarılı test, Pages'in güncellendiği anlamına gelmez. **Bu depoda başarılı
+`main` push testleri Pages dağıtımını otomatik tetikler.** Dolayısıyla
+PR #67'nin birleştirilmesi, ek bir manuel butona basılmadan canlı siteyi
+değiştirebilir. Son yayın kararı bundan önce verilmelidir.
 
 ## Canlı yayın sonrası kontrol (ayrı adım)
 
+Pages workflow, içerikleri yüklemeden önce aynı
+`verify_release_readiness --site _site` denetimini çalıştırır.
 GitHub Pages yayın görevinin başarılı tamamlandığını kontrol et; daha sonra
 `https://erenariel.github.io/konaklamaflow/` ve
 `/project-overview.html`, `/synthetic-scorecard.html`,
