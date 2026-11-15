@@ -42,13 +42,13 @@ These are **real browser recordings of an earlier fictional offline demo** (not 
 | [![Real recorded AI decision review](docs/images/ai-command-tour.gif)](docs/images/ai-command-tour.gif) | [![Real recorded fictional room-plan interactions](docs/images/roomplan-story.gif)](docs/images/roomplan-story.gif) | [![Real recorded hotel operations overview](docs/images/overview-pulse.gif)](docs/images/overview-pulse.gif) |
 | Source-bound review demo | Housekeeping and room status demo | Offline analytics demo |
 
-✨ **[Explore the cinematic Future Intelligence vision — three original science-fiction animated concepts](https://erenariel.github.io/konaklamaflow/project-overview.html#vizyon)** · [GIF provenance and clear concept labels](docs/VISION_SHOWCASE_TR_EN.md).
+✨ **[Explore the product interface concepts — three animated design studies](https://erenariel.github.io/konaklamaflow/project-overview.html#vizyon)** · [Design assets and media provenance](docs/VISION_SHOWCASE_TR_EN.md).
 
 ## 🔐 Privacy First — Zero-Access Vision (concept)
 
 [![KonaklamaFlow privacy-first hotel vault future concept — fictional, not deployed](docs/images/privacy-promise.gif)](https://erenariel.github.io/konaklamaflow/privacy-campaign.html)
 
-*Özgün hareketli konsept · Bilimkurgu tanıtımı; mevcut otel güvenlik sertifikası veya canlı şifreli PMS değildir.*
+*Özgün arayüz vizyonu · Gerçek kullanıcı verisi içermeyen tasarım çalışması; mevcut otel güvenlik sertifikası veya canlı şifreli PMS değildir.*
 
 
 **[Explore the privacy campaign / Gizlilik vizyonu tanıtımını aç](https://erenariel.github.io/konaklamaflow/privacy-campaign.html)** · [Animated schematic: authorized device → encrypted record → hotel staff authorization](https://erenariel.github.io/konaklamaflow/privacy-campaign.html#akış)
