@@ -2,6 +2,21 @@
 
 > **Evidence classification:** First-party / project-maintainer-affiliated operator feedback, **self-reported**. This is **not** an independent hotel audit, certification, verified pilot, production deployment, external endorsement, or proof of actual PMS connectivity.
 
+## Evidence summary — why this review matters
+
+This record combines **an attributable business-context operator worksheet** with a **separate, reproducible GitHub engineering trail**. The reviewer self-identifies as an authorized front-office representative at a named hotel and submitted a dated, personally signed assessment bearing a property-stamp impression. The paper form is a meaningful **documented first-party hospitality operations review** of the fictional demo, more specific than an informal comment or an unsupported claim of product-market fit. It does not by itself establish an independent corporate endorsement.
+
+**Supported strengths, without extrapolation:**
+
+1. **Domain-specific review:** The written feedback concerns reservation conflicts, room-plan versus occupancy status, night-shift human approval boundaries and UI translations—workflows relevant to hotel reception.
+2. **Accountability and traceability:** The worksheet is dated and signed, with a visible property stamp; the sanitized public report records the tested version and the checkbox status verbatim. The original document remains private, so public readers cannot independently authenticate the stamp or signature.
+3. **Balanced findings:** The reviewer checked **Pass** for reservation-conflict display; wrote observations for three other scenarios without marking their outcomes; and noted incomplete specialist translations and the absence of live PMS integration.
+4. **Separate technical evidence:** Version history, merged changes and CI checks can be inspected publicly. They support code and demonstration integrity, **not independent confirmation of the operator's claims or live adoption**.
+
+**What may be stated in an application:** *“Documented first-party hotel-operator assessment: a dated, signed and company-stamped worksheet from a project-affiliated hotel front-office reviewer, with one explicitly checked scenario pass and additional written usability observations; accompanied by publicly inspectable GitHub CI evidence.”*
+
+**What must not be stated:** *“Independently hotel-certified,” “third-party audited,” “validated in a live PMS environment,” “four of four scenarios passed,” or “proven real-world adoption.”* No authority has externally verified the signatory's company role.
+
 ## Source and context
 
 - **Source:** Three-page, dated, handwritten evaluation sheet submitted by the project maintainer in this conversation, with a handwritten signature and a visible property stamp. **The original scans and stamp/signature images are intentionally not published in this repository.**
