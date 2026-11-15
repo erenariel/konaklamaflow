@@ -61,7 +61,7 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
 
     def test_responsive_and_navigation_are_accessible(self):
         page = self.page
-        self.assertEqual(page.locator('nav.links a').count(), 7)
+        self.assertEqual(page.locator('nav.links a').count(), 8)
         for width in (320, 375, 390, 768, 1366):
             page.set_viewport_size({"width": width, "height": 900})
             with self.subTest(width=width):
@@ -115,10 +115,12 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
 
     def test_first_party_hotel_evaluation_is_visible_and_properly_scoped(self):
         page = self.page
-        page.locator('a[href="#otel-degerlendirmesi"]').click()
+        page.locator('nav.links a[href="#otel-degerlendirmesi"]').click()
         self.assertEqual(page.evaluate("location.hash"), "#otel-degerlendirmesi")
         review = page.locator("#otel-degerlendirmesi")
         self.assertTrue(review.is_visible())
+        # The signed evaluation is surfaced before the decorative GIF galleries.
+        self.assertTrue(page.evaluate("() => document.querySelector('#otel-degerlendirmesi').compareDocumentPosition(document.querySelector('#gercek-gif')) & Node.DOCUMENT_POSITION_FOLLOWING"))
         body = review.inner_text()
         self.assertIn("imzalı ve kaşeli", body)
         self.assertIn("birinci taraf", body)
@@ -138,9 +140,10 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
         link = page.locator(".kf-promo-entry a")
-        self.assertEqual(link.count(), 1)
-        self.assertEqual(link.get_attribute("href"), "project-overview.html")
-        self.assertTrue(link.is_visible())
+        self.assertEqual(link.count(), 2)
+        self.assertEqual(link.first.get_attribute("href"), "project-overview.html")
+        self.assertEqual(link.nth(1).get_attribute("href"), "project-overview.html#otel-degerlendirmesi")
+        self.assertTrue(link.nth(1).is_visible())
 
 
 if __name__ == "__main__":
