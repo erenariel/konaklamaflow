@@ -127,6 +127,74 @@ class ZeroAccessVaultLabTests(unittest.TestCase):
         self.assertEqual(self.page.locator("#envelope").input_value(), "")
         self.assertIn("LOCKED",self.page.locator("#revealed").inner_text())
 
+    def _pause_kdf_for_race_test(self):
+        """Deterministically pause the next PBKDF2 result inside this test page."""
+        self.page.evaluate("""
+            () => {
+                const original = crypto.subtle.deriveKey.bind(crypto.subtle);
+                window.__kdfGate = { waiting: false, release: null };
+                Object.defineProperty(crypto.subtle, 'deriveKey', {
+                    configurable: true,
+                    value: (...args) => original(...args).then(
+                        key => new Promise(resolve => {
+                            window.__kdfGate.waiting = true;
+                            window.__kdfGate.release = () => resolve(key);
+                        })
+                    )
+                });
+            }
+        """)
+
+    def _begin_paused_decrypt(self):
+        self._encrypt()
+        self._pause_kdf_for_race_test()
+        self.page.locator("#passphrase").fill("UniqueFictionalLabPhrase-2026-Only")
+        self.page.locator("#decrypt").click()
+        self.page.wait_for_function("() => window.__kdfGate.waiting === true")
+        self.assertIn("Decrypting synthetic sample", self.page.locator("#status").inner_text())
+
+    def test_lock_during_pending_decrypt_never_reopens(self):
+        self._begin_paused_decrypt()
+        self.page.locator("#lock").click()
+        self.page.evaluate("() => window.__kdfGate.release()")
+        self.page.wait_for_timeout(250)
+        self.assertIn("LOCKED", self.page.locator("#revealed").inner_text())
+        self.assertIn("Locked this browser view", self.page.locator("#status").inner_text())
+        self.assertNotIn("Local decryption succeeded", self.page.locator("#status").inner_text())
+        self.assertEqual(self.page.locator("#passphrase").input_value(), "")
+
+    def test_clear_during_pending_decrypt_never_restores_ciphertext_or_guest(self):
+        self._begin_paused_decrypt()
+        self.page.locator("#clear").click()
+        self.page.evaluate("() => window.__kdfGate.release()")
+        self.page.wait_for_timeout(250)
+        self.assertEqual(self.page.locator("#envelope").input_value(), "")
+        self.assertIn("LOCKED", self.page.locator("#revealed").inner_text())
+        self.assertIn("Cleared the ephemeral lab envelope", self.page.locator("#status").inner_text())
+
+    def test_edit_during_pending_decrypt_invalidates_old_operation(self):
+        self._begin_paused_decrypt()
+        envelope_text = self.page.locator("#envelope").input_value()
+        # Editing the ciphertext must invalidate a queued decrypt and clear passphrase.
+        self.page.locator("#envelope").fill(envelope_text + " ")
+        self.page.evaluate("() => window.__kdfGate.release()")
+        self.page.wait_for_timeout(250)
+        self.assertIn("LOCKED", self.page.locator("#revealed").inner_text())
+        self.assertEqual(self.page.locator("#passphrase").input_value(), "")
+        self.assertIn("Encrypted envelope edited", self.page.locator("#status").inner_text())
+
+    def test_clear_during_pending_encrypt_prevents_envelope_resurrection(self):
+        self._pause_kdf_for_race_test()
+        self.page.locator("#passphrase").fill("UniqueFictionalLabPhrase-2026-Only")
+        self.page.locator("#encrypt").click()
+        self.page.wait_for_function("() => window.__kdfGate.waiting === true")
+        self.page.locator("#clear").click()
+        self.page.evaluate("() => window.__kdfGate.release()")
+        self.page.wait_for_timeout(250)
+        self.assertEqual(self.page.locator("#envelope").input_value(), "")
+        self.assertIn("LOCKED", self.page.locator("#revealed").inner_text())
+        self.assertIn("Cleared the ephemeral lab envelope", self.page.locator("#status").inner_text())
+
     def test_readability_and_no_private_record_entry(self):
         self.assertEqual(self.page.locator("textarea").count(), 1)
         self.assertEqual(self.page.locator('input[type="password"]').count(), 1)
