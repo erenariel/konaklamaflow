@@ -2,7 +2,9 @@
 from pathlib import Path
 import tempfile
 import unittest
-from scripts.stage_demo_site import stage_site, PUBLIC_ASSETS, GENERATED_ASSETS, ROOT
+from zipfile import ZipFile
+from scripts.stage_demo_site import (stage_site, PUBLIC_ASSETS, GENERATED_ASSETS, ROOT,
+                                     DOWNLOAD_BUNDLE, OPERATOR_FEEDBACK_TEMPLATE)
 
 
 class DemoSiteTests(unittest.TestCase):
@@ -20,13 +22,27 @@ class DemoSiteTests(unittest.TestCase):
             for number in (51,53,55,58,59):
                 self.assertIn(f'pull/{number}',overview)
             self.assertNotIn('<script',overview.lower())
+            self.assertIn('href="'+DOWNLOAD_BUNDLE+'"', overview)
+            self.assertIn('Çevrimdışı değerlendirme paketini indir', overview)
 
             self.assertEqual((site/'index.html').read_bytes(),(site/'hotel-operations.html').read_bytes())
             self.assertEqual((site/'hotel-suite.html').read_bytes(),(ROOT/'demo/hotel-suite.html').read_bytes())
             self.assertEqual((site/'global-presentation.html').read_bytes(),(ROOT/'demo/global-presentation-concept.html').read_bytes())
             self.assertEqual((site/'reviewer.html').read_bytes(),(ROOT/'demo/viewer.html').read_bytes())
             self.assertEqual((site/'operations.html').read_bytes(),(ROOT/'demo/operations.html').read_bytes())
-            self.assertEqual({p.name for p in site.iterdir()},set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{'.nojekyll'})
+            self.assertEqual({p.name for p in site.iterdir()}, set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{'.nojekyll', DOWNLOAD_BUNDLE})
+            with ZipFile(site / DOWNLOAD_BUNDLE) as archive:
+                expected_members = set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{'OPERATOR_FEEDBACK_TEMPLATE.md'}
+                self.assertEqual(set(archive.namelist()), expected_members)
+                self.assertIsNone(archive.testzip())
+                for name in expected_members - {'OPERATOR_FEEDBACK_TEMPLATE.md'}:
+                    self.assertEqual(archive.read(name), (site/name).read_bytes())
+                guide = archive.read('OPERATOR_FEEDBACK_TEMPLATE.md').decode('utf-8')
+                self.assertEqual(guide, OPERATOR_FEEDBACK_TEMPLATE)
+                self.assertIn('Test durumu: YAPILMADI',guide)
+                self.assertIn('birinci taraf',guide)
+                self.assertNotIn('.git/', '\\n'.join(archive.namelist()))
+
             scorecard = (site/'synthetic-scorecard.html').read_text(encoding='utf-8')
             history = (site/'fictional-trace.html').read_text(encoding='utf-8')
             index = (site/'index.html').read_text(encoding='utf-8')
