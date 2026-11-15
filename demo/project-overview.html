@@ -49,7 +49,7 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
   <div class="eyebrow">Açık kaynak · Kurgusal otel operasyonları</div>
   <h1 id="heroTitle">Rezervasyon kararları <em>açıklanabilir</em> olmalı.</h1>
   <p class="lead">KonaklamaFlow, butik otellerin rezervasyon ve oda kontrolü süreçlerini kurgusal verilerle gösteren gizlilik öncelikli bir karar destek prototipidir. Amacımız yalnızca bir uyarı üretmek değil, <strong>uyarının nedenini göstermek ve ölçülebilir hâle getirmek.</strong></p>
-  <div class="actions"><a class="cta" href="index.html">Kurgusal otel demosunu keşfet</a><a class="cta ghost" href="https://github.com/erenariel/konaklamaflow">GitHub kaynak kodu</a></div>
+  <div class="actions"><a class="cta" href="index.html">Kurgusal otel demosunu keşfet</a><a class="cta ghost" href="#otel-degerlendirmesi">İmzalı otel değerlendirmesi</a><a class="cta ghost" href="https://github.com/erenariel/konaklamaflow">GitHub kaynak kodu</a></div>
   <div class="chips"><span class="chip">18 kurgusal oda</span><span class="chip">10 dilde taslak açıklamalar</span><span class="chip">Çevrimdışı gösterim</span></div>
  </div>
  <figure class="hero-visual">
@@ -80,6 +80,24 @@ code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow
   <div class="metric"><strong>0 / 0</strong><span>FP / FN</span><small>Yalnız ölçülen yedi etiket üzerinde; genellenemez</small></div>
  </div>
  <div class="explanation"><strong>Neyi ölçmüyoruz?</strong> Gerçek otel başarı oranını, personelin kararı değiştirme sıklığını, canlı sistem gecikmesini veya üretim ortamındaki hata olasılığını. İki senaryo desteklenmiyor; bir senaryo bağımsız etiketli değil. <a href="https://github.com/erenariel/konaklamaflow/pull/51">Ölçüm kodu ve testleri</a> · <a href="https://github.com/erenariel/konaklamaflow/pull/58">Görsel scorecard kodu</a>.</div>
+</section>
+<section id="otel-degerlendirmesi" class="section" aria-labelledby="hotelReviewTitle">
+  <span class="kicker">İşletme bağlamında değerlendirme · 15 Kasım 2026</span>
+  <h2 id="hotelReviewTitle">Tarihli, imzalı ve kaşeli otel operatörü değerlendirmesi</h2>
+  <p class="section-intro">Asmalı Hotel ön büro bağlamında görev yaptığını belirten, aynı zamanda proje geliştiricisiyle ilişkili bir değerlendirici, <strong>kurgusal çevrimdışı demo hakkında üç sayfalık, imzalı ve işletme kaşesi görüntüsü bulunan bir geri bildirim formu</strong> sundu. Bu kayıt, alan uzmanlığına dayalı <strong>birinci taraf (first-party) operasyonel geri bildirim</strong> niteliğindedir. Belgenin imza/kaşe görselleri ve kişisel bilgiler güvenlik amacıyla herkese açık depoya yüklenmedi.</p>
+  <div class="split">
+    <article class="info">
+      <h3>✅ Somut olarak belgelenenler</h3>
+      <p>Rezervasyon çakışması senaryosu <strong>Pass</strong> işaretli. Oda planı, vardiya devri ve dil kullanılabilirliğine ilişkin yazılı gözlemler var; ancak bu üç senaryonun sonuç kutuları işaretlenmemiş. Eksik uzmanlık çevirileri ve canlı PMS bağlantısının bulunmaması kaydedilmiş.</p>
+      <a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md">İngilizce, kişisel verilerden arındırılmış değerlendirme kaydı</a>
+    </article>
+    <article class="info">
+      <h3>🔍 Kanıt sınırı ve teknik iz</h3>
+      <p>Bu, <strong>bağımsız denetim veya üçüncü taraf sertifikasyon değildir</strong>; imza, kaşe ve kurumsal yetki haricen doğrulanmamıştır. Gerçek PMS/OTA/KBS kullanımı, üretim güvenilirliği ya da ölçülmüş müşteri benimsemesi iddiası yoktur. Kod ve otomatik test kayıtları operatör formundan ayrı incelenebilir.</p>
+      <a href="https://github.com/erenariel/konaklamaflow/actions">GitHub Actions teknik testlerini incele</a>
+    </article>
+  </div>
+  <div class="explanation"><strong>English evidence note:</strong> The project has a <strong>documented, dated, signed and company-stamped first-party hotel front-office operator assessment</strong> of its fictional offline prototype. One scenario has an explicitly checked Pass; three additional scenarios contain written observations without selected outcomes. The review is maintainer-affiliated, not independently verified hotel certification, live PMS testing or proven adoption. <a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md">Read the full sanitized evidence record</a>.</div>
 </section>
 <section id="gelistirme" class="section" aria-labelledby="featuresTitle">
  <span class="kicker">Birleştirilmiş sürüm adayı · Kaynak kod kanıtları</span>
