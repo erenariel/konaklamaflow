@@ -52,10 +52,15 @@ class _OverviewLinks(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
-        if tag not in ("a", "img"):
+        if tag not in ("a", "img", "source"):
             return
-        value = attributes.get("href" if tag == "a" else "src", "")
+        attribute = "href" if tag == "a" else "srcset" if tag == "source" else "src"
+        value = attributes.get(attribute, "")
         _require(type(value) is str and value != "", "Overview link/image missing URL")
+        if tag == "source":
+            _require(attributes.get("media") == "(prefers-reduced-motion: reduce)"
+                     and "," not in value and not any(ch.isspace() for ch in value),
+                     "Only one local reduced-motion poster is allowed per source")
         url = urlsplit(value)
         if url.scheme or url.netloc:
             _require(
@@ -75,11 +80,14 @@ class _OverviewLinks(HTMLParser):
             and len(path.parts) == 1,
             "Unexpected local path in overview",
         )
-        if tag == "img":
-            _require(
-                bool(attributes.get("alt")) and not url.fragment,
-                "Overview image missing alt text",
-            )
+        if tag in ("img", "source"):
+            if tag == "img":
+                _require(
+                    bool(attributes.get("alt")) and not url.fragment,
+                    "Overview image missing alt text",
+                )
+            else:
+                _require(not url.fragment, "Poster source must not contain a fragment")
             self.local_images.add(url.path)
         else:
             self.internal.add(url.path)
