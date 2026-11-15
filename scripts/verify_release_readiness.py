@@ -29,7 +29,7 @@ _REQUIRED_OVERVIEW_COPY = (
     "English summary",
     "Future Intelligence Vision",
     "Zero-Access Hotel Vault",
-    "Gizliliğinizi",
+    "Gizlilik kampanyası",
     "Concept art only",
     "gerçek tarayıcı ekran kayıtlarıdır",
 )
