@@ -1,0 +1,39 @@
+{
+  "schema": "konaklamaflow-vision-art-v1",
+  "date": "2026-11-15",
+  "media_classification": "original AI-generated conceptual art, not a product screen capture or an AI integration demo",
+  "frames_per_gif": 6,
+  "duration_ms_per_frame": 180,
+  "files": [
+    {
+      "path": "vision-ai-command-core.gif",
+      "bytes": 499183,
+      "sha256": "29df9ea09ace0a8bf8f285666f79aeebfde01849d0f97acab00e5da53f931b8c"
+    },
+    {
+      "path": "vision-ai-command-core-poster.jpg",
+      "bytes": 43908,
+      "sha256": "7b5d84a9962e98b51fd1fcc7fce674c399963567dc42df5cd062c19f59b1a2ba"
+    },
+    {
+      "path": "vision-smart-room-grid.gif",
+      "bytes": 473148,
+      "sha256": "194b974b451ecb64c9c65d4f074e8f2c75a0fa9d4131c8d8c1c180702ecc9fbd"
+    },
+    {
+      "path": "vision-smart-room-grid-poster.jpg",
+      "bytes": 43466,
+      "sha256": "b07318722722f6017de270cb541caceb619e35c41e9d90f58245b6f45eb4987f"
+    },
+    {
+      "path": "vision-executive-intelligence.gif",
+      "bytes": 463033,
+      "sha256": "3ea38217ae681643428e0c6fddb95c2d4449adf6ec0dad121dcae747395fb9b0"
+    },
+    {
+      "path": "vision-executive-intelligence-poster.jpg",
+      "bytes": 43739,
+      "sha256": "e82fbce9ac67e1234299958d2576b8af4071fc3d2f82634971d93aef0eeed2a2"
+    }
+  ]
+}
