@@ -87,6 +87,11 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         self.assertIn("maintainer-affiliated", body)
         self.assertGreaterEqual(review.locator(
             'a[href*="OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md"]').count(), 1)
+        self.assertGreaterEqual(review.locator(
+            'a[href*="Operator_Review_PUBLIC_REDACTED_TR_EN_2026-11-15.pdf"]').count(), 1)
+        self.assertGreaterEqual(review.locator(
+            'a[href*="PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md"]').count(), 1)
+        self.assertIn("otel ortamında değerlendirdiğini beyan", body)
 
     def test_existing_demo_has_discoverable_overview_entry(self):
         page = self.page
