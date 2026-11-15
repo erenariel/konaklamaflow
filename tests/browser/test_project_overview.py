@@ -61,7 +61,7 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
 
     def test_responsive_and_navigation_are_accessible(self):
         page = self.page
-        self.assertEqual(page.locator('nav.links a').count(), 4)
+        self.assertEqual(page.locator('nav.links a').count(), 5)
         for width in (320, 375, 390, 768, 1366):
             page.set_viewport_size({"width": width, "height": 900})
             with self.subTest(width=width):
@@ -92,6 +92,32 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         self.assertGreaterEqual(review.locator(
             'a[href*="PUBLIC_EVIDENCE_DISCLOSURE_TR_EN.md"]').count(), 1)
         self.assertIn("otel ortamında değerlendirdiğini beyan", body)
+
+    def test_animated_recordings_and_vision_concepts_are_distinct_and_accessible(self):
+        page = self.page
+        recorded = page.locator('#real-gifs .showcase-card')
+        visions = page.locator('#vision .showcase-card.concept')
+        self.assertEqual(recorded.count(), 3)
+        self.assertEqual(visions.count(), 3)
+        self.assertIn('gerçek tarayıcı kayıtlarıdır', page.locator('#real-gifs').inner_text())
+        self.assertIn('konsept sanattır', page.locator('#vision').inner_text())
+        for segment, expected in (
+            ('#real-gifs', ('ai-command-tour.gif', 'roomplan-story.gif', 'overview-pulse.gif')),
+            ('#vision', ('vision-ai-command-core.gif', 'vision-smart-room-grid.gif',
+                        'vision-executive-intelligence.gif')),
+        ):
+            links = page.locator(segment + ' .showcase-card a')
+            self.assertEqual([links.nth(i).get_attribute('href') for i in range(3)],
+                             list(expected))
+            for i in range(3):
+                card = page.locator(segment + ' .showcase-card').nth(i)
+                self.assertTrue(card.locator('img').get_attribute('alt'))
+                self.assertEqual(card.locator('picture source').get_attribute('media'),
+                                 '(prefers-reduced-motion: reduce)')
+                self.assertTrue((self.site / expected[i]).is_file())
+        page.emulate_media(reduced_motion='reduce')
+        for image in page.locator('#vision img').all():
+            self.assertTrue(image.evaluate('(img) => img.currentSrc.endsWith("-poster.jpg")'))
 
     def test_existing_demo_has_discoverable_overview_entry(self):
         page = self.page
