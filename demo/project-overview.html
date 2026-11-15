@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="KonaklamaFlow: gizlilik öncelikli, kurgusal otel operasyonları demosu; doğruluk testleri, karar açıklamaları ve geliştirme adaylarının dürüst durumu.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; connect-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'none'; font-src 'none'; form-action 'none'; object-src 'none';">
+<title>KonaklamaFlow | Ürün Tanıtımı ve Geliştirme Kanıtları</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1122;--deep:#101b34;--card:#172641;--line:#354861;--muted:#b5c8df;--ink:#f0f6ff;--mint:#a1f4d5;--blue:#abc7ff;--yellow:#f5d69a;--radius:19px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 0%,#23445d 0,transparent 40%),var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--mint);text-underline-offset:3px}a:hover{color:#fff}a:focus-visible{outline:3px solid var(--yellow);outline-offset:4px;border-radius:4px}
+.page{max-width:1220px;margin:auto;padding:0 22px 68px}.topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:1px solid var(--line);padding:21px 0}
+.brand{font-weight:850;letter-spacing:.02em;font-size:18px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:12px}.brandmark{width:38px;height:38px;display:inline-grid;place-items:center;background:linear-gradient(140deg,#74dccf,#596bbb);border-radius:12px;color:#0c2335}
+nav.links{display:flex;flex-wrap:wrap;gap:12px 22px;font-weight:650;font-size:13px}.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:32px;padding:60px 0 50px}
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:750;color:var(--mint)}h1{font-size:clamp(33px,4.5vw,60px);letter-spacing:-.04em;line-height:1.09;margin:16px 0 19px;max-width:680px}
+h1 em{font-style:normal;color:var(--mint)}.lead{color:#d3e0ef;font-size:clamp(15px,1.65vw,19px);max-width:640px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}.cta{display:inline-flex;align-items:center;justify-content:center;border-radius:11px;padding:11px 16px;font-weight:750;text-decoration:none;background:var(--mint);color:#11283a;border:1px solid var(--mint)}.cta:hover{background:#fff;color:#14283a}.cta.ghost{background:transparent;color:var(--ink);border-color:#7089a3}.cta.ghost:hover{background:#223750;color:#fff}
+.hero-visual{position:relative;min-width:0}.hero-visual img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid #6380a0;box-shadow:0 30px 90px #07101ecb;aspect-ratio:16/10;object-fit:contain;background:#111f38}
+.visual-caption{color:var(--muted);font-size:12px;margin:12px 2px 0}.notice{border:1px solid #64728c;border-inline-start:4px solid var(--yellow);background:#28283b;padding:15px 17px;border-radius:10px;color:#f6efd9}
+.section{padding:34px 0 8px}.section h2{font-size:clamp(22px,2.65vw,34px);margin:0 0 10px;line-height:1.25;letter-spacing:-.025em}.section-intro{color:var(--muted);max-width:850px;margin:0 0 22px}
+.kicker{font-weight:850;color:var(--mint);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:19px 0 0}.chip{border:1px solid #6f8fa5;border-radius:999px;font-size:11px;font-weight:700;color:#e3f8ff;padding:4px 10px}
+.chip.gold{border-color:#bb9f61;color:var(--yellow)}
+.visual-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;list-style:none;padding:0;margin:22px 0}.flow-step{background:linear-gradient(150deg,#1a3450,#14233b);border:1px solid #517087;border-radius:16px;padding:20px 16px;min-width:0;position:relative}.flow-step:not(:last-child):after{content:"→";position:absolute;right:-13px;top:40%;z-index:1;color:var(--mint);font-size:23px;font-weight:800}.flow-num{display:inline-grid;place-items:center;border-radius:50%;width:33px;height:33px;background:#2a5c63;color:var(--mint);font-weight:850;font-size:13px}.flow-step h3{font-size:16px;margin:14px 0 6px}.flow-step p{color:var(--muted);font-size:13px;margin:0;line-height:1.5}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:20px 0}.metric{background:#192a42;border:1px solid #46617a;border-radius:16px;padding:21px 18px;min-width:0}.metric strong{display:block;font-variant-numeric:tabular-nums;font-size:clamp(26px,3vw,40px);line-height:1;color:var(--mint)}.metric span{display:block;font-size:13px;font-weight:700;margin-top:10px}.metric small{display:block;color:var(--muted);margin-top:5px;line-height:1.4}
+.explanation{border-radius:14px;background:var(--deep);border:1px solid var(--line);padding:15px 19px;margin-top:14px;color:#d8e4f3}
+.features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.feature{border:1px solid #405671;border-radius:18px;background:var(--card);padding:22px;min-width:0}.feature .status{display:inline-flex;font-size:11px;border:1px solid #d0ac73;border-radius:100px;color:var(--yellow);padding:3px 10px;font-weight:750}.feature h3{font-size:19px;margin:13px 0 7px}.feature p{color:var(--muted);margin:0 0 13px}.feature a{font-weight:700;font-size:13px}.feature:last-child{grid-column:1/-1}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:17px}.info{border:1px solid var(--line);border-radius:17px;padding:22px;background:#131f37}.info h3{margin:0 0 10px;font-size:18px}.info p{color:var(--muted);margin:0}.info a{display:inline-block;margin-top:14px}
+.track{border:1px solid #61758b;border-radius:13px;background:#20283a;margin:24px 0;padding:16px 18px}.track strong{color:#ffdfa4}.track p{margin:7px 0 0;color:#ebdfc8;font-size:13px}
+.footer{border-top:1px solid var(--line);color:var(--muted);margin-top:44px;padding-top:26px;font-size:12px}
+code{background:#263650;color:#c1f2e0;padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+@media(max-width:930px){.hero{grid-template-columns:1fr;gap:27px;padding-top:42px}.hero-visual img{max-height:470px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow-step:after{display:none}}
+@media(max-width:620px){.page{padding:0 16px 42px}.hero{padding:32px 0 24px}.features,.split{grid-template-columns:1fr}.feature:last-child{grid-column:auto}.visual-flow{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{padding:15px}.metric strong{font-size:29px}.feature,.info{padding:17px}.hero-visual img{border-radius:11px}}
+@media(max-width:350px){.metrics{grid-template-columns:1fr}nav.links{gap:10px}.cta{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="topbar">
+ <a class="brand" href="index.html" aria-label="KonaklamaFlow ana demoya dön"><span class="brandmark">K</span> KonaklamaFlow</a>
+ <nav class="links" aria-label="Sayfa bölümleri"><a href="#nasil">Nasıl çalışır?</a><a href="#kanit">Ölçülebilir kanıtlar</a><a href="#gelistirme">Geliştirmeler</a><a href="#sinirlar">Sınırlar</a></nav>
+</header>
+<main>
+<section class="hero" aria-labelledby="heroTitle">
+ <div>
+  <div class="eyebrow">Açık kaynak · Kurgusal otel operasyonları</div>
+  <h1 id="heroTitle">Rezervasyon kararları <em>açıklanabilir</em> olmalı.</h1>
+  <p class="lead">KonaklamaFlow, butik otellerin rezervasyon ve oda kontrolü süreçlerini kurgusal verilerle gösteren gizlilik öncelikli bir karar destek prototipidir. Amacımız yalnızca bir uyarı üretmek değil, <strong>uyarının nedenini göstermek ve ölçülebilir hâle getirmek.</strong></p>
+  <div class="actions"><a class="cta" href="index.html">Yayımlanmış v0.5.2 demoyu keşfet</a><a class="cta ghost" href="https://github.com/erenariel/konaklamaflow">GitHub kaynak kodu</a></div>
+  <div class="chips"><span class="chip">18 kurgusal oda</span><span class="chip">10 dilde taslak açıklamalar</span><span class="chip">Çevrimdışı gösterim</span></div>
+ </div>
+ <figure class="hero-visual">
+  <img src="ai-command-tour-poster.png" width="1280" height="800" loading="eager" decoding="async" alt="Yayımlanmış v0.5.2 demosunun AI inceleme merkezi, operasyon panelleri ve oda kontrollerini gösteren gerçek tarayıcı ekran görüntüsü.">
+  <figcaption class="visual-caption">Görsel, yayımlanmış kurgusal v0.5.2 demosundan alınan ekran görüntüsüdür; aşağıdaki aday PR özelliklerinin ekran görüntüsü değildir.</figcaption>
+ </figure>
+</section>
+<div class="notice"><strong>Geliştirme durumunu açıkça ayırıyoruz:</strong> Yayımlanmış demoda oda planı, kaynakla eşlenmiş kurgusal kayıtlar ve önceden hesaplanmış açıklamalar var. Yeni doğruluk, karar izi ve görsel kanıt özellikleri başarılı testlerden geçmiş <strong>inceleme adaylarıdır</strong>; henüz ana sürüme birleştirilmediler.</div>
+<section id="nasil" class="section" aria-labelledby="flowTitle">
+ <span class="kicker">Çalışma akışı · Konsept çizimi</span>
+ <h2 id="flowTitle">Bir rezervasyon incelenirken ne olur?</h2>
+ <p class="section-intro">Bu dört adım, mevcut kurgusal demo ve incelemedeki geliştirmelerin birlikte hedeflediği deneyimi anlatan <strong>kavramsal şemadır</strong>. Tarayıcıdaki simülasyon gerçek PMS'ye yazmaz; insan yerine onay vermez.</p>
+ <ol class="visual-flow">
+  <li class="flow-step"><span class="flow-num">01</span><h3>Kurgusal kaynak</h3><p>Rezervasyon, oda ve kanal sinyalleri Python tarafından doğrulanan örnek veri kümesinden gelir.</p></li>
+  <li class="flow-step"><span class="flow-num">02</span><h3>Kural motoru</h3><p>Çakışma, eksik eşleşme, bakım veya iptal durumu için deterministik gerekçe kodları üretir.</p></li>
+  <li class="flow-step"><span class="flow-num">03</span><h3>Kanıt ve açıklama</h3><p>Karara yol açan neden kodları ve güvenli veri alanı adları gösterilir. Gerçek kimlik değerleri sunulmaz.</p></li>
+  <li class="flow-step"><span class="flow-num">04</span><h3>İnsan sınırı</h3><p>Yetkili personel gerçek sisteminde ayrıca kontrol eder. Bu prototip check-in, tahsilat veya KBS bildirimi yapmaz.</p></li>
+ </ol>
+</section>
+<section id="kanit" class="section" aria-labelledby="metricsTitle">
+ <span class="kicker">Test verileri · PR #51 ve #58</span>
+ <h2 id="metricsTitle">Tahmin değil, sınırları açık bir test sonucu</h2>
+ <p class="section-intro">Aşağıdaki sayılar GitHub'daki inceleme adayı benchmark'ın <strong>proje içinde hazırlanmış sentetik etiketlerinden</strong> gelir. Gerçek otel sahası veya bağımsız uzman değerlendirmesi değildir. Kapsam dışı vakalar başarıya eklenmez.</p>
+ <div class="metrics">
+  <div class="metric"><strong>10</strong><span>Tanımlı senaryo</span><small>Önceden belirlenmiş kurgusal değerlendirme kümesi</small></div>
+  <div class="metric"><strong>7 / 10</strong><span>Ölçülen vaka</span><small>Kapsam: %70; kalan üç vaka ayrı raporlanıyor</small></div>
+  <div class="metric"><strong>5 / 2</strong><span>TP / TN</span><small>Beş pozitif, iki negatif eşleşen etiket</small></div>
+  <div class="metric"><strong>0 / 0</strong><span>FP / FN</span><small>Yalnız ölçülen yedi etiket üzerinde; genellenemez</small></div>
+ </div>
+ <div class="explanation"><strong>Neyi ölçmüyoruz?</strong> Gerçek otel başarı oranını, personelin kararı değiştirme sıklığını, canlı sistem gecikmesini veya üretim ortamındaki hata olasılığını. İki senaryo desteklenmiyor; bir senaryo bağımsız etiketli değil. <a href="https://github.com/erenariel/konaklamaflow/pull/51">Ölçüm kodu ve testleri</a> · <a href="https://github.com/erenariel/konaklamaflow/pull/58">Görsel scorecard adayı</a>.</div>
+</section>
+<section id="gelistirme" class="section" aria-labelledby="featuresTitle">
+ <span class="kicker">İncelemede olan modüller · 14 Kasım 2026 durum özeti</span>
+ <h2 id="featuresTitle">Son beş geliştirme, ayrı ayrı doğrulanabilir</h2>
+ <p class="section-intro">Aşağıdaki bağlantılar ilgili GitHub PR'larını açar. Bu modüller test edilmiş kod adaylarıdır; birleştirme tamamlanana kadar herkese açık v0.5.2 demo özellikleri olarak sunulmaz. Güncel PR durumları için GitHub bağlantılarını kullan.</p>
+ <div class="features">
+  <article class="feature"><span class="status">PR #51 · İnceleme adayı</span><h3>Sentetik doğruluk ölçümü</h3><p>Uyarıların beklenen etiketlerle karşılaştırılması; TP, FP, TN, FN, precision, recall ve ölçüm kapsamı. Desteklenmeyen senaryolar açıkça ayrılır.</p><a href="https://github.com/erenariel/konaklamaflow/pull/51">Kod ve testleri incele</a></article>
+  <article class="feature"><span class="status">PR #53 · İnceleme adayı</span><h3>Hash bağlantılı kurgusal karar izi</h3><p>Örnek inceleme adımlarının gerekçe ve kanıt yollarına bağlanması. Hash zinciri değişiklikleri sınar; bağımsız güven kökü olmadığından değiştirilemez kayıt garantisi vermez.</p><a href="https://github.com/erenariel/konaklamaflow/pull/53">Karar izi altyapısını incele</a></article>
+  <article class="feature"><span class="status">PR #55 · İnceleme adayı</span><h3>Görsel karar kanıt yolu</h3><p>Kaynak → gerekçe → kanıt alanı → insan sınırı adımlarını rezervasyona göre gösterir. Kaynak raporu eskirse veya uyuşmazsa panel güvenli biçimde kapanır.</p><a href="https://github.com/erenariel/konaklamaflow/pull/55">Arayüz ve tarayıcı testlerini incele</a></article>
+  <article class="feature"><span class="status">PR #58 · #51'e bağımlı</span><h3>Görsel doğruluk raporu</h3><p>Sentetik benchmark sonuçlarını okunabilir grafik ve tablolarla açıklar; oranlar Python test motorundan türetilir, elle tahmin edilmez.</p><a href="https://github.com/erenariel/konaklamaflow/pull/58">Rapor arayüzünü incele</a></article>
+  <article class="feature"><span class="status">PR #59 · #53'e bağımlı</span><h3>Kurgusal karar geçmişi ekranı</h3><p>Hash ile bağlantılı üç simüle edilmiş olayı görsel bir zaman akışında gösterir. Bunlar gerçek personel işlemleri veya doğrulanmış onaylar değildir.</p><a href="https://github.com/erenariel/konaklamaflow/pull/59">Geçmiş görünümünü incele</a></article>
+ </div>
+ <div class="track"><strong>Birleştirme sırası önemli.</strong><p>#51 → #58 ve #53 → #59 bağımlılıkları bulunuyor. #55, birleşik demo ekranında ayrıca uyumluluk incelemesi gerektiriyor. Bu tanıtım sayfası PR'ları otomatik birleştirmez veya yayına almaz.</p></div>
+</section>
+<section id="sinirlar" class="section" aria-labelledby="limitsTitle">
+ <span class="kicker">Güvenlik, şeffaflık ve açık kaynak</span>
+ <h2 id="limitsTitle">Ne yapabiliyoruz, ne yapamıyoruz?</h2>
+ <div class="split">
+  <article class="info"><h3>✅ Şu anda gösterilebilenler</h3><p>18 odalı kurgusal bir örnek, kaynakla eşleştirilmiş rezervasyonlar, oda planı ve zaman çizelgesi, önceden hesaplanmış kural açıklamaları, personel inceleme sınırı ve 10 dilde taslak arayüz açıklamaları.</p><a href="index.html">Yayımlanmış demoya git</a></article>
+  <article class="info"><h3>🔒 Henüz yapılmayanlar</h3><p>Gerçek misafir kimliği işleme, PMS/OTA/KBS entegrasyonu, canlı AI sağlayıcısı çağrısı, ödeme alma, otomatik check-in, bağımsız denetim, sertifikalı otel kullanımı veya gerçek personel onayı.</p><a href="https://github.com/erenariel/konaklamaflow/blob/main/docs/LIMITATIONS.md">Teknik sınırları incele</a></article>
+ </div>
+ <div class="info" style="margin-top:16px"><h3>English summary</h3><p>KonaklamaFlow is an open-source, privacy-first <strong>fictional offline hospitality operations prototype</strong>. The published v0.5.2 demo visualizes precomputed reservation reviews and the human-approval boundary. Proposed benchmark, decision-trace and evidence-UI enhancements have passed automated tests but remain unmerged review candidates. The 7/10 benchmark coverage and matching labels are synthetic, not independently verified hotel accuracy. No live PMS, OTA, KBS, AI provider or payments are connected.</p></div>
+</section>
+</main>
+<footer class="footer">KonaklamaFlow · MIT açık kaynak · <a href="https://github.com/erenariel/konaklamaflow">GitHub</a> · Durum özeti: 14 Kasım 2026; gelecekteki PR değişiklikleri bu statik sayfaya otomatik uygulanmaz. Gerçek kişi veya otel kaydı kullanılmaz.</footer>
+</div>
+</body></html>
