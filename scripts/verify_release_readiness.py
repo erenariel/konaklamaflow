@@ -17,6 +17,7 @@ EXPECTED_INTERNAL_PAGES = frozenset({
     "index.html", "project-overview.html", "synthetic-scorecard.html",
     "fictional-trace.html",
     "privacy-vault-lab.html",
+    "privacy-campaign.html",
 })
 _REQUIRED_OVERVIEW_COPY = (
     "Geliştirme durumunu açıkça ayırıyoruz:",
@@ -28,6 +29,7 @@ _REQUIRED_OVERVIEW_COPY = (
     "English summary",
     "Future Intelligence Vision",
     "Zero-Access Hotel Vault",
+    "Gizlilik kampanyası",
     "Concept art only",
     "gerçek tarayıcı ekran kayıtlarıdır",
 )
