@@ -63,6 +63,13 @@ input{width:100%;border-radius:10px;background:#091323;border:1px solid #7394a1;
   const decoder = new TextDecoder("utf-8", {fatal: true});
   const byId = (id) => document.getElementById(id);
   const status = (message) => { byId("status").textContent = message; };
+  // A monotonic token prevents an old asynchronous Web Crypto operation
+  // from changing the view after Lock, Clear, a newer operation or an edit.
+  // It does not cancel native crypto work or securely erase JS memory.
+  let operationToken = 0;
+  const invalidatePending = () => ++operationToken;
+  const isCurrent = (token) => token === operationToken;
+  const lockedText = "LOCKED · No decrypted record in this view.";
   const bytes = (n) => crypto.getRandomValues(new Uint8Array(n));
   const b64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
   function unb64(value, expectedLength) {
@@ -104,69 +111,119 @@ input{width:100%;border-radius:10px;background:#091323;border:1px solid #7394a1;
     return decoded;
   }
   function wipeView() {
-    byId("revealed").textContent = "LOCKED · No decrypted record in this view.";
+    byId("revealed").textContent = lockedText;
     byId("passphrase").value = "";
   }
+  function invalidateAndLock(message, eraseEnvelope) {
+    invalidatePending();
+    wipeView();
+    if (eraseEnvelope) byId("envelope").value = "";
+    status(message);
+  }
   async function encrypt() {
+    const token = invalidatePending();
     const pass = byId("passphrase").value;
-    if (pass.length < 12) {status("Enter a unique lab-only passphrase of at least 12 characters.");return;}
-    if (!globalThis.isSecureContext || !crypto.subtle) {status("Web Crypto requires an HTTPS or localhost secure context.");return;}
+    wipeView();
+    if (pass.length < 12) {
+      status("Enter a unique lab-only passphrase of at least 12 characters.");
+      return;
+    }
+    if (!globalThis.isSecureContext || !crypto.subtle) {
+      status("Web Crypto requires an HTTPS or localhost secure context.");
+      return;
+    }
+    // The old envelope must not be silently retained during a new encryption.
+    byId("envelope").value = "";
     status("Encrypting synthetic sample locally…");
     const envelope = {
-      schema:SCHEMA, hotel_id:HOTEL, record_id:SAMPLE.reservation, vault_id:id(), 
+      schema:SCHEMA, hotel_id:HOTEL, record_id:SAMPLE.reservation, vault_id:id(),
       kdf_iterations:600000,kdf_salt:b64(bytes(16)),wrap_nonce:b64(bytes(12)),
       data_nonce:b64(bytes(12)),wrapped_dek:"",ciphertext:""
     };
     try {
       const kek = await passphraseKey(pass,unb64(envelope.kdf_salt,16),600000);
+      if (!isCurrent(token)) return;
       const dek = await crypto.subtle.generateKey({name:"AES-GCM",length:256},true,["encrypt","decrypt"]);
+      if (!isCurrent(token)) return;
       const rawDEK = await crypto.subtle.exportKey("raw",dek);
       try {
+        if (!isCurrent(token)) return;
         envelope.wrapped_dek = b64(await crypto.subtle.encrypt(
           {name:"AES-GCM",iv:unb64(envelope.wrap_nonce,12),additionalData:wrapAAD(envelope)},kek,rawDEK));
       } finally {new Uint8Array(rawDEK).fill(0);}
+      if (!isCurrent(token)) return;
       envelope.ciphertext = b64(await crypto.subtle.encrypt(
         {name:"AES-GCM",iv:unb64(envelope.data_nonce,12),additionalData:recordAAD(envelope)},
         dek,encoder.encode(JSON.stringify(SAMPLE))));
+      if (!isCurrent(token)) return;
       byId("envelope").value = JSON.stringify(envelope,null,2);
-      wipeView();
       status("Encrypted locally. No application upload or persistence; re-enter the lab passphrase to decrypt.");
     } catch {
-      wipeView();byId("envelope").value = "";
+      if (!isCurrent(token)) return;
+      wipeView();
+      byId("envelope").value = "";
       status("Encryption failed. No envelope was retained.");
     }
   }
   async function decrypt() {
+    const token = invalidatePending();
     const pass = byId("passphrase").value;
-    if (pass.length < 12) {status("Enter the lab passphrase used to encrypt this example.");return;}
     wipeView();
-    // Keep a copy of the input only for this immediate operation.
+    if (pass.length < 12) {
+      status("Enter the lab passphrase used to encrypt this example.");
+      return;
+    }
+    status("Decrypting synthetic sample locally…");
     try {
       const source = byId("envelope").value;
       if (source.length > 16000 || !source.trim()) throw new Error("Input too long or empty");
       const envelope = JSON.parse(source);
       const parts = validate(envelope);
       const kek = await passphraseKey(pass,parts.kdf_salt,envelope.kdf_iterations);
+      if (!isCurrent(token)) return;
       const rawDEK = await crypto.subtle.decrypt(
         {name:"AES-GCM",iv:parts.wrap_nonce,additionalData:wrapAAD(envelope)},kek,parts.wrapped_dek);
       let dek;
-      try {dek = await crypto.subtle.importKey("raw",rawDEK,{name:"AES-GCM"},false,["decrypt"]);}
-      finally {new Uint8Array(rawDEK).fill(0);}
+      try {
+        if (!isCurrent(token)) return;
+        dek = await crypto.subtle.importKey("raw",rawDEK,{name:"AES-GCM"},false,["decrypt"]);
+      } finally {new Uint8Array(rawDEK).fill(0);}
+      if (!isCurrent(token)) return;
       const plaintext = await crypto.subtle.decrypt(
         {name:"AES-GCM",iv:parts.data_nonce,additionalData:recordAAD(envelope)},dek,parts.ciphertext);
-      const restored = JSON.parse(decoder.decode(plaintext));
-      // Display only the exact fixed synthetic record; never arbitrary attacker-supplied values.
+      if (!isCurrent(token)) {
+        new Uint8Array(plaintext).fill(0);
+        return;
+      }
+      let restored;
+      try {
+        restored = JSON.parse(decoder.decode(plaintext));
+      } finally {new Uint8Array(plaintext).fill(0);}
       if (JSON.stringify(restored) !== JSON.stringify(SAMPLE)) throw new Error("Unexpected content");
+      if (!isCurrent(token)) return;
       byId("revealed").textContent = JSON.stringify(restored,null,2);
       status("Local decryption succeeded. Only the fixed fictional record is displayed.");
-    } catch {status("Unlock rejected: wrong passphrase, corrupted ciphertext, or invalid metadata.");}
+    } catch {
+      if (!isCurrent(token)) return;
+      status("Unlock rejected: wrong passphrase, corrupted ciphertext, or invalid metadata.");
+    }
   }
   byId("sample").textContent = JSON.stringify(SAMPLE,null,2);
   byId("encrypt").addEventListener("click",encrypt);
   byId("decrypt").addEventListener("click",decrypt);
-  byId("lock").addEventListener("click",() => {wipeView();status("Locked this browser view; ciphertext remains until cleared.");});
+  byId("lock").addEventListener("click",() => {
+    invalidateAndLock("Locked this browser view; ciphertext remains until cleared.",false);
+  });
   byId("clear").addEventListener("click",() => {
-    wipeView();byId("envelope").value = "";status("Cleared the ephemeral lab envelope.");
+    invalidateAndLock("Cleared the ephemeral lab envelope.",true);
+  });
+  byId("passphrase").addEventListener("input",() => {
+    // Editing a credential invalidates any in-progress unlock.
+    invalidatePending();
+    byId("revealed").textContent = lockedText;
+  });
+  byId("envelope").addEventListener("input",() => {
+    invalidateAndLock("Encrypted envelope edited; re-enter the passphrase and unlock again.",false);
   });
   if (!globalThis.isSecureContext || !globalThis.crypto?.subtle) {
     byId("encrypt").disabled = true;byId("decrypt").disabled = true;
