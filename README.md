@@ -6,7 +6,19 @@
 
 **[Görsel proje tanıtımı — kaynak → kural → kanıt → personel işleyişi](demo/project-overview.html)**
 
-**15 November 2026 — hotel operator feedback (first-party / self-reported):** A dated, signed operator worksheet with a visible property stamp was submitted privately. Only the reservation-conflict scenario is marked **Pass**; three other scenarios contain written observations but no selected result. [Read the public, privacy-preserving evidence summary](docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md). **This is not an independent hotel audit, third-party certification, or live PMS pilot.**
+### İmzalı ve kaşeli işletme değerlendirmesi / Documented hotel-operator review
+
+**15 Kasım 2026 — Asmalı Hotel ön büro bağlamı (değerlendiricinin beyanı).** KonaklamaFlow'un kurgusal çevrimdışı demosuna ilişkin **tarihli, imzalı ve işletme kaşesi bulunan üç sayfalık bir operatör değerlendirme formu** özel olarak sunuldu. Bu, yalnızca bir geliştirme iddiası değil, yazılı gözlemler içeren **birinci taraf / proje geliştiricisiyle ilişkili operasyonel geri bildirim kaydıdır**. Kaşenin, imzanın ve değerlendiricinin kurumsal yetkisinin bağımsız doğrulaması yapılmamıştır.
+
+| Kanıt türü / Evidence | Doğrulanabilen kapsam / Supported scope |
+| --- | --- |
+| **Operatör değerlendirmesi** | Rezervasyon çakışması senaryosu **Pass** işaretli; oda planı, vardiya devri ve dil kullanılabilirliği hakkında yazılı gözlemler var, fakat bu üç senaryonun sonuç kutuları boş. |
+| **İşletme belgesi** | Tarih, işletme bağlamı, imza ve kaşe görüntüsü içeren kaynak form; **orijinal taramalar gizli tutulur**. |
+| **Teknik kanıtlar** | GitHub üzerinde birleştirilmiş kaynak kod, otomatik testler ve demo yayın iş akışı; bunlar operatör gözleminden **ayrı kanıtlardır**. |
+
+**[Değerlendirmenin İngilizce, kişisel verilerden arındırılmış kaydını oku / Read the English evidence record](docs/OPERATOR_FIRST_PARTY_REVIEW_2026-11-15.md)** · [Otomatik testler / CI](https://github.com/erenariel/konaklamaflow/actions) · [Açık kaynak katkı rehberi / Contributing](CONTRIBUTING.md)
+
+**English — evaluation significance:** On 15 November 2026 a property-affiliated front-office reviewer submitted a **dated, signed and company-stamped first-party assessment** of the fictional offline prototype. The paper report records a checked **Pass** for reservation conflict and written operator observations on room planning, manual authorization and incomplete translations. Three other scenario result boxes remain unselected. This documents domain-informed feedback, **not independently verified hotel approval, production use, third-party certification, or measured real-world adoption**.
 
 Birleşik çevrimdışı sürüm adayı (PR [#67](https://github.com/erenariel/konaklamaflow/pull/67)), kurgusal demo ile sentetik benchmark/karar geçmişi ve kanıt panelini aynı inceleme paketinde toplar. Tanıtımda önceki v0.5.2 demosuna ait gerçek ekran görüntüsü, 7/10 proje etiketli vaka kapsamı, sınırlamalar ve kaynak PR bağlantıları yer alır. **Bu PR'ın açılması canlı yayına alma işlemi değildir.** Pages bağlantısı ancak `main` birleştirmesi, başarılı dağıtım ve yayın doğrulamasından sonra kullanılabilir: `https://erenariel.github.io/konaklamaflow/project-overview.html`. TR anlatım ve kısa EN özet içerir.
 
