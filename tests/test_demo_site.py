@@ -19,6 +19,15 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('ai-command-tour-poster.png',overview)
             self.assertIn('id="gercek-gif"', overview)
             self.assertIn('id="vizyon"', overview)
+            self.assertIn('id="sifreli-kasa"', overview)
+            self.assertIn('href="privacy-vault-lab.html"',overview)
+            vault=(site/'privacy-vault-lab.html').read_text(encoding='utf-8')
+            self.assertIn("NOT A PRODUCTION SECURITY FEATURE",vault)
+            self.assertIn("connect-src 'none'",vault)
+            self.assertIn("crypto.subtle",vault)
+            self.assertNotIn('localStorage',vault)
+            self.assertNotIn('sessionStorage',vault)
+            self.assertIn('FICTIONAL_HOTEL_ONLY',vault)
             self.assertIn('Concept art only', overview)
             for name in ('ai-command-tour.gif', 'roomplan-story.gif', 'overview-pulse.gif',
                          'vision-ai-command-core.gif', 'vision-smart-room-grid.gif',
