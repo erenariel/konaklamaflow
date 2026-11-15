@@ -17,6 +17,16 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('7 / 10',overview)
             self.assertIn('Henüz yapılmayanlar',overview)
             self.assertIn('ai-command-tour-poster.png',overview)
+            self.assertIn('id="gercek-gif"', overview)
+            self.assertIn('id="vizyon"', overview)
+            self.assertIn('Concept art only', overview)
+            for name in ('ai-command-tour.gif', 'roomplan-story.gif', 'overview-pulse.gif',
+                         'vision-ai-command-core.gif', 'vision-smart-room-grid.gif',
+                         'vision-executive-intelligence.gif',
+                         'vision-ai-command-core-poster.jpg', 'vision-smart-room-grid-poster.jpg',
+                         'vision-executive-intelligence-poster.jpg'):
+                self.assertIn(name, overview)
+                self.assertTrue((site / name).is_file(), f'Staged showcase asset missing: {name}')
             for number in (51,53,55,58,59):
                 self.assertIn(f'pull/{number}',overview)
             self.assertNotIn('<script',overview.lower())
