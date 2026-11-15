@@ -61,7 +61,7 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
 
     def test_responsive_and_navigation_are_accessible(self):
         page = self.page
-        self.assertEqual(page.locator('nav.links a').count(), 7)
+        self.assertEqual(page.locator('nav.links a').count(), 8)
         for width in (320, 375, 390, 768, 1366):
             page.set_viewport_size({"width": width, "height": 900})
             with self.subTest(width=width):
@@ -104,6 +104,15 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
             "(image) => image.currentSrc.endsWith('vision-ai-command-core-poster.jpg')"))
         self.assertEqual(page.locator("picture source").count(), 6)
 
+    def test_synthetic_encryption_research_is_clearly_not_a_live_vault(self):
+        page = self.page
+        section = page.locator('#sifreli-kasa')
+        self.assertEqual(section.count(), 1)
+        self.assertIn('kurgusal kayıt', section.inner_text())
+        self.assertIn('Future design, not deployed end-to-end encryption', section.inner_text())
+        self.assertEqual(section.locator('a[href="privacy-vault-lab.html"]').count(), 1)
+        self.assertIn('ZERO_ACCESS_HOTEL_VAULT_TR_EN.md', section.inner_html())
+
     def test_first_party_hotel_evaluation_is_visible_and_properly_scoped(self):
         page = self.page
         page.locator('nav.links a[href="#otel-degerlendirmesi"]').click()
@@ -131,9 +140,10 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
         link = page.locator(".kf-promo-entry a")
-        self.assertEqual(link.count(), 2)
+        self.assertEqual(link.count(), 3)
         self.assertEqual(link.first.get_attribute("href"), "project-overview.html")
         self.assertEqual(link.nth(1).get_attribute("href"), "project-overview.html#otel-degerlendirmesi")
+        self.assertEqual(link.nth(2).get_attribute("href"), "privacy-vault-lab.html")
         self.assertTrue(link.nth(1).is_visible())
 
 

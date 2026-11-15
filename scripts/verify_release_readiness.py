@@ -16,6 +16,7 @@ from scripts.stage_demo_site import ROOT, PUBLIC_ASSETS, GENERATED_ASSETS
 EXPECTED_INTERNAL_PAGES = frozenset({
     "index.html", "project-overview.html", "synthetic-scorecard.html",
     "fictional-trace.html",
+    "privacy-vault-lab.html",
 })
 _REQUIRED_OVERVIEW_COPY = (
     "Geliştirme durumunu açıkça ayırıyoruz:",
@@ -26,6 +27,7 @@ _REQUIRED_OVERVIEW_COPY = (
     "Gerçek otel",
     "English summary",
     "Future Intelligence Vision",
+    "Zero-Access Hotel Vault",
     "Concept art only",
     "gerçek tarayıcı ekran kayıtlarıdır",
 )

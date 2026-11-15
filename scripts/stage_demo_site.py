@@ -20,6 +20,7 @@ PUBLIC_ASSETS = {
     'index.html': 'demo/v04-integrated-preview.html',
     'hotel-operations.html': 'demo/v04-integrated-preview.html',
     'project-overview.html': 'demo/project-overview.html',
+    'privacy-vault-lab.html': 'demo/privacy-vault-lab.html',
     'v04-integrated-preview.html': 'demo/v04-integrated-preview.html',
     'global-presentation.html': 'demo/global-presentation-concept.html',
     'hotel-suite.html': 'demo/hotel-suite.html',
