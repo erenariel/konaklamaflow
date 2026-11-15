@@ -114,6 +114,19 @@ class ZeroAccessVaultLabTests(unittest.TestCase):
         self.assertEqual(self.page.locator("#envelope").input_value(), "")
         self.assertEqual(self.page.locator("#passphrase").input_value(), "")
 
+    def test_each_encryption_is_randomized_and_no_state_survives_reload(self):
+        first = self._encrypt()
+        second = self._encrypt()
+        for field in ("vault_id", "kdf_salt", "wrap_nonce", "data_nonce",
+                      "wrapped_dek", "ciphertext"):
+            self.assertNotEqual(first[field], second[field],
+                                "Each encryption needs independent randomness: " + field)
+        self.assertEqual(self.page.evaluate("() => localStorage.length"), 0)
+        self.assertEqual(self.page.evaluate("() => sessionStorage.length"), 0)
+        self.page.reload()
+        self.assertEqual(self.page.locator("#envelope").input_value(), "")
+        self.assertIn("LOCKED",self.page.locator("#revealed").inner_text())
+
     def test_readability_and_no_private_record_entry(self):
         self.assertEqual(self.page.locator("textarea").count(), 1)
         self.assertEqual(self.page.locator('input[type="password"]').count(), 1)
