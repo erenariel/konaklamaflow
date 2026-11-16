@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "konaklamaflow"
-version = "0.2.0rc1"
+version = "0.2.0rc2"
 description = "Privacy-first dry-run hospitality operations reviewer for boutique hotels"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -20,5 +20,13 @@ konaklamaflow-suite = "konaklamaflow.experience_cli:main"
 [project.optional-dependencies]
 browser = ["playwright==1.62.0"]
 
+[project.urls]
+Homepage = "https://github.com/erenariel/konaklamaflow"
+Repository = "https://github.com/erenariel/konaklamaflow"
+Issues = "https://github.com/erenariel/konaklamaflow/issues"
+
 [tool.setuptools.packages.find]
 include = ["konaklamaflow*"]
+
+[tool.setuptools.package-data]
+konaklamaflow = ["data/*.json"]
