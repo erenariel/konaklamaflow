@@ -24,6 +24,9 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('id="gercek-gif"', overview)
             self.assertIn('id="moduller"', overview)
             self.assertIn('href="' + DOWNLOAD_BUNDLE + '"', overview)
+            self.assertIn('href="global-allocation-lab.html"', overview)
+            self.assertIn('data-scenario-button="200"',
+                          (site/'global-allocation-lab.html').read_text(encoding='utf-8'))
             self.assertNotIn('id="sifreli-kasa"', overview)
             self.assertNotIn('href="privacy-campaign.html"', overview)
             for name in ("privacy-promise.gif", "privacy-promise-poster.jpg", "authorized-device.gif", "authorized-device-poster.jpg", "zero-access-flow.gif", "zero-access-flow-poster.jpg", "future-certification.gif", "future-certification-poster.jpg"):
@@ -72,6 +75,7 @@ class DemoSiteTests(unittest.TestCase):
                 for name in members - {'README_OFFLINE.md'}:
                     self.assertEqual(archive.read(name), offline_bundle_asset(name, (site/name).read_bytes()))
                 self.assertEqual(archive.read('README_OFFLINE.md'), OFFLINE_GUIDE.encode('utf-8'))
+                self.assertIn('global-allocation-lab.html', archive.namelist())
                 for name in ('index.html', 'hotel-operations.html',
                              'v04-integrated-preview.html', 'project-overview.html'):
                     self.assertNotIn(DOWNLOAD_BUNDLE.encode('utf-8'), archive.read(name))
@@ -89,6 +93,7 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('href="fictional-trace.html"', index)
             self.assertIn('href="project-overview.html"', index)
             self.assertIn('href="project-overview.html#senaryolar"', index)
+            self.assertIn('href="global-allocation-lab.html"', index)
             self.assertIn('href="' + DOWNLOAD_BUNDLE + '"', index)
             self.assertNotIn('project-overview.html#otel-degerlendirmesi', index)
             self.assertNotIn('İmzalı ve kaşeli otel değerlendirmesi', index)
