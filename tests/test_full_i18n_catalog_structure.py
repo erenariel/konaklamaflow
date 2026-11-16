@@ -27,8 +27,8 @@ class FullI18nCatalogStructureTests(unittest.TestCase):
 
     def test_optional_product_links_are_translated_in_embedded_demo(self):
         html=(ROOT/'demo/v04-integrated-preview.html').read_text(encoding='utf-8')
-        source=re.search(r'fullUiRows\\((\\[\\[[\\s\\S]*?\\]\\])\\);', CATALOG)
-        embedded=re.search(r'fullUiRows\\((\\[\\[[\\s\\S]*?\\]\\])\\);', html)
+        source=re.search(r'fullUiRows\((\[\[[\s\S]*?\]\])\);', CATALOG)
+        embedded=re.search(r'fullUiRows\((\[\[[\s\S]*?\]\])\);', html)
         self.assertIsNotNone(source)
         self.assertIsNotNone(embedded)
         source_rows=json.loads(source.group(1))
