@@ -18,7 +18,7 @@ from scripts.stage_demo_site import (ROOT, PUBLIC_ASSETS, GENERATED_ASSETS,
 
 EXPECTED_INTERNAL_PAGES = frozenset({
     "index.html", "project-overview.html", "synthetic-scorecard.html",
-    "fictional-trace.html",
+    "fictional-trace.html", "global-allocation-lab.html",
     "privacy-vault-lab.html",
     "privacy-campaign.html",
 })
@@ -127,7 +127,7 @@ def verify_overview_content(html: str, staged_files):
     _require("connect-src 'none'" in html, "Network-restricted CSP missing")
     parser = _OverviewLinks()
     parser.feed(html)
-    _require({"index.html", DOWNLOAD_BUNDLE} <= parser.internal,
+    _require({"index.html", DOWNLOAD_BUNDLE, "global-allocation-lab.html"} <= parser.internal,
              "Published demo not linked from overview")
     _require("ai-command-tour-poster.png" in parser.local_images,
              "Historical demo screenshot missing")
@@ -184,6 +184,12 @@ def verify_staged_site(site: Path, root: Path = ROOT):
                      "Offline demo ZIP asset differs from staged release")
         _require(archive.read("README_OFFLINE.md") == OFFLINE_GUIDE.encode("utf-8"),
                  "Offline demo guide mismatch")
+    laboratory = (site / "global-allocation-lab.html").read_text(encoding="utf-8")
+    _require("connect-src 'none'" in laboratory
+             and 'data-scenario-button="200"' in laboratory
+             and "Personel onayı gerekli" in laboratory
+             and 'href="index.html"' in laboratory,
+             "Missing real Python-backed offline allocation laboratory")
     overview = (site / "project-overview.html").read_text(encoding="utf-8")
     link_info = verify_overview_content(overview, present)
     home = (site / "index.html").read_text(encoding="utf-8")
@@ -191,7 +197,7 @@ def verify_staged_site(site: Path, root: Path = ROOT):
     # program demo navigation must highlight product workflows, not future
     # vault/campaign concepts.
     for name in ("project-overview.html", "synthetic-scorecard.html",
-                 "fictional-trace.html"):
+                 "fictional-trace.html", "global-allocation-lab.html"):
         _require(f'href="{name}"' in home, "Integrated demo missing navigation link")
     for value in ("project-overview.html#otel-degerlendirmesi",
                   "KonaklamaFlow_Operator_Review", "İmzalı ve kaşeli otel",
