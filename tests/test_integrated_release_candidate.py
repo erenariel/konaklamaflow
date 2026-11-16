@@ -11,7 +11,8 @@ from scripts.render_trace_view import trusted_trace
 class IntegratedReleaseCandidateTests(unittest.TestCase):
     def test_source_verified_pages_are_staged_and_linked(self):
         self.assertEqual(set(GENERATED_ASSETS), {
-            "synthetic-scorecard.html", "fictional-trace.html"
+            "synthetic-scorecard.html", "fictional-trace.html",
+            "global-allocation-lab.html",
         })
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/"site"
@@ -24,6 +25,11 @@ class IntegratedReleaseCandidateTests(unittest.TestCase):
                 self.assertIn(link,index)
             scorecard=(path/"synthetic-scorecard.html").read_text(encoding="utf-8")
             trace=(path/"fictional-trace.html").read_text(encoding="utf-8")
+            lab=(path/"global-allocation-lab.html").read_text(encoding="utf-8")
+            self.assertIn('data-scenario-button="200"',lab)
+            self.assertIn('data-scenario-panel="review"',lab)
+            self.assertIn("Personel onayı gerekli",lab)
+            self.assertIn('href="global-allocation-lab.html"',index)
             self.assertIn("7 / 10",scorecard)
             self.assertIn("Gerçek otel doğruluğu değildir",scorecard)
             self.assertIn("Gerçek personel eylemi",trace)
