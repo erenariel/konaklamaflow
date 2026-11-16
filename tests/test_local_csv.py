@@ -145,6 +145,20 @@ class LocalCsvTests(unittest.TestCase):
             with self.assertRaises(InputError):
                 import_csv_snapshot(str(rooms), str(bookings))
 
+    def test_missing_room_active_flag_never_assumes_room_is_usable(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rooms, bookings = sample_inputs(Path(tmp))
+            rooms.write_text(
+                "room_id,category,beds\n"
+                "A101,standard,double\n"
+                "A102,standard,twin\n",
+                encoding="utf-8",
+            )
+            snapshot = import_csv_snapshot(str(rooms), str(bookings))
+            self.assertTrue(all(not room["active"] for room in snapshot["rooms"]))
+            report = review(snapshot, "2026-11-12")
+            self.assertEqual(report["room_proposals"], [])
+
     def test_duplicate_ref_preserves_duplicate_detection_without_raw_ids(self):
         with tempfile.TemporaryDirectory() as tmp:
             rooms, bookings = sample_inputs(Path(tmp))
