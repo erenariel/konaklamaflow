@@ -5,7 +5,7 @@ import unittest
 from zipfile import ZipFile
 from scripts.stage_demo_site import (
     stage_site, PUBLIC_ASSETS, GENERATED_ASSETS, ROOT,
-    PRODUCT_BUNDLE_ASSETS, DOWNLOAD_BUNDLE, OFFLINE_GUIDE,
+    PRODUCT_BUNDLE_ASSETS, DOWNLOAD_BUNDLE, OFFLINE_GUIDE, offline_bundle_asset,
 )
 
 
@@ -70,8 +70,11 @@ class DemoSiteTests(unittest.TestCase):
                 self.assertEqual(len(archive.namelist()), len(members))
                 self.assertIsNone(archive.testzip())
                 for name in members - {'README_OFFLINE.md'}:
-                    self.assertEqual(archive.read(name), (site/name).read_bytes())
+                    self.assertEqual(archive.read(name), offline_bundle_asset(name, (site/name).read_bytes()))
                 self.assertEqual(archive.read('README_OFFLINE.md'), OFFLINE_GUIDE.encode('utf-8'))
+                for name in ('index.html', 'hotel-operations.html',
+                             'v04-integrated-preview.html', 'project-overview.html'):
+                    self.assertNotIn(DOWNLOAD_BUNDLE.encode('utf-8'), archive.read(name))
                 self.assertIn('offline fictional software demo', OFFLINE_GUIDE)
                 self.assertFalse(any(name.startswith(('privacy-', 'vision-', 'future-certification',
                                                       'zero-access-', 'authorized-device')) for name in members))
