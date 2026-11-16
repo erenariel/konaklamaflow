@@ -1,0 +1,4 @@
+room_id,category,beds,active,guest_name
+A101,standard,double,true,Fictional Guest Alpha
+A102,standard,twin,true,Fictional Guest Beta
+A201,superior,double,true,

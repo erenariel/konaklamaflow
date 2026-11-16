@@ -1,0 +1,4 @@
+reservation_ref,checkin,checkout,category,status,room_id,twin_requested,guest_name,guest_email,phone,passport_number,notes
+SYN001,2026-11-12,2026-11-14,standard,confirmed,A101,false,Fictional Guest Alpha,fictional@example.invalid,NOT_A_REAL_PHONE,NOT_A_REAL_PASSPORT,discard this column
+SYN002,2026-11-13,2026-11-15,standard,confirmed,,true,Fictional Guest Beta,fictional2@example.invalid,NOT_A_REAL_PHONE,NOT_A_REAL_PASSPORT,discard this column
+SYN003,2026-11-13,2026-11-14,superior,confirmed,A201,false,,,,,

@@ -1,0 +1,17 @@
+{
+  "property_id": "DEMO_INN_01",
+  "rooms": [
+    {"id": "101", "category": "standard", "beds": "double"},
+    {"id": "102", "category": "standard", "beds": "twin"},
+    {"id": "103", "category": "standard", "beds": "flex", "maintenance": [{"start":"2026-11-13","end":"2026-11-15"}]},
+    {"id": "201", "category": "superior", "beds": "double"},
+    {"id": "202", "category": "superior", "beds": "twin"}
+  ],
+  "reservations": [
+    {"ref":"D001", "source":"CHANNEL_A", "status":"confirmed", "checkin":"2026-11-12", "checkout":"2026-11-14", "category":"standard", "room_id":"101"},
+    {"ref":"D002", "source":"CHANNEL_B", "status":"confirmed", "checkin":"2026-11-13", "checkout":"2026-11-15", "category":"standard", "twin_requested":true, "nightly_base":"90.00", "total_base":"180.00", "currency":"EUR"},
+    {"ref":"D003", "source":"CHANNEL_A", "status":"confirmed", "checkin":"2026-11-13", "checkout":"2026-11-14", "category":"superior", "room_id":"201"},
+    {"ref":"D004", "source":"CHANNEL_B", "status":"cancelled", "checkin":"2026-11-13", "checkout":"2026-11-15", "category":"superior", "room_id":"202"},
+    {"ref":"D005", "source":"CHANNEL_C", "status":"confirmed", "checkin":"2026-11-13", "checkout":"2026-11-14", "category":"standard", "nightly_base":"85.00", "total_base":"75.00", "currency":"EUR"}
+  ]
+}

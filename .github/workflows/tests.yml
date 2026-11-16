@@ -118,3 +118,52 @@ jobs:
             docs/images/aurora-room-plan-*
           if-no-files-found: error
           retention-days: 14
+
+
+  package:
+    name: package (clean-wheel install)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build wheel and source distribution
+        run: |
+          python -m pip install --upgrade build twine
+          python -m build
+          python -m twine check dist/*.whl dist/*.tar.gz
+          sha256sum dist/*.whl dist/*.tar.gz > dist/SHA256SUMS
+      - name: Clean offline wheel installation and command smoke test
+        run: |
+          python -m venv /tmp/kf-clean-env
+          /tmp/kf-clean-env/bin/python -m pip install --no-index --no-deps dist/*.whl
+          (cd /tmp && /tmp/kf-clean-env/bin/konaklamaflow demo --output /tmp/kf-wheel-demo.json)
+          (cd /tmp && /tmp/kf-clean-env/bin/konaklamaflow review-csv \
+            --rooms "$GITHUB_WORKSPACE/examples/csv/rooms.csv" \
+            --reservations "$GITHUB_WORKSPACE/examples/csv/reservations.csv" \
+            --as-of 2026-11-12 --output /tmp/kf-wheel-csv.json)
+          /tmp/kf-clean-env/bin/python - <<'PY'
+          import json
+          from importlib.metadata import version
+          from pathlib import Path
+          assert version('konaklamaflow') == '0.2.0rc2'
+          demo = json.loads(Path('/tmp/kf-wheel-demo.json').read_text())
+          review = json.loads(Path('/tmp/kf-wheel-csv.json').read_text())
+          assert demo['summary']['rooms'] == 5
+          assert review['summary']['rooms'] == 3
+          assert 'fictional@example.invalid' not in json.dumps(review)
+          assert 'NOT_A_REAL_PASSPORT' not in json.dumps(review)
+          assert demo['mode'] == 'DRY_RUN_ONLY'
+          PY
+      - name: Preserve verified candidate distributions (not a public release)
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-v0.2.0rc2-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
