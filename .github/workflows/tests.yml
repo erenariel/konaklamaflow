@@ -24,6 +24,24 @@ jobs:
         run: |
           python -m konaklamaflow.evaluation --json /tmp/konaklamaflow-eval.json --markdown /tmp/konaklamaflow-eval.md
           cat /tmp/konaklamaflow-eval.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Generate transparent 43-case synthetic benchmark v2
+        run: |
+          python -m konaklamaflow.evaluation_v2 --json /tmp/konaklamaflow-eval-v2.json --markdown /tmp/konaklamaflow-eval-v2.md
+          cat /tmp/konaklamaflow-eval-v2.md >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY'
+          import json
+          with open('/tmp/konaklamaflow-eval-v2.json', encoding='utf-8') as stream:
+              result = json.load(stream)
+          print('Benchmark v2 observed:', json.dumps(result['summary'], sort_keys=True))
+          print('Benchmark v2 confusion:', json.dumps(
+              {key: result['metrics'][key] for key in ('tp', 'fp', 'tn', 'fn')},
+              sort_keys=True))
+          for case in result['cases']:
+              if case['status'] == 'fail':
+                  print('Benchmark v2 disagreement:', case['id'],
+                        case['outcome'], case['reason_code'],
+                        'expected=', case['expected'], 'observed=', case['predicted'])
+          PY
       - name: Generate and verify fictional decision trace
         run: |
           python -m konaklamaflow.trace_cli --output /tmp/konaklamaflow-trace.json
@@ -36,6 +54,8 @@ jobs:
           path: |
             /tmp/konaklamaflow-eval.json
             /tmp/konaklamaflow-eval.md
+            /tmp/konaklamaflow-eval-v2.json
+            /tmp/konaklamaflow-eval-v2.md
             /tmp/konaklamaflow-trace.json
           if-no-files-found: warn
           retention-days: 14

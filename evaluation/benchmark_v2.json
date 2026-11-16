@@ -1,0 +1,425 @@
+{
+  "schema_version": "konaklamaflow.synthetic-evaluation.v2",
+  "source_fixture": "examples/fictional-hotel.json",
+  "method": "author_labeled_single_reason_observation",
+  "cases": [
+    {
+      "id": "baseline_cancelled_hold",
+      "category": "cancelled_hold",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1006",
+      "reason_code": "CANCELLED_ASSIGNED",
+      "expected": true,
+      "rationale": "A cancelled reservation still has a room reference and needs release review."
+    },
+    {
+      "id": "baseline_no_overlap",
+      "category": "inventory",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_CONFLICT",
+      "expected": false,
+      "rationale": "Room 101 has no overlapping assigned stay in the unmodified snapshot."
+    },
+    {
+      "id": "baseline_no_duplicate",
+      "category": "channel",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "DUPLICATE_CHANNEL_REF",
+      "expected": false,
+      "rationale": "The baseline Booking channel reference is unique among reservations."
+    },
+    {
+      "id": "baseline_paid",
+      "category": "payment",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "PAYMENT_REVIEW",
+      "expected": false,
+      "rationale": "The baseline payment signal is ready rather than review."
+    },
+    {
+      "id": "baseline_open_housekeeping",
+      "category": "housekeeping",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1003",
+      "reason_code": "HOUSEKEEPING_TASK_OPEN",
+      "expected": true,
+      "rationale": "An open housekeeping task references the assigned deluxe room."
+    },
+    {
+      "id": "baseline_no_housekeeping_task",
+      "category": "housekeeping",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "HOUSEKEEPING_TASK_OPEN",
+      "expected": false,
+      "rationale": "There is no open housekeeping task for room 101."
+    },
+    {
+      "id": "baseline_unassigned",
+      "category": "inventory",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1002",
+      "reason_code": "NO_ASSIGNED_ROOM",
+      "expected": true,
+      "rationale": "Confirmed superior booking KF1002 has not been assigned a room."
+    },
+    {
+      "id": "baseline_assigned",
+      "category": "inventory",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "NO_ASSIGNED_ROOM",
+      "expected": false,
+      "rationale": "Confirmed booking KF1001 already has assigned room 101."
+    },
+    {
+      "id": "baseline_special_request",
+      "category": "requests",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "SPECIAL_REQUEST_REVIEW",
+      "expected": true,
+      "rationale": "The quiet-room request is a special request requiring staff review."
+    },
+    {
+      "id": "baseline_amenity_available",
+      "category": "requests",
+      "status": "evaluated",
+      "scenario": "none",
+      "reservation_id": "KF1001",
+      "reason_code": "REQUEST_AMENITY_UNAVAILABLE",
+      "expected": false,
+      "rationale": "Assigned room 101 already includes the requested quiet amenity."
+    },
+    {
+      "id": "duplicate_source_first",
+      "category": "channel",
+      "status": "evaluated",
+      "scenario": "duplicate_reference",
+      "reservation_id": "KF1001",
+      "reason_code": "DUPLICATE_CHANNEL_REF",
+      "expected": true,
+      "rationale": "Two reservations now share the same channel and external reference."
+    },
+    {
+      "id": "duplicate_source_second",
+      "category": "channel",
+      "status": "evaluated",
+      "scenario": "duplicate_reference",
+      "reservation_id": "KF1002",
+      "reason_code": "DUPLICATE_CHANNEL_REF",
+      "expected": true,
+      "rationale": "The second reservation shares the same Booking channel and external reference."
+    },
+    {
+      "id": "duplicate_source_unrelated",
+      "category": "channel",
+      "status": "evaluated",
+      "scenario": "duplicate_reference",
+      "reservation_id": "KF1003",
+      "reason_code": "DUPLICATE_CHANNEL_REF",
+      "expected": false,
+      "rationale": "Unrelated Trip reservation KF1003 has a different channel and reference."
+    },
+    {
+      "id": "duplicate_source_event_mismatch",
+      "category": "channel",
+      "status": "evaluated",
+      "scenario": "duplicate_reference",
+      "reservation_id": "KF1001",
+      "reason_code": "CHANNEL_REFERENCE_MISMATCH",
+      "expected": true,
+      "rationale": "The mapped event is ambiguous because two reservations share its reference."
+    },
+    {
+      "id": "overlap_first_booking",
+      "category": "inventory",
+      "status": "evaluated",
+      "scenario": "room_overlap",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_CONFLICT",
+      "expected": true,
+      "rationale": "Two overlapping stays explicitly hold room 101 in the modified snapshot."
+    },
+    {
+      "id": "overlap_second_booking",
+      "category": "inventory",
+      "status": "evaluated",
+      "scenario": "room_overlap",
+      "reservation_id": "KF1002",
+      "reason_code": "ROOM_CONFLICT",
+      "expected": true,
+      "rationale": "The newly assigned second booking overlaps a stay already holding room 101."
+    },
+    {
+      "id": "overlap_other_booking",
+      "category": "inventory",
+      "status": "evaluated",
+      "scenario": "room_overlap",
+      "reservation_id": "KF1004",
+      "reason_code": "ROOM_CONFLICT",
+      "expected": false,
+      "rationale": "The overlapping assignment concerns room 101, not separate room 104."
+    },
+    {
+      "id": "maintenance_active_room",
+      "category": "maintenance",
+      "status": "evaluated",
+      "scenario": "maintenance_open",
+      "reservation_id": "KF1001",
+      "reason_code": "MAINTENANCE_TASK_OPEN",
+      "expected": true,
+      "rationale": "A new open maintenance task is attached to room 101 and booking KF1001."
+    },
+    {
+      "id": "maintenance_unaffected_room",
+      "category": "maintenance",
+      "status": "evaluated",
+      "scenario": "maintenance_open",
+      "reservation_id": "KF1004",
+      "reason_code": "MAINTENANCE_TASK_OPEN",
+      "expected": false,
+      "rationale": "The new maintenance task affects room 101 rather than room 104."
+    },
+    {
+      "id": "ota_cancel_status",
+      "category": "channel",
+      "status": "evaluated",
+      "scenario": "channel_status_conflict",
+      "reservation_id": "KF1001",
+      "reason_code": "CHANNEL_STATUS_CONFLICT",
+      "expected": true,
+      "rationale": "The channel event says cancelled while the linked booking remains confirmed."
+    },
+    {
+      "id": "ota_cancel_unrelated",
+      "category": "channel",
+      "status": "evaluated",
+      "scenario": "channel_status_conflict",
+      "reservation_id": "KF1003",
+      "reason_code": "CHANNEL_STATUS_CONFLICT",
+      "expected": false,
+      "rationale": "Unrelated Trip booking is not linked to the cancelled channel event."
+    },
+    {
+      "id": "cancelled_room_released",
+      "category": "cancelled_hold",
+      "status": "evaluated",
+      "scenario": "cancelled_without_room",
+      "reservation_id": "KF1006",
+      "reason_code": "CANCELLED_ASSIGNED",
+      "expected": false,
+      "rationale": "The cancelled reservation no longer holds a room assignment."
+    },
+    {
+      "id": "duplicate_pms_first",
+      "category": "pms",
+      "status": "evaluated",
+      "scenario": "duplicate_pms",
+      "reservation_id": "KF1001",
+      "reason_code": "DUPLICATE_PMS_REF",
+      "expected": true,
+      "rationale": "Two active reservations share PMS reference PMS501."
+    },
+    {
+      "id": "duplicate_pms_second",
+      "category": "pms",
+      "status": "evaluated",
+      "scenario": "duplicate_pms",
+      "reservation_id": "KF1002",
+      "reason_code": "DUPLICATE_PMS_REF",
+      "expected": true,
+      "rationale": "The second active booking has been deliberately given PMS501."
+    },
+    {
+      "id": "mismatched_category",
+      "category": "inventory",
+      "status": "evaluated",
+      "scenario": "category_mismatch",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_INCOMPATIBLE",
+      "expected": true,
+      "rationale": "Booked superior category does not match standard room 101."
+    },
+    {
+      "id": "mismatched_twin_bed",
+      "category": "beds",
+      "status": "evaluated",
+      "scenario": "twin_mismatch",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_INCOMPATIBLE",
+      "expected": true,
+      "rationale": "Strict twin-bed request cannot be satisfied by double-bed room 101."
+    },
+    {
+      "id": "conflicting_bed_requests",
+      "category": "beds",
+      "status": "evaluated",
+      "scenario": "contradictory_beds",
+      "reservation_id": "KF1001",
+      "reason_code": "CONFLICTING_BED_REQUEST",
+      "expected": true,
+      "rationale": "The reservation simultaneously requests twin and double bed configurations."
+    },
+    {
+      "id": "dirty_room_not_inspected",
+      "category": "housekeeping",
+      "status": "evaluated",
+      "scenario": "dirty_room",
+      "reservation_id": "KF1001",
+      "reason_code": "HOUSEKEEPING_NOT_INSPECTED",
+      "expected": true,
+      "rationale": "Assigned room 101 is dirty, so inspection readiness is not verified."
+    },
+    {
+      "id": "out_of_service_not_compatible",
+      "category": "maintenance",
+      "status": "evaluated",
+      "scenario": "out_of_service",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_INCOMPATIBLE",
+      "expected": true,
+      "rationale": "Out-of-service room 101 must not be treated as operationally compatible."
+    },
+    {
+      "id": "payment_review_signal",
+      "category": "payment",
+      "status": "evaluated",
+      "scenario": "payment_review",
+      "reservation_id": "KF1001",
+      "reason_code": "PAYMENT_REVIEW",
+      "expected": true,
+      "rationale": "The altered reservation now explicitly carries a payment review signal."
+    },
+    {
+      "id": "identity_not_verified",
+      "category": "identity",
+      "status": "evaluated",
+      "scenario": "identity_unverified",
+      "reservation_id": "KF1001",
+      "reason_code": "IDENTITY_STAFF_REVIEW",
+      "expected": true,
+      "rationale": "Identity is pending staff review rather than staff verified."
+    },
+    {
+      "id": "pms_reference_missing",
+      "category": "pms",
+      "status": "evaluated",
+      "scenario": "pms_missing",
+      "reservation_id": "KF1001",
+      "reason_code": "UNMAPPED_PMS",
+      "expected": true,
+      "rationale": "A missing PMS reference cannot establish reliable booking mapping."
+    },
+    {
+      "id": "future_arrival_not_today",
+      "category": "dates",
+      "status": "evaluated",
+      "scenario": "future_arrival",
+      "reservation_id": "KF1001",
+      "reason_code": "ARRIVAL_NOT_TODAY",
+      "expected": true,
+      "rationale": "Arrival was moved to the following day, not the snapshot review date."
+    },
+    {
+      "id": "guest_not_arrived",
+      "category": "arrival",
+      "status": "evaluated",
+      "scenario": "guest_expected",
+      "reservation_id": "KF1001",
+      "reason_code": "GUEST_NOT_ARRIVED",
+      "expected": true,
+      "rationale": "Arrival state is expected rather than physically arrived on review day."
+    },
+    {
+      "id": "before_checkin_time",
+      "category": "arrival",
+      "status": "evaluated",
+      "scenario": "before_checkin",
+      "reservation_id": "KF1001",
+      "reason_code": "BEFORE_CHECKIN_TIME",
+      "expected": true,
+      "rationale": "Review time was moved to 13:00 before the standard check-in threshold."
+    },
+    {
+      "id": "no_show_room_still_held",
+      "category": "no_show",
+      "status": "evaluated",
+      "scenario": "no_show",
+      "reservation_id": "KF1001",
+      "reason_code": "NO_SHOW_RELEASE_REVIEW",
+      "expected": true,
+      "rationale": "No-show booking must retain its existing room until authorized release."
+    },
+    {
+      "id": "requested_amenity_missing",
+      "category": "requests",
+      "status": "evaluated",
+      "scenario": "amenity_missing",
+      "reservation_id": "KF1001",
+      "reason_code": "REQUEST_AMENITY_UNAVAILABLE",
+      "expected": true,
+      "rationale": "The booking requests accessibility that assigned room 101 does not list."
+    },
+    {
+      "id": "completed_housekeeping_task",
+      "category": "housekeeping",
+      "status": "evaluated",
+      "scenario": "task_closed",
+      "reservation_id": "KF1003",
+      "reason_code": "HOUSEKEEPING_TASK_OPEN",
+      "expected": false,
+      "rationale": "Housekeeping task T1001 is now done and should no longer count as open."
+    },
+    {
+      "id": "pms_registration_confirmed",
+      "category": "pms",
+      "status": "evaluated",
+      "scenario": "pms_recorded",
+      "reservation_id": "KF1001",
+      "reason_code": "PMS_REGISTRATION_NOT_CONFIRMED",
+      "expected": false,
+      "rationale": "The snapshot states authorized PMS registration has been recorded."
+    },
+    {
+      "id": "same_day_checkout_reuse",
+      "category": "dates",
+      "status": "evaluated",
+      "scenario": "same_day_checkout",
+      "reservation_id": "KF1001",
+      "reason_code": "ROOM_CONFLICT",
+      "expected": false,
+      "rationale": "A second stay begins on the first stay checkout date; intervals do not overlap."
+    },
+    {
+      "id": "reordered_same_day_revisions",
+      "category": "event_revision_order",
+      "status": "unsupported",
+      "reason": "NO_EVENT_REVISION_MODEL"
+    },
+    {
+      "id": "partial_cancellation",
+      "category": "partial_cancellation",
+      "status": "unsupported",
+      "reason": "NO_PARTIAL_CANCELLATION_MODEL"
+    },
+    {
+      "id": "split_stay_truth_unreviewed",
+      "category": "split_stay",
+      "status": "unlabelled",
+      "reason": "SPLIT_STAY_TRUTH_UNREVIEWED"
+    }
+  ]
+}

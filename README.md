@@ -41,7 +41,7 @@ The current integrated demo is source-validated, offline and privacy-restricted.
 
 ## Validation status / Doğrulama sınırları
 
-GitHub CI confirms code and offline UI regressions; it is not independent hotel certification or permission for real guest records. The 10-case [project-authored benchmark](docs/EVALUATION_TR.md) contains **7 labeled/evaluated cases and 3 excluded cases** (2 unsupported, 1 unlabelled); **7/10 is coverage, not 70% accuracy**. Independent pilot and security review are still required.
+GitHub CI confirms code and offline UI regressions, not independent hotel accuracy. The original [10-case benchmark](docs/EVALUATION_TR.md) has 7 scored / 3 excluded; the new [Benchmark v2](docs/BENCHMARK_V2_TR_EN.md) contains **40 project-labeled observations from 23 fictional scenarios, plus 3 explicit exclusions**. FP/FN disagreements are shown, not hidden. Neither benchmark is a real-hotel pilot.
 
 ## 60-second quickstart / 60 saniyelik başlangıç
 
@@ -62,14 +62,14 @@ This runs the bundled 5-room scenario and then a local minimized CSV review. No 
 - [GitHub Actions — automated tests](https://github.com/erenariel/konaklamaflow/actions/workflows/tests.yml): Python 3.11–3.13 unit tests and Chromium browser checks.
 - [Main-run CI evidence (15 Nov 2026)](https://github.com/erenariel/konaklamaflow/actions/runs/43682701510) · [Successful demo workflow](https://github.com/erenariel/konaklamaflow/actions/runs/43682944588)
 - [Merged integrated offline preview PR #67](https://github.com/erenariel/konaklamaflow/pull/67)
-- [Synthetic benchmark PR #51](https://github.com/erenariel/konaklamaflow/pull/51) and [scorecard PR #58](https://github.com/erenariel/konaklamaflow/pull/58): **7/10** project-authored cases were labeled/evaluated; three were excluded, not counted as failures. This is **not** real-world accuracy.
+- [Benchmark v2 methodology and full FP/FN case list](docs/BENCHMARK_V2_TR_EN.md) · [V1 10-case synthetic scorecard](https://erenariel.github.io/konaklamaflow/synthetic-scorecard.html) (7 labeled, 3 excluded). Neither represents independent accuracy.
 - [Architecture/limits](docs/LIMITATIONS.md) · [Release gate](docs/RELEASE_GATE_TR.md) · [Security policy](SECURITY.md)
 
 ## Releases, contributions and roadmap / Sürümler ve katkı
 
 **Version tracks are separate:** the public fictional browser demo is v0.5.x-era; the Python package in [pyproject.toml](pyproject.toml) is now **v0.2.0rc2 candidate, not yet published**. Existing GitHub Releases [v0.1.1](https://github.com/erenariel/konaklamaflow/releases/tag/v0.1.1) and [v0.2.0rc1](https://github.com/erenariel/konaklamaflow/releases/tag/v0.2.0rc1) have no attached wheel/ZIP assets. The [offline product ZIP is already available via Pages](https://erenariel.github.io/konaklamaflow/konaklamaflow-offline-demo.zip). CI now checks wheel/sdist in a clean installation and retains candidate artifacts; **TestPyPI, PyPI and a new permanent GitHub Release still require separate verification and publication**. [Release plan](docs/RELEASE_STRATEGY_TR_EN.md).
 
-Next priorities: clean packaging, local CSV safety, transparent larger synthetic benchmarks and independently reviewed fictional user trials. Live PMS/OTA work needs separate authorization. See [Issues](https://github.com/erenariel/konaklamaflow/issues) and [Changelog](CHANGELOG.md). Do not infer feature completion from an open pull request.
+Next priorities: independent review of Benchmark v2 labels, real privacy audit, and independently supervised fictional user trials. Live PMS/OTA work needs separate authorization. See [Issues](https://github.com/erenariel/konaklamaflow/issues) and [Changelog](CHANGELOG.md). Do not infer feature completion from an open pull request.
 
 Contributions and feedback are welcome: [CONTRIBUTING.md](CONTRIBUTING.md) · [Fictional-only operator feedback guide](docs/OPERATOR_FEEDBACK_TR_EN.md). Please never include real guest names, passports, hotel system exports, credentials or operational secrets.
 
