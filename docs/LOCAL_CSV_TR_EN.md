@@ -41,7 +41,8 @@ Desteklenen category değerleri: economy, basement, standard, superior, deluxe,
 triple, family, suite. beds: double, twin, flex. status: confirmed, pending,
 cancelled. checkin/checkout: YYYY-MM-DD (checkout gelişten sonra).
 active/twin_requested: true/false, TRUE/FALSE, 1/0, yes/no; boşsa sırasıyla
-true ve false. Oda adı veya rezervasyon referansı boş bırakılamaz.
+false ve false. Aktifliği bildirilmemiş oda öneriye alınmaz. active=true,
+fiziksel boşluk veya housekeeping kontrolünün tamamlandığını **kanıtlamaz**. Oda adı veya rezervasyon referansı boş bırakılamaz.
 Tutar, özel istek, çok odalı ebeveyn rezervasyonu, kaynak revizyonu ve
 saat dilimi **henüz** desteklenmez. Kaynak sabit LOCAL_CSV olarak yazılır.
 
