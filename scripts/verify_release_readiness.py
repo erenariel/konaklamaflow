@@ -13,7 +13,8 @@ from urllib.parse import urlsplit
 from zipfile import BadZipFile, ZipFile
 
 from scripts.stage_demo_site import (ROOT, PUBLIC_ASSETS, GENERATED_ASSETS,
-                                    PRODUCT_BUNDLE_ASSETS, DOWNLOAD_BUNDLE, OFFLINE_GUIDE)
+                                    PRODUCT_BUNDLE_ASSETS, DOWNLOAD_BUNDLE, OFFLINE_GUIDE,
+                                    offline_bundle_asset)
 
 EXPECTED_INTERNAL_PAGES = frozenset({
     "index.html", "project-overview.html", "synthetic-scorecard.html",
@@ -179,7 +180,7 @@ def verify_staged_site(site: Path, root: Path = ROOT):
                      and "/" not in info.filename and "\\" not in info.filename,
                      "Unsafe offline demo ZIP member name")
         for name in allowed - {"README_OFFLINE.md"}:
-            _require(archive.read(name) == (site / name).read_bytes(),
+            _require(archive.read(name) == offline_bundle_asset(name, (site / name).read_bytes()),
                      "Offline demo ZIP asset differs from staged release")
         _require(archive.read("README_OFFLINE.md") == OFFLINE_GUIDE.encode("utf-8"),
                  "Offline demo guide mismatch")
