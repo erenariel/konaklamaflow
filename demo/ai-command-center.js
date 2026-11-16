@@ -8,27 +8,27 @@ function demoGuestName(id){
  return guest?.display_label||booking?.display_name||'ÖRNEK';
 }
 const COMMAND_LANG={
- tr:['AI Operasyon Merkezi','Örnek veri · Çevrimdışı','Kaynak → Kural motoru → AI açıklaması → Personel','Operasyonun merkezinde yapay zekâ','Senaryoyu oynat','Duraklat','İleri','Sıfırla','İncelenen rezervasyon','Mevcut adım','Kanıt ve güvenli karar','Kontrol personelde','Yedi günlük doluluk','Kanallara göre rezervasyon','Kurgusal 12 Kasım 2026 veri anlık görüntüsü','Gösterilen adımlar gerçek PMS işlemi değildir.','Başlamak için senaryoyu oynat.'],
- en:['AI Operations Center','Sample data · Offline','Source → Rule engine → AI explanation → Staff','AI at the center of operations','Play scenario','Pause','Next','Reset','Reservation in focus','Current step','Evidence and safe decision','Staff retains control','Seven-day occupancy','Bookings by channel','Fictional snapshot: 12 November 2026','No live PMS actions are performed.','Play a scenario to begin.'],
- fr:['Centre des opérations IA','Données fictives · Hors ligne','Source → Règles → Explication IA → Équipe','L’IA au cœur des opérations','Lancer le scénario','Pause','Suivant','Réinitialiser','Réservation ciblée','Étape actuelle','Preuves et décision sûre','Décision humaine','Occupation sur sept jours','Réservations par canal','Données fictives du 12 novembre 2026','Aucune action PMS réelle.','Lance le scénario.'],
- el:['Κέντρο λειτουργιών AI','Δοκιμαστικά δεδομένα · Offline','Πηγή → Κανόνες → AI → Προσωπικό','AI στο κέντρο λειτουργιών','Έναρξη σεναρίου','Παύση','Επόμενο','Επαναφορά','Κράτηση σε εξέταση','Τρέχον βήμα','Στοιχεία και ασφαλής απόφαση','Ανθρώπινος έλεγχος','Πληρότητα επτά ημερών','Κρατήσεις ανά κανάλι','Εικονικά δεδομένα 12 Νοεμβρίου 2026','Χωρίς πραγματικές ενέργειες PMS.','Ξεκίνησε το σενάριο.'],
- he:['מרכז תפעול AI','נתוני הדגמה · לא מקוון','מקור ← מנוע כללים ← הסבר AI ← צוות','AI במרכז התפעול','הפעל תרחיש','השהה','הבא','אפס','הזמנה נבדקת','שלב נוכחי','ראיות והחלטה בטוחה','הצוות מאשר','תפוסה לשבעה ימים','הזמנות לפי ערוץ','נתונים מדומים: 12 בנובמבר 2026','אין פעולות PMS אמיתיות.','הפעל תרחיש להתחלה.'],
- ar:['مركز عمليات الذكاء الاصطناعي','بيانات تجريبية · دون اتصال','المصدر ← القواعد ← شرح الذكاء الاصطناعي ← الموظف','الذكاء الاصطناعي في قلب العمليات','تشغيل السيناريو','إيقاف مؤقت','التالي','إعادة تعيين','الحجز قيد المراجعة','الخطوة الحالية','الأدلة والقرار الآمن','القرار للموظف','الإشغال خلال سبعة أيام','الحجوزات حسب القناة','بيانات افتراضية: 12 نوفمبر 2026','لا توجد عمليات فعلية على PMS.','شغّل السيناريو للبدء.'],
- de:['KI-Betriebszentrale','Beispieldaten · Offline','Quelle → Regeln → KI-Erklärung → Personal','KI im Mittelpunkt des Betriebs','Szenario starten','Pause','Weiter','Zurücksetzen','Buchung im Fokus','Aktueller Schritt','Nachweis und sichere Entscheidung','Personal entscheidet','Belegung über sieben Tage','Buchungen nach Kanal','Fiktiver Datenstand: 12. November 2026','Keine echten PMS-Aktionen.','Szenario starten.'],
- ru:['Центр операций ИИ','Тестовые данные · Офлайн','Источник → Правила → ИИ → Персонал','ИИ в центре работы','Запустить сценарий','Пауза','Далее','Сбросить','Выбранная бронь','Текущий этап','Доказательства и решение','Решение за персоналом','Загрузка за семь дней','Брони по каналам','Тестовые данные: 12 ноября 2026','Реальные действия PMS не выполняются.','Запустите сценарий.'],
- es:['Centro de operaciones IA','Datos ficticios · Sin conexión','Fuente → Reglas → Explicación IA → Personal','IA en el centro de las operaciones','Reproducir escenario','Pausar','Siguiente','Restablecer','Reserva seleccionada','Paso actual','Pruebas y decisión segura','Decisión humana','Ocupación de siete días','Reservas por canal','Datos ficticios: 12 de noviembre de 2026','No se ejecutan acciones PMS reales.','Inicia el escenario.'],
- uk:['Центр операцій ШІ','Тестові дані · Офлайн','Джерело → Правила → ШІ → Персонал','ШІ в центрі операцій','Запустити сценарій','Пауза','Далі','Скинути','Бронювання у фокусі','Поточний крок','Докази та безпечне рішення','Рішення за персоналом','Завантаженість за сім днів','Бронювання за каналом','Тестові дані: 12 листопада 2026','Реальні дії PMS не виконуються.','Запусти сценарій.']
+ tr:['AI Operasyon Merkezi','Örnek veri · Çevrimdışı','Kaynak → Kural motoru → AI açıklaması → Personel','Operasyonun merkezinde yapay zekâ','AI akışını başlat','Duraklat','İleri','Sıfırla','İncelenen rezervasyon','Mevcut adım','Kanıt ve güvenli karar','Kontrol personelde','Yedi günlük doluluk','Kanallara göre rezervasyon','Kurgusal 12 Kasım 2026 veri anlık görüntüsü','Gösterilen adımlar gerçek PMS işlemi değildir.','Başlamak için senaryoyu oynat.'],
+ en:['AI Operations Center','Sample data · Offline','Source → Rule engine → AI explanation → Staff','AI at the center of operations','Start AI workflow','Pause','Next','Reset','Reservation in focus','Current step','Evidence and safe decision','Staff retains control','Seven-day occupancy','Bookings by channel','Fictional snapshot: 12 November 2026','No live PMS actions are performed.','Play a scenario to begin.'],
+ fr:['Centre des opérations IA','Données fictives · Hors ligne','Source → Règles → Explication IA → Équipe','L’IA au cœur des opérations','Démarrer le parcours IA','Pause','Suivant','Réinitialiser','Réservation ciblée','Étape actuelle','Preuves et décision sûre','Décision humaine','Occupation sur sept jours','Réservations par canal','Données fictives du 12 novembre 2026','Aucune action PMS réelle.','Lance le scénario.'],
+ el:['Κέντρο λειτουργιών AI','Δοκιμαστικά δεδομένα · Offline','Πηγή → Κανόνες → AI → Προσωπικό','AI στο κέντρο λειτουργιών','Έναρξη ροής AI','Παύση','Επόμενο','Επαναφορά','Κράτηση σε εξέταση','Τρέχον βήμα','Στοιχεία και ασφαλής απόφαση','Ανθρώπινος έλεγχος','Πληρότητα επτά ημερών','Κρατήσεις ανά κανάλι','Εικονικά δεδομένα 12 Νοεμβρίου 2026','Χωρίς πραγματικές ενέργειες PMS.','Ξεκίνησε το σενάριο.'],
+ he:['מרכז תפעול AI','נתוני הדגמה · לא מקוון','מקור ← מנוע כללים ← הסבר AI ← צוות','AI במרכז התפעול','התחל תהליך AI','השהה','הבא','אפס','הזמנה נבדקת','שלב נוכחי','ראיות והחלטה בטוחה','הצוות מאשר','תפוסה לשבעה ימים','הזמנות לפי ערוץ','נתונים מדומים: 12 בנובמבר 2026','אין פעולות PMS אמיתיות.','הפעל תרחיש להתחלה.'],
+ ar:['مركز عمليات الذكاء الاصطناعي','بيانات تجريبية · دون اتصال','المصدر ← القواعد ← شرح الذكاء الاصطناعي ← الموظف','الذكاء الاصطناعي في قلب العمليات','بدء مسار الذكاء الاصطناعي','إيقاف مؤقت','التالي','إعادة تعيين','الحجز قيد المراجعة','الخطوة الحالية','الأدلة والقرار الآمن','القرار للموظف','الإشغال خلال سبعة أيام','الحجوزات حسب القناة','بيانات افتراضية: 12 نوفمبر 2026','لا توجد عمليات فعلية على PMS.','شغّل السيناريو للبدء.'],
+ de:['KI-Betriebszentrale','Beispieldaten · Offline','Quelle → Regeln → KI-Erklärung → Personal','KI im Mittelpunkt des Betriebs','KI-Ablauf starten','Pause','Weiter','Zurücksetzen','Buchung im Fokus','Aktueller Schritt','Nachweis und sichere Entscheidung','Personal entscheidet','Belegung über sieben Tage','Buchungen nach Kanal','Fiktiver Datenstand: 12. November 2026','Keine echten PMS-Aktionen.','Szenario starten.'],
+ ru:['Центр операций ИИ','Тестовые данные · Офлайн','Источник → Правила → ИИ → Персонал','ИИ в центре работы','Запустить процесс ИИ','Пауза','Далее','Сбросить','Выбранная бронь','Текущий этап','Доказательства и решение','Решение за персоналом','Загрузка за семь дней','Брони по каналам','Тестовые данные: 12 ноября 2026','Реальные действия PMS не выполняются.','Запустите сценарий.'],
+ es:['Centro de operaciones IA','Datos ficticios · Sin conexión','Fuente → Reglas → Explicación IA → Personal','IA en el centro de las operaciones','Iniciar flujo IA','Pausar','Siguiente','Restablecer','Reserva seleccionada','Paso actual','Pruebas y decisión segura','Decisión humana','Ocupación de siete días','Reservas por canal','Datos ficticios: 12 de noviembre de 2026','No se ejecutan acciones PMS reales.','Inicia el escenario.'],
+ uk:['Центр операцій ШІ','Тестові дані · Офлайн','Джерело → Правила → ШІ → Персонал','ШІ в центрі операцій','Почати процес ШІ','Пауза','Далі','Скинути','Бронювання у фокусі','Поточний крок','Докази та безпечне рішення','Рішення за персоналом','Завантаженість за сім днів','Бронювання за каналом','Тестові дані: 12 листопада 2026','Реальні дії PMS не виконуються.','Запусти сценарій.']
 };
 function commandText(i){return (COMMAND_LANG[typeof opsState!=='undefined'?opsState.lang:'tr']||COMMAND_LANG.en)[i];}
 let commandTourAll=false;
 function playCommandTour(){
- const all=stories();
- if(!all.length||reportStale)return;
+ const chosen=currentStory();
+ if(!chosen||reportStale)return;
  stopStory();commandTourAll=false;
- selectedStoryId=all[0].id;storyStep=0;storyStarted=true;
+ selectedStoryId=chosen.id;storyStep=0;storyStarted=true;
  if(!motionAllowed()){storyMessage='Azaltılmış hareket: adımları elle ilerletin.';render();return;}
  commandTourAll=true;storyPlaying=true;
- storyMessage='Tüm kurgusal AI senaryoları oynatılıyor';
+ storyMessage='Seçili kurgusal AI senaryosu oynatılıyor';
  render();scheduleCommandTour();
 }
 function scheduleCommandTour(){
@@ -39,9 +39,10 @@ function scheduleCommandTour(){
   const all=stories(),current=currentStory();
   if(storyStep<current.steps.length-1)storyStep++;
   else{
-   const next=all.findIndex(x=>x.id===current.id)+1;
-   if(next>=all.length){commandTourAll=false;stopStory('Tüm kurgusal senaryolar tamamlandı; canlı işlem yapılmadı.');render();return;}
-   selectedStoryId=all[next].id;storyStep=0;
+   commandTourAll=false;
+   stopStory('Seçili senaryo tamamlandı; diğerini senaryo listesinden seçebilirsin. Canlı işlem yapılmadı.');
+   render();
+   return;
   }
   storyMessage='Kurgusal kanıt güncellendi. Nihai karar personelde.';
   render();scheduleCommandTour();
