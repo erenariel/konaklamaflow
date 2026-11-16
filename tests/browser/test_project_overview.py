@@ -120,7 +120,16 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
     def test_integrated_demo_links_only_to_workflow_overview(self):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
-        links = page.locator(".kf-promo-entry a")
+        info = page.locator("#aboutProject")
+        self.assertEqual(info.count(), 1)
+        self.assertFalse(info.evaluate("(node) => node.open"))
+        self.assertLess(page.locator("#content").bounding_box()["y"],
+                        info.bounding_box()["y"])
+        self.assertLess(page.locator("#aiCommandCenter").bounding_box()["y"],
+                        info.bounding_box()["y"])
+        page.locator("#aboutProject summary").click()
+        self.assertTrue(info.evaluate("(node) => node.open"))
+        links = info.locator("a")
         self.assertEqual(links.count(), 4)
         self.assertEqual(links.first.get_attribute("href"), "project-overview.html")
         self.assertEqual(links.nth(1).get_attribute("href"), "project-overview.html#senaryolar")
@@ -130,6 +139,15 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         self.assertTrue(links.nth(3).is_visible())
         self.assertNotIn("imzalı ve kaşeli", page.locator(".kf-promo-entry").inner_text().lower())
         self.assertNotIn("privacy-campaign.html", page.locator(".kf-promo-entry").inner_html())
+        for width in (320, 375, 390):
+            page.set_viewport_size({"width": width, "height": 844})
+            with self.subTest(width=width):
+                self.assertTrue(page.evaluate(
+                    "() => document.documentElement.scrollWidth <= window.innerWidth"))
+                self.assertLess(page.locator("#content").bounding_box()["y"],
+                                page.locator("#aboutProject").bounding_box()["y"])
+                self.assertTrue(page.locator("#aiCommandCenter").is_visible())
+                self.assertTrue(page.locator("#aboutProject summary").is_visible())
 
 
 if __name__ == "__main__":
