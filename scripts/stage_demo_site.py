@@ -96,6 +96,32 @@ sertifikasyon ya da gerçek otel kurulumunun kanıtı değildir.
 """
 
 
+# A downloaded ZIP cannot link to itself. Remove the online-only download
+# control from the four HTML pages inside the archive (not from the site).
+OFFLINE_DOWNLOAD_ANCHOR = {
+    "project-overview.html":
+        '<a class="cta ghost" href="konaklamaflow-offline-demo.zip" download>Çevrimdışı demoyu indir (ZIP)</a>',
+    "index.html":
+        '<a href="konaklamaflow-offline-demo.zip" download aria-label="Kurgusal otel programını çevrimdışı indir">Çevrimdışı demoyu indir (ZIP)</a>',
+    "hotel-operations.html":
+        '<a href="konaklamaflow-offline-demo.zip" download aria-label="Kurgusal otel programını çevrimdışı indir">Çevrimdışı demoyu indir (ZIP)</a>',
+    "v04-integrated-preview.html":
+        '<a href="konaklamaflow-offline-demo.zip" download aria-label="Kurgusal otel programını çevrimdışı indir">Çevrimdışı demoyu indir (ZIP)</a>',
+}
+
+
+def offline_bundle_asset(name: str, source: bytes) -> bytes:
+    """Remove dead self-download actions in extracted product pages."""
+    link = OFFLINE_DOWNLOAD_ANCHOR.get(name)
+    if link is None:
+        return source
+    needle = link.encode("utf-8")
+    if source.count(needle) != 1:
+        raise ValueError("Offline product page download CTA changed")
+    return source.replace(needle, b"")
+
+
+
 def write_offline_demo_bundle(output: Path) -> None:
     """Deterministic allowlisted product-only ZIP; no repository traversal."""
     if not PRODUCT_BUNDLE_ASSETS <= set(PUBLIC_ASSETS):
@@ -106,7 +132,7 @@ def write_offline_demo_bundle(output: Path) -> None:
             info = ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0))
             info.compress_type = ZIP_STORED if name.endswith((".png", ".jpg", ".gif")) else ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
-            archive.writestr(info, (output / name).read_bytes())
+            archive.writestr(info, offline_bundle_asset(name, (output / name).read_bytes()))
         info = ZipInfo("README_OFFLINE.md", date_time=(2026, 1, 1, 0, 0, 0))
         info.compress_type = ZIP_DEFLATED
         info.external_attr = 0o100644 << 16
