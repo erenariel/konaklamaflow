@@ -25,6 +25,26 @@ class FullI18nCatalogStructureTests(unittest.TestCase):
             self.assertNotIn(row[0],seen)
             seen.add(row[0])
 
+    def test_optional_product_links_are_translated_in_embedded_demo(self):
+        html=(ROOT/'demo/v04-integrated-preview.html').read_text(encoding='utf-8')
+        source=re.search(r'fullUiRows\\((\\[\\[[\\s\\S]*?\\]\\])\\);', CATALOG)
+        embedded=re.search(r'fullUiRows\\((\\[\\[[\\s\\S]*?\\]\\])\\);', html)
+        self.assertIsNotNone(source)
+        self.assertIsNotNone(embedded)
+        source_rows=json.loads(source.group(1))
+        embedded_rows=json.loads(embedded.group(1))
+        self.assertEqual(source_rows, embedded_rows)
+        names={row[0] for row in source_rows}
+        for key in ('Proje hakkında ve indirmeler',
+                    'Program modüllerini keşfet',
+                    'Örnek rezervasyon senaryolarını gör',
+                    'Oda tahsisini dene (18/60/200)',
+                    'Çevrimdışı demoyu indir (ZIP)',
+                    'Seçili senaryoyu oynat'):
+            self.assertIn(key, names)
+        self.assertIn('<details class="kf-promo-entry"', html)
+        self.assertLess(html.index('id="content"'), html.index('id="projectInfo"'))
+
     def test_ten_navigation_categories_each_have_eighteen_labels(self):
         pattern=re.compile(r'^([a-z]{2}):\[(.*?)\],?\s*$',re.MULTILINE)
         head=ENGINE.split('const fullUiMenu={',1)[1].split('};',1)[0]
