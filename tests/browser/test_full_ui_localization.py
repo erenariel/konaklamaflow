@@ -117,7 +117,7 @@ class FullApplicationLanguageTests(unittest.TestCase):
         self.assertIn("HUMAN_APPROVAL_REQUIRED",self.page.locator("#wfPreviewResult").inner_text())
         self.assertIn("NO_LIVE_EXECUTION",self.page.locator("#wfPreviewResult").inner_text())
 
-    def test_demo_launch_runs_multiple_stories_on_ai_dashboard(self):
+    def test_demo_launch_stops_at_selected_story_without_surprise_rotation(self):
         self.page.locator("#startShowcase").click()
         self.assertEqual(self.page.evaluate("() => page"),"dashboard")
         self.assertTrue(self.page.evaluate("() => commandTourAll && storyPlaying"))
@@ -125,11 +125,14 @@ class FullApplicationLanguageTests(unittest.TestCase):
         self.assertEqual(self.page.locator("#aiCommandCenter").count(),1)
         first=self.page.evaluate("() => selectedStoryId")
         self.page.evaluate("() => {storyStep=currentStory().steps.length-1;}")
-        self.page.wait_for_timeout(2400)
-        self.assertNotEqual(self.page.evaluate("() => selectedStoryId"),first)
-        self.assertEqual(self.page.evaluate("() => storyStep"),0)
-        self.page.locator("#commandPause").click()
+        self.page.wait_for_function("() => !storyPlaying",timeout=5000)
+        self.assertEqual(self.page.evaluate("() => selectedStoryId"),first)
+        self.assertEqual(self.page.evaluate("() => storyStep"),
+                         self.page.evaluate("() => currentStory().steps.length-1"))
         self.assertFalse(self.page.evaluate("() => commandTourAll || storyPlaying"))
+        self.assertIn("tamamlandı",self.page.locator("#tourPanel").inner_text().lower()
+                      if self.page.locator("#tourPanel").count() else
+                      self.page.evaluate("() => storyMessage").lower())
         self.page.locator('nav [data-nav="ops_workflows"]').click()
         self.assertEqual(self.page.locator("#wfScenario option").count(),5)
         self.page.locator("#wfScenario").select_option("payment")
