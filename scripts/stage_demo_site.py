@@ -9,7 +9,7 @@ import argparse
 from pathlib import Path
 import shutil
 import sys
-from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
+from zipfile import ZIP_DEFLATED, ZIP_STORED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -104,7 +104,7 @@ def write_offline_demo_bundle(output: Path) -> None:
     with ZipFile(output / DOWNLOAD_BUNDLE, "w", compression=ZIP_DEFLATED) as archive:
         for name in filenames:
             info = ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0))
-            info.compress_type = ZIP_DEFLATED
+            info.compress_type = ZIP_STORED if name.endswith((".png", ".jpg", ".gif")) else ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
             archive.writestr(info, (output / name).read_bytes())
         info = ZipInfo("README_OFFLINE.md", date_time=(2026, 1, 1, 0, 0, 0))
