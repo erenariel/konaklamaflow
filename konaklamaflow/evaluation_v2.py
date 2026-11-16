@@ -27,11 +27,13 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST_V2 = ROOT / "evaluation" / "benchmark_v2.json"
 SCHEMA_V2 = "konaklamaflow.synthetic-evaluation.v2"
 IDENT = re.compile(r"^[A-Za-z0-9_-]{1,50}$")
-EXCLUSIONS = frozenset({
-    "NO_EVENT_REVISION_MODEL",
-    "NO_PARTIAL_CANCELLATION_MODEL",
-    "SPLIT_STAY_TRUTH_UNREVIEWED",
-})
+# Fix the excluded set for this published benchmark version. A developer
+# cannot reclassify a failing measured case as excluded to inflate the score.
+EXCLUSIONS = {
+    "reordered_same_day_revisions": ("unsupported", "NO_EVENT_REVISION_MODEL"),
+    "partial_cancellation": ("unsupported", "NO_PARTIAL_CANCELLATION_MODEL"),
+    "split_stay_truth_unreviewed": ("unlabelled", "SPLIT_STAY_TRUTH_UNREVIEWED"),
+}
 # These are named, reviewed transformations on a PUBLIC FICTIONAL fixture.
 # No arbitrary JSON patch or user-supplied script can be embedded in a label.
 SCENARIOS = frozenset({
@@ -92,10 +94,14 @@ def _validated_manifest(manifest, source):
         else:
             _require(item.get("status") in {"unsupported", "unlabelled"})
             _require(set(item) == {"id", "category", "status", "reason"})
-            _require(item["reason"] in EXCLUSIONS)
+            _require(item["id"] in EXCLUSIONS)
+            _require((item["status"], item["reason"]) == EXCLUSIONS[item["id"]])
             excluded += 1
-    _require(evaluated >= 30 and positive >= 10 and negative >= 10
-             and excluded >= 2)
+    _require(evaluated == 40 and excluded == len(EXCLUSIONS)
+             and len(cases) == 43
+             and positive >= 10 and negative >= 10)
+    _require({c["id"] for c in cases if c["status"] != "evaluated"}
+             == set(EXCLUSIONS))
     _require(len({c["scenario"] for c in cases
                   if c["status"] == "evaluated"}) >= 12)
     return cases
