@@ -120,7 +120,14 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
     def test_integrated_demo_links_only_to_workflow_overview(self):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
-        links = page.locator(".kf-promo-entry a")
+        info = page.locator("#projectInfo")
+        self.assertEqual(info.count(), 1)
+        self.assertFalse(info.evaluate("(element) => element.open"))
+        self.assertGreater(info.bounding_box()["y"],
+                           page.locator("#content").bounding_box()["y"])
+        info.locator("summary").click()
+        self.assertTrue(info.evaluate("(element) => element.open"))
+        links = info.locator("a")
         self.assertEqual(links.count(), 4)
         self.assertEqual(links.first.get_attribute("href"), "project-overview.html")
         self.assertEqual(links.nth(1).get_attribute("href"), "project-overview.html#senaryolar")
