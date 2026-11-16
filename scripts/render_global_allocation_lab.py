@@ -179,7 +179,7 @@ def global_allocation_lab_html(root=None):
     return (
         '<!doctype html><html lang="tr"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<meta http-equiv="Content-Security-Policy" content="' + escape(csp, quote=True) + '">'
+        '<meta http-equiv="Content-Security-Policy" content="' + escape(csp, quote=False) + '">'
         '<meta name="description" content="Kurgusal, çevrimdışı 18, 60 ve 200 odalı '
         'KonaklamaFlow oda tahsis önerisi laboratuvarı">'
         '<title>KonaklamaFlow | Oda Tahsis Laboratuvarı</title>'
