@@ -126,7 +126,7 @@ def import_csv_snapshot(rooms_path: str, reservations_path: str) -> dict:
             "id": _token(secret, b"room", row["room_id"]),
             "category": _generic(row["category"], CATEGORIES, "category"),
             "beds": _generic(row["beds"], BEDS, "beds"),
-            "active": _flag(row.get("active", ""), "active", True),
+            "active": _flag(row.get("active", ""), "active", False),
         })
     reservations: list[dict] = []
     for row in bookings_raw:
