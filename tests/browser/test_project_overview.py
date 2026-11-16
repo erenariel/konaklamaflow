@@ -97,6 +97,15 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
                 arg=img.element_handle())
             self.assertTrue(img.evaluate("(image) => image.currentSrc.startsWith('file:')"))
 
+    def test_product_zip_is_discoverable_without_operator_proof(self):
+        page = self.page
+        download = page.locator('a[href="konaklamaflow-offline-demo.zip"]')
+        self.assertEqual(download.count(), 1)
+        self.assertEqual(download.get_attribute("download"), "")
+        self.assertTrue((self.site / "konaklamaflow-offline-demo.zip").is_file())
+        self.assertNotIn("değerlendirme formu", page.locator("main").inner_text().lower())
+        self.assertEqual(page.locator('a[href$=".pdf"]').count(), 0)
+
     def test_reduced_motion_uses_real_demo_still_poster(self):
         page = self.page
         page.emulate_media(reduced_motion="reduce")
@@ -112,9 +121,11 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
         links = page.locator(".kf-promo-entry a")
-        self.assertEqual(links.count(), 2)
+        self.assertEqual(links.count(), 3)
         self.assertEqual(links.first.get_attribute("href"), "project-overview.html")
         self.assertEqual(links.nth(1).get_attribute("href"), "project-overview.html#senaryolar")
+        self.assertEqual(links.nth(2).get_attribute("href"), "konaklamaflow-offline-demo.zip")
+        self.assertTrue(links.nth(2).is_visible())
         self.assertNotIn("imzalı ve kaşeli", page.locator(".kf-promo-entry").inner_text().lower())
         self.assertNotIn("privacy-campaign.html", page.locator(".kf-promo-entry").inner_html())
 
