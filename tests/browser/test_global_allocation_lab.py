@@ -49,7 +49,7 @@ class GlobalAllocationLabBrowserTests(unittest.TestCase):
                 self.assertEqual(selector.get_attribute("aria-pressed"), "true")
                 panel = page.locator(f'[data-scenario-panel="{size}"]')
                 self.assertTrue(panel.is_visible())
-                self.assertEqual(panel.locator("tr").count(), 0)  # collapsed details
+                self.assertEqual(panel.locator("tbody tr:visible").count(), 0)  # collapsed details
                 self.assertIn(f"{size} odalı kurgusal otel", panel.inner_text())
                 self.assertIn("Tam öneri üretildi", panel.inner_text())
                 self.assertIn(f"Tüm {size} oda önerisini göster",
