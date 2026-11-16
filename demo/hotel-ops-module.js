@@ -7,7 +7,7 @@
 const opsState={
   lang:'tr',selectedReport:'active_folios',selectedFolio:null,
   selectedReservation:null,selectedGuest:null,folioReservation:'',reportReservation:'',
-  reportFrom:'',reportTo:'',reportAgency:'',formOpen:false,roomCount:1,drafts:[],
+  reportFrom:'',reportTo:'',reportAgency:'',formOpen:false,roomCount:1,drafts:[],nextDraftSequence:1,
   formMessage:'',country:'TR',guestTab:'identity'
 };
 const opsDict={
@@ -140,7 +140,14 @@ function opsReservations(){
  opsTr(['<code dir="ltr">'+opsHtml(part.room_stay_id||'—')+'</code>',opsHtml(part.room_id||'ATANMADI'),opsHtml(part.category),opsHtml(part.adults),opsHtml(part.children),
  (part.nightly_rates||[]).length?part.nightly_rates.map(n=>opsHtml(n.date)+' '+opsMoney(n.amount,selected.currency)).join('<div class="ops-divider"></div>'):'<code>missing_source</code>'])))+
  opsLinkedRecords(selected)+'</div>'):'';
- return '<div class="ops-stack">'+opsNotice()+view+detail+(opsState.formOpen?opsBookingForm():'')+'</div>';
+ const draftList=opsState.drafts.length?opsCard('Kurgusal rezervasyon taslakları · bu oturum',
+  '<p class="ops-note">Bunlar yalnızca tarayıcıdaki geçici taslaklardır. PMS, kanal, tahsilat, oda tahsisi veya gerçek konaklama oluşturulmadı.</p>'+
+  opsTable(['Taslak kodu','Oda sayısı','Kişi sayısı','İşlem'],opsState.drafts.map(d=>opsTr([
+   '<code dir="ltr">'+opsHtml(d.id)+'</code>',
+   opsHtml(d.rooms),opsHtml(d.persons),
+   '<button type="button" class="mini" data-op-action="delete-draft" data-draft-id="'+opsHtml(d.id)+'">Taslağı sil</button>'
+  ])))):'';
+ return '<div class="ops-stack">'+opsNotice()+view+draftList+detail+(opsState.formOpen?opsBookingForm():'')+'</div>';
 }
 function opsBookingForm(){
  const agencies=HOTEL_OPS_DATA.agencies.map(a=>[a.id,a.name]);
@@ -378,9 +385,42 @@ function opsSyncLocale(lang){
      return;
    }
    if(!action)return;
-   if(action==='new-reservation'){opsState.formOpen=true;opsState.formMessage='';render()}
-   else if(action==='close-form'){opsState.formOpen=false;render()}
-   else if(action==='add-room'){if(opsState.roomCount<12){opsState.roomCount++;render()}}
+   if(action==='new-reservation'){
+     if(opsState.formOpen){document.getElementById('opsDraftForm')?.scrollIntoView({block:'nearest'});return;}
+     opsState.formOpen=true;opsState.roomCount=1;opsState.formMessage='';render();
+   }
+   else if(action==='close-form'){opsState.formOpen=false;opsState.roomCount=1;opsState.formMessage='';render()}
+   else if(action==='delete-draft'){
+     const id=event.target.closest('[data-op-action]')?.dataset.draftId;
+     if(!id||!opsState.drafts.some(d=>d.id===id))return;
+     opsState.drafts=opsState.drafts.filter(d=>d.id!==id);
+     opsState.formMessage='';
+     render();
+   }
+   else if(action==='add-room'){
+     if(opsState.roomCount>=12){
+       if(typeof notify==='function')notify('Demo formunda en fazla 12 oda ekleyebilirsin.');
+       return;
+     }
+     // Append a new fictional room field in-place. Re-rendering the entire
+     // form here discarded the user's entered dates, agency and room counts.
+     const form=document.getElementById('opsDraftForm');
+     const stack=form?.querySelector('.ops-room-stack');
+     const original=stack?.querySelector('fieldset.ops-room-field');
+     if(!stack||!original)return;
+     const next=opsState.roomCount;
+     const field=original.cloneNode(true);
+     const legend=field.querySelector('legend');
+     if(legend)legend.textContent=opsT('room')+' '+(next+1);
+     const category=field.querySelector('select[id^="draftRoom"]');
+     if(category){category.id='draftRoom'+next;category.value='standard';}
+     const adults=field.querySelector('input[name^="adults"]');
+     if(adults){adults.name='adults'+next;adults.value='2';}
+     const children=field.querySelector('input[name^="children"]');
+     if(children){children.name='children'+next;children.value='0';}
+     stack.append(field);
+     opsState.roomCount++;
+   }
    else if(action==='clear-folio-scope'){opsState.folioReservation='';opsState.selectedFolio=null;render()}
    else if(action==='apply-report'){
      opsState.selectedReport=document.getElementById('opsReportType').value;
@@ -421,8 +461,21 @@ function opsSyncLocale(lang){
         reason='Kişi sayısı seçilen oda kategorisinin örnek kapasitesine uygun değil.';
       }
    }
-   if(reason){opsState.formMessage=reason;render();return;}
-   const num=opsState.drafts.length+1;
+   if(reason){
+     // Preserve the completed form and show the validation reason in place.
+     opsState.formMessage=reason;
+     let feedback=form.querySelector('[data-ops-form-result]');
+     if(!feedback){
+       feedback=document.createElement('div');
+       feedback.dataset.opsFormResult='error';
+       feedback.className='ops-message';
+       feedback.setAttribute('role','status');
+       form.append(feedback);
+     }
+     feedback.textContent=reason;
+     return;
+   }
+   const num=opsState.nextDraftSequence++;
    const id='DRAFT-'+a.slice(0,4)+'-'+String(num).padStart(4,'0');
    // Only non-personal summary persists in this browser tab's RAM.
    opsState.drafts.push({id,rooms:opsState.roomCount,persons:total});
@@ -431,7 +484,8 @@ function opsSyncLocale(lang){
  });
  const originalReset=document.getElementById('resetButton');
  originalReset?.addEventListener('click',()=>{opsState.drafts=[];opsState.formOpen=false;opsState.roomCount=1;
- opsState.formMessage='';opsState.selectedReservation=null;opsState.selectedFolio=null;opsState.selectedGuest=null;
- opsState.folioReservation='';opsState.reportReservation='';opsState.reportFrom='';opsState.reportTo='';opsState.reportAgency='';});
+ opsState.nextDraftSequence=1;opsState.formMessage='';opsState.selectedReservation=null;opsState.selectedFolio=null;opsState.selectedGuest=null;
+ opsState.folioReservation='';opsState.reportReservation='';opsState.reportFrom='';opsState.reportTo='';opsState.reportAgency='';
+ render();});
  opsSyncLocale('tr');
 })();

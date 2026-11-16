@@ -1208,7 +1208,7 @@ function otaView(){const rows=state.channel_events.filter(e=>!search||e.external
 function channelTiles(){return `<div class="modules">${[['Booking.com','Yetkili Connectivity Partner veya Channel Manager'],['Expedia Group','Connectivity Hub / yetkili entegratör'],['Trip.com / Ctrip','İzinli sağlayıcı veya kanal yöneticisi'],['Hotelbeds','Yetkili acente / bağlantı anlaşması'],['PHOBS','İzinli aktarım veya belgeli API'],['Sistem Otel','Üretici onaylı erişim / export']].map(([name,desc])=>`<div class="module"><h3>${name}</h3><p>${desc}</p><div class="status">◌ Bağlı değil</div></div>`).join('')}</div>`}
 function roomPresentationClass(room,used){const plan=INITIAL_EVALUATION.room_plan.find(p=>p.id===room.id);return ['out_of_order','out_of_service'].includes(room.housekeeping)||(plan?.reason_codes||[]).includes('OUT_OF_SERVICE_OR_MAINTENANCE')?'ooo':room.housekeeping==='dirty'?'dirty':used.has(room.id)?'occupied':'';}
 function roomView(){const used=occupiedIds();const floorValues=[...new Set(state.rooms.map(r=>r.floor))].sort((a,b)=>a-b);return `${timelineView(false)}<div class="metrics">${metric('Toplam oda',state.rooms.length,'Kurgusal envanter','▤')}${metric('Giriş günü blokajlı',used.size,'Rezervasyon tahsisleri','⌂')}${metric('Kat kontrolü bekleyen',state.rooms.filter(r=>r.housekeeping==='dirty').length,'Kirli oda','♧')}${metric('Teknik kapalı',state.rooms.filter(r=>['out_of_order','out_of_service'].includes(r.housekeeping)).length,'Satış dışı','⚙')}</div><section class="panel"><div class="panel-head"><div><h2>Grafik oda planı</h2><p>Temizlik, bakım, blokaj ve önceki çıkış ayrıdır. No-show odası personel teyidi olmadan müsait gösterilmez.</p></div><button class="mini" data-nav="housekeeping">Kat hizmetleri ↗</button></div>${floorValues.map(floor=>`<div class="floor">${floor===-1?'Bodrum kat':floor+'. kat'}</div><div class="rooms">${state.rooms.filter(r=>r.floor===floor).map(r=>`<button class="room ${roomPresentationClass(r,used)}" data-room="${esc(r.id)}"><strong>${esc(r.id)}</strong><small>${esc(roomName[r.category])}</small><span class="tiny">${r.bed==='twin'?'Twin':r.bed==='double'?'Double':r.bed==='flex'?'Esnek':'Single'}</span></button>`).join('')}</div>`).join('')}<div class="roomslegend"><span><i class="legenddot"></i>Kontrolden geçmiş</span><span><i class="legenddot" style="background:#667ee7"></i>Tahsisli</span><span><i class="legenddot" style="background:#e4a644"></i>Kirli</span><span><i class="legenddot" style="background:#d95b71"></i>Teknik kapalı</span></div></section>`}
-function housekeepingView(){const candidates=state.rooms.filter(r=>r.housekeeping!=='inspected');return `<div class="metrics">${metric('Kontrolden geçmiş',state.rooms.filter(r=>r.housekeeping==='inspected').length,'Kurgusal oda','✓')}${metric('Kirli / temizlikte',candidates.filter(r=>['dirty','in_progress'].includes(r.housekeeping)).length,'Temizlik kontrolü','♧')}${metric('Teknik servis',candidates.filter(r=>['out_of_order','out_of_service'].includes(r.housekeeping)).length,'Kapalı oda','⚙')}${metric('Açık HK görevleri',activeTasks().filter(t=>t.kind==='housekeeping').length,'Personel koordinasyonu','☷')}</div><section class="panel"><div class="panel-head"><div><h2>Kat hizmetleri kontrol kuyruğu</h2><p>Bir odayı demo modunda kontrol edilmiş işaretlemek, gerçek PMS'ye yansımaz</p></div></div><div class="tablewrap"><table class="table"><thead><tr><th>Oda</th><th>Oda tipi</th><th>Kat</th><th>Durum</th><th>Simülasyon</th></tr></thead><tbody>${state.rooms.map(r=>`<tr><td class="tdstrong">${esc(r.id)}</td><td>${roomName[r.category]}</td><td>${r.floor}</td><td>${pill(r.housekeeping==='inspected'?'Kontrol edildi':r.housekeeping==='dirty'?'Kirli':r.housekeeping==='in_progress'?'Temizlikte':'Teknik kapalı',r.housekeeping==='inspected'?'ready':r.housekeeping==='dirty'?'review':'blocked')}</td><td>${['out_of_order','out_of_service'].includes(r.housekeeping)?'<button class="mini" disabled>Teknik blokaj</button>':r.housekeeping==='inspected'?'<span class="tiny">Değişiklik yok</span>':`<button class="mini" data-hk="${esc(r.id)}">Demo: kontrol edildi</button>`}</td></tr>`).join('')}</tbody></table></div></section>`}
+function housekeepingView(){const candidates=state.rooms.filter(r=>r.housekeeping!=='inspected');return `<div class="metrics">${metric('Kontrolden geçmiş',state.rooms.filter(r=>r.housekeeping==='inspected').length,'Kurgusal oda','✓')}${metric('Kirli / temizlikte',candidates.filter(r=>['dirty','in_progress'].includes(r.housekeeping)).length,'Temizlik kontrolü','♧')}${metric('Teknik servis',candidates.filter(r=>['out_of_order','out_of_service'].includes(r.housekeeping)).length,'Kapalı oda','⚙')}${metric('Açık HK görevleri',activeTasks().filter(t=>t.kind==='housekeeping').length,'Personel koordinasyonu','☷')}</div><section class="panel"><div class="panel-head"><div><h2>Kat hizmetleri kontrol kuyruğu</h2><p>Bir odayı demo modunda kontrol edilmiş işaretlemek, gerçek PMS'ye yansımaz</p></div></div><div class="tablewrap"><table class="table"><thead><tr><th>Oda</th><th>Oda tipi</th><th>Kat</th><th>Durum</th><th>Simülasyon</th></tr></thead><tbody>${state.rooms.map(r=>`<tr><td class="tdstrong">${esc(r.id)}</td><td>${roomName[r.category]}</td><td>${r.floor}</td><td>${pill(r.housekeeping==='inspected'?'Kontrol edildi':r.housekeeping==='dirty'?'Kirli':r.housekeeping==='in_progress'?'Temizlikte':'Teknik kapalı',r.housekeeping==='inspected'?'ready':r.housekeeping==='dirty'?'review':'blocked')}</td><td>${['out_of_order','out_of_service'].includes(r.housekeeping)?'<button class="mini" data-room="'+esc(r.id)+'" aria-label="Teknik blokaj ayrıntılarını görüntüle: '+esc(r.id)+'">Teknik blokajı incele</button>':r.housekeeping==='inspected'?'<span class="tiny">Değişiklik yok</span>':`<button class="mini" data-hk="${esc(r.id)}">Demo: kontrol edildi</button>`}</td></tr>`).join('')}</tbody></table></div></section>`}
 function guestView(){const requests=state.reservations.filter(b=>b.requests.length).slice(0,12);return `<div class="grid2"><section class="panel"><div class="panel-head"><div><h2>Konaklama öncesi özel talepler</h2><p>Misafire yanlış söz verilmesini engelleyen koşullu iletişim</p></div></div>${requests.map(b=>`<div class="listrow"><div><b>${esc(b.id)} · ${esc(channelName[b.channel])}</b><small>${esc(b.requests.join(', '))} · ${esc(roomName[b.category])}</small></div><button class="mini" data-draft="${esc(b.id)}">Taslak gör</button></div>`).join('')}</section><section class="panel"><div class="panel-head"><div><h2>İnsana devredilecek konular</h2><p>Guest relation deneyimi otomatik yanıtla sınırlandırılmaz</p></div></div><div class="listrow"><div><b>Şikâyet ve memnuniyetsizlik</b><small>Hızlı personel devri, yanlış vaat riskinin azaltılması</small></div>${pill('İnsan','review')}</div><div class="listrow"><div><b>İstisnai oda talepleri</b><small>Oda kapasitesi ve doluluk kontrolünden sonra onay</small></div>${pill('İnsan','review')}</div><div class="listrow"><div><b>Geç giriş / transfer</b><small>Saat koşulları, servis uygunluğu, manuel konfirmasyon</small></div>${pill('Ön taslak','info')}</div><div class="note" style="margin-top:15px">Taslaklar gönderilmez. Canlı entegrasyonda iletişim yetkisi, izinler, insan devri ve içerik denetimi ayrıca gereklidir.</div></section></div>`}
 function tasksView(){const order={high:0,normal:1,low:2};const tasks=[...state.tasks].sort((a,b)=>order[a.priority]-order[b.priority]);return `<section class="panel"><div class="panel-head"><div><h2>Departman iş listesi</h2><p>Gerekçe, öncelik, oda ve sorumlu ekip bilgileri · demo işlemleri oturum içinde kalır</p></div></div><div class="taskgrid">${tasks.map(t=>`<article class="taskcard">${pill(t.priority==='high'?'Yüksek öncelik':'Normal öncelik',t.priority==='high'?'blocked':'info')}<h3>${esc(t.id)} · ${esc(({housekeeping:'Housekeeping',maintenance:'Teknik servis',guest_request:'Misafir ilişkileri',frontdesk:'Resepsiyon'})[t.kind])}</h3><p>${t.room_id?'Oda '+esc(t.room_id)+' · ':''}${t.reservation_id?'Rez. '+esc(t.reservation_id):'Tesis genel görevi'}<br>Durum: ${esc(t.status)}</p><button class="mini" ${t.status==='done'?'disabled':''} data-task="${esc(t.id)}">${t.status==='done'?'Tamamlandı':'Demo: görev tamamlandı'}</button></article>`).join('')}</div></section>`}
 function revenueView(){
@@ -1517,7 +1517,7 @@ fullUiEnglishRows([["Günlük hareketleri, oda hazırlığını ve kanal uyarıl
 const opsState={
   lang:'tr',selectedReport:'active_folios',selectedFolio:null,
   selectedReservation:null,selectedGuest:null,folioReservation:'',reportReservation:'',
-  reportFrom:'',reportTo:'',reportAgency:'',formOpen:false,roomCount:1,drafts:[],
+  reportFrom:'',reportTo:'',reportAgency:'',formOpen:false,roomCount:1,drafts:[],nextDraftSequence:1,
   formMessage:'',country:'TR',guestTab:'identity'
 };
 const opsDict={
@@ -1650,7 +1650,14 @@ function opsReservations(){
  opsTr(['<code dir="ltr">'+opsHtml(part.room_stay_id||'—')+'</code>',opsHtml(part.room_id||'ATANMADI'),opsHtml(part.category),opsHtml(part.adults),opsHtml(part.children),
  (part.nightly_rates||[]).length?part.nightly_rates.map(n=>opsHtml(n.date)+' '+opsMoney(n.amount,selected.currency)).join('<div class="ops-divider"></div>'):'<code>missing_source</code>'])))+
  opsLinkedRecords(selected)+'</div>'):'';
- return '<div class="ops-stack">'+opsNotice()+view+detail+(opsState.formOpen?opsBookingForm():'')+'</div>';
+ const draftList=opsState.drafts.length?opsCard('Kurgusal rezervasyon taslakları · bu oturum',
+  '<p class="ops-note">Bunlar yalnızca tarayıcıdaki geçici taslaklardır. PMS, kanal, tahsilat, oda tahsisi veya gerçek konaklama oluşturulmadı.</p>'+
+  opsTable(['Taslak kodu','Oda sayısı','Kişi sayısı','İşlem'],opsState.drafts.map(d=>opsTr([
+   '<code dir="ltr">'+opsHtml(d.id)+'</code>',
+   opsHtml(d.rooms),opsHtml(d.persons),
+   '<button type="button" class="mini" data-op-action="delete-draft" data-draft-id="'+opsHtml(d.id)+'">Taslağı sil</button>'
+  ])))):'';
+ return '<div class="ops-stack">'+opsNotice()+view+draftList+detail+(opsState.formOpen?opsBookingForm():'')+'</div>';
 }
 function opsBookingForm(){
  const agencies=HOTEL_OPS_DATA.agencies.map(a=>[a.id,a.name]);
@@ -1888,9 +1895,42 @@ function opsSyncLocale(lang){
      return;
    }
    if(!action)return;
-   if(action==='new-reservation'){opsState.formOpen=true;opsState.formMessage='';render()}
-   else if(action==='close-form'){opsState.formOpen=false;render()}
-   else if(action==='add-room'){if(opsState.roomCount<12){opsState.roomCount++;render()}}
+   if(action==='new-reservation'){
+     if(opsState.formOpen){document.getElementById('opsDraftForm')?.scrollIntoView({block:'nearest'});return;}
+     opsState.formOpen=true;opsState.roomCount=1;opsState.formMessage='';render();
+   }
+   else if(action==='close-form'){opsState.formOpen=false;opsState.roomCount=1;opsState.formMessage='';render()}
+   else if(action==='delete-draft'){
+     const id=event.target.closest('[data-op-action]')?.dataset.draftId;
+     if(!id||!opsState.drafts.some(d=>d.id===id))return;
+     opsState.drafts=opsState.drafts.filter(d=>d.id!==id);
+     opsState.formMessage='';
+     render();
+   }
+   else if(action==='add-room'){
+     if(opsState.roomCount>=12){
+       if(typeof notify==='function')notify('Demo formunda en fazla 12 oda ekleyebilirsin.');
+       return;
+     }
+     // Append a new fictional room field in-place. Re-rendering the entire
+     // form here discarded the user's entered dates, agency and room counts.
+     const form=document.getElementById('opsDraftForm');
+     const stack=form?.querySelector('.ops-room-stack');
+     const original=stack?.querySelector('fieldset.ops-room-field');
+     if(!stack||!original)return;
+     const next=opsState.roomCount;
+     const field=original.cloneNode(true);
+     const legend=field.querySelector('legend');
+     if(legend)legend.textContent=opsT('room')+' '+(next+1);
+     const category=field.querySelector('select[id^="draftRoom"]');
+     if(category){category.id='draftRoom'+next;category.value='standard';}
+     const adults=field.querySelector('input[name^="adults"]');
+     if(adults){adults.name='adults'+next;adults.value='2';}
+     const children=field.querySelector('input[name^="children"]');
+     if(children){children.name='children'+next;children.value='0';}
+     stack.append(field);
+     opsState.roomCount++;
+   }
    else if(action==='clear-folio-scope'){opsState.folioReservation='';opsState.selectedFolio=null;render()}
    else if(action==='apply-report'){
      opsState.selectedReport=document.getElementById('opsReportType').value;
@@ -1931,8 +1971,21 @@ function opsSyncLocale(lang){
         reason='Kişi sayısı seçilen oda kategorisinin örnek kapasitesine uygun değil.';
       }
    }
-   if(reason){opsState.formMessage=reason;render();return;}
-   const num=opsState.drafts.length+1;
+   if(reason){
+     // Preserve the completed form and show the validation reason in place.
+     opsState.formMessage=reason;
+     let feedback=form.querySelector('[data-ops-form-result]');
+     if(!feedback){
+       feedback=document.createElement('div');
+       feedback.dataset.opsFormResult='error';
+       feedback.className='ops-message';
+       feedback.setAttribute('role','status');
+       form.append(feedback);
+     }
+     feedback.textContent=reason;
+     return;
+   }
+   const num=opsState.nextDraftSequence++;
    const id='DRAFT-'+a.slice(0,4)+'-'+String(num).padStart(4,'0');
    // Only non-personal summary persists in this browser tab's RAM.
    opsState.drafts.push({id,rooms:opsState.roomCount,persons:total});
@@ -1941,8 +1994,9 @@ function opsSyncLocale(lang){
  });
  const originalReset=document.getElementById('resetButton');
  originalReset?.addEventListener('click',()=>{opsState.drafts=[];opsState.formOpen=false;opsState.roomCount=1;
- opsState.formMessage='';opsState.selectedReservation=null;opsState.selectedFolio=null;opsState.selectedGuest=null;
- opsState.folioReservation='';opsState.reportReservation='';opsState.reportFrom='';opsState.reportTo='';opsState.reportAgency='';});
+ opsState.nextDraftSequence=1;opsState.formMessage='';opsState.selectedReservation=null;opsState.selectedFolio=null;opsState.selectedGuest=null;
+ opsState.folioReservation='';opsState.reportReservation='';opsState.reportFrom='';opsState.reportTo='';opsState.reportAgency='';
+ render();});
  opsSyncLocale('tr');
 })();
 
