@@ -27,7 +27,33 @@ class CanonicalGenerationTests(unittest.TestCase):
 
     def test_generated_artifacts_are_current_without_mutation(self):
         # The check path must reject stale output, never repair it silently.
-        generate(check=True)
+        try:
+            generate(check=True)
+        except ValueError as problem:
+            # Explain the *first* generated source difference, then restore
+            # all original files byte-for-byte even if generation fails.
+            paths = [ROOT / "demo" / name for name in (
+                "hotel-suite.html", "v04-integrated-preview.html",
+                "global-presentation-concept.html")]
+            paths += [ROOT / "examples" / name for name in (
+                "canonical-review.json", "canonical-review-report.json",
+                "canonical-operations.json", "canonical-operations-report.json")]
+            originals = {path: path.read_bytes() for path in paths}
+            expected = None
+            try:
+                generate(check=False)
+                expected = (ROOT / "demo/v04-integrated-preview.html").read_text(
+                    encoding="utf-8")
+            finally:
+                for path, content in originals.items():
+                    path.write_bytes(content)
+            actual = originals[ROOT / "demo/v04-integrated-preview.html"].decode(
+                "utf-8")
+            idx = next((i for i, (a, b) in enumerate(zip(actual, expected))
+                        if a != b), min(len(actual), len(expected)))
+            self.fail(f"{problem}; first difference at char {idx}: "
+                      f"committed={actual[max(0, idx-100):idx+140]!r}, "
+                      f"regenerated={expected[max(0, idx-100):idx+140]!r}")
 
     def test_decision_evidence_ui_matches_canonical_generator(self):
         document = (ROOT / "demo" / "v04-integrated-preview.html").read_text(encoding="utf-8")
