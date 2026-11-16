@@ -121,11 +121,13 @@ class ProjectOverviewBrowserTests(unittest.TestCase):
         page = self.page
         page.goto((self.site / "index.html").as_uri())
         links = page.locator(".kf-promo-entry a")
-        self.assertEqual(links.count(), 3)
+        self.assertEqual(links.count(), 4)
         self.assertEqual(links.first.get_attribute("href"), "project-overview.html")
         self.assertEqual(links.nth(1).get_attribute("href"), "project-overview.html#senaryolar")
-        self.assertEqual(links.nth(2).get_attribute("href"), "konaklamaflow-offline-demo.zip")
+        self.assertEqual(links.nth(2).get_attribute("href"), "global-allocation-lab.html")
         self.assertTrue(links.nth(2).is_visible())
+        self.assertEqual(links.nth(3).get_attribute("href"), "konaklamaflow-offline-demo.zip")
+        self.assertTrue(links.nth(3).is_visible())
         self.assertNotIn("imzalı ve kaşeli", page.locator(".kf-promo-entry").inner_text().lower())
         self.assertNotIn("privacy-campaign.html", page.locator(".kf-promo-entry").inner_html())
 
