@@ -1,0 +1,55 @@
+name: TestPyPI candidate (manual approval only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type PUBLISH_TESTPYPI to authorize one TestPyPI candidate upload
+        type: string
+        required: true
+      expected_version:
+        description: Candidate version to verify
+        type: string
+        required: true
+        default: 0.2.0rc2
+
+permissions:
+  contents: read
+
+jobs:
+  publish_testpypi:
+    if: github.ref == 'refs/heads/main' && inputs.confirm == 'PUBLISH_TESTPYPI' && inputs.expected_version == '0.2.0rc2'
+    name: Manual TestPyPI candidate (never PyPI production)
+    runs-on: ubuntu-latest
+    environment: testpypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enforce fixed package version and clean candidate
+        run: |
+          python - <<'PY'
+          import tomllib
+          from pathlib import Path
+          from konaklamaflow import __version__
+          config = tomllib.loads(Path("pyproject.toml").read_text())
+          assert config["project"]["version"] == "0.2.0rc2"
+          assert __version__ == "0.2.0rc2"
+          PY
+          python -m unittest discover -s tests -v
+      - name: Build and verify distribution metadata
+        run: |
+          python -m pip install --upgrade build twine
+          python -m build
+          python -m twine check dist/*.whl dist/*.tar.gz
+          sha256sum dist/*.whl dist/*.tar.gz > SHA256SUMS
+      - name: Upload only to TestPyPI after repository/environment authorization
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
