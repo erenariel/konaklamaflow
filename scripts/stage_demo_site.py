@@ -9,6 +9,7 @@ import argparse
 from pathlib import Path
 import shutil
 import sys
+from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -62,6 +63,56 @@ GENERATED_ASSETS = {
 }
 
 
+# Download only actual fictional program screens and their local media.
+# Future-vault research, concept galleries, certification artwork and operator
+# assessment PDFs are deliberately excluded from this end-user bundle.
+DOWNLOAD_BUNDLE = "konaklamaflow-offline-demo.zip"
+PRODUCT_BUNDLE_ASSETS = frozenset({
+    "index.html", "hotel-operations.html", "project-overview.html",
+    "v04-integrated-preview.html", "global-presentation.html",
+    "hotel-suite.html", "reviewer.html", "viewer.html", "operations.html",
+    "demo-report.png", "social-card.png", "operations-tour.gif",
+    "ai-command-tour.gif", "roomplan-story.gif", "overview-pulse.gif",
+    "ai-command-tour-poster.png", "roomplan-story-poster.png",
+    "overview-pulse-poster.png", "desktop-preview.png", "mobile-preview.png",
+})
+OFFLINE_GUIDE = """# KonaklamaFlow — offline fictional software demo
+
+1. Extract this ZIP to an empty directory.
+2. Open index.html in a current desktop or mobile browser.
+3. Explore reservations, room plans, channel mismatch reviews and
+   staff approval boundaries using the included fictional records.
+
+This is an offline product demonstration, not a deployed hotel PMS.
+No live OTA, PMS, KBS, payment or AI-provider integration is included.
+No guest check-in or room assignment is performed.
+Do not enter genuine guest information or operational credentials.
+Links to GitHub may need an internet connection, but the included demo
+screens and synthetic reports are local.
+
+Bu paket yalnızca kurgusal otel verileriyle çalışan yazılım demosudur.
+Gerçek misafir kimliği, ödeme veya otel şifresi girme. Değerlendirme,
+sertifikasyon ya da gerçek otel kurulumunun kanıtı değildir.
+"""
+
+
+def write_offline_demo_bundle(output: Path) -> None:
+    """Deterministic allowlisted product-only ZIP; no repository traversal."""
+    if not PRODUCT_BUNDLE_ASSETS <= set(PUBLIC_ASSETS):
+        raise ValueError("Unreviewed offline demo asset")
+    filenames = sorted(PRODUCT_BUNDLE_ASSETS | set(GENERATED_ASSETS))
+    with ZipFile(output / DOWNLOAD_BUNDLE, "w", compression=ZIP_DEFLATED) as archive:
+        for name in filenames:
+            info = ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0))
+            info.compress_type = ZIP_DEFLATED
+            info.external_attr = 0o100644 << 16
+            archive.writestr(info, (output / name).read_bytes())
+        info = ZipInfo("README_OFFLINE.md", date_time=(2026, 1, 1, 0, 0, 0))
+        info.compress_type = ZIP_DEFLATED
+        info.external_attr = 0o100644 << 16
+        archive.writestr(info, OFFLINE_GUIDE.encode("utf-8"))
+
+
 def stage_site(output: Path, root: Path = ROOT) -> None:
     if output.exists() or output.is_symlink():
         raise ValueError('Output already exists')
@@ -75,6 +126,7 @@ def stage_site(output: Path, root: Path = ROOT) -> None:
     for destination, render in GENERATED_ASSETS.items():
         (output / destination).write_text(render(root), encoding='utf-8')
     (output / '.nojekyll').write_text('', encoding='utf-8')
+    write_offline_demo_bundle(output)
 
 
 def main(argv=None):
