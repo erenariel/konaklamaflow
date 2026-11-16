@@ -2,7 +2,11 @@
 from pathlib import Path
 import tempfile
 import unittest
-from scripts.stage_demo_site import stage_site, PUBLIC_ASSETS, GENERATED_ASSETS, ROOT
+from zipfile import ZipFile
+from scripts.stage_demo_site import (
+    stage_site, PUBLIC_ASSETS, GENERATED_ASSETS, ROOT,
+    PRODUCT_BUNDLE_ASSETS, DOWNLOAD_BUNDLE, OFFLINE_GUIDE, offline_bundle_asset,
+)
 
 
 class DemoSiteTests(unittest.TestCase):
@@ -19,6 +23,7 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('ai-command-tour-poster.png',overview)
             self.assertIn('id="gercek-gif"', overview)
             self.assertIn('id="moduller"', overview)
+            self.assertIn('href="' + DOWNLOAD_BUNDLE + '"', overview)
             self.assertNotIn('id="sifreli-kasa"', overview)
             self.assertNotIn('href="privacy-campaign.html"', overview)
             for name in ("privacy-promise.gif", "privacy-promise-poster.jpg", "authorized-device.gif", "authorized-device-poster.jpg", "zero-access-flow.gif", "zero-access-flow-poster.jpg", "future-certification.gif", "future-certification-poster.jpg"):
@@ -57,7 +62,23 @@ class DemoSiteTests(unittest.TestCase):
             self.assertEqual((site/'global-presentation.html').read_bytes(),(ROOT/'demo/global-presentation-concept.html').read_bytes())
             self.assertEqual((site/'reviewer.html').read_bytes(),(ROOT/'demo/viewer.html').read_bytes())
             self.assertEqual((site/'operations.html').read_bytes(),(ROOT/'demo/operations.html').read_bytes())
-            self.assertEqual({p.name for p in site.iterdir()},set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{'.nojekyll'})
+            self.assertEqual({p.name for p in site.iterdir()},
+                             set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{'.nojekyll', DOWNLOAD_BUNDLE})
+            with ZipFile(site / DOWNLOAD_BUNDLE) as archive:
+                members = set(PRODUCT_BUNDLE_ASSETS)|set(GENERATED_ASSETS)|{'README_OFFLINE.md'}
+                self.assertEqual(set(archive.namelist()), members)
+                self.assertEqual(len(archive.namelist()), len(members))
+                self.assertIsNone(archive.testzip())
+                for name in members - {'README_OFFLINE.md'}:
+                    self.assertEqual(archive.read(name), offline_bundle_asset(name, (site/name).read_bytes()))
+                self.assertEqual(archive.read('README_OFFLINE.md'), OFFLINE_GUIDE.encode('utf-8'))
+                for name in ('index.html', 'hotel-operations.html',
+                             'v04-integrated-preview.html', 'project-overview.html'):
+                    self.assertNotIn(DOWNLOAD_BUNDLE.encode('utf-8'), archive.read(name))
+                self.assertIn('offline fictional software demo', OFFLINE_GUIDE)
+                self.assertFalse(any(name.startswith(('privacy-', 'vision-', 'future-certification',
+                                                      'zero-access-', 'authorized-device')) for name in members))
+                self.assertFalse(any('review' in name.lower() and name.endswith('.pdf') for name in members))
             scorecard = (site/'synthetic-scorecard.html').read_text(encoding='utf-8')
             history = (site/'fictional-trace.html').read_text(encoding='utf-8')
             index = (site/'index.html').read_text(encoding='utf-8')
@@ -68,6 +89,7 @@ class DemoSiteTests(unittest.TestCase):
             self.assertIn('href="fictional-trace.html"', index)
             self.assertIn('href="project-overview.html"', index)
             self.assertIn('href="project-overview.html#senaryolar"', index)
+            self.assertIn('href="' + DOWNLOAD_BUNDLE + '"', index)
             self.assertNotIn('project-overview.html#otel-degerlendirmesi', index)
             self.assertNotIn('İmzalı ve kaşeli otel değerlendirmesi', index)
             self.assertFalse((site/'.git').exists())

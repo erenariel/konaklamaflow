@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 from scripts.render_scorecard import authoritative_report, render_scorecard, scorecard_html, main
-from scripts.stage_demo_site import stage_site, PUBLIC_ASSETS, GENERATED_ASSETS
+from scripts.stage_demo_site import stage_site, PUBLIC_ASSETS, GENERATED_ASSETS, DOWNLOAD_BUNDLE
 
 
 class ScorecardUiTests(unittest.TestCase):
@@ -53,7 +53,7 @@ class ScorecardUiTests(unittest.TestCase):
             self.assertEqual((site/"synthetic-scorecard.html").read_text(encoding="utf-8"),
                              scorecard_html())
             self.assertEqual({p.name for p in site.iterdir()},
-                             set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{".nojekyll"})
+                             set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{".nojekyll", DOWNLOAD_BUNDLE})
 
 
 if __name__=="__main__":

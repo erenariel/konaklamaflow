@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scripts.stage_demo_site import stage_site
+from scripts.stage_demo_site import stage_site, DOWNLOAD_BUNDLE
 from scripts.verify_release_readiness import (
     ReleaseReadinessError,
     verify_overview_content,
@@ -44,6 +44,23 @@ class ReleaseReadinessTests(unittest.TestCase):
             stage = Path(folder) / "stage"
             stage_site(stage)
             (stage / "synthetic-scorecard.html").write_text("<p>forged</p>")
+            with self.assertRaises(ReleaseReadinessError):
+                verify_staged_site(stage)
+
+    def test_corrupt_offline_demo_download_is_rejected(self):
+        with tempfile.TemporaryDirectory() as folder:
+            stage = Path(folder) / "stage"
+            stage_site(stage)
+            package = stage / DOWNLOAD_BUNDLE
+            with package.open("ab") as stream:
+                stream.write(b"EXTRA_TAMPER")
+            # Extra trailing bytes may be tolerated by ZIP readers; instead
+            # change a byte in the payload and fail the integrity preflight.
+            content = package.read_bytes()
+            position = len(content) // 2
+            altered = bytearray(content)
+            altered[position] ^= 0xFF
+            package.write_bytes(altered)
             with self.assertRaises(ReleaseReadinessError):
                 verify_staged_site(stage)
 

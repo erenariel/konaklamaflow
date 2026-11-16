@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scripts.stage_demo_site import stage_site, ROOT, PUBLIC_ASSETS, GENERATED_ASSETS
+from scripts.stage_demo_site import stage_site, ROOT, PUBLIC_ASSETS, GENERATED_ASSETS, DOWNLOAD_BUNDLE
 from scripts.render_scorecard import authoritative_report
 from scripts.render_trace_view import trusted_trace
 
@@ -17,7 +17,7 @@ class IntegratedReleaseCandidateTests(unittest.TestCase):
             path=Path(directory)/"site"
             stage_site(path)
             self.assertEqual({p.name for p in path.iterdir()},
-                             set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{".nojekyll"})
+                             set(PUBLIC_ASSETS)|set(GENERATED_ASSETS)|{".nojekyll", DOWNLOAD_BUNDLE})
             index=(path/"index.html").read_text(encoding="utf-8")
             for link in ("synthetic-scorecard.html", "fictional-trace.html",
                          "project-overview.html", "BEGIN GENERATED_DECISION_EVIDENCE_UI"):

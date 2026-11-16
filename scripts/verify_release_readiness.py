@@ -10,8 +10,11 @@ from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 import sys
 from urllib.parse import urlsplit
+from zipfile import BadZipFile, ZipFile
 
-from scripts.stage_demo_site import ROOT, PUBLIC_ASSETS, GENERATED_ASSETS
+from scripts.stage_demo_site import (ROOT, PUBLIC_ASSETS, GENERATED_ASSETS,
+                                    PRODUCT_BUNDLE_ASSETS, DOWNLOAD_BUNDLE, OFFLINE_GUIDE,
+                                    offline_bundle_asset)
 
 EXPECTED_INTERNAL_PAGES = frozenset({
     "index.html", "project-overview.html", "synthetic-scorecard.html",
@@ -124,7 +127,7 @@ def verify_overview_content(html: str, staged_files):
     _require("connect-src 'none'" in html, "Network-restricted CSP missing")
     parser = _OverviewLinks()
     parser.feed(html)
-    _require({"index.html"} <= parser.internal,
+    _require({"index.html", DOWNLOAD_BUNDLE} <= parser.internal,
              "Published demo not linked from overview")
     _require("ai-command-tour-poster.png" in parser.local_images,
              "Historical demo screenshot missing")
@@ -144,7 +147,7 @@ def verify_staged_site(site: Path, root: Path = ROOT):
     site = Path(site)
     root = Path(root)
     _require(site.is_dir() and not site.is_symlink(), "Staging directory absent or unsafe")
-    expected = set(PUBLIC_ASSETS) | set(GENERATED_ASSETS) | {".nojekyll"}
+    expected = set(PUBLIC_ASSETS) | set(GENERATED_ASSETS) | {".nojekyll", DOWNLOAD_BUNDLE}
     present = {path.name for path in site.iterdir()}
     _require(present == expected, "Unexpected, private or missing staged assets")
     for name in expected:
@@ -165,6 +168,22 @@ def verify_staged_site(site: Path, root: Path = ROOT):
         )
     _require((site / ".nojekyll").read_bytes() == b"",
              "Unexpected Pages metadata")
+    # Every ZIP member must match the staged, reviewed fictional file.
+    allowed = PRODUCT_BUNDLE_ASSETS | set(GENERATED_ASSETS) | {"README_OFFLINE.md"}
+    with ZipFile(site / DOWNLOAD_BUNDLE) as archive:
+        names = archive.namelist()
+        _require(len(names) == len(allowed) and set(names) == allowed,
+                 "Offline demo bundle has unexpected or missing files")
+        _require(archive.testzip() is None, "Offline demo ZIP is corrupted")
+        for info in archive.infolist():
+            _require(not info.is_dir() and not info.filename.startswith("/")
+                     and "/" not in info.filename and "\\" not in info.filename,
+                     "Unsafe offline demo ZIP member name")
+        for name in allowed - {"README_OFFLINE.md"}:
+            _require(archive.read(name) == offline_bundle_asset(name, (site / name).read_bytes()),
+                     "Offline demo ZIP asset differs from staged release")
+        _require(archive.read("README_OFFLINE.md") == OFFLINE_GUIDE.encode("utf-8"),
+                 "Offline demo guide mismatch")
     overview = (site / "project-overview.html").read_text(encoding="utf-8")
     link_info = verify_overview_content(overview, present)
     home = (site / "index.html").read_text(encoding="utf-8")
@@ -178,6 +197,8 @@ def verify_staged_site(site: Path, root: Path = ROOT):
                   "KonaklamaFlow_Operator_Review", "İmzalı ve kaşeli otel",
                   'href="privacy-campaign.html"', 'href="privacy-vault-lab.html"'):
         _require(value not in home, "Product demo must not promote operator proof or future vault research")
+    _require(f'href="{DOWNLOAD_BUNDLE}"' in home,
+             "Integrated demo missing offline product download")
     _require("BEGIN GENERATED_DECISION_EVIDENCE_UI" in home,
              "Source-bound evidence panel missing")
     return {"staged_files": len(expected), **link_info}
@@ -190,7 +211,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         result = verify_staged_site(args.site)
-    except (ReleaseReadinessError, OSError, UnicodeError, ValueError):
+    except (ReleaseReadinessError, OSError, UnicodeError, ValueError, BadZipFile):
         print("Offline release candidate preflight failed", file=sys.stderr)
         return 2
     print(f"Offline fictional release preflight passed: {result['staged_files']} staged files")
