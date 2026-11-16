@@ -99,7 +99,7 @@ button{font:inherit;cursor:pointer;padding:11px 16px;background:#1b304e;color:#f
 button[aria-pressed="true"]{background:#b2e8dc;color:#0d2536;border-color:#b2e8dc;font-weight:750}
 button:hover{border-color:#b2e8dc}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #efdc94;outline-offset:3px}
 .panels{min-height:380px}.panel{border:1px solid #344766;background:#101c30;border-radius:16px;padding:24px}
-.panel[hidden]{display:none}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.panel[hidden]{display:none}.panel,.notice,.stat,button{min-width:0;overflow-wrap:anywhere}code{white-space:normal;word-break:break-word;overflow-wrap:anywhere}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
 .stat{background:#1b2a42;border:1px solid #334867;border-radius:12px;padding:15px}
 .stat strong{font-size:clamp(22px,4vw,34px);display:block}.stat span{color:#b4c2d7;font-size:13px}
 .status{display:inline-block;color:#a6f4d9;background:#1c403c;padding:5px 10px;border-radius:30px;font-size:13px;font-weight:700}
