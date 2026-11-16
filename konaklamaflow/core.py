@@ -184,6 +184,68 @@ def issue(code: str, severity: str, ref: str, detail: str) -> dict[str, str]:
     return {"code": code, "severity": severity, "reservation_ref": ref, "detail": detail}
 
 
+def _recover_small_safe_plan(
+    requests: list[Reservation],
+    rooms: list[Room],
+    assigned: dict[str, list[Reservation]],
+) -> dict[tuple[str, str], str] | None:
+    """Bounded fallback when the normal greedy room suggestion misses a valid plan.
+
+    Scope is deliberately small (at most 8 stays / 18 rooms / 20,000
+    candidate placements). There is no global-optimum claim and no PMS write.
+    A failed or exhausted search leaves the original advisory output intact.
+    """
+    if not requests or len(requests) > 8 or len(rooms) > 18:
+        return None
+
+    options: dict[tuple[str, str], list[Room]] = {}
+    for res in requests:
+        compatible = [
+            room for room in rooms
+            if room.category == res.category
+            and room.available(res.stay)
+            and (not res.twin_requested or room.beds != "double")
+            and not any(held.stay.overlaps(res.stay) for held in assigned[room.id])
+        ]
+        if not compatible:
+            return None
+        bed_order = ("twin", "flex", "double") if res.twin_requested else ("double", "flex", "twin")
+        compatible.sort(key=lambda room: (bed_order.index(room.beds), room.id))
+        options[(res.source, res.ref)] = compatible
+
+    ordered = sorted(
+        requests,
+        key=lambda res: (len(options[(res.source, res.ref)]),
+                         0 if res.twin_requested else 1,
+                         res.stay.start, res.source, res.ref),
+    )
+    planned: dict[str, list[Window]] = {room.id: [] for room in rooms}
+    matches: dict[tuple[str, str], str] = {}
+    states = 0
+
+    def search(index: int) -> bool:
+        nonlocal states
+        if index == len(ordered):
+            return True
+        res = ordered[index]
+        key = (res.source, res.ref)
+        for room in options[key]:
+            if any(window.overlaps(res.stay) for window in planned[room.id]):
+                continue
+            if states >= 20_000:
+                return False
+            states += 1
+            planned[room.id].append(res.stay)
+            matches[key] = room.id
+            if search(index + 1):
+                return True
+            planned[room.id].pop()
+            del matches[key]
+        return False
+
+    return dict(matches) if search(0) else None
+
+
 def review(data: Any, as_of: str) -> dict[str, Any]:
     today = read_date(as_of, "as_of")
     if today == date.max:
@@ -258,6 +320,7 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
         (r for r in reservations if r.status == "confirmed" and r.room_id is None and r.stay.start >= today),
         key=lambda r: (r.stay.start, 0 if r.twin_requested else 1, r.source, r.ref),
     )
+    missing: list[Reservation] = []
     for res in todo:
         if (res.source, res.ref) in duplicated or res.category not in categories:
             continue
@@ -273,7 +336,7 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
                 continue
             candidates.append(room)
         if not candidates:
-            warn("NO_SAFE_ROOM_PROPOSAL", "critical", res, "No free compatible room; do not confirm or promise a room")
+            missing.append(res)
             continue
         # Preserve scarce twin-capable rooms for constrained guests; heuristic, not global optimization.
         bed_order = ("twin", "flex", "double") if res.twin_requested else ("double", "flex", "twin")
@@ -281,6 +344,25 @@ def review(data: Any, as_of: str) -> dict[str, Any]:
         chosen = candidates[0]
         planned[chosen.id].append(res.stay)
         proposals.append({"reservation_ref": res.ref, "source": res.source, "room_id": chosen.id, "kind": "MANUAL_APPROVAL_REQUIRED"})
+
+    # Repair only proven greedy misses in a small snapshot. Never replace an
+    # existing safe partial plan unless every eligible stay can be proposed.
+    if missing:
+        eligible = [
+            res for res in todo
+            if (res.source, res.ref) not in duplicated and res.category in categories
+        ]
+        recovered = _recover_small_safe_plan(eligible, rooms, assigned)
+        if recovered is not None:
+            proposals = [
+                {"reservation_ref": res.ref, "source": res.source,
+                 "room_id": recovered[(res.source, res.ref)],
+                 "kind": "MANUAL_APPROVAL_REQUIRED"}
+                for res in eligible
+            ]
+            missing = []
+    for res in missing:
+        warn("NO_SAFE_ROOM_PROPOSAL", "critical", res, "No free compatible room; do not confirm or promise a room")
 
     tomorrow = today + timedelta(days=1)
     tomorrow_arrivals = sorted(
