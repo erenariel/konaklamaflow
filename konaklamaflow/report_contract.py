@@ -22,6 +22,11 @@ REASONS = {
     "DUPLICATE_SOURCE_REF", "UNKNOWN_CATEGORY", "BASE_PRICE_MISMATCH", "UNKNOWN_ROOM",
     "CATEGORY_MISMATCH", "ROOM_OUT_OF_SERVICE", "TWIN_NOT_GUARANTEED", "ROOM_OVERLAP",
     "NO_SAFE_ROOM_PROPOSAL", "CANCELLED_HOLD_REVIEW",
+    # Core reservation-review codes added with input schema 1.1.
+    "IN_HOUSE_WITHOUT_ROOM", "CHECKOUT_OVERDUE", "STATUS_DATE_CONFLICT", "NO_SHOW_HOLD_REVIEW",
+    "PENDING_ARRIVAL_DECISION", "PENDING_EXCEEDS_CAPACITY", "POSSIBLE_DUPLICATE_BOOKING",
+    "OCCUPANCY_EXCEEDS_ROOM", "SAME_DAY_TURNOVER_RISK", "ROOM_MOVE_OPTION",
+    "BLOCK_NOT_FOUND", "BLOCK_MISMATCH", "BLOCK_OVERBOOKED",
 }
 CHECKS = {"identity_reviewed_by_authorized_staff", "payment_review_complete",
           "room_clean_and_inspected", "registration_confirmed_by_authorized_system"}
